@@ -24,7 +24,6 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import subprocess
 import sys
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
@@ -38,6 +37,7 @@ from agridata.dataset.mapping import (  # noqa: E402
     map_raw_category,
 )
 from agridata.logging_utils import setup_logging  # noqa: E402
+from agridata.reproducibility.environment import get_git_commit  # noqa: E402
 from agridata.seed import set_global_seed  # noqa: E402
 
 logger = logging.getLogger("agridata.scripts.prepare_dataset")
