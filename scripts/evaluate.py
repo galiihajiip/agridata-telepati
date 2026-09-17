@@ -37,6 +37,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 from ultralytics import YOLO  # noqa: E402
 
 from agridata.dataset.mapping import CANONICAL_CLASSES, CANONICAL_ID_TO_NAME  # noqa: E402
+from agridata.device import detect_device  # noqa: E402
 from agridata.logging_utils import setup_logging  # noqa: E402
 from agridata.metrics.detection import (  # noqa: E402
     Detection,
