@@ -67,13 +67,23 @@ def load_ground_truth(manifest_path: Path) -> tuple[list[GroundTruthBox], dict[i
 
 
 def collect_predictions(model: YOLO, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str) -> list[Detection]:
+    """Chunked to avoid a Block 16-confirmed failure: passing a very large
+    (2000+) explicit path list to a single `predict(..., stream=True)` call
+    fails with "MPSGraph does not support tensor dims larger than INT_MAX"
+    on this project's numpy/torch/MPS combination — see
+    scripts/evaluate.py::collect_predictions for the full investigation."""
+    CHUNK_SIZE = 500
     ordered_ids = list(images_by_id.keys())
     image_paths = [str(images_dir / images_by_id[iid]["file_name"]) for iid in ordered_ids]
     detections = []
-    for image_id, result in zip(ordered_ids, model.predict(image_paths, conf=collection_conf, verbose=False, stream=True, device=device), strict=True):
-        for box in result.boxes:
-            x1, y1, x2, y2 = box.xyxy[0].tolist()
-            detections.append(Detection(image_id, int(box.cls.item()), float(box.conf.item()), (x1, y1, x2 - x1, y2 - y1)))
+    for chunk_start in range(0, len(image_paths), CHUNK_SIZE):
+        chunk_ids = ordered_ids[chunk_start : chunk_start + CHUNK_SIZE]
+        chunk_paths = image_paths[chunk_start : chunk_start + CHUNK_SIZE]
+        results_stream = model.predict(chunk_paths, conf=collection_conf, verbose=False, stream=True, device=device)
+        for image_id, result in zip(chunk_ids, results_stream, strict=True):
+            for box in result.boxes:
+                x1, y1, x2, y2 = box.xyxy[0].tolist()
+                detections.append(Detection(image_id, int(box.cls.item()), float(box.conf.item()), (x1, y1, x2 - x1, y2 - y1)))
     return detections
 
 
