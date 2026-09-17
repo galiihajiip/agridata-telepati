@@ -25,7 +25,6 @@ import argparse
 import json
 import logging
 import os
-import subprocess
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -44,6 +43,7 @@ from agridata.metrics.detection import (  # noqa: E402
     GroundTruthBox,
     match_detections_to_ground_truth,
 )
+from agridata.reproducibility.environment import get_git_commit  # noqa: E402
 from agridata.visualization.images import draw_annotated_image  # noqa: E402
 from agridata.dataset.stats import AnnotationRecord, ImageRecord  # noqa: E402
 
