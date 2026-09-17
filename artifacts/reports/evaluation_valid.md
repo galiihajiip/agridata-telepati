@@ -1,6 +1,6 @@
 # Evaluation Report — split: `valid`
 
-Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `0b5b43942ed16ea915bdb7ce1140e8e59cf485b4`
+Weights: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Git commit: `05725f1729bf6386c5cce84e508eec8f9b799ce8`
 
 ## Native metrics (Ultralytics, source of truth for mAP)
 
@@ -24,21 +24,21 @@ Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `0b5b43
 
 ## Local F1 metrics (implementation detail, confidence threshold = 0.25)
 
-- Overall precision: 0.6096
-- Overall recall: 0.2070
-- Overall F1: 0.3091
-- TP=1012 FP=648 FN=3876
+- Overall precision: 0.6568
+- Overall recall: 0.2052
+- Overall F1: 0.3127
+- TP=1003 FP=524 FN=3885
 
 | canonical class | precision | recall | F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|---:|
-| Leaf scald | 0.5037 | 0.1744 | 0.2590 | 68 | 67 | 322 |
-| Brown spot | 0.6310 | 0.1253 | 0.2090 | 183 | 107 | 1278 |
-| Healthy | 0.8367 | 0.3868 | 0.5290 | 164 | 32 | 260 |
-| Leaf roller | 0.0000 | 0.0000 | 0.0000 | 0 | 13 | 87 |
-| Tungro | 0.6136 | 0.2842 | 0.3885 | 216 | 136 | 544 |
-| Blast | 0.5599 | 0.2122 | 0.3078 | 201 | 158 | 746 |
-| Narrow brown | 0.7778 | 0.9333 | 0.8485 | 70 | 20 | 5 |
-| Sheath blight | 0.5676 | 0.1291 | 0.2104 | 63 | 48 | 425 |
-| Bacterial leaf blight | 0.4107 | 0.3680 | 0.3882 | 46 | 66 | 79 |
-| False smut | 1.0000 | 0.0116 | 0.0230 | 1 | 0 | 85 |
-| Bacterial panicle blight | 0.0000 | 0.0000 | 0.0000 | 0 | 1 | 45 |
+| Leaf scald | 0.6436 | 0.1667 | 0.2648 | 65 | 36 | 325 |
+| Brown spot | 0.6190 | 0.0801 | 0.1418 | 117 | 72 | 1344 |
+| Healthy | 0.8261 | 0.4929 | 0.6174 | 209 | 44 | 215 |
+| Leaf roller | 0.6635 | 0.7931 | 0.7225 | 69 | 35 | 18 |
+| Tungro | 0.6381 | 0.2250 | 0.3327 | 171 | 97 | 589 |
+| Blast | 0.5921 | 0.1732 | 0.2680 | 164 | 113 | 783 |
+| Narrow brown | 0.7500 | 0.2000 | 0.3158 | 15 | 5 | 60 |
+| Sheath blight | 0.6667 | 0.1598 | 0.2579 | 78 | 39 | 410 |
+| Bacterial leaf blight | 0.3000 | 0.0960 | 0.1455 | 12 | 28 | 113 |
+| False smut | 0.8000 | 0.8837 | 0.8398 | 76 | 19 | 10 |
+| Bacterial panicle blight | 0.4286 | 0.6000 | 0.5000 | 27 | 36 | 18 |
