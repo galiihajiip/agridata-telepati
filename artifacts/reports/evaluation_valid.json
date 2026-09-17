@@ -1,6 +1,6 @@
 {
   "block": 7,
-  "git_commit": "a9e8483b54c717613f97a61aee04059b579e5ff5",
+  "git_commit": "cf1adab55eb96036ec97d067788af241130bf46a",
   "weights": "runs/detect/final/final_model/weights/best.pt",
   "split": "valid",
   "data_yaml": "data/prepared/data.yaml",
@@ -29,85 +29,85 @@
     "description": "LOCAL implementation detail (not the official scoring formula): greedy IoU>=0.5 matching at a caller-specified confidence threshold. See src/agridata/metrics/detection.py for full methodology. Run in its own subprocess.",
     "confidence_threshold": 0.25,
     "overall": {
-      "true_positives": 994,
-      "false_positives": 604,
-      "false_negatives": 3894,
-      "precision": 0.6220275344180225,
-      "recall": 0.20335515548281505,
-      "f1": 0.30650632130743144
+      "true_positives": 1147,
+      "false_positives": 699,
+      "false_negatives": 3741,
+      "precision": 0.6213434452871073,
+      "recall": 0.23465630114566285,
+      "f1": 0.34065934065934067
     },
     "per_class": {
       "Leaf scald": {
-        "true_positives": 84,
-        "false_positives": 69,
-        "false_negatives": 306,
-        "precision": 0.5490196078431373,
-        "recall": 0.2153846153846154,
-        "f1": 0.30939226519337015
+        "true_positives": 93,
+        "false_positives": 47,
+        "false_negatives": 297,
+        "precision": 0.6642857142857143,
+        "recall": 0.23846153846153847,
+        "f1": 0.35094339622641507
       },
       "Brown spot": {
-        "true_positives": 175,
-        "false_positives": 112,
-        "false_negatives": 1286,
-        "precision": 0.6097560975609756,
-        "recall": 0.11978097193702943,
-        "f1": 0.20022883295194507
+        "true_positives": 221,
+        "false_positives": 123,
+        "false_negatives": 1240,
+        "precision": 0.6424418604651163,
+        "recall": 0.1512662559890486,
+        "f1": 0.24487534626038782
       },
       "Healthy": {
-        "true_positives": 155,
-        "false_positives": 24,
-        "false_negatives": 269,
-        "precision": 0.8659217877094972,
-        "recall": 0.36556603773584906,
-        "f1": 0.5140961857379768
+        "true_positives": 146,
+        "false_positives": 31,
+        "false_negatives": 278,
+        "precision": 0.8248587570621468,
+        "recall": 0.3443396226415094,
+        "f1": 0.4858569051580699
       },
       "Leaf roller": {
         "true_positives": 0,
-        "false_positives": 17,
+        "false_positives": 26,
         "false_negatives": 87,
         "precision": 0.0,
         "recall": 0.0,
         "f1": 0.0
       },
       "Tungro": {
-        "true_positives": 207,
-        "false_positives": 126,
-        "false_negatives": 553,
-        "precision": 0.6216216216216216,
-        "recall": 0.2723684210526316,
-        "f1": 0.3787740164684355
+        "true_positives": 321,
+        "false_positives": 183,
+        "false_negatives": 439,
+        "precision": 0.6369047619047619,
+        "recall": 0.42236842105263156,
+        "f1": 0.5079113924050632
       },
       "Blast": {
-        "true_positives": 165,
-        "false_positives": 120,
-        "false_negatives": 782,
-        "precision": 0.5789473684210527,
-        "recall": 0.17423442449841606,
-        "f1": 0.26785714285714285
+        "true_positives": 226,
+        "false_positives": 185,
+        "false_negatives": 721,
+        "precision": 0.5498783454987834,
+        "recall": 0.23864836325237593,
+        "f1": 0.3328424153166421
       },
       "Narrow brown": {
-        "true_positives": 70,
-        "false_positives": 20,
-        "false_negatives": 5,
-        "precision": 0.7777777777777778,
-        "recall": 0.9333333333333333,
-        "f1": 0.8484848484848485
+        "true_positives": 15,
+        "false_positives": 6,
+        "false_negatives": 60,
+        "precision": 0.7142857142857143,
+        "recall": 0.2,
+        "f1": 0.3125
       },
       "Sheath blight": {
-        "true_positives": 91,
-        "false_positives": 49,
-        "false_negatives": 397,
-        "precision": 0.65,
-        "recall": 0.1864754098360656,
-        "f1": 0.2898089171974522
+        "true_positives": 112,
+        "false_positives": 70,
+        "false_negatives": 376,
+        "precision": 0.6153846153846154,
+        "recall": 0.22950819672131148,
+        "f1": 0.33432835820895523
       },
       "Bacterial leaf blight": {
-        "true_positives": 46,
-        "false_positives": 66,
-        "false_negatives": 79,
-        "precision": 0.4107142857142857,
-        "recall": 0.368,
-        "f1": 0.3881856540084388
+        "true_positives": 12,
+        "false_positives": 28,
+        "false_negatives": 113,
+        "precision": 0.3,
+        "recall": 0.096,
+        "f1": 0.14545454545454545
       },
       "False smut": {
         "true_positives": 1,
@@ -119,7 +119,7 @@
       },
       "Bacterial panicle blight": {
         "true_positives": 0,
-        "false_positives": 1,
+        "false_positives": 0,
         "false_negatives": 45,
         "precision": 0.0,
         "recall": 0.0,
@@ -127,16 +127,16 @@
       }
     }
   },
-  "num_detections_collected": 97573,
+  "num_detections_collected": 111032,
   "num_ground_truth_boxes": 4888,
   "predictions_artifact": "artifacts/predictions/predictions_valid.json",
   "sample_prediction_figures": [
     "artifacts/figures/predictions/pred_id0_IMG-20241014-WA0381_jpg.rf.02d81d946e4969027004eb331b2636b5.jpg",
     "artifacts/figures/predictions/pred_id500_aug_0_1405_jpg.rf.6a0e56ea1553e786b36ac75cb36c1fed.jpg",
-    "artifacts/figures/predictions/pred_id1000_BLAST3_160_jpg.rf.ce82a246072316e4a902b17f5497cdf8.jpg",
-    "artifacts/figures/predictions/pred_id1001_SheathBlight_233_jpg.rf.cd85e49f8ff8b34b2816feafdcd0ffd0.jpg",
-    "artifacts/figures/predictions/pred_id1002_TUNGRO2_188_JPG_jpg.rf.cdc57c6aa131c5bf7077010a6de44a5d.jpg",
-    "artifacts/figures/predictions/pred_id1003_BLAST9_151_jpg.rf.ce425ec97808e50bfbaa93d072b68cfe.jpg"
+    "artifacts/figures/predictions/pred_id502_Healthy_213_jpg.rf.6b0141ce41dc1876e3d86f02a5ae5e95.jpg",
+    "artifacts/figures/predictions/pred_id503_BLAST9_150_JPG_jpg.rf.6b018c5dcf5292737747023ed7627597.jpg",
+    "artifacts/figures/predictions/pred_id504_BLAST9_032_jpg.rf.6b0232049f6de25065d02a35d5e59ee7.jpg",
+    "artifacts/figures/predictions/pred_id505_BLAST4_108_jpg.rf.6b2fc129c3996256e566119d0e8717f1.jpg"
   ],
   "test_set_tuning_warning_issued": false
 }
