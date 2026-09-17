@@ -32,6 +32,13 @@ MIN_PLAUSIBLE_BBOX_AREA = 4.0
 # Bounding boxes covering more than this fraction of the image area are
 # flagged as suspiciously large (may indicate a mislabeled full-image box).
 MAX_PLAUSIBLE_BBOX_AREA_FRACTION = 0.98
+# Boxes that exceed the image boundary by no more than this many pixels are
+# treated as float-rounding noise (WARNING, clampable) rather than a broken
+# annotation (FATAL). Verified empirically on this dataset: every
+# "exceeds image bounds" case across train/valid/test overshoots by <= 0.5px
+# (a Roboflow export rounding artifact), so 1.0px is a conservative cutoff
+# that would still catch a genuinely broken box.
+BBOX_BOUNDARY_TOLERANCE_PX = 1.0
 
 
 @dataclass
