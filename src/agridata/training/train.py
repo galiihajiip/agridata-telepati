@@ -79,6 +79,13 @@ def run_training(
         data_yaml, image_size, batch_size, epochs, device, seed, fraction,
     )
 
+    # Ultralytics resolves a *relative* `project` path against the global,
+    # machine-specific Ultralytics settings' `runs_dir` (see
+    # ultralytics.cfg.get_save_dir) rather than the current working
+    # directory — silently making output location depend on per-machine
+    # global config. Passing an absolute path here bypasses that entirely,
+    # so outputs always land exactly where this project's code says they
+    # should, regardless of the audit machine's global Ultralytics settings.
     model.train(
         data=str(data_yaml),
         imgsz=image_size,
@@ -90,7 +97,7 @@ def run_training(
         fraction=fraction,
         pretrained=False,
         plots=plots,
-        project=str(output_project),
+        project=str(Path(output_project).resolve()),
         name=run_name,
         exist_ok=True,
         verbose=True,
