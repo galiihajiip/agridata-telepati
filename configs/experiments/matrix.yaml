@@ -1,0 +1,74 @@
+# Block 10 — controlled baseline hyperparameter experiment matrix.
+#
+# Methodology: one-factor-at-a-time (OFAT), not full factorial. Every
+# variant changes exactly ONE axis from `baseline`; everything else is
+# held fixed. This isolates each factor's effect instead of confounding
+# several changes at once (per master spec: "Jangan mengubah banyak
+# variabel simultan").
+#
+# Scale note: this matrix intentionally uses a SMALL fraction of train data
+# and few epochs to keep total wall-clock time bounded for a comparative
+# screening pass — it is NOT the final training regime. The best-performing
+# configuration found here is a candidate for further investigation in
+# later blocks (11-14), not a final answer.
+#
+# Every variant: same canonical dataset, same official train/valid split,
+# same evaluation method (model.val() -> mAP@0.5, per Block 7's established
+# native-metric methodology), same seed, no external pretrained weights.
+
+common:
+  seed: 42
+  model_arch: "yolov8n.yaml"
+  pretrained: false
+  data_yaml: "data/prepared/data.yaml"
+  device: "auto"
+  workers: 2
+  validate_during_training: false  # skip expensive per-epoch full validation; one val() pass after training instead
+
+baseline:
+  image_size: 320
+  batch_size: 16
+  epochs: 5
+  fraction: 0.08
+  optimizer: "AdamW"
+  learning_rate: 0.001
+  momentum: 0.9
+  weight_decay: 0.0005
+  augmentation: {}   # Ultralytics defaults (untouched)
+
+variants:
+  - id: image_size_640
+    axis: image_size
+    overrides:
+      image_size: 640
+
+  - id: batch_size_32
+    axis: batch_size
+    overrides:
+      batch_size: 32
+
+  - id: learning_rate_low
+    axis: learning_rate
+    overrides:
+      learning_rate: 0.0001
+
+  - id: optimizer_sgd
+    axis: optimizer
+    overrides:
+      optimizer: "SGD"
+      momentum: 0.937   # SGD-appropriate momentum (Ultralytics default for SGD)
+
+  - id: augmentation_strong
+    axis: augmentation_strength
+    overrides:
+      augmentation:
+        degrees: 10.0
+        translate: 0.2
+        scale: 0.7
+        mixup: 0.1
+        hsv_v: 0.6
+
+  - id: training_duration_long
+    axis: training_duration
+    overrides:
+      epochs: 10
