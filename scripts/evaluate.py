@@ -105,7 +105,9 @@ def load_ground_truth(manifest_path: Path) -> tuple[list[GroundTruthBox], dict[i
     return ground_truths, images_by_id
 
 
-def collect_predictions(model: YOLO, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float) -> list[Detection]:
+def collect_predictions(
+    model: YOLO, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str
+) -> list[Detection]:
     """Run inference once at a low confidence threshold; filtering by a higher
     threshold happens later in match_detections_to_ground_truth (pure function,
     no re-inference needed per threshold).
@@ -119,7 +121,7 @@ def collect_predictions(model: YOLO, images_dir: Path, images_by_id: dict[int, d
     image_paths = [str(images_dir / images_by_id[iid]["file_name"]) for iid in ordered_ids]
 
     detections: list[Detection] = []
-    results_stream = model.predict(image_paths, conf=collection_conf, verbose=False, stream=True)
+    results_stream = model.predict(image_paths, conf=collection_conf, verbose=False, stream=True, device=device)
     for image_id, result in zip(ordered_ids, results_stream, strict=True):
         for box in result.boxes:
             x1, y1, x2, y2 = box.xyxy[0].tolist()
