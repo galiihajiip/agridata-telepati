@@ -31,3 +31,9 @@ matplotlib==3.10.0
 torch==2.14.0
 torchvision==0.29.0
 ultralytics==8.4.154
+
+# Block 17 (final notebook): needed to open/execute the submission notebook.
+jupyter==1.1.1
+ipykernel==7.3.0
+nbformat==5.11.1
+nbclient==0.11.0
