@@ -110,8 +110,18 @@ def run_training(
     # the resolved choice only exists on the instantiated optimizer object.
     # Read it there so the experiment tracker (Block 9) records what actually
     # ran, not the unresolved config string.
+    # `param_groups[i]["lr"]` decays over training (scheduler-driven); the
+    # value the scheduler was actually initialized with is preserved in
+    # "initial_lr" (set once at optimizer/scheduler construction — see
+    # torch.optim.lr_scheduler.LRScheduler.__init__). That, not the decayed
+    # end-of-training value, is the meaningful "learning rate" hyperparameter
+    # for experiment tracking.
     resolved_optimizer = type(trainer.optimizer).__name__ if trainer.optimizer is not None else trainer.args.optimizer
-    resolved_lr = trainer.optimizer.param_groups[0]["lr"] if trainer.optimizer is not None else trainer.args.lr0
+    resolved_lr = (
+        trainer.optimizer.param_groups[0].get("initial_lr", trainer.optimizer.param_groups[0]["lr"])
+        if trainer.optimizer is not None
+        else trainer.args.lr0
+    )
     resolved_weight_decay = (
         next((g["weight_decay"] for g in trainer.optimizer.param_groups if g.get("weight_decay")), 0.0)
         if trainer.optimizer is not None
