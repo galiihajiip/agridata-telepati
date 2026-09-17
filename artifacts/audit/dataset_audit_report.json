@@ -214,8 +214,8 @@
             639.446,
             406.059
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.446px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 36,
@@ -226,8 +226,8 @@
             505.107,
             259.748
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.107px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 41,
@@ -238,8 +238,8 @@
             630.462,
             369.349
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 43,
@@ -250,8 +250,8 @@
             332.308,
             639.385
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.385px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 65,
@@ -262,8 +262,8 @@
             427.077,
             242.129
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 98,
@@ -274,8 +274,8 @@
             456.285,
             245.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.285px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 101,
@@ -286,8 +286,8 @@
             340.417,
             546.111
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.111px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 102,
@@ -298,8 +298,8 @@
             351.852,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 128,
@@ -310,8 +310,8 @@
             354.074,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 135,
@@ -322,8 +322,8 @@
             172.8,
             568.355
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.355px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 152,
@@ -334,8 +334,8 @@
             639.401,
             292.558
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.401px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 161,
@@ -346,8 +346,8 @@
             559.231,
             228.586
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 165,
@@ -358,8 +358,8 @@
             535.37,
             428.611
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.370px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 194,
@@ -370,8 +370,8 @@
             268.148,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 216,
@@ -382,8 +382,8 @@
             573.367,
             218.986
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.367px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 219,
@@ -394,8 +394,8 @@
             147.945,
             516.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 224,
@@ -406,8 +406,8 @@
             111.215,
             615.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 227,
@@ -418,8 +418,8 @@
             639.6,
             335.467
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.467px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 242,
@@ -430,8 +430,8 @@
             113.748,
             638.399
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.399px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 247,
@@ -442,8 +442,8 @@
             531.077,
             441.538
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 257,
@@ -454,8 +454,8 @@
             468.889,
             629.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 269,
@@ -466,8 +466,8 @@
             111.111,
             561.111
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.111px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 279,
@@ -478,8 +478,8 @@
             639.444,
             330.37
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 292,
@@ -490,8 +490,8 @@
             322.949,
             471.142
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.142px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 307,
@@ -502,8 +502,8 @@
             604.154,
             206.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 320,
@@ -514,8 +514,8 @@
             206.154,
             604.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 325,
@@ -526,8 +526,8 @@
             526.938,
             461.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 334,
@@ -538,8 +538,8 @@
             80.533,
             482.301
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.301px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 337,
@@ -550,8 +550,8 @@
             392.012,
             359.031
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.012px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 348,
@@ -562,8 +562,8 @@
             244.074,
             422.222
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 356,
@@ -574,8 +574,8 @@
             328.533,
             539.137
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.137px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 384,
@@ -586,8 +586,8 @@
             242.129,
             427.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 398,
@@ -598,8 +598,8 @@
             393.176,
             591.456
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.176px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 424,
@@ -610,8 +610,8 @@
             105.6,
             580.363
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.363px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 436,
@@ -622,8 +622,8 @@
             325.926,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 438,
@@ -634,8 +634,8 @@
             199.031,
             450.015
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.015px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 453,
@@ -646,8 +646,8 @@
             166,
             639.467
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.467px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 496,
@@ -658,8 +658,8 @@
             639.444,
             128.217
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 513,
@@ -670,8 +670,8 @@
             465.077,
             586.256
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.256px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 539,
@@ -682,8 +682,8 @@
             490.185,
             472.083
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.083px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 541,
@@ -694,8 +694,8 @@
             147.945,
             516.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 558,
@@ -706,8 +706,8 @@
             405.07,
             258.148
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.070px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 559,
@@ -718,8 +718,8 @@
             407.236,
             519.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 561,
@@ -730,8 +730,8 @@
             532.222,
             484.306
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.306px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 582,
@@ -742,8 +742,8 @@
             581.109,
             432.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.109px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 602,
@@ -754,8 +754,8 @@
             399.102,
             550.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 612,
@@ -766,8 +766,8 @@
             141.173,
             576.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 630,
@@ -778,8 +778,8 @@
             406.022,
             563.809
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.022px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 645,
@@ -790,8 +790,8 @@
             133.992,
             580.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 646,
@@ -802,8 +802,8 @@
             520.769,
             526.117
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.117px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 667,
@@ -814,8 +814,8 @@
             436.296,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 680,
@@ -826,8 +826,8 @@
             556.462,
             556.103
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.103px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 695,
@@ -838,8 +838,8 @@
             559.467,
             599.174
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.174px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 704,
@@ -850,8 +850,8 @@
             620.059,
             191.614
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.059px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 706,
@@ -862,8 +862,8 @@
             242.341,
             600.418
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.418px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 717,
@@ -874,8 +874,8 @@
             610.232,
             476.542
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.232px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 759,
@@ -886,8 +886,8 @@
             123.333,
             639.5
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.500px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 820,
@@ -898,8 +898,8 @@
             184.264,
             471.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 844,
@@ -910,8 +910,8 @@
             464.246,
             516.183
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.246px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 867,
@@ -922,8 +922,8 @@
             482.215,
             300.584
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.215px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 897,
@@ -934,8 +934,8 @@
             561.806,
             599.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 903,
@@ -946,8 +946,8 @@
             221.333,
             588.368
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.368px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 912,
@@ -958,8 +958,8 @@
             627.192,
             414.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.192px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 915,
@@ -970,8 +970,8 @@
             639.444,
             190.37
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 917,
@@ -982,8 +982,8 @@
             634.5,
             183.537
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.500px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 929,
@@ -994,8 +994,8 @@
             149.656,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 939,
@@ -1006,8 +1006,8 @@
             108,
             639.5
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.500px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 940,
@@ -1018,8 +1018,8 @@
             639.444,
             325.926
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 988,
@@ -1030,8 +1030,8 @@
             228.08,
             429.204
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.204px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1017,
@@ -1042,8 +1042,8 @@
             559.631,
             405.121
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.121px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1021,
@@ -1054,8 +1054,8 @@
             529.131,
             267.107
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.131px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1033,
@@ -1066,8 +1066,8 @@
             258.148,
             405.07
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.070px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1042,
@@ -1078,8 +1078,8 @@
             417.067,
             368.23
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.067px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1048,
@@ -1090,8 +1090,8 @@
             464.246,
             516.183
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.183px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1062,
@@ -1102,8 +1102,8 @@
             452.222,
             402.963
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1063,
@@ -1114,8 +1114,8 @@
             600.36,
             230.008
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.360px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1072,
@@ -1126,8 +1126,8 @@
             588.103,
             189.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.103px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1082,
@@ -1138,8 +1138,8 @@
             123.713,
             537.002
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.002px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1087,
@@ -1150,8 +1150,8 @@
             152.593,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1090,
@@ -1162,8 +1162,8 @@
             344.328,
             368.596
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.328px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1127,
@@ -1174,8 +1174,8 @@
             639.467,
             166
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.467px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1129,
@@ -1186,8 +1186,8 @@
             329.846,
             639.385
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.385px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1147,
@@ -1198,8 +1198,8 @@
             530.221,
             230.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.221px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1152,
@@ -1210,8 +1210,8 @@
             245.735,
             569.347
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.347px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1155,
@@ -1222,8 +1222,8 @@
             519.324,
             435.848
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.324px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1157,
@@ -1234,8 +1234,8 @@
             579.057,
             371.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.057px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1160,
@@ -1246,8 +1246,8 @@
             91.164,
             539.442
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.442px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1175,
@@ -1258,8 +1258,8 @@
             498.333,
             421.481
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.481px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1176,
@@ -1270,8 +1270,8 @@
             639.444,
             170.37
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1180,
@@ -1282,8 +1282,8 @@
             546.515,
             508.153
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.153px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1196,
@@ -1294,8 +1294,8 @@
             506.336,
             231.098
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.336px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1203,
@@ -1306,8 +1306,8 @@
             242.667,
             560.35
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.350px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1211,
@@ -1318,8 +1318,8 @@
             373.043,
             534.615
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.043px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1220,
@@ -1330,8 +1330,8 @@
             532.198,
             618.291
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.198px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1235,
@@ -1342,8 +1342,8 @@
             324.267,
             536.335
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.335px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1255,
@@ -1354,8 +1354,8 @@
             639.444,
             159.259
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1269,
@@ -1366,8 +1366,8 @@
             546.515,
             508.153
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.153px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1274,
@@ -1378,8 +1378,8 @@
             529.385,
             622.353
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.353px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1288,
@@ -1390,8 +1390,8 @@
             499.032,
             368.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.032px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1299,
@@ -1402,8 +1402,8 @@
             473.496,
             391.467
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.496px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1300,
@@ -1414,8 +1414,8 @@
             133.992,
             580.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1303,
@@ -1426,8 +1426,8 @@
             588.633,
             410.104
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.104px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1309,
@@ -1438,8 +1438,8 @@
             332.043,
             515.156
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.156px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1317,
@@ -1450,8 +1450,8 @@
             183.467,
             616.385
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.385px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1326,
@@ -1462,8 +1462,8 @@
             378.333,
             444.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1336,
@@ -1474,8 +1474,8 @@
             180.513,
             630.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1346,
@@ -1486,8 +1486,8 @@
             560.277,
             69.555
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.277px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1349,
@@ -1498,8 +1498,8 @@
             332.043,
             515.156
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.043px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1353,
@@ -1510,8 +1510,8 @@
             547.195,
             306.455
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.195px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1363,
@@ -1522,8 +1522,8 @@
             535.134,
             485.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1369,
@@ -1534,8 +1534,8 @@
             445.054,
             452.451
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.451px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1378,
@@ -1546,8 +1546,8 @@
             618.333,
             639.259
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.259px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1383,
@@ -1558,8 +1558,8 @@
             263.467,
             630.394
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.394px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1384,
@@ -1570,8 +1570,8 @@
             327.848,
             450.485
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.485px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1406,
@@ -1582,8 +1582,8 @@
             207.179,
             474.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1411,
@@ -1594,8 +1594,8 @@
             147.333,
             639.5
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.500px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1420,
@@ -1618,8 +1618,8 @@
             635.278,
             579.039
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.278px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1431,
@@ -1630,8 +1630,8 @@
             387.037,
             594.028
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.028px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1447,
@@ -1642,8 +1642,8 @@
             474.101,
             375.502
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.101px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1452,
@@ -1654,8 +1654,8 @@
             237.867,
             636.398
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.398px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1453,
@@ -1666,8 +1666,8 @@
             392.012,
             359.031
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.012px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1455,
@@ -1678,8 +1678,8 @@
             614.308,
             417.98
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1486,
@@ -1690,8 +1690,8 @@
             195.392,
             595.433
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.433px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1509,
@@ -1702,8 +1702,8 @@
             460.338,
             638.478
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.338px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1523,
@@ -1714,8 +1714,8 @@
             622.308,
             498.006
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.006px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1527,
@@ -1726,8 +1726,8 @@
             638.462,
             214.974
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1530,
@@ -1738,8 +1738,8 @@
             637.093,
             433.608
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.093px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1539,
@@ -1750,8 +1750,8 @@
             471.094,
             198.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.094px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1549,
@@ -1762,8 +1762,8 @@
             436.242,
             637.846
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.242px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1555,
@@ -1774,8 +1774,8 @@
             499.032,
             368.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.032px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1558,
@@ -1786,8 +1786,8 @@
             399.231,
             145.688
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1561,
@@ -1798,8 +1798,8 @@
             340.399,
             526.367
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.367px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1563,
@@ -1810,8 +1810,8 @@
             299.259,
             604.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1606,
@@ -1822,8 +1822,8 @@
             342.933,
             534.334
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.334px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1638,
@@ -1834,8 +1834,8 @@
             639.259,
             269.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.259px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1646,
@@ -1846,8 +1846,8 @@
             631.274,
             350.898
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.274px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1647,
@@ -1858,8 +1858,8 @@
             65.02,
             419.292
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.292px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1657,
@@ -1870,8 +1870,8 @@
             485.333,
             535.134
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1661,
@@ -1882,8 +1882,8 @@
             635.278,
             579.039
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.278px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1665,
@@ -1894,8 +1894,8 @@
             592.029,
             395.412
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.029px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1671,
@@ -1906,8 +1906,8 @@
             482.301,
             80.533
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.301px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1688,
@@ -1918,8 +1918,8 @@
             639.444,
             218.519
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1698,
@@ -1930,8 +1930,8 @@
             416.443,
             416.093
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.443px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1700,
@@ -1942,8 +1942,8 @@
             396.19,
             446.228
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.190px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1703,
@@ -1954,8 +1954,8 @@
             470.694,
             481.296
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.296px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1708,
@@ -1966,8 +1966,8 @@
             512.369,
             314.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.369px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1709,
@@ -1978,8 +1978,8 @@
             445.846,
             586.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1730,
@@ -1990,8 +1990,8 @@
             173.333,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1739,
@@ -2002,8 +2002,8 @@
             526.117,
             520.769
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.117px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1749,
@@ -2014,8 +2014,8 @@
             564.308,
             530.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1768,
@@ -2026,8 +2026,8 @@
             215.556,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1775,
@@ -2038,8 +2038,8 @@
             144.821,
             618.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1776,
@@ -2050,8 +2050,8 @@
             474.101,
             536.886
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.101px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1795,
@@ -2062,8 +2062,8 @@
             460.338,
             638.478
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.338px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1808,
@@ -2074,8 +2074,8 @@
             634.396,
             243.733
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.396px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1809,
@@ -2086,8 +2086,8 @@
             294.359,
             512.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1812,
@@ -2098,8 +2098,8 @@
             268.804,
             620.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1813,
@@ -2110,8 +2110,8 @@
             637.222,
             192.593
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1815,
@@ -2122,8 +2122,8 @@
             540.215,
             316.955
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.215px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1828,
@@ -2134,8 +2134,8 @@
             490.185,
             472.083
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.083px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1836,
@@ -2146,8 +2146,8 @@
             639.444,
             251.852
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1838,
@@ -2158,8 +2158,8 @@
             92.266,
             637.274
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.274px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1849,
@@ -2170,8 +2170,8 @@
             391.467,
             473.496
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.496px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1858,
@@ -2182,8 +2182,8 @@
             164.976,
             601.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1871,
@@ -2194,8 +2194,8 @@
             556.103,
             556.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.103px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1873,
@@ -2206,8 +2206,8 @@
             300.547,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1876,
@@ -2218,8 +2218,8 @@
             75.556,
             426.111
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.111px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1891,
@@ -2230,8 +2230,8 @@
             437.093,
             628.694
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.093px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1906,
@@ -2242,8 +2242,8 @@
             639.444,
             375.556
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1909,
@@ -2254,8 +2254,8 @@
             502.054,
             170.638
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.054px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1918,
@@ -2266,8 +2266,8 @@
             345.57,
             468.178
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.178px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1923,
@@ -2278,8 +2278,8 @@
             639.444,
             116.296
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1924,
@@ -2290,8 +2290,8 @@
             553.02,
             133.68
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.020px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1976,
@@ -2302,8 +2302,8 @@
             639.444,
             171.111
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1978,
@@ -2314,8 +2314,8 @@
             530.185,
             465.694
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.185px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1988,
@@ -2326,8 +2326,8 @@
             388.789,
             485.161
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.161px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1991,
@@ -2338,8 +2338,8 @@
             258.148,
             405.07
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.070px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1998,
@@ -2350,8 +2350,8 @@
             519.259,
             561.667
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.259px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2036,
@@ -2362,8 +2362,8 @@
             84.923,
             550.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2044,
@@ -2374,8 +2374,8 @@
             433.608,
             637.093
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.093px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2054,
@@ -2386,8 +2386,8 @@
             145.095,
             509.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2059,
@@ -2398,8 +2398,8 @@
             629.158,
             281.121
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.158px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2066,
@@ -2410,8 +2410,8 @@
             410.104,
             588.633
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.104px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2067,
@@ -2422,8 +2422,8 @@
             550.154,
             399.102
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2071,
@@ -2434,8 +2434,8 @@
             465.233,
             640
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.233px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2081,
@@ -2446,8 +2446,8 @@
             639.25,
             159.578
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.250px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2083,
@@ -2458,8 +2458,8 @@
             368.41,
             424
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.410px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2084,
@@ -2470,8 +2470,8 @@
             198.4,
             471.094
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.094px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2122,
@@ -2482,8 +2482,8 @@
             170.638,
             502.054
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.054px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2129,
@@ -2494,8 +2494,8 @@
             205.194,
             638.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2141,
@@ -2506,8 +2506,8 @@
             639.5,
             146
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.500px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2148,
@@ -2518,8 +2518,8 @@
             267.107,
             529.131
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.131px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2159,
@@ -2530,8 +2530,8 @@
             97.436,
             532.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2166,
@@ -2542,8 +2542,8 @@
             323.704,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2171,
@@ -2554,8 +2554,8 @@
             631.419,
             596.989
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.419px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2202,
@@ -2566,8 +2566,8 @@
             244.444,
             577.222
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2209,
@@ -2578,8 +2578,8 @@
             426.111,
             75.556
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.111px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2210,
@@ -2590,8 +2590,8 @@
             343.7,
             411.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2214,
@@ -2602,8 +2602,8 @@
             572.154,
             122.296
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2215,
@@ -2614,8 +2614,8 @@
             512.308,
             294.359
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2217,
@@ -2626,8 +2626,8 @@
             368.462,
             499.032
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.032px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2218,
@@ -2638,8 +2638,8 @@
             423.889,
             433.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2230,
@@ -2650,8 +2650,8 @@
             455.926,
             627.174
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.174px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2236,
@@ -2662,8 +2662,8 @@
             315.385,
             526.117
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.117px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2251,
@@ -2674,8 +2674,8 @@
             511.029,
             202.929
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.029px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2265,
@@ -2686,8 +2686,8 @@
             326.308,
             492.055
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.055px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2267,
@@ -2698,8 +2698,8 @@
             362.812,
             634.447
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.447px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2268,
@@ -2710,8 +2710,8 @@
             428.333,
             610.139
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.139px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2295,
@@ -2722,8 +2722,8 @@
             452.451,
             445.054
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.451px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2300,
@@ -2734,8 +2734,8 @@
             639.444,
             217.778
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2308,
@@ -2746,8 +2746,8 @@
             157.011,
             562.155
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.155px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2321,
@@ -2758,8 +2758,8 @@
             534.308,
             262.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2325,
@@ -2770,8 +2770,8 @@
             489.63,
             618.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2328,
@@ -2782,8 +2782,8 @@
             153.333,
             528.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2340,
@@ -2794,8 +2794,8 @@
             218.737,
             609.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2348,
@@ -2806,8 +2806,8 @@
             526.111,
             578.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2359,
@@ -2818,8 +2818,8 @@
             615.087,
             426.175
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.087px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2371,
@@ -2830,8 +2830,8 @@
             512.388,
             525.68
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.388px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2376,
@@ -2842,8 +2842,8 @@
             285.22,
             607.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2382,
@@ -2854,8 +2854,8 @@
             639.444,
             198.519
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2409,
@@ -2866,8 +2866,8 @@
             170.667,
             474.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.400px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2438,
@@ -2878,8 +2878,8 @@
             568.355,
             117.867
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.355px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2452,
@@ -2890,8 +2890,8 @@
             468.178,
             345.57
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.178px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2458,
@@ -2902,8 +2902,8 @@
             461.867,
             391.044
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.044px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2463,
@@ -2914,8 +2914,8 @@
             470.417,
             584.074
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.074px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2473,
@@ -2926,8 +2926,8 @@
             128.148,
             538.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2482,
@@ -2938,8 +2938,8 @@
             520.325,
             339.733
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.325px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2487,
@@ -2950,8 +2950,8 @@
             409.026,
             597.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.026px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2490,
@@ -2962,8 +2962,8 @@
             85.769,
             549.238
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.238px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2492,
@@ -2974,8 +2974,8 @@
             498.006,
             622.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.006px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2493,
@@ -2986,8 +2986,8 @@
             243.917,
             525.384
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.384px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2511,
@@ -2998,8 +2998,8 @@
             566.118,
             197.742
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.118px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2515,
@@ -3010,8 +3010,8 @@
             515.156,
             332.043
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.156px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2521,
@@ -3022,8 +3022,8 @@
             639.444,
             297.037
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2522,
@@ -3034,8 +3034,8 @@
             129.231,
             465.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2525,
@@ -3046,8 +3046,8 @@
             291.694,
             417.494
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.494px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2547,
@@ -3058,8 +3058,8 @@
             145.299,
             471.017
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.017px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2567,
@@ -3070,8 +3070,8 @@
             638.494,
             238.894
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.494px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2584,
@@ -3082,8 +3082,8 @@
             371.806,
             607.006
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.006px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2586,
@@ -3094,8 +3094,8 @@
             639.444,
             436.296
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2600,
@@ -3106,8 +3106,8 @@
             344.328,
             368.596
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.328px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2606,
@@ -3118,8 +3118,8 @@
             237.231,
             405.463
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.463px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2617,
@@ -3130,8 +3130,8 @@
             639.444,
             213.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2621,
@@ -3142,8 +3142,8 @@
             639.444,
             360
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2637,
@@ -3166,8 +3166,8 @@
             496.296,
             469.028
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.028px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2690,
@@ -3178,8 +3178,8 @@
             78.756,
             597.16
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.160px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2729,
@@ -3190,8 +3190,8 @@
             584.392,
             335.846
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.392px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2734,
@@ -3202,8 +3202,8 @@
             402.826,
             474.187
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.187px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2739,
@@ -3214,8 +3214,8 @@
             451.111,
             77.037
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.111px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2743,
@@ -3226,8 +3226,8 @@
             214.748,
             550.068
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.068px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2762,
@@ -3238,8 +3238,8 @@
             425.278,
             483.148
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.148px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2764,
@@ -3250,8 +3250,8 @@
             232.593,
             582.222
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2768,
@@ -3262,8 +3262,8 @@
             429.204,
             228.08
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.204px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2770,
@@ -3274,8 +3274,8 @@
             532.222,
             484.306
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.306px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2793,
@@ -3286,8 +3286,8 @@
             308.201,
             535.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2805,
@@ -3298,8 +3298,8 @@
             228.586,
             559.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2816,
@@ -3310,8 +3310,8 @@
             391.044,
             461.867
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.044px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2840,
@@ -3322,8 +3322,8 @@
             406.059,
             639.446
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.446px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2861,
@@ -3334,8 +3334,8 @@
             367.708,
             618.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2864,
@@ -3346,8 +3346,8 @@
             547.195,
             194.411
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.195px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2866,
@@ -3358,8 +3358,8 @@
             174.061,
             638.494
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.494px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2884,
@@ -3370,8 +3370,8 @@
             355.497,
             589.382
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.382px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2892,
@@ -3382,8 +3382,8 @@
             194.391,
             549.411
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.411px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2897,
@@ -3394,8 +3394,8 @@
             557.128,
             286.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.128px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2918,
@@ -3406,8 +3406,8 @@
             532.198,
             618.291
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.291px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2949,
@@ -3418,8 +3418,8 @@
             639.444,
             325.185
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2950,
@@ -3430,8 +3430,8 @@
             506.336,
             231.098
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.336px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2959,
@@ -3442,8 +3442,8 @@
             146.667,
             586.111
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.111px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2966,
@@ -3454,8 +3454,8 @@
             601.176,
             125.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.176px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2968,
@@ -3466,8 +3466,8 @@
             421.481,
             498.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.481px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2975,
@@ -3478,8 +3478,8 @@
             364.014,
             608.462
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.014px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2985,
@@ -3490,8 +3490,8 @@
             292.558,
             639.401
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.401px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2986,
@@ -3502,8 +3502,8 @@
             469.028,
             496.296
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.028px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2994,
@@ -3514,8 +3514,8 @@
             466.308,
             216.274
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2995,
@@ -3526,8 +3526,8 @@
             164.267,
             639.2
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.200px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3001,
@@ -3538,8 +3538,8 @@
             536.886,
             474.101
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.101px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3009,
@@ -3550,8 +3550,8 @@
             412.44,
             265.385
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.440px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3018,
@@ -3562,8 +3562,8 @@
             639.444,
             153.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3036,
@@ -3574,8 +3574,8 @@
             473.496,
             108.267
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.496px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3049,
@@ -3586,8 +3586,8 @@
             595.433,
             195.392
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.433px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3059,
@@ -3598,8 +3598,8 @@
             110.173,
             502.12
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.120px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3073,
@@ -3610,8 +3610,8 @@
             265.385,
             412.44
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.440px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3081,
@@ -3622,8 +3622,8 @@
             418.256,
             444.923
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.256px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3103,
@@ -3634,8 +3634,8 @@
             474.154,
             207.179
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3105,
@@ -3646,8 +3646,8 @@
             402.963,
             452.222
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3110,
@@ -3658,8 +3658,8 @@
             629.38,
             331.171
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.380px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3127,
@@ -3670,8 +3670,8 @@
             549.143,
             193.067
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.143px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3138,
@@ -3682,8 +3682,8 @@
             216.274,
             466.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3153,
@@ -3694,8 +3694,8 @@
             257.037,
             569.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3158,
@@ -3706,8 +3706,8 @@
             108.123,
             529.474
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.474px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3170,
@@ -3718,8 +3718,8 @@
             631.177,
             439.385
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.177px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3172,
@@ -3730,8 +3730,8 @@
             446.228,
             396.19
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.190px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3174,
@@ -3742,8 +3742,8 @@
             571.296,
             421.806
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.296px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3180,
@@ -3754,8 +3754,8 @@
             395.294,
             639.754
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.294px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3181,
@@ -3766,8 +3766,8 @@
             548.148,
             637.222
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3182,
@@ -3778,8 +3778,8 @@
             532.198,
             618.291
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.198px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3202,
@@ -3790,8 +3790,8 @@
             587.167,
             194.667
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.167px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3244,
@@ -3802,8 +3802,8 @@
             177.067,
             508.318
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.318px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3272,
@@ -3814,8 +3814,8 @@
             495.109,
             639.467
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.467px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3275,
@@ -3826,8 +3826,8 @@
             414.4,
             627.192
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.192px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3277,
@@ -3838,8 +3838,8 @@
             456.667,
             639.5
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.500px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3288,
@@ -3850,8 +3850,8 @@
             328.997,
             484.178
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.178px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3305,
@@ -3862,8 +3862,8 @@
             625.013,
             93.888
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.013px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3306,
@@ -3874,8 +3874,8 @@
             481.38,
             395.411
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.380px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3311,
@@ -3886,8 +3886,8 @@
             639.444,
             222.222
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3320,
@@ -3898,8 +3898,8 @@
             497.204,
             373.564
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.204px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3326,
@@ -3910,8 +3910,8 @@
             502.145,
             325.899
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.145px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3327,
@@ -3922,8 +3922,8 @@
             485.333,
             535.134
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3348,
@@ -3934,8 +3934,8 @@
             145.688,
             399.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3355,
@@ -3946,8 +3946,8 @@
             255.564,
             456.373
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.373px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3360,
@@ -3958,8 +3958,8 @@
             322.949,
             471.142
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.142px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3363,
@@ -3970,8 +3970,8 @@
             498.889,
             406.119
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.119px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3364,
@@ -3982,8 +3982,8 @@
             450.485,
             327.848
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.485px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3391,
@@ -4006,8 +4006,8 @@
             574.456,
             278.186
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.456px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3401,
@@ -4018,8 +4018,8 @@
             618.308,
             367.708
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3410,
@@ -4030,8 +4030,8 @@
             502.12,
             110.173
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.120px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3420,
@@ -4042,8 +4042,8 @@
             591.456,
             393.176
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.176px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3449,
@@ -4054,8 +4054,8 @@
             419.486,
             637.065
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.065px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3460,
@@ -4066,8 +4066,8 @@
             439.385,
             631.177
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.177px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3463,
@@ -4078,8 +4078,8 @@
             414.815,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3468,
@@ -4090,8 +4090,8 @@
             496.296,
             469.028
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.028px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3480,
@@ -4102,8 +4102,8 @@
             510.094,
             172.085
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.094px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3496,
@@ -4114,8 +4114,8 @@
             592.029,
             395.412
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.029px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3516,
@@ -4126,8 +4126,8 @@
             492.055,
             326.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.055px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3518,
@@ -4138,8 +4138,8 @@
             230.154,
             530.221
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.221px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3552,
@@ -4150,8 +4150,8 @@
             464.246,
             516.183
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.246px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3581,
@@ -4162,8 +4162,8 @@
             302.883,
             631.02
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.020px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3600,
@@ -4174,8 +4174,8 @@
             367.708,
             618.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3618,
@@ -4186,8 +4186,8 @@
             275.2,
             531.132
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.132px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3629,
@@ -4198,8 +4198,8 @@
             94.4,
             369.431
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.431px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3641,
@@ -4210,8 +4210,8 @@
             577.231,
             207.861
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3658,
@@ -4222,8 +4222,8 @@
             299.259,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3675,
@@ -4234,8 +4234,8 @@
             606.143,
             250.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.143px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3690,
@@ -4246,8 +4246,8 @@
             369.431,
             94.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.431px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3702,
@@ -4258,8 +4258,8 @@
             406.059,
             639.446
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.059px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3705,
@@ -4270,8 +4270,8 @@
             248.08,
             630.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3708,
@@ -4282,8 +4282,8 @@
             159.467,
             604.378
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.378px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3709,
@@ -4294,8 +4294,8 @@
             177.067,
             403.452
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.452px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3718,
@@ -4306,8 +4306,8 @@
             126.032,
             618.208
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.208px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3719,
@@ -4318,8 +4318,8 @@
             639.444,
             111.852
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3721,
@@ -4330,8 +4330,8 @@
             364.835,
             638.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3799,
@@ -4342,8 +4342,8 @@
             465.694,
             530.185
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.185px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3800,
@@ -4354,8 +4354,8 @@
             458.687,
             634.133
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.133px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3809,
@@ -4366,8 +4366,8 @@
             516.308,
             147.945
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3816,
@@ -4378,8 +4378,8 @@
             639.444,
             224.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3818,
@@ -4390,8 +4390,8 @@
             635.197,
             158.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.197px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3837,
@@ -4402,8 +4402,8 @@
             608.333,
             95.556
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3853,
@@ -4414,8 +4414,8 @@
             201.5,
             625.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3858,
@@ -4426,8 +4426,8 @@
             271.7,
             552.47
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.470px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3875,
@@ -4438,8 +4438,8 @@
             164.503,
             639.467
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.467px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3899,
@@ -4450,8 +4450,8 @@
             426.175,
             615.087
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.087px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3916,
@@ -4462,8 +4462,8 @@
             264.905,
             638.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3921,
@@ -4474,8 +4474,8 @@
             638.462,
             368.323
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3966,
@@ -4486,8 +4486,8 @@
             321.139,
             542.172
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.172px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3971,
@@ -4498,8 +4498,8 @@
             639.754,
             395.294
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.294px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3986,
@@ -4510,8 +4510,8 @@
             375.556,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3988,
@@ -4522,8 +4522,8 @@
             111.215,
             615.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3996,
@@ -4534,8 +4534,8 @@
             172.085,
             510.094
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.094px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3997,
@@ -4546,8 +4546,8 @@
             242.129,
             427.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4021,
@@ -4558,8 +4558,8 @@
             533.351,
             232.823
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.351px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4032,
@@ -4570,8 +4570,8 @@
             576.154,
             343.905
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4042,
@@ -4582,8 +4582,8 @@
             306.455,
             547.195
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.195px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4050,
@@ -4594,8 +4594,8 @@
             197.778,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4056,
@@ -4606,8 +4606,8 @@
             218.519,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4066,
@@ -4618,8 +4618,8 @@
             133.867,
             379.037
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.037px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4081,
@@ -4630,8 +4630,8 @@
             513.333,
             377.778
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4087,
@@ -4642,8 +4642,8 @@
             141.173,
             576.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4088,
@@ -4654,8 +4654,8 @@
             295.467,
             545.141
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.141px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4090,
@@ -4666,8 +4666,8 @@
             150.37,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4092,
@@ -4678,8 +4678,8 @@
             607.179,
             120.533
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.179px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4107,
@@ -4690,8 +4690,8 @@
             564.308,
             530.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4109,
@@ -4702,8 +4702,8 @@
             262.154,
             534.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4117,
@@ -4714,8 +4714,8 @@
             550.462,
             84.923
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4119,
@@ -4726,8 +4726,8 @@
             479.414,
             138.128
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.414px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4126,
@@ -4738,8 +4738,8 @@
             557.128,
             286.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.128px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4132,
@@ -4750,8 +4750,8 @@
             461.231,
             526.938
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4133,
@@ -4762,8 +4762,8 @@
             270.432,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4134,
@@ -4774,8 +4774,8 @@
             403.072,
             257.855
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.072px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4137,
@@ -4786,8 +4786,8 @@
             639.444,
             325.926
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4144,
@@ -4798,8 +4798,8 @@
             76.19,
             483.045
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.045px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4166,
@@ -4810,8 +4810,8 @@
             610.232,
             476.542
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.232px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4173,
@@ -4822,8 +4822,8 @@
             535.694,
             417.222
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4174,
@@ -4834,8 +4834,8 @@
             14.028,
             4.074
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.074px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4182,
@@ -4846,8 +4846,8 @@
             409.026,
             597.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4188,
@@ -4858,8 +4858,8 @@
             526.117,
             315.385
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.117px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4197,
@@ -4870,8 +4870,8 @@
             525.68,
             512.388
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.388px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4198,
@@ -4882,8 +4882,8 @@
             491.44,
             150.615
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.440px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4203,
@@ -4894,8 +4894,8 @@
             560.35,
             161.6
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.350px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4210,
@@ -4906,8 +4906,8 @@
             639.5,
             456.667
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.500px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4240,
@@ -4918,8 +4918,8 @@
             471.017,
             145.299
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.017px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4243,
@@ -4930,8 +4930,8 @@
             184.264,
             471.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4269,
@@ -4942,8 +4942,8 @@
             519.308,
             407.236
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.236px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4276,
@@ -4954,8 +4954,8 @@
             190.37,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4281,
@@ -4966,8 +4966,8 @@
             509.462,
             145.095
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.462px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4318,
@@ -4978,8 +4978,8 @@
             526.452,
             555.156
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.452px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4320,
@@ -4990,8 +4990,8 @@
             147.407,
             639.444
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.444px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4335,
@@ -5002,8 +5002,8 @@
             178.59,
             513.392
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.392px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4341,
@@ -5014,8 +5014,8 @@
             76.944,
             616.182
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.182px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4357,
@@ -5026,8 +5026,8 @@
             93.888,
             625.013
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.013px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4367,
@@ -5038,8 +5038,8 @@
             607.077,
             285.22
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4374,
@@ -5050,8 +5050,8 @@
             95.556,
             608.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4378,
@@ -5062,8 +5062,8 @@
             588.103,
             189.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.103px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4388,
@@ -5074,8 +5074,8 @@
             335.467,
             639.6
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.467px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4428,
@@ -5086,8 +5086,8 @@
             170.667,
             400.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.400px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4430,
@@ -5098,8 +5098,8 @@
             514.321,
             398.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.400px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4432,
@@ -5110,8 +5110,8 @@
             422.222,
             244.074
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4437,
@@ -5122,8 +5122,8 @@
             409.026,
             597.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4438,
@@ -5134,8 +5134,8 @@
             564.308,
             530.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4479,
@@ -5158,8 +5158,8 @@
             62,
             297.2
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.200px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4588,
@@ -5170,8 +5170,8 @@
             560.137,
             396.581
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.137px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 5114,
@@ -5194,8 +5194,8 @@
             248.203,
             305.313
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.313px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 5233,
@@ -5206,8 +5206,8 @@
             255.078,
             305.313
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.313px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 5967,
@@ -5266,8 +5266,8 @@
             422.5,
             508.438
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.438px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 6995,
@@ -5290,8 +5290,8 @@
             85.2,
             257.2
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.200px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 7512,
@@ -5350,8 +5350,8 @@
             563.958,
             508.438
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.438px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 9026,
@@ -5398,8 +5398,8 @@
             54.8,
             314.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.400px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 10023,
@@ -5422,8 +5422,8 @@
             77.2,
             350.4
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.400px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 10553,
@@ -5566,8 +5566,8 @@
             256.25,
             558.438
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.438px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 12742,
@@ -5578,8 +5578,8 @@
             168.563,
             305.313
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.313px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 13435,
@@ -5590,8 +5590,8 @@
             55.2,
             574.012
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.012px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 13739,
@@ -5614,8 +5614,8 @@
             354.688,
             305.313
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.313px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 13893,
@@ -5710,8 +5710,8 @@
             482.344,
             530.313
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.313px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 16635,
@@ -5746,8 +5746,8 @@
             582.813,
             552.188
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.188px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 17007,
@@ -5998,8 +5998,8 @@
             530.438,
             133.199
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.438px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 17870,
@@ -6214,8 +6214,8 @@
             62.159,
             433.216
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.216px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 19158,
@@ -6286,8 +6286,8 @@
             50.849,
             639.305
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.305px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 19492,
@@ -6370,8 +6370,8 @@
             72.198,
             633.103
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.103px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 19980,
@@ -26830,8 +26830,8 @@
             98.664,
             478.091
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.091px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 7,
@@ -26842,8 +26842,8 @@
             559.231,
             231.385
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 28,
@@ -26854,8 +26854,8 @@
             625.674,
             616.473
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.473px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 59,
@@ -26866,8 +26866,8 @@
             116.267,
             389.043
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.043px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 74,
@@ -26878,8 +26878,8 @@
             61.145,
             579.105
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.105px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 75,
@@ -26890,8 +26890,8 @@
             596.252,
             386.851
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.252px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 91,
@@ -26902,8 +26902,8 @@
             384.147,
             384.498
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.147px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 105,
@@ -26914,8 +26914,8 @@
             560.533,
             383.039
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.039px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 106,
@@ -26926,8 +26926,8 @@
             499.259,
             383.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.333px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 143,
@@ -26938,8 +26938,8 @@
             88.54,
             575.258
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.258px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 163,
@@ -26950,8 +26950,8 @@
             466.852,
             462.222
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.222px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 175,
@@ -26962,8 +26962,8 @@
             204.82,
             574.5
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.500px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 189,
@@ -26974,8 +26974,8 @@
             433.057,
             495.095
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.057px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 247,
@@ -26986,8 +26986,8 @@
             395.356,
             549.373
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.373px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 253,
@@ -26998,8 +26998,8 @@
             318.473,
             539.166
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.166px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 272,
@@ -27010,8 +27010,8 @@
             535.146,
             512
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.146px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 307,
@@ -27022,8 +27022,8 @@
             516.473,
             329.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 308,
@@ -27034,8 +27034,8 @@
             466.111,
             388.333
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.111px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 319,
@@ -27046,8 +27046,8 @@
             134.933,
             419.062
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.062px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 322,
@@ -27058,8 +27058,8 @@
             330.077,
             543.806
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 337,
@@ -27070,8 +27070,8 @@
             553.487,
             437.267
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.487px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 358,
@@ -27082,8 +27082,8 @@
             79.4,
             441.017
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.017px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 379,
@@ -27094,8 +27094,8 @@
             307.203,
             514.896
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.203px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 382,
@@ -27106,8 +27106,8 @@
             167.1,
             598.201
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.201px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 389,
@@ -27130,8 +27130,8 @@
             130.709,
             548.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 405,
@@ -27142,8 +27142,8 @@
             325.926,
             502.361
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.361px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 406,
@@ -27154,8 +27154,8 @@
             448.759,
             445.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 409,
@@ -27166,8 +27166,8 @@
             458.519,
             540.278
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.278px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 453,
@@ -27178,8 +27178,8 @@
             509.096,
             171.498
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.096px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 597,
@@ -27238,8 +27238,8 @@
             454.792,
             601.25
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.250px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1631,
@@ -27298,8 +27298,8 @@
             72,
             441.2
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.200px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3367,
@@ -27334,8 +27334,8 @@
             600.147,
             549.744
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.147px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 3745,
@@ -27358,8 +27358,8 @@
             198.813,
             305.313
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.313px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4133,
@@ -27526,8 +27526,8 @@
             612.447,
             209.402
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.447px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 4797,
@@ -31996,8 +31996,8 @@
             400.926,
             560.139
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.139px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 31,
@@ -32008,8 +32008,8 @@
             93.979,
             526.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 34,
@@ -32020,8 +32020,8 @@
             619.356,
             242.778
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.356px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 39,
@@ -32044,8 +32044,8 @@
             277.593,
             394.306
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.306px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 54,
@@ -32056,8 +32056,8 @@
             482.037,
             445.139
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.139px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 87,
@@ -32068,8 +32068,8 @@
             128.657,
             619.077
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.077px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 104,
@@ -32080,8 +32080,8 @@
             639.815,
             533.056
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.056px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 107,
@@ -32092,8 +32092,8 @@
             257.046,
             516.013
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.013px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 117,
@@ -32104,8 +32104,8 @@
             78.359,
             519.231
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.231px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 133,
@@ -32116,8 +32116,8 @@
             516.923,
             450.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 147,
@@ -32128,8 +32128,8 @@
             254.259,
             377.083
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.083px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 151,
@@ -32140,8 +32140,8 @@
             397.108,
             459.419
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.419px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 159,
@@ -32152,8 +32152,8 @@
             354.163,
             506.159
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.163px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 161,
@@ -32164,8 +32164,8 @@
             88,
             367.029
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.029px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 173,
@@ -32176,8 +32176,8 @@
             577.026,
             530.154
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.154px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 181,
@@ -32188,8 +32188,8 @@
             76.08,
             610.433
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.433px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 198,
@@ -32200,8 +32200,8 @@
             88.644,
             514.308
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.308px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 298,
@@ -32212,8 +32212,8 @@
             568.125,
             639.662
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.125px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 338,
@@ -32236,8 +32236,8 @@
             420.103,
             232.205
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.103px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 801,
@@ -32272,8 +32272,8 @@
             312.5,
             305.313
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.313px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1080,
@@ -32284,8 +32284,8 @@
             639.662,
             568.057
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.057px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1507,
@@ -32296,8 +32296,8 @@
             560.137,
             366.105
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.137px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1559,
@@ -32308,8 +32308,8 @@
             568.057,
             639.662
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.057px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 1605,
@@ -32428,8 +32428,8 @@
             638.436,
             117.475
           ],
-          "reason": "bbox exceeds image bounds",
-          "severity": "FATAL"
+          "reason": "bbox exceeds image bounds by 0.436px (sub-pixel rounding, clampable)",
+          "severity": "WARNING"
         },
         {
           "annotation_id": 2558,
