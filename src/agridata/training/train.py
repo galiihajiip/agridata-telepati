@@ -65,12 +65,26 @@ def run_training(
     workers: int = 2,
     fraction: float = 1.0,
     plots: bool = False,
+    validate: bool = True,
+    extra_train_kwargs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run a compliant training job and return key result paths.
 
     `pretrained=False` is passed explicitly to `model.train()` as a
     belt-and-suspenders safeguard, even though the model was already built
     from a weights-free `.yaml` definition in `build_compliant_model`.
+
+    `validate=False` skips Ultralytics' per-epoch validation on the full
+    validation split (expensive when repeated every epoch across many
+    experiments) — verified via source (`engine/trainer.py`) that `best.pt`
+    selection still works correctly in this case, falling back to a
+    loss-based fitness score. Use `agridata.metrics`/`scripts/evaluate.py`
+    for the authoritative post-hoc mAP@0.5/F1 instead.
+
+    `extra_train_kwargs` passes additional Ultralytics train() arguments
+    through directly (e.g. optimizer, lr0, momentum, weight_decay,
+    augmentation overrides) for controlled hyperparameter experiments
+    (Block 10) without bloating this function's fixed signature.
     """
     model = build_compliant_model(model_arch, pretrained=False)
 
