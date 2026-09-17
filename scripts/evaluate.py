@@ -205,6 +205,15 @@ def main() -> int:
         per_class_map50[canonical_name] = float(val_results.box.ap50[idx])
 
     # --- 2. LOCAL precision/recall/F1 at a configurable confidence threshold ---
+    # Reload the model fresh rather than reusing the instance val() just ran
+    # on: calling predict(..., stream=True) on a model that already ran
+    # val() in the same process leaves MPS memory unreleased between calls,
+    # causing an out-of-memory failure partway through (confirmed via a
+    # clean-environment reproduction test — Block 16 — where it manifested
+    # first as a confusing "MPSGraph tensor dims > INT_MAX" error and then,
+    # isolated, as an explicit "MPS backend out of memory" error). A fresh
+    # model object guarantees a clean MPS graph/memory state.
+    model = YOLO(str(args.weights))
     logger.info("Collecting raw predictions for local F1 computation (conf>=%.4f) ...", args.collection_conf)
     ground_truths, images_by_id = load_ground_truth(manifest_path)
     detections = collect_predictions(model, images_dir, images_by_id, args.collection_conf, device)
