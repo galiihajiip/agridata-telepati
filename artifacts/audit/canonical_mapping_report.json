@@ -1,0 +1,389 @@
+{
+  "train": {
+    "total_raw_categories": 21,
+    "mapped": [
+      {
+        "raw_id": 1,
+        "raw_name": "Bacterial panicle Blight",
+        "canonical_name": "Bacterial panicle blight",
+        "canonical_id": 2
+      },
+      {
+        "raw_id": 2,
+        "raw_name": "False-Smut",
+        "canonical_name": "False smut",
+        "canonical_id": 5
+      },
+      {
+        "raw_id": 3,
+        "raw_name": "Healthy Rice Leaf",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 4,
+        "raw_name": "Healthy Rice beads",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 5,
+        "raw_name": "Infected Blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 6,
+        "raw_name": "Leaf-roller",
+        "canonical_name": "Leaf roller",
+        "canonical_id": 7
+      },
+      {
+        "raw_id": 8,
+        "raw_name": "Blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 9,
+        "raw_name": "BrownSpot",
+        "canonical_name": "Brown spot",
+        "canonical_id": 4
+      },
+      {
+        "raw_id": 10,
+        "raw_name": "Healthy",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 11,
+        "raw_name": "Leaf Scald",
+        "canonical_name": "Leaf scald",
+        "canonical_id": 8
+      },
+      {
+        "raw_id": 12,
+        "raw_name": "Rice-Tungro",
+        "canonical_name": "Tungro",
+        "canonical_id": 11
+      },
+      {
+        "raw_id": 13,
+        "raw_name": "Sheath Blight",
+        "canonical_name": "Sheath blight",
+        "canonical_id": 10
+      },
+      {
+        "raw_id": 15,
+        "raw_name": "Bacterial leaf blight",
+        "canonical_name": "Bacterial leaf blight",
+        "canonical_id": 1
+      },
+      {
+        "raw_id": 16,
+        "raw_name": "Brown spot",
+        "canonical_name": "Brown spot",
+        "canonical_id": 4
+      },
+      {
+        "raw_id": 17,
+        "raw_name": "Leaf blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 18,
+        "raw_name": "Leaf scald",
+        "canonical_name": "Leaf scald",
+        "canonical_id": 8
+      },
+      {
+        "raw_id": 19,
+        "raw_name": "Narrow brown",
+        "canonical_name": "Narrow brown",
+        "canonical_id": 9
+      },
+      {
+        "raw_id": 20,
+        "raw_name": "healthy",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      }
+    ],
+    "supercategory_placeholders": [
+      {
+        "raw_id": 0,
+        "raw_name": "Leaf-blight"
+      },
+      {
+        "raw_id": 7,
+        "raw_name": "Rice-Leaf-Diseasee"
+      },
+      {
+        "raw_id": 14,
+        "raw_name": "paddy"
+      }
+    ],
+    "unmapped_raw_categories": [],
+    "canonical_classes_with_zero_raw_labels": []
+  },
+  "valid": {
+    "total_raw_categories": 21,
+    "mapped": [
+      {
+        "raw_id": 1,
+        "raw_name": "Bacterial panicle Blight",
+        "canonical_name": "Bacterial panicle blight",
+        "canonical_id": 2
+      },
+      {
+        "raw_id": 2,
+        "raw_name": "False-Smut",
+        "canonical_name": "False smut",
+        "canonical_id": 5
+      },
+      {
+        "raw_id": 3,
+        "raw_name": "Healthy Rice Leaf",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 4,
+        "raw_name": "Healthy Rice beads",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 5,
+        "raw_name": "Infected Blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 6,
+        "raw_name": "Leaf-roller",
+        "canonical_name": "Leaf roller",
+        "canonical_id": 7
+      },
+      {
+        "raw_id": 8,
+        "raw_name": "Blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 9,
+        "raw_name": "BrownSpot",
+        "canonical_name": "Brown spot",
+        "canonical_id": 4
+      },
+      {
+        "raw_id": 10,
+        "raw_name": "Healthy",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 11,
+        "raw_name": "Leaf Scald",
+        "canonical_name": "Leaf scald",
+        "canonical_id": 8
+      },
+      {
+        "raw_id": 12,
+        "raw_name": "Rice-Tungro",
+        "canonical_name": "Tungro",
+        "canonical_id": 11
+      },
+      {
+        "raw_id": 13,
+        "raw_name": "Sheath Blight",
+        "canonical_name": "Sheath blight",
+        "canonical_id": 10
+      },
+      {
+        "raw_id": 15,
+        "raw_name": "Bacterial leaf blight",
+        "canonical_name": "Bacterial leaf blight",
+        "canonical_id": 1
+      },
+      {
+        "raw_id": 16,
+        "raw_name": "Brown spot",
+        "canonical_name": "Brown spot",
+        "canonical_id": 4
+      },
+      {
+        "raw_id": 17,
+        "raw_name": "Leaf blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 18,
+        "raw_name": "Leaf scald",
+        "canonical_name": "Leaf scald",
+        "canonical_id": 8
+      },
+      {
+        "raw_id": 19,
+        "raw_name": "Narrow brown",
+        "canonical_name": "Narrow brown",
+        "canonical_id": 9
+      },
+      {
+        "raw_id": 20,
+        "raw_name": "healthy",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      }
+    ],
+    "supercategory_placeholders": [
+      {
+        "raw_id": 0,
+        "raw_name": "Leaf-blight"
+      },
+      {
+        "raw_id": 7,
+        "raw_name": "Rice-Leaf-Diseasee"
+      },
+      {
+        "raw_id": 14,
+        "raw_name": "paddy"
+      }
+    ],
+    "unmapped_raw_categories": [],
+    "canonical_classes_with_zero_raw_labels": []
+  },
+  "test": {
+    "total_raw_categories": 21,
+    "mapped": [
+      {
+        "raw_id": 1,
+        "raw_name": "Bacterial panicle Blight",
+        "canonical_name": "Bacterial panicle blight",
+        "canonical_id": 2
+      },
+      {
+        "raw_id": 2,
+        "raw_name": "False-Smut",
+        "canonical_name": "False smut",
+        "canonical_id": 5
+      },
+      {
+        "raw_id": 3,
+        "raw_name": "Healthy Rice Leaf",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 4,
+        "raw_name": "Healthy Rice beads",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 5,
+        "raw_name": "Infected Blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 6,
+        "raw_name": "Leaf-roller",
+        "canonical_name": "Leaf roller",
+        "canonical_id": 7
+      },
+      {
+        "raw_id": 8,
+        "raw_name": "Blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 9,
+        "raw_name": "BrownSpot",
+        "canonical_name": "Brown spot",
+        "canonical_id": 4
+      },
+      {
+        "raw_id": 10,
+        "raw_name": "Healthy",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      },
+      {
+        "raw_id": 11,
+        "raw_name": "Leaf Scald",
+        "canonical_name": "Leaf scald",
+        "canonical_id": 8
+      },
+      {
+        "raw_id": 12,
+        "raw_name": "Rice-Tungro",
+        "canonical_name": "Tungro",
+        "canonical_id": 11
+      },
+      {
+        "raw_id": 13,
+        "raw_name": "Sheath Blight",
+        "canonical_name": "Sheath blight",
+        "canonical_id": 10
+      },
+      {
+        "raw_id": 15,
+        "raw_name": "Bacterial leaf blight",
+        "canonical_name": "Bacterial leaf blight",
+        "canonical_id": 1
+      },
+      {
+        "raw_id": 16,
+        "raw_name": "Brown spot",
+        "canonical_name": "Brown spot",
+        "canonical_id": 4
+      },
+      {
+        "raw_id": 17,
+        "raw_name": "Leaf blast",
+        "canonical_name": "Blast",
+        "canonical_id": 3
+      },
+      {
+        "raw_id": 18,
+        "raw_name": "Leaf scald",
+        "canonical_name": "Leaf scald",
+        "canonical_id": 8
+      },
+      {
+        "raw_id": 19,
+        "raw_name": "Narrow brown",
+        "canonical_name": "Narrow brown",
+        "canonical_id": 9
+      },
+      {
+        "raw_id": 20,
+        "raw_name": "healthy",
+        "canonical_name": "Healthy",
+        "canonical_id": 6
+      }
+    ],
+    "supercategory_placeholders": [
+      {
+        "raw_id": 0,
+        "raw_name": "Leaf-blight"
+      },
+      {
+        "raw_id": 7,
+        "raw_name": "Rice-Leaf-Diseasee"
+      },
+      {
+        "raw_id": 14,
+        "raw_name": "paddy"
+      }
+    ],
+    "unmapped_raw_categories": [],
+    "canonical_classes_with_zero_raw_labels": []
+  }
+}
