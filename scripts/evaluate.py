@@ -119,7 +119,7 @@ def load_ground_truth(manifest_path: Path) -> tuple[list[GroundTruthBox], dict[i
 def collect_predictions(
     model, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str
 ) -> list[Detection]:
-    """Run inference once at a low confidence threshold; filtering by a higher
+    """Run inference at a low confidence threshold; filtering by a higher
     threshold happens later in match_detections_to_ground_truth (pure function,
     no re-inference needed per threshold).
 
@@ -127,18 +127,33 @@ def collect_predictions(
     accumulating all of them (each holding image tensors) in RAM — necessary
     at full-dataset scale (Ultralytics itself warns against the non-streamed
     form for exactly this reason).
+
+    Paths are submitted in chunks of `CHUNK_SIZE`, not as one 2000+ path
+    list. A Block 16 clean-environment reproduction test found that passing
+    the full valid-split path list (2106 images) to a single `predict(...,
+    stream=True)` call fails with "MPSGraph does not support tensor dims
+    larger than INT_MAX" on this project's numpy/torch/MPS combination —
+    reproduced with zero relation to any prior `val()` call, purely from
+    the size of the path list itself (confirmed working up to 1000 paths in
+    one call, confirmed failing at 2106). Root cause not fully isolated
+    (likely a numpy 2.4.x / torch MPS interaction specific to very large
+    explicit path lists); chunking is a verified, robust workaround.
     """
+    CHUNK_SIZE = 500
     ordered_ids = list(images_by_id.keys())
     image_paths = [str(images_dir / images_by_id[iid]["file_name"]) for iid in ordered_ids]
 
     detections: list[Detection] = []
-    results_stream = model.predict(image_paths, conf=collection_conf, verbose=False, stream=True, device=device)
-    for image_id, result in zip(ordered_ids, results_stream, strict=True):
-        for box in result.boxes:
-            x1, y1, x2, y2 = box.xyxy[0].tolist()
-            detections.append(
-                Detection(
-                    image_id=image_id,
+    for chunk_start in range(0, len(image_paths), CHUNK_SIZE):
+        chunk_ids = ordered_ids[chunk_start : chunk_start + CHUNK_SIZE]
+        chunk_paths = image_paths[chunk_start : chunk_start + CHUNK_SIZE]
+        results_stream = model.predict(chunk_paths, conf=collection_conf, verbose=False, stream=True, device=device)
+        for image_id, result in zip(chunk_ids, results_stream, strict=True):
+            for box in result.boxes:
+                x1, y1, x2, y2 = box.xyxy[0].tolist()
+                detections.append(
+                    Detection(
+                        image_id=image_id,
                     class_id=int(box.cls.item()),
                     confidence=float(box.conf.item()),
                     bbox_xywh=(x1, y1, x2 - x1, y2 - y1),
