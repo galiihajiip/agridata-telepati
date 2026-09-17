@@ -14,7 +14,6 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,18 +24,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from agridata.device import detect_device  # noqa: E402
 from agridata.logging_utils import setup_logging  # noqa: E402
+from agridata.reproducibility.environment import get_git_commit  # noqa: E402
 from agridata.seed import set_global_seed  # noqa: E402
 from agridata.training.train import run_training  # noqa: E402
 
 logger = logging.getLogger("agridata.scripts.train")
-
-
-def get_git_commit() -> str | None:
-    try:
-        result = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True)
-        return result.stdout.strip()
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return None
 
 
 def parse_args() -> argparse.Namespace:
