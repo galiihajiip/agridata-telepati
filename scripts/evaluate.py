@@ -154,11 +154,11 @@ def collect_predictions(
                 detections.append(
                     Detection(
                         image_id=image_id,
-                    class_id=int(box.cls.item()),
-                    confidence=float(box.conf.item()),
-                    bbox_xywh=(x1, y1, x2 - x1, y2 - y1),
+                        class_id=int(box.cls.item()),
+                        confidence=float(box.conf.item()),
+                        bbox_xywh=(x1, y1, x2 - x1, y2 - y1),
+                    )
                 )
-            )
     return detections
 
 
