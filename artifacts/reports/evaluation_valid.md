@@ -1,6 +1,6 @@
 # Evaluation Report — split: `valid`
 
-Weights: `runs/detect/block6_baseline_smoke/weights/best.pt`  |  Git commit: `b727684d299797f42b726c7a4c6e9ee488a4e64d`
+Weights: `runs/detect/block6_baseline_smoke/weights/best.pt`  |  Git commit: `81ca5bac759cd2ea6db8ffbd1e5a5248e8debd17`
 
 ## Native metrics (Ultralytics, source of truth for mAP)
 
