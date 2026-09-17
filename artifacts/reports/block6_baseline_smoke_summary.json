@@ -1,6 +1,6 @@
 {
   "block": 6,
-  "git_commit": "11b1bfbd7e870955c1507d133f91e231f3ec8f44",
+  "git_commit": "6ede3f816c6cdad5943378337509420260f14806",
   "seed": 42,
   "device": "mps",
   "model_arch": "yolov8n.yaml",
@@ -10,9 +10,9 @@
   "batch_size": 8,
   "epochs": 2,
   "fraction": 0.05,
-  "started_at_utc": "2026-09-17T08:39:34.234363+00:00",
-  "finished_at_utc": "2026-09-17T08:41:18.959295+00:00",
-  "duration_seconds": 104.724932,
+  "started_at_utc": "2026-09-17T09:21:08.738752+00:00",
+  "finished_at_utc": "2026-09-17T09:23:13.983559+00:00",
+  "duration_seconds": 125.244807,
   "save_dir": "/Users/macbookpro/Projects/agridata/runs/detect/block6_baseline_smoke",
   "best_weights": "/Users/macbookpro/Projects/agridata/runs/detect/block6_baseline_smoke/weights/best.pt",
   "last_weights": "/Users/macbookpro/Projects/agridata/runs/detect/block6_baseline_smoke/weights/last.pt",
@@ -21,6 +21,28 @@
     "metrics/recall(B)": 0.0,
     "metrics/mAP50(B)": 0.0,
     "metrics/mAP50-95(B)": 0.0
+  },
+  "resolved_hyperparameters": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.00033683499999999996,
+    "weight_decay": 0.0005,
+    "scheduler": "linear",
+    "augmentation": {
+      "hsv_h": 0.015,
+      "hsv_s": 0.7,
+      "hsv_v": 0.4,
+      "degrees": 0.0,
+      "translate": 0.1,
+      "scale": 0.5,
+      "shear": 0.0,
+      "perspective": 0.0,
+      "flipud": 0.0,
+      "fliplr": 0.5,
+      "bgr": 0.0,
+      "mosaic": 1.0,
+      "mixup": 0.0,
+      "copy_paste": 0.0
+    }
   },
   "yolo_offline_enforced": true
 }
