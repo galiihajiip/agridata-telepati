@@ -1,0 +1,26 @@
+{
+  "block": 6,
+  "git_commit": "8cd8d8fa6f0ca6a9f4fa2fad784597d93eac417b",
+  "seed": 42,
+  "device": "mps",
+  "model_arch": "yolov8n.yaml",
+  "pretrained": false,
+  "data_yaml": "data/prepared/data.yaml",
+  "image_size": 320,
+  "batch_size": 8,
+  "epochs": 2,
+  "fraction": 0.05,
+  "started_at_utc": "2026-09-17T08:35:47.634274+00:00",
+  "finished_at_utc": "2026-09-17T08:38:00.768226+00:00",
+  "duration_seconds": 133.133952,
+  "save_dir": "/Users/macbookpro/Projects/agridata/runs/detect/runs/detect/block6_baseline_smoke",
+  "best_weights": "/Users/macbookpro/Projects/agridata/runs/detect/runs/detect/block6_baseline_smoke/weights/best.pt",
+  "last_weights": "/Users/macbookpro/Projects/agridata/runs/detect/runs/detect/block6_baseline_smoke/weights/last.pt",
+  "final_metrics": {
+    "metrics/precision(B)": 0.0,
+    "metrics/recall(B)": 0.0,
+    "metrics/mAP50(B)": 0.0,
+    "metrics/mAP50-95(B)": 0.0
+  },
+  "yolo_offline_enforced": true
+}
