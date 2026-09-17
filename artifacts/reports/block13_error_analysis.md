@@ -65,6 +65,19 @@ Weights: `runs/detect/matrix/E08/weights/best.pt` | Split: `valid` | Confidence 
 - False positives: ['artifacts/figures/error_analysis/bg_fp_id2_IMG-20241012-WA0099_jpg.rf.052715be2fdca8f048e88ae49189c283.jpg', 'artifacts/figures/error_analysis/bg_fp_id4_IMG-20240927-WA0204_jpg.rf.08d9cd91a261a0fac5a9eddf03f8313b.jpg', 'artifacts/figures/error_analysis/bg_fp_id5_IMG-20240926-WA0174_jpg.rf.0877f8b16302ce982b768ca746a3185a.jpg', 'artifacts/figures/error_analysis/bg_fp_id7_20240915_150129_jpg.rf.045091b7ad6b9cc08f3265fce3a6ad3a.jpg']
 - False negatives: ['artifacts/figures/error_analysis/fn_id0_IMG-20241014-WA0381_jpg.rf.02d81d946e4969027004eb331b2636b5.jpg', 'artifacts/figures/error_analysis/fn_id2_IMG-20241012-WA0099_jpg.rf.052715be2fdca8f048e88ae49189c283.jpg', 'artifacts/figures/error_analysis/fn_id3_IMG-20240927-WA0215_jpg.rf.02427045292acba0cf19b92c6a42caf2.jpg', 'artifacts/figures/error_analysis/fn_id4_IMG-20240927-WA0204_jpg.rf.08d9cd91a261a0fac5a9eddf03f8313b.jpg']
 
+## Important caveat before drawing conclusions
+
+This checkpoint (E08, 10 epochs on a small training fraction) has zero true positives on 8/11 classes — it has not yet learned most classes at all. Confusion patterns above involving those classes mostly reflect "the model hasn't learned this yet", not a stable, meaningful semantic confusion. Only classes with non-trivial TP counts (Blast, Leaf roller, Bacterial panicle blight here) support any real interpretation at this stage.
+
+## Proposed next experiment
+
+Based on the findings above, not a generic guess:
+
+1. **False negatives skew smaller than the overall GT area distribution** (4710.4 vs. 7051.6 px² median) — independent evidence, from actual missed detections rather than aggregate mAP alone, reinforcing Block 10's finding that larger image size (640 vs. 320) helps: more resolution should recover some of these small-object misses.
+2. **Crowded scenes have a higher false-negative rate** (0.9734 vs. 0.7094 for sparse scenes) — consistent with (1): small, densely-packed lesions are the hardest case, and resolution should help here specifically.
+3. Block 10 already found image size and training duration to be the two most impactful single factors (independently). This analysis provides an independent line of evidence (actual missed detections, not just an aggregate mAP number) pointing at the same lever (image size). **Recommended next experiment: combine larger image size (640) with more epochs in one run** (rather than continuing single-factor OFAT screening) to test whether the two effects compound, feeding directly into Block 14's final configuration decision.
+4. Do NOT act on the Healthy-vs-disease confusion or specific confused-pair list yet — per the caveat above, this checkpoint hasn't learned most classes, so those patterns aren't reliable signal. Worth rechecking once a better-trained checkpoint exists (post-item-3 experiment).
+
 ## IMPORTANT: no changes were applied automatically
 
 This script only analyzes and reports. Any data or model change suggested by these findings (e.g. relabeling, excluding an image, adjusting a class's augmentation) must be a separate, explicitly documented decision — never applied automatically from this analysis, per the master spec.
