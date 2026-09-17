@@ -106,13 +106,19 @@ def load_ground_truth(manifest_path: Path) -> tuple[list[GroundTruthBox], dict[i
 def collect_predictions(model: YOLO, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float) -> list[Detection]:
     """Run inference once at a low confidence threshold; filtering by a higher
     threshold happens later in match_detections_to_ground_truth (pure function,
-    no re-inference needed per threshold)."""
+    no re-inference needed per threshold).
+
+    Uses `stream=True` so Ultralytics yields one Result at a time instead of
+    accumulating all of them (each holding image tensors) in RAM — necessary
+    at full-dataset scale (Ultralytics itself warns against the non-streamed
+    form for exactly this reason).
+    """
     ordered_ids = list(images_by_id.keys())
     image_paths = [str(images_dir / images_by_id[iid]["file_name"]) for iid in ordered_ids]
 
     detections: list[Detection] = []
-    results_list = model.predict(image_paths, conf=collection_conf, verbose=False)
-    for image_id, result in zip(ordered_ids, results_list, strict=True):
+    results_stream = model.predict(image_paths, conf=collection_conf, verbose=False, stream=True)
+    for image_id, result in zip(ordered_ids, results_stream, strict=True):
         for box in result.boxes:
             x1, y1, x2, y2 = box.xyxy[0].tolist()
             detections.append(
