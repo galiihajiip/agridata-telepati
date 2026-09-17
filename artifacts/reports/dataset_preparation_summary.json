@@ -1,0 +1,32 @@
+{
+  "dataset_root": "Telepati 8.0 Datasets",
+  "output_dir": "data/prepared",
+  "seed": 42,
+  "mapping_version": "1.0.0",
+  "git_commit": "c2520d382bab9c789677584cd23bf7573e356fba",
+  "generated_at_utc": "2026-09-17T08:24:57.673572+00:00",
+  "splits": [
+    {
+      "split": "train",
+      "num_images_prepared": 10132,
+      "num_images_excluded_leakage": 1,
+      "num_annotations_prepared": 20160,
+      "manifest_path": "data/prepared/manifest_train.json"
+    },
+    {
+      "split": "valid",
+      "num_images_prepared": 2106,
+      "num_images_excluded_leakage": 0,
+      "num_annotations_prepared": 4888,
+      "manifest_path": "data/prepared/manifest_valid.json"
+    },
+    {
+      "split": "test",
+      "num_images_prepared": 1059,
+      "num_images_excluded_leakage": 0,
+      "num_annotations_prepared": 2670,
+      "manifest_path": "data/prepared/manifest_test.json"
+    }
+  ],
+  "data_yaml": "data/prepared/data.yaml"
+}
