@@ -1,0 +1,71 @@
+{
+  "python_version": "3.11.16",
+  "python_executable": "/Users/macbookpro/Projects/agridata/.venv/bin/python",
+  "platform": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "platform_string": "macOS-26.2-arm64-arm-64bit"
+  },
+  "device": {
+    "resolved_device": "mps",
+    "is_apple_silicon": true,
+    "torch_version": "2.14.0",
+    "cuda_available": false,
+    "mps_available": true
+  },
+  "git_commit": "9724a9b25a4c36e9ebf414fca841824afcedf74f",
+  "git_status": {
+    "clean": false,
+    "changed_files": [
+      "?? artifacts/reports/block14_final_model_selection.md",
+      "?? artifacts/reports/final_model_metadata.json",
+      "?? docs/"
+    ]
+  },
+  "installed_packages": [
+    "Jinja2==3.1.6",
+    "MarkupSafe==3.0.3",
+    "PyYAML==6.0.2",
+    "anyio==4.15.1",
+    "certifi==2026.7.22",
+    "charset-normalizer==3.5.1",
+    "cloudpickle==3.1.2",
+    "contourpy==1.3.3",
+    "cycler==0.12.1",
+    "filelock==4.0.0",
+    "fonttools==4.65.0",
+    "fsspec==2026.7.0",
+    "h11==0.16.0",
+    "httpcore==1.0.9",
+    "httpx==0.28.1",
+    "idna==3.19",
+    "iniconfig==2.3.0",
+    "kiwisolver==1.5.1",
+    "matplotlib==3.10.0",
+    "mpmath==1.3.0",
+    "networkx==3.6.1",
+    "numpy==2.4.6",
+    "nvidia-ml-py==13.610.43",
+    "opencv-python==5.0.0.93",
+    "packaging==26.3",
+    "pillow==11.1.0",
+    "pluggy==1.6.0",
+    "polars-runtime-32==1.44.2",
+    "polars==1.44.2",
+    "psutil==7.2.2",
+    "pyparsing==3.3.2",
+    "pytest==8.3.4",
+    "python-dateutil==2.9.0.post0",
+    "requests==2.34.2",
+    "six==1.17.0",
+    "sympy==1.14.0",
+    "torch==2.14.0",
+    "torchvision==0.29.0",
+    "tqdm==4.67.1",
+    "typing_extensions==4.16.0",
+    "ultralytics-platform==0.1.46",
+    "ultralytics-thop==2.1.6",
+    "ultralytics==8.4.154",
+    "urllib3==2.8.0"
+  ]
+}

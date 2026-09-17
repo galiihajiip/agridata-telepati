@@ -1,0 +1,38 @@
+{
+  "model_name": "agridata-telepati8-yolov8n",
+  "architecture": "YOLOv8n (Ultralytics), built from architecture-only .yaml, pretrained=False",
+  "task": "object_detection",
+  "num_classes": 11,
+  "class_names": [
+    "Bacterial leaf blight",
+    "Bacterial panicle blight",
+    "Blast",
+    "Brown spot",
+    "False smut",
+    "Healthy",
+    "Leaf roller",
+    "Leaf scald",
+    "Narrow brown",
+    "Sheath blight",
+    "Tungro"
+  ],
+  "mapping_version": "1.0.0",
+  "input": {
+    "image_size": 640,
+    "channels": 3,
+    "format": "RGB"
+  },
+  "output": "bounding boxes (xyxy) + class + confidence, per canonical class",
+  "training_config_path": "configs/final_model_config.yaml",
+  "compliance": {
+    "external_pretrained_weights": false,
+    "external_dataset_used": false,
+    "llm_api_dataset_processing": false,
+    "yolo_offline_enforced": true
+  },
+  "status": "CONFIGURATION FROZEN \u2014 weights not yet produced (pending Block 15)",
+  "selected_at_utc": "2026-09-17T11:58:47.857491+00:00",
+  "git_commit_at_selection": "9724a9b25a4c36e9ebf414fca841824afcedf74f",
+  "weights_path": null,
+  "weights_checksum_sha256": null
+}
