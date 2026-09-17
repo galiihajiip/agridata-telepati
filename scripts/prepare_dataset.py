@@ -87,14 +87,6 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def get_git_commit() -> str | None:
-    try:
-        result = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True)
-        return result.stdout.strip()
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return None
-
-
 def load_train_exclusions(audit_report_path: Path) -> set[str]:
     """Return train filenames to exclude because Block 2 found them to be exact
     byte-duplicates of an image in valid or test (data leakage prevention)."""
