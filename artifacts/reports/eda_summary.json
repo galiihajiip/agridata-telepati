@@ -1,0 +1,220 @@
+{
+  "train": {
+    "split": "train",
+    "num_images": 10133,
+    "num_annotations": 20163,
+    "class_summary": {
+      "Healthy": {
+        "instance_count": 2374,
+        "image_count": 2198,
+        "share_of_instances_pct": 11.77,
+        "median_bbox_area_px2": 155844.1
+      },
+      "Leaf roller": {
+        "instance_count": 812,
+        "image_count": 803,
+        "share_of_instances_pct": 4.03,
+        "median_bbox_area_px2": 114759.2
+      },
+      "Blast": {
+        "instance_count": 4149,
+        "image_count": 1919,
+        "share_of_instances_pct": 20.58,
+        "median_bbox_area_px2": 7477.5
+      },
+      "False smut": {
+        "instance_count": 852,
+        "image_count": 832,
+        "share_of_instances_pct": 4.23,
+        "median_bbox_area_px2": 137300.8
+      },
+      "Bacterial panicle blight": {
+        "instance_count": 528,
+        "image_count": 519,
+        "share_of_instances_pct": 2.62,
+        "median_bbox_area_px2": 141993.3
+      },
+      "Brown spot": {
+        "instance_count": 5010,
+        "image_count": 1122,
+        "share_of_instances_pct": 24.85,
+        "median_bbox_area_px2": 1022.3
+      },
+      "Leaf scald": {
+        "instance_count": 1438,
+        "image_count": 837,
+        "share_of_instances_pct": 7.13,
+        "median_bbox_area_px2": 38698.3
+      },
+      "Sheath blight": {
+        "instance_count": 1762,
+        "image_count": 629,
+        "share_of_instances_pct": 8.74,
+        "median_bbox_area_px2": 11380.7
+      },
+      "Tungro": {
+        "instance_count": 2540,
+        "image_count": 773,
+        "share_of_instances_pct": 12.6,
+        "median_bbox_area_px2": 12017.5
+      },
+      "Bacterial leaf blight": {
+        "instance_count": 476,
+        "image_count": 234,
+        "share_of_instances_pct": 2.36,
+        "median_bbox_area_px2": 13831.4
+      },
+      "Narrow brown": {
+        "instance_count": 222,
+        "image_count": 222,
+        "share_of_instances_pct": 1.1,
+        "median_bbox_area_px2": 147911.5
+      }
+    },
+    "rarest_classes": [
+      "Narrow brown",
+      "Bacterial leaf blight",
+      "Bacterial panicle blight"
+    ],
+    "most_common_classes": [
+      "Tungro",
+      "Blast",
+      "Brown spot"
+    ],
+    "smallest_object_classes": [
+      "Brown spot",
+      "Blast",
+      "Sheath blight"
+    ],
+    "images_with_zero_annotations": 59,
+    "max_annotations_in_one_image": 178,
+    "saved_figures": {
+      "instance_counts": "artifacts/figures/distributions/train_instance_counts.png",
+      "image_counts": "artifacts/figures/distributions/train_image_counts.png",
+      "bbox_sizes": "artifacts/figures/distributions/train_bbox_sizes.png",
+      "image_dims": "artifacts/figures/distributions/train_image_dims.png"
+    },
+    "saved_samples": [
+      "artifacts/figures/samples/train/train_random_id1836_IMG-20241003-WA0601_jpg.rf.1791cb2c2ddfddc7608664a27c9d55dc.jpg",
+      "artifacts/figures/samples/train/train_random_id415_IMG-20240926-WA0318_jpg.rf.4d2a68494d90ba71ac63207015d2dd0c.jpg",
+      "artifacts/figures/samples/train/train_random_id4539_BROWNSPOT1_112_jpg.rf.41fdbbec3462a52fd7fb334a543a8fa0.jpg",
+      "artifacts/figures/samples/train/train_random_id4040_IMG-20240926-WA0264_jpg.rf.bf7bc15c0eb4f62ab4dbfd42f9cb28f9.jpg",
+      "artifacts/figures/samples/train/train_random_id3684_IMG_20241020_083003_653_jpg.rf.f1df6b2e2e018409080bd1309cf132f9.jpg",
+      "artifacts/figures/samples/train/train_random_id2301_IMG-20241003-WA0641_jpg.rf.7f03213fd51bc0d40bdf02de07020a1d.jpg",
+      "artifacts/figures/samples/train/train_random_id1691_IMG-20241012-WA0700_jpg.rf.0bdf67be913ac753aa949a5a79f002c4.jpg",
+      "artifacts/figures/samples/train/train_random_id8993_healthy-245-_jpg.rf.6c73f4f791b6fb3086ab00535f6f727a.jpg",
+      "artifacts/figures/samples/train/train_rare_class_id8689_narrow_brown-193-_jpg.rf.0ed451439b24e5f7118f5353cda86214.jpg",
+      "artifacts/figures/samples/train/train_crowded_id9568_11-Brown-spot_jpg.rf.c50cdb509b0c6d100b30e16c2a6af713.jpg",
+      "artifacts/figures/samples/train/train_suspicious_id1394_20240915_152246_jpg.rf.3cbcf42becbb5ebf822b9393539488ac.jpg"
+    ]
+  },
+  "valid": {
+    "split": "valid",
+    "num_images": 2106,
+    "num_annotations": 4888,
+    "class_summary": {
+      "False smut": {
+        "instance_count": 86,
+        "image_count": 83,
+        "share_of_instances_pct": 1.76,
+        "median_bbox_area_px2": 130947.1
+      },
+      "Bacterial panicle blight": {
+        "instance_count": 45,
+        "image_count": 45,
+        "share_of_instances_pct": 0.92,
+        "median_bbox_area_px2": 135132.2
+      },
+      "Healthy": {
+        "instance_count": 424,
+        "image_count": 388,
+        "share_of_instances_pct": 8.67,
+        "median_bbox_area_px2": 177444.6
+      },
+      "Leaf roller": {
+        "instance_count": 87,
+        "image_count": 87,
+        "share_of_instances_pct": 1.78,
+        "median_bbox_area_px2": 111976.3
+      },
+      "Blast": {
+        "instance_count": 947,
+        "image_count": 382,
+        "share_of_instances_pct": 19.37,
+        "median_bbox_area_px2": 6157.0
+      },
+      "Leaf scald": {
+        "instance_count": 390,
+        "image_count": 244,
+        "share_of_instances_pct": 7.98,
+        "median_bbox_area_px2": 43179.9
+      },
+      "Brown spot": {
+        "instance_count": 1461,
+        "image_count": 300,
+        "share_of_instances_pct": 29.89,
+        "median_bbox_area_px2": 819.2
+      },
+      "Sheath blight": {
+        "instance_count": 488,
+        "image_count": 184,
+        "share_of_instances_pct": 9.98,
+        "median_bbox_area_px2": 13228.9
+      },
+      "Tungro": {
+        "instance_count": 760,
+        "image_count": 239,
+        "share_of_instances_pct": 15.55,
+        "median_bbox_area_px2": 11184.1
+      },
+      "Bacterial leaf blight": {
+        "instance_count": 125,
+        "image_count": 69,
+        "share_of_instances_pct": 2.56,
+        "median_bbox_area_px2": 12800
+      },
+      "Narrow brown": {
+        "instance_count": 75,
+        "image_count": 75,
+        "share_of_instances_pct": 1.53,
+        "median_bbox_area_px2": 146880.0
+      }
+    },
+    "rarest_classes": [
+      "Bacterial panicle blight",
+      "Narrow brown",
+      "False smut"
+    ],
+    "most_common_classes": [
+      "Tungro",
+      "Blast",
+      "Brown spot"
+    ],
+    "smallest_object_classes": [
+      "Brown spot",
+      "Blast",
+      "Tungro"
+    ],
+    "images_with_zero_annotations": 13,
+    "max_annotations_in_one_image": 104,
+    "saved_figures": {
+      "instance_counts": "artifacts/figures/distributions/valid_instance_counts.png",
+      "image_counts": "artifacts/figures/distributions/valid_image_counts.png",
+      "bbox_sizes": "artifacts/figures/distributions/valid_bbox_sizes.png",
+      "image_dims": "artifacts/figures/distributions/valid_image_dims.png"
+    },
+    "saved_samples": [
+      "artifacts/figures/samples/valid/valid_random_id361_IMG_20241020_084420_307_jpg.rf.c91646a5a385ec5180283c23e7329bea.jpg",
+      "artifacts/figures/samples/valid/valid_random_id1741_leaf_scald-110-_jpg.rf.2337007a8e4ccc09717e923550cd7e15.jpg",
+      "artifacts/figures/samples/valid/valid_random_id131_IMG-20241012-WA0715_jpg.rf.530adb8c0a8ab313ddb720d37df5f28c.jpg",
+      "artifacts/figures/samples/valid/valid_random_id123_IMG-20241014-WA0433_jpg.rf.427c94a9b4aeab9a2e785e5cadb954df.jpg",
+      "artifacts/figures/samples/valid/valid_random_id388_IMG-20240926-WA0201_jpg.rf.d88315d5ae69df9f3fbc7a010ae3b1ce.jpg",
+      "artifacts/figures/samples/valid/valid_random_id901_BLAST8_084_jpg.rf.bd057790e3d421a1e005b5640f8e7898.jpg",
+      "artifacts/figures/samples/valid/valid_random_id958_SheathBlight_32_jpg.rf.c657303302b505dc175ed5839ba17203.jpg",
+      "artifacts/figures/samples/valid/valid_random_id2082_bacterial_leaf_blight-236-_JPG.rf.f5cc57e2f8260506da2037d269490aa6.jpg",
+      "artifacts/figures/samples/valid/valid_rare_class_id2_IMG-20241012-WA0099_jpg.rf.052715be2fdca8f048e88ae49189c283.jpg",
+      "artifacts/figures/samples/valid/valid_crowded_id873_bsf_22_jpg.rf.b5ded9701f17871a39865f3311ffb541.jpg",
+      "artifacts/figures/samples/valid/valid_suspicious_id384_20240915_152245_jpg.rf.d775c7073b706163afb13c6c6923dd2b.jpg"
+    ]
+  }
+}
