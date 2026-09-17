@@ -9,3 +9,6 @@ pytest==8.3.4
 # Block 2 (dataset forensic audit): image inspection, hashing, progress bars
 Pillow==11.1.0
 tqdm==4.67.1
+
+# Block 4 (EDA / visualization): distribution plots and annotated samples
+matplotlib==3.10.0
