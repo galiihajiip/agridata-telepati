@@ -215,7 +215,7 @@ def main() -> int:
     # --- 2. LOCAL precision/recall/F1 at a configurable confidence threshold ---
     logger.info("Collecting raw predictions for local F1 computation (conf>=%.4f) ...", args.collection_conf)
     ground_truths, images_by_id = load_ground_truth(manifest_path)
-    detections = collect_predictions(model, images_dir, images_by_id, args.collection_conf)
+    detections = collect_predictions(model, images_dir, images_by_id, args.collection_conf, device)
     logger.info("Collected %d raw detections across %d images.", len(detections), len(images_by_id))
 
     local_result = match_detections_to_ground_truth(detections, ground_truths, args.conf_threshold)
