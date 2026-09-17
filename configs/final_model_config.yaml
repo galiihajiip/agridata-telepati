@@ -1,0 +1,71 @@
+# FINAL MODEL CONFIGURATION (Block 14) — frozen for Block 15's full-scale training run.
+#
+# Selected from 21 logged screening-scale experiments (E01-E21, see
+# artifacts/experiments/experiment_log.json and
+# artifacts/reports/block14_final_model_selection.md for full reasoning).
+# This is NOT a trained model — it is the exact, reproducible recipe Block 15
+# will execute to produce the final submitted weights.
+
+seed: 42
+
+model_arch: "yolov8n.yaml"   # architecture definition ONLY — never a .pt checkpoint
+pretrained: false
+
+data_yaml: "data/prepared/data.yaml"
+
+# --- Selected from screening evidence ---
+image_size: 640
+# Rationale: E03 (imgsz=640, +0.0023 vs. 320 baseline at 5 epochs), and
+# independently confirmed by Block 13's error analysis (false negatives
+# skew smaller than the overall GT area distribution — more resolution
+# should recover small-lesion misses). E20/E21 (imgsz=640 + 12 epochs)
+# produced the two best mAP@0.5 results of all 21 experiments.
+
+batch_size: 16
+# Rationale: E04 (batch=32) underperformed the batch=16 baseline
+# (-0.0013 mAP@0.5) — fewer gradient updates per epoch at the same
+# screening-scale epoch count. batch=16 used successfully throughout.
+
+optimizer: "AdamW"
+learning_rate: 0.001
+momentum: 0.9
+weight_decay: 0.0005
+# Rationale: E06 (optimizer=SGD) underperformed AdamW (-0.0015 mAP@0.5).
+# E05 (lr=0.0001) also underperformed the lr=0.001 baseline (-0.0016).
+
+scheduler: "linear"   # Ultralytics default when cos_lr=False; not separately ablated
+
+# --- Augmentation: kept at Ultralytics defaults, WITH deliberate exclusions ---
+# Rationale is NOT purely the screening numbers: at 5 epochs (Block 11),
+# every augmentation variant underperformed a no-augmentation reference
+# (a known low-epoch/low-data artifact). At 12 epochs (E20 default-aug vs.
+# E21 no-aug), the gap shrank to +0.0013 (~5%) in favor of no-augmentation —
+# a much smaller margin, consistent with augmentation's benefit emerging
+# with more training budget. Combined with domain reasoning (a deployed
+# camera/drone system will see real lighting/angle/distance variation this
+# training set alone does not cover), augmentation is KEPT for full-scale
+# training, with one deliberate override:
+flipud: 0.0   # vertical flip explicitly disabled — physically implausible for
+              # gravity-oriented plants (Block 11 finding); this already matches
+              # the Ultralytics default, kept explicit here so it can never be
+              # silently re-enabled by a future config change.
+# All other augmentation parameters (hsv_h, hsv_s, hsv_v, degrees, translate,
+# scale, shear, perspective, fliplr, mosaic, mixup, copy_paste) are left at
+# Ultralytics' defaults — each individually assessed as physically plausible
+# for field-captured rice imagery in Block 11.
+
+# --- Full-scale training parameters (NOT yet run — Block 15's job) ---
+fraction: 1.0        # full training set (all screening used a small fraction)
+epochs: 50           # see time estimate and rationale below
+patience: 15         # early stopping: halt if val fitness doesn't improve for 15 epochs
+workers: 2
+device: "auto"
+
+# --- Time estimate (documented, not hidden) ---
+# E20 (imgsz=640, 12 epochs, 1013 images) took 670.7s -> ~55.9s/epoch at that scale.
+# Full train set has ~10,131 images (~10x E20's fraction) -> ~559s/epoch (train) +
+# ~30s/epoch (fixed validation cost on the full 2106-image valid set) =~ 590s/epoch.
+# 50 epochs -> ~29,500s =~ 8.2 hours on this project's Apple M1 Pro (MPS backend).
+# `patience: 15` may end training earlier if validation fitness plateaus.
+# Block 15 MUST re-verify this estimate (disk/RAM/device check) before committing
+# to the full run, per the master spec's resource-estimation requirement.
