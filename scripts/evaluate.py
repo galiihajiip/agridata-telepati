@@ -15,6 +15,18 @@ documentation of why both exist and exactly how each is computed):
      uses an internally auto-selected confidence threshold that is not
      configurable.
 
+These two stages run in SEPARATE PROCESSES, not sequentially in one. A
+Block 16 clean-environment reproduction test found that running
+`model.val()` followed by `model.predict(..., stream=True)` on the same (or
+even a freshly reloaded) model object in one process corrupts the MPS
+backend's internal state — it fails with either "MPSGraph does not support
+tensor dims larger than INT_MAX" or an explicit MPS out-of-memory error,
+regardless of `torch.mps.empty_cache()` + `gc.collect()` between the calls.
+Only full process-level isolation (a fresh Python interpreter and GPU
+context per stage) reliably avoids this. This script's default invocation
+transparently spawns itself twice (via `--stage`) to achieve that; the
+external CLI is unchanged.
+
 Test-set evaluation is for final reporting only, never for iterative model
 tuning — a WARNING is logged whenever `--split test` is used.
 """
@@ -25,15 +37,15 @@ import argparse
 import json
 import logging
 import os
+import subprocess
 import sys
+import tempfile
 from dataclasses import asdict
 from pathlib import Path
 
 os.environ.setdefault("YOLO_OFFLINE", "1")
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
-
-from ultralytics import YOLO  # noqa: E402
 
 from agridata.dataset.mapping import CANONICAL_CLASSES, CANONICAL_ID_TO_NAME  # noqa: E402
 from agridata.device import detect_device  # noqa: E402
@@ -63,10 +75,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--report-dir", default=Path("artifacts/reports"), type=Path)
     parser.add_argument("--predictions-dir", default=Path("artifacts/predictions"), type=Path)
     parser.add_argument("--figures-dir", default=Path("artifacts/figures/predictions"), type=Path)
+    parser.add_argument(
+        "--stage",
+        choices=["native_val", "local_f1"],
+        default=None,
+        help=argparse.SUPPRESS,  # internal use only: this process re-invokes itself with this flag
+    )
+    parser.add_argument("--stage-output", type=Path, default=None, help=argparse.SUPPRESS)
     return parser.parse_args()
 
 
-def validate_class_mapping(model: YOLO) -> None:
+def validate_class_mapping(model) -> None:
     """Fail loudly if the model's class order doesn't match the canonical mapping.
 
     Ground truth (from the Block 5 manifest) uses model_class_id =
@@ -98,7 +117,7 @@ def load_ground_truth(manifest_path: Path) -> tuple[list[GroundTruthBox], dict[i
 
 
 def collect_predictions(
-    model: YOLO, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str
+    model, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str
 ) -> list[Detection]:
     """Run inference once at a low confidence threshold; filtering by a higher
     threshold happens later in match_detections_to_ground_truth (pure function,
@@ -164,35 +183,19 @@ def save_prediction_samples(
     return saved
 
 
-def main() -> int:
-    setup_logging()
-    args = parse_args()
-
-    if args.split == "test":
-        logger.warning(
-            "Evaluating on the TEST split. Per the master spec, test ground truth must "
-            "NEVER be used to tune the model — this run should only happen for final, "
-            "frozen-model reporting (Block 15+), not iterative experimentation."
-        )
+def run_native_val_stage(args: argparse.Namespace) -> None:
+    """Runs in its OWN process: load model, run model.val(), write results to --stage-output."""
+    from ultralytics import YOLO
 
     data_yaml = args.data_yaml or (args.prepared_dir / "data.yaml")
-    manifest_path = args.prepared_dir / f"manifest_{args.split}.json"
-    images_dir = args.prepared_dir / args.split / "images"
     device = detect_device() if args.device == "auto" else args.device
-    logger.info("Device: %s", device)
 
-    logger.info("Loading model from %s", args.weights)
     model = YOLO(str(args.weights))
     validate_class_mapping(model)
-    logger.info("Class mapping validated: model class order matches canonical mapping exactly.")
 
-    # --- 1. NATIVE metrics (mAP@0.5, mAP@0.5:0.95) via Ultralytics val() ---
-    # Ultralytics' `split` argument is a literal lookup key into data.yaml
-    # (which uses the YOLO convention "val", not this project's "valid"
-    # directory/manifest naming) — translate explicitly rather than assume.
     ultralytics_split = {"train": "train", "valid": "val", "test": "test"}[args.split]
-    logger.info("Running native Ultralytics validation for mAP@0.5 / mAP@0.5:0.95 ...")
     val_results = model.val(data=str(data_yaml), split=ultralytics_split, plots=False, verbose=False, device=device)
+
     native_metrics = {
         "mAP50": float(val_results.box.map50),
         "mAP50_95": float(val_results.box.map),
@@ -204,20 +207,24 @@ def main() -> int:
         canonical_name = CANONICAL_ID_TO_NAME[int(class_id) + 1]
         per_class_map50[canonical_name] = float(val_results.box.ap50[idx])
 
-    # --- 2. LOCAL precision/recall/F1 at a configurable confidence threshold ---
-    # Reload the model fresh rather than reusing the instance val() just ran
-    # on: calling predict(..., stream=True) on a model that already ran
-    # val() in the same process leaves MPS memory unreleased between calls,
-    # causing an out-of-memory failure partway through (confirmed via a
-    # clean-environment reproduction test — Block 16 — where it manifested
-    # first as a confusing "MPSGraph tensor dims > INT_MAX" error and then,
-    # isolated, as an explicit "MPS backend out of memory" error). A fresh
-    # model object guarantees a clean MPS graph/memory state.
+    with args.stage_output.open("w", encoding="utf-8") as f:
+        json.dump({"native_metrics": native_metrics, "per_class_map50": per_class_map50}, f)
+
+
+def run_local_f1_stage(args: argparse.Namespace) -> None:
+    """Runs in its OWN process: load model, collect predictions, match, save
+    artifacts+figures, write results to --stage-output."""
+    from ultralytics import YOLO
+
+    device = detect_device() if args.device == "auto" else args.device
+    manifest_path = args.prepared_dir / f"manifest_{args.split}.json"
+    images_dir = args.prepared_dir / args.split / "images"
+
     model = YOLO(str(args.weights))
-    logger.info("Collecting raw predictions for local F1 computation (conf>=%.4f) ...", args.collection_conf)
+    validate_class_mapping(model)
+
     ground_truths, images_by_id = load_ground_truth(manifest_path)
     detections = collect_predictions(model, images_dir, images_by_id, args.collection_conf, device)
-    logger.info("Collected %d raw detections across %d images.", len(detections), len(images_by_id))
 
     local_result = match_detections_to_ground_truth(detections, ground_truths, args.conf_threshold)
     local_overall = local_result["overall"]
@@ -225,16 +232,94 @@ def main() -> int:
         CANONICAL_ID_TO_NAME[cid + 1]: asdict(prf1) for cid, prf1 in local_result["per_class"].items()
     }
 
-    # --- Save prediction artifacts ---
     args.predictions_dir.mkdir(parents=True, exist_ok=True)
     predictions_path = args.predictions_dir / f"predictions_{args.split}.json"
     with predictions_path.open("w", encoding="utf-8") as f:
         json.dump([asdict(d) for d in detections], f, indent=2)
 
-    # --- Visualization: a few predicted-box samples ---
     saved_samples = save_prediction_samples(
         images_dir, images_by_id, detections, args.conf_threshold, args.num_vis_samples, args.figures_dir
     )
+
+    with args.stage_output.open("w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "overall": asdict(local_overall),
+                "per_class": local_per_class,
+                "num_detections_collected": len(detections),
+                "num_ground_truth_boxes": len(ground_truths),
+                "predictions_artifact": str(predictions_path),
+                "sample_prediction_figures": saved_samples,
+            },
+            f,
+        )
+
+
+def run_stage_in_subprocess(stage: str, args: argparse.Namespace) -> dict:
+    """Spawn a fresh `python scripts/evaluate.py --stage <stage> ...` process
+    and read back its JSON result. See module docstring for why this is a
+    separate process rather than a function call."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        stage_output = Path(tmpdir) / f"{stage}.json"
+        cmd = [
+            sys.executable, __file__,
+            "--weights", str(args.weights),
+            "--split", args.split,
+            "--prepared-dir", str(args.prepared_dir),
+            "--device", args.device,
+            "--conf-threshold", str(args.conf_threshold),
+            "--collection-conf", str(args.collection_conf),
+            "--num-vis-samples", str(args.num_vis_samples),
+            "--predictions-dir", str(args.predictions_dir),
+            "--figures-dir", str(args.figures_dir),
+            "--stage", stage,
+            "--stage-output", str(stage_output),
+        ]
+        if args.data_yaml:
+            cmd += ["--data-yaml", str(args.data_yaml)]
+
+        logger.info("Running stage '%s' in a fresh subprocess (isolates MPS state)...", stage)
+        result = subprocess.run(cmd)
+        if result.returncode != 0:
+            raise RuntimeError(f"Stage '{stage}' subprocess failed with exit code {result.returncode}")
+
+        with stage_output.open("r", encoding="utf-8") as f:
+            return json.load(f)
+
+
+def main() -> int:
+    setup_logging()
+    args = parse_args()
+
+    if args.device == "auto":
+        args.device = detect_device()
+
+    # Internal invocation: run exactly one stage and exit.
+    if args.stage == "native_val":
+        run_native_val_stage(args)
+        return 0
+    if args.stage == "local_f1":
+        run_local_f1_stage(args)
+        return 0
+
+    # Top-level invocation: orchestrate both stages as separate processes.
+    if args.split == "test":
+        logger.warning(
+            "Evaluating on the TEST split. Per the master spec, test ground truth must "
+            "NEVER be used to tune the model — this run should only happen for final, "
+            "frozen-model reporting (Block 15+), not iterative experimentation."
+        )
+
+    logger.info("Device: %s", args.device)
+    data_yaml = args.data_yaml or (args.prepared_dir / "data.yaml")
+
+    native = run_stage_in_subprocess("native_val", args)
+    local = run_stage_in_subprocess("local_f1", args)
+
+    native_metrics = native["native_metrics"]
+    per_class_map50 = native["per_class_map50"]
+    local_overall = local["overall"]
+    local_per_class = local["per_class"]
 
     summary = {
         "block": 7,
@@ -245,22 +330,23 @@ def main() -> int:
         "iou_threshold": 0.5,
         "native_metrics": {
             "description": "Computed via ultralytics model.val() — source of truth for mAP. "
-            "IoU thresholds: torch.linspace(0.5, 0.95, 10); mAP50 uses index 0 (IoU=0.50).",
+            "IoU thresholds: torch.linspace(0.5, 0.95, 10); mAP50 uses index 0 (IoU=0.50). "
+            "Run in its own subprocess — see module docstring for why.",
             **native_metrics,
             "per_class_AP50": per_class_map50,
         },
         "local_f1_metrics": {
             "description": "LOCAL implementation detail (not the official scoring formula): "
             "greedy IoU>=0.5 matching at a caller-specified confidence threshold. See "
-            "src/agridata/metrics/detection.py for full methodology.",
+            "src/agridata/metrics/detection.py for full methodology. Run in its own subprocess.",
             "confidence_threshold": args.conf_threshold,
-            "overall": asdict(local_overall),
+            "overall": local_overall,
             "per_class": local_per_class,
         },
-        "num_detections_collected": len(detections),
-        "num_ground_truth_boxes": len(ground_truths),
-        "predictions_artifact": str(predictions_path),
-        "sample_prediction_figures": saved_samples,
+        "num_detections_collected": local["num_detections_collected"],
+        "num_ground_truth_boxes": local["num_ground_truth_boxes"],
+        "predictions_artifact": local["predictions_artifact"],
+        "sample_prediction_figures": local["sample_prediction_figures"],
         "test_set_tuning_warning_issued": args.split == "test",
     }
 
@@ -290,10 +376,10 @@ def main() -> int:
         "",
         f"## Local F1 metrics (implementation detail, confidence threshold = {args.conf_threshold})",
         "",
-        f"- Overall precision: {local_overall.precision:.4f}",
-        f"- Overall recall: {local_overall.recall:.4f}",
-        f"- Overall F1: {local_overall.f1:.4f}",
-        f"- TP={local_overall.true_positives} FP={local_overall.false_positives} FN={local_overall.false_negatives}",
+        f"- Overall precision: {local_overall['precision']:.4f}",
+        f"- Overall recall: {local_overall['recall']:.4f}",
+        f"- Overall F1: {local_overall['f1']:.4f}",
+        f"- TP={local_overall['true_positives']} FP={local_overall['false_positives']} FN={local_overall['false_negatives']}",
         "",
         "| canonical class | precision | recall | F1 | TP | FP | FN |",
         "|---|---:|---:|---:|---:|---:|---:|",
@@ -312,7 +398,7 @@ def main() -> int:
     print("\n".join(md_lines))
     print(f"\nJSON report: {json_path}")
     print(f"Markdown report: {md_path}")
-    print(f"Prediction artifacts: {predictions_path}")
+    print(f"Prediction artifacts: {local['predictions_artifact']}")
     return 0
 
 
