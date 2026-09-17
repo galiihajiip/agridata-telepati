@@ -104,9 +104,38 @@ def run_training(
     )
 
     trainer = model.trainer
+
+    # `trainer.args.optimizer` stays "auto" (the raw config value) even after
+    # Ultralytics auto-selects a concrete optimizer (e.g. AdamW) internally —
+    # the resolved choice only exists on the instantiated optimizer object.
+    # Read it there so the experiment tracker (Block 9) records what actually
+    # ran, not the unresolved config string.
+    resolved_optimizer = type(trainer.optimizer).__name__ if trainer.optimizer is not None else trainer.args.optimizer
+    resolved_lr = trainer.optimizer.param_groups[0]["lr"] if trainer.optimizer is not None else trainer.args.lr0
+    resolved_weight_decay = (
+        next((g["weight_decay"] for g in trainer.optimizer.param_groups if g.get("weight_decay")), 0.0)
+        if trainer.optimizer is not None
+        else trainer.args.weight_decay
+    )
+
+    augmentation_config = {
+        key: getattr(trainer.args, key)
+        for key in (
+            "hsv_h", "hsv_s", "hsv_v", "degrees", "translate", "scale", "shear",
+            "perspective", "flipud", "fliplr", "bgr", "mosaic", "mixup", "copy_paste",
+        )
+    }
+
     return {
         "save_dir": str(trainer.save_dir),
         "best_weights": str(trainer.best) if trainer.best and Path(trainer.best).exists() else None,
         "last_weights": str(trainer.last) if trainer.last and Path(trainer.last).exists() else None,
         "metrics": {k: float(v) for k, v in (trainer.metrics or {}).items()},
+        "resolved_hyperparameters": {
+            "optimizer": resolved_optimizer,
+            "learning_rate": float(resolved_lr),
+            "weight_decay": float(resolved_weight_decay),
+            "scheduler": "cosine" if trainer.args.cos_lr else "linear",
+            "augmentation": augmentation_config,
+        },
     }
