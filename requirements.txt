@@ -12,3 +12,13 @@ tqdm==4.67.1
 
 # Block 4 (EDA / visualization): distribution plots and annotated samples
 matplotlib==3.10.0
+
+# Block 6 (baseline object detector): architecture + training loop.
+# IMPORTANT: models are always built from a .yaml architecture definition
+# with pretrained=False — never from a .pt checkpoint. See
+# src/agridata/training/train.py for the enforced compliance checks, and
+# note that YOLO_OFFLINE=1 is forced on before ultralytics is imported so any
+# accidental network call (telemetry, checkpoint download) fails loudly.
+torch==2.14.0
+torchvision==0.29.0
+ultralytics==8.4.154
