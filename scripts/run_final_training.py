@@ -77,8 +77,8 @@ def print_disclosures(cfg: dict, device: str, manifest_hash: str, git_commit: st
     for key in ("image_size", "batch_size", "epochs", "fraction", "optimizer", "learning_rate",
                 "momentum", "weight_decay", "scheduler", "patience", "workers"):
         print(f"      {key}: {cfg.get(key)}")
-    print(f"      augmentation overrides: {{k: cfg[k] for k in AUGMENTATION_OVERRIDE_KEYS if k in cfg}}"
-          if False else f"      augmentation overrides: {({k: cfg[k] for k in AUGMENTATION_OVERRIDE_KEYS if k in cfg})}")
+    aug_overrides = {k: cfg[k] for k in AUGMENTATION_OVERRIDE_KEYS if k in cfg}
+    print(f"      augmentation overrides: {aug_overrides}")
     print(f"10. Device:                 {device}")
     print(f"11. Output path:            {Path('runs/detect/final').resolve()}")
     print("=" * 70)
