@@ -66,14 +66,6 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def get_git_commit() -> str | None:
-    try:
-        result = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True)
-        return result.stdout.strip()
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return None
-
-
 def validate_class_mapping(model: YOLO) -> None:
     """Fail loudly if the model's class order doesn't match the canonical mapping.
 
