@@ -1,0 +1,123 @@
+{
+  "split": "train",
+  "total_instances": 20163,
+  "num_classes": 11,
+  "max_min_imbalance_ratio": 22.57,
+  "rare_class_threshold_fraction": 0.2,
+  "small_object_threshold_fraction": 0.1,
+  "rare_classes": [
+    "Bacterial leaf blight",
+    "Bacterial panicle blight",
+    "False smut",
+    "Leaf roller",
+    "Narrow brown"
+  ],
+  "small_object_classes": [
+    "Bacterial leaf blight",
+    "Blast",
+    "Brown spot",
+    "Sheath blight",
+    "Tungro"
+  ],
+  "per_class": [
+    {
+      "canonical_class": "Bacterial leaf blight",
+      "instance_count": 476,
+      "image_count": 234,
+      "relative_frequency_pct": 2.36,
+      "median_bbox_area_px2": 13831.4,
+      "is_rare": true,
+      "is_small_object": true
+    },
+    {
+      "canonical_class": "Bacterial panicle blight",
+      "instance_count": 528,
+      "image_count": 519,
+      "relative_frequency_pct": 2.62,
+      "median_bbox_area_px2": 141993.3,
+      "is_rare": true,
+      "is_small_object": false
+    },
+    {
+      "canonical_class": "Blast",
+      "instance_count": 4149,
+      "image_count": 1919,
+      "relative_frequency_pct": 20.58,
+      "median_bbox_area_px2": 7477.5,
+      "is_rare": false,
+      "is_small_object": true
+    },
+    {
+      "canonical_class": "Brown spot",
+      "instance_count": 5010,
+      "image_count": 1122,
+      "relative_frequency_pct": 24.85,
+      "median_bbox_area_px2": 1022.3,
+      "is_rare": false,
+      "is_small_object": true
+    },
+    {
+      "canonical_class": "False smut",
+      "instance_count": 852,
+      "image_count": 832,
+      "relative_frequency_pct": 4.23,
+      "median_bbox_area_px2": 137300.8,
+      "is_rare": true,
+      "is_small_object": false
+    },
+    {
+      "canonical_class": "Healthy",
+      "instance_count": 2374,
+      "image_count": 2198,
+      "relative_frequency_pct": 11.77,
+      "median_bbox_area_px2": 155844.1,
+      "is_rare": false,
+      "is_small_object": false
+    },
+    {
+      "canonical_class": "Leaf roller",
+      "instance_count": 812,
+      "image_count": 803,
+      "relative_frequency_pct": 4.03,
+      "median_bbox_area_px2": 114759.2,
+      "is_rare": true,
+      "is_small_object": false
+    },
+    {
+      "canonical_class": "Leaf scald",
+      "instance_count": 1438,
+      "image_count": 837,
+      "relative_frequency_pct": 7.13,
+      "median_bbox_area_px2": 38698.3,
+      "is_rare": false,
+      "is_small_object": false
+    },
+    {
+      "canonical_class": "Narrow brown",
+      "instance_count": 222,
+      "image_count": 222,
+      "relative_frequency_pct": 1.1,
+      "median_bbox_area_px2": 147911.5,
+      "is_rare": true,
+      "is_small_object": false
+    },
+    {
+      "canonical_class": "Sheath blight",
+      "instance_count": 1762,
+      "image_count": 629,
+      "relative_frequency_pct": 8.74,
+      "median_bbox_area_px2": 11380.7,
+      "is_rare": false,
+      "is_small_object": true
+    },
+    {
+      "canonical_class": "Tungro",
+      "instance_count": 2540,
+      "image_count": 773,
+      "relative_frequency_pct": 12.6,
+      "median_bbox_area_px2": 12017.5,
+      "is_rare": false,
+      "is_small_object": true
+    }
+  ]
+}
