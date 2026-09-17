@@ -93,6 +93,7 @@ def main() -> int:
         "best_weights": result["best_weights"],
         "last_weights": result["last_weights"],
         "final_metrics": result["metrics"],
+        "resolved_hyperparameters": result["resolved_hyperparameters"],
         "yolo_offline_enforced": True,
     }
 
