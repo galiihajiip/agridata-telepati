@@ -1,0 +1,105 @@
+"""Compliant baseline training entrypoint (Block 6+).
+
+This module NEVER references a pretrained checkpoint (.pt) — models are
+always constructed from an architecture-only .yaml definition with
+pretrained=False, per the competition's explicit prohibition on external
+pretrained weights (master spec Section 8).
+
+`YOLO_OFFLINE` is forced on *before* importing ultralytics, because
+`ultralytics.utils.ONLINE` is computed once at import time from that
+environment variable. With it set, any accidental network call this code
+does not intend (telemetry sync, an update check, or — critically — a
+checkpoint download) fails loudly with a `ConnectionError` instead of
+silently succeeding. This gives a genuine, verifiable "network blocked" test
+rather than just a configuration claim.
+"""
+
+from __future__ import annotations
+
+import logging
+import os
+
+os.environ.setdefault("YOLO_OFFLINE", "1")
+
+from pathlib import Path  # noqa: E402
+from typing import Any  # noqa: E402
+
+from ultralytics import YOLO  # noqa: E402
+
+logger = logging.getLogger("agridata.training")
+
+
+def build_compliant_model(model_arch: str, pretrained: bool) -> YOLO:
+    """Construct a YOLO model with zero external pretrained weights.
+
+    Raises:
+        ValueError: if `model_arch` looks like a pretrained checkpoint file
+            (.pt) rather than an architecture-only definition (.yaml), or if
+            `pretrained` is True — both would violate the competition's
+            prohibition on external pretrained weights.
+    """
+    if pretrained:
+        raise ValueError("pretrained=True is not permitted in this project — see master spec Section 8.")
+    if model_arch.endswith((".pt", ".pth", ".ckpt")):
+        raise ValueError(
+            f"model_arch '{model_arch}' looks like a pretrained checkpoint file. "
+            "Use an architecture-only .yaml definition instead (e.g. 'yolov8n.yaml')."
+        )
+
+    logger.info("Building model from architecture definition '%s' (pretrained=False)", model_arch)
+    model = YOLO(model_arch)
+    logger.info("Model built from architecture only. No external checkpoint was referenced or downloaded.")
+    return model
+
+
+def run_training(
+    model_arch: str,
+    data_yaml: Path,
+    output_project: Path,
+    run_name: str,
+    image_size: int,
+    batch_size: int,
+    epochs: int,
+    device: str,
+    seed: int,
+    workers: int = 2,
+    fraction: float = 1.0,
+    plots: bool = False,
+) -> dict[str, Any]:
+    """Run a compliant training job and return key result paths.
+
+    `pretrained=False` is passed explicitly to `model.train()` as a
+    belt-and-suspenders safeguard, even though the model was already built
+    from a weights-free `.yaml` definition in `build_compliant_model`.
+    """
+    model = build_compliant_model(model_arch, pretrained=False)
+
+    logger.info(
+        "Starting training: data=%s imgsz=%d batch=%d epochs=%d device=%s seed=%d fraction=%.3f",
+        data_yaml, image_size, batch_size, epochs, device, seed, fraction,
+    )
+
+    model.train(
+        data=str(data_yaml),
+        imgsz=image_size,
+        batch=batch_size,
+        epochs=epochs,
+        device=device,
+        seed=seed,
+        workers=workers,
+        fraction=fraction,
+        pretrained=False,
+        plots=plots,
+        project=str(output_project),
+        name=run_name,
+        exist_ok=True,
+        verbose=True,
+    )
+
+    trainer = model.trainer
+    return {
+        "save_dir": str(trainer.save_dir),
+        "best_weights": str(trainer.best) if trainer.best and Path(trainer.best).exists() else None,
+        "last_weights": str(trainer.last) if trainer.last and Path(trainer.last).exists() else None,
+        "metrics": {k: float(v) for k, v in (trainer.metrics or {}).items()},
+    }
