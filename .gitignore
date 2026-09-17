@@ -59,3 +59,9 @@ auto_commit.log
 # Official competition raw dataset (large, official-source, not committed per
 # TELEPATI 8.0 guidance to avoid storing the raw dataset in the repository)
 /Telepati 8.0 Datasets/
+
+# Generated, training-ready dataset representation (Block 5): symlinked
+# images + YOLO labels + per-split manifests. Fully regenerable via
+# scripts/prepare_dataset.py — never committed. A small summary report is
+# committed separately under artifacts/reports/.
+/data/prepared/
