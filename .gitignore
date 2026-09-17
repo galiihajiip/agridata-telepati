@@ -55,3 +55,7 @@ checkpoints/
 # Auto commit automation logs & state
 auto_commit.log
 .auto_commit.pid
+
+# Official competition raw dataset (large, official-source, not committed per
+# TELEPATI 8.0 guidance to avoid storing the raw dataset in the repository)
+/Telepati 8.0 Datasets/
