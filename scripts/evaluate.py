@@ -198,7 +198,7 @@ def main() -> int:
     # directory/manifest naming) — translate explicitly rather than assume.
     ultralytics_split = {"train": "train", "valid": "val", "test": "test"}[args.split]
     logger.info("Running native Ultralytics validation for mAP@0.5 / mAP@0.5:0.95 ...")
-    val_results = model.val(data=str(data_yaml), split=ultralytics_split, plots=False, verbose=False)
+    val_results = model.val(data=str(data_yaml), split=ultralytics_split, plots=False, verbose=False, device=device)
     native_metrics = {
         "mAP50": float(val_results.box.map50),
         "mAP50_95": float(val_results.box.map),
