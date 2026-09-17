@@ -19,6 +19,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+# Bump this whenever RAW_TO_CANONICAL or KNOWN_SUPERCATEGORY_LABELS changes,
+# so prepared dataset outputs can record exactly which mapping produced them.
+MAPPING_VERSION = "1.0.0"
+
 CANONICAL_CLASSES: tuple[str, ...] = (
     "Bacterial leaf blight",
     "Bacterial panicle blight",
