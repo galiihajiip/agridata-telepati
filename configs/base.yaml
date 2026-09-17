@@ -1,0 +1,15 @@
+# Base configuration for the TELEPATI 8.0 AgriData pipeline.
+# Paths are relative to the project root so the pipeline is portable
+# across machines (no personal/absolute paths).
+
+seed: 42
+
+project:
+  name: "agridata-telepati8"
+
+dataset:
+  root: "Telepati 8.0 Datasets"
+  train_dir: "train"
+  valid_dir: "valid"
+  test_dir: "test"
+  annotation_filename: "_annotations.coco.json"
