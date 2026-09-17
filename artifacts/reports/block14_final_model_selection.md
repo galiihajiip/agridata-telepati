@@ -53,3 +53,14 @@ Best individual screening result: **E21** (mAP@0.5=0.0247). The frozen final con
 - Estimated full-scale training time (~8.2 hours on this project's hardware) is long; `patience=15` may shorten it, but Block 15 must re-verify this estimate before committing.
 
 Git commit at selection time: `9724a9b25a4c36e9ebf414fca841824afcedf74f`
+
+## Addendum: scope revision before Block 15 execution
+
+Before any full-scale training was run, `epochs` was revised from 50 to 20 (and `patience`
+from 15 to 8 proportionally) in `configs/final_model_config.yaml`. Rationale: the master
+spec's operational deadline (Section 36: 20 September 2026, 23:59 WIB) left roughly 3 days
+at the time of Block 14/15 execution, with Blocks 16-21 (clean reproduction, notebook,
+README, release preparation, compliance audit, final freeze) still to come, plus buffer for
+any re-runs if something needs fixing. The user chose to reduce scope (~3.3 hours estimated
+instead of ~8.2 hours) to preserve that buffer. This revision was made based on timeline
+constraints alone, before observing any full-scale training result — not tuned to an outcome.
