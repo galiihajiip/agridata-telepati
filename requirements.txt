@@ -2,7 +2,16 @@
 # object-detection framework, etc.) is added in later blocks once the
 # dataset audit determines actual requirements — per the master spec, the
 # stack must not be locked in before that audit.
-numpy==2.1.3
+#
+# numpy is intentionally NOT pinned to 2.1.x: ultralytics==8.4.154 explicitly
+# excludes numpy 2.0.x-2.3.4 on macOS (platform_system == "Darwin"). The
+# original 2.1.3 pin (set in Block 1, before ultralytics existed in this
+# project) was never re-validated against that later constraint — an
+# incrementally-built virtualenv masked the conflict, but a fresh single-shot
+# `pip install -r requirements.txt` fails immediately (caught in Block 16's
+# clean-environment reproduction test). 2.4.6 is what pip's resolver picks
+# when this pin is removed and all other pins here are kept.
+numpy==2.4.6
 PyYAML==6.0.2
 pytest==8.3.4
 
