@@ -210,8 +210,22 @@ def audit_split(split: str, split_dir: Path, annotation_filename: str) -> SplitA
         if w <= 0 or h <= 0:
             audit.bbox_issues.append(BBoxIssue(ann["id"], image_id, bbox, "non-positive width/height", "FATAL"))
         elif img_w is not None and img_h is not None:
-            if x + w > img_w or y + h > img_h:
-                audit.bbox_issues.append(BBoxIssue(ann["id"], image_id, bbox, "bbox exceeds image bounds", "FATAL"))
+            overshoot = max(0.0, (x + w) - img_w, (y + h) - img_h)
+            if overshoot > BBOX_BOUNDARY_TOLERANCE_PX:
+                audit.bbox_issues.append(
+                    BBoxIssue(
+                        ann["id"], image_id, bbox,
+                        f"bbox exceeds image bounds by {overshoot:.2f}px", "FATAL",
+                    )
+                )
+            elif overshoot > 0:
+                audit.bbox_issues.append(
+                    BBoxIssue(
+                        ann["id"], image_id, bbox,
+                        f"bbox exceeds image bounds by {overshoot:.3f}px (sub-pixel rounding, clampable)",
+                        "WARNING",
+                    )
+                )
             area = w * h
             image_area = img_w * img_h
             if image_area > 0:
