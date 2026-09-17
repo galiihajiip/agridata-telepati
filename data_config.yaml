@@ -1,0 +1,17 @@
+# Dataset configuration for TELEPATI 8.0 AgriData Race
+path: ./Telepati 8.0 Datasets
+train: train
+val: valid
+test: test
+
+# Class categories (detected from COCO annotations)
+names:
+  0: bacterial_leaf_blight
+  1: brown_spot
+  2: healthy
+  3: leaf_blast
+  4: leaf_scald
+  5: narrow_brown
+  6: rice_blast
+  7: sheath_blight
+  8: tungro
