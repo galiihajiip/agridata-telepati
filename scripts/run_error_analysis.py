@@ -250,6 +250,39 @@ def main() -> int:
         f"- False positives: {fp_examples}",
         f"- False negatives: {fn_examples}",
         "",
+        "## Important caveat before drawing conclusions",
+        "",
+        f"This checkpoint (E08, 10 epochs on a small training fraction) has zero true positives on "
+        f"{sum(1 for pr in per_class_pr.values() if pr['tp'] == 0)}/11 classes — it has not yet learned "
+        "most classes at all. Confusion patterns above involving those classes mostly reflect "
+        "\"the model hasn't learned this yet\", not a stable, meaningful semantic confusion. Only "
+        "classes with non-trivial TP counts (Blast, Leaf roller, Bacterial panicle blight here) "
+        "support any real interpretation at this stage.",
+        "",
+        "## Proposed next experiment",
+        "",
+        "Based on the findings above, not a generic guess:",
+        "",
+        f"1. **False negatives skew smaller than the overall GT area distribution** "
+        f"({small_object_miss_analysis['false_negative_median_area_px2']} vs. "
+        f"{small_object_miss_analysis['overall_median_gt_area_px2']} px² median) — independent evidence, "
+        "from actual missed detections rather than aggregate mAP alone, reinforcing Block 10's finding "
+        "that larger image size (640 vs. 320) helps: more resolution should recover some of these "
+        "small-object misses.",
+        f"2. **Crowded scenes have a higher false-negative rate** ({summary['crowded_vs_sparse_scene_fn_rate']['crowded_scene_fn_rate']} "
+        f"vs. {summary['crowded_vs_sparse_scene_fn_rate']['sparse_scene_fn_rate']} for sparse scenes) — "
+        "consistent with (1): small, densely-packed lesions are the hardest case, and resolution should "
+        "help here specifically.",
+        "3. Block 10 already found image size and training duration to be the two most impactful single "
+        "factors (independently). This analysis provides an independent line of evidence (actual missed "
+        "detections, not just an aggregate mAP number) pointing at the same lever (image size). "
+        "**Recommended next experiment: combine larger image size (640) with more epochs in one run** "
+        "(rather than continuing single-factor OFAT screening) to test whether the two effects compound, "
+        "feeding directly into Block 14's final configuration decision.",
+        "4. Do NOT act on the Healthy-vs-disease confusion or specific confused-pair list yet — per the "
+        "caveat above, this checkpoint hasn't learned most classes, so those patterns aren't reliable "
+        "signal. Worth rechecking once a better-trained checkpoint exists (post-item-3 experiment).",
+        "",
         "## IMPORTANT: no changes were applied automatically",
         "",
         "This script only analyzes and reports. Any data or model change suggested by these "
