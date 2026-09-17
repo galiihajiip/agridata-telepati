@@ -56,8 +56,8 @@ flipud: 0.0   # vertical flip explicitly disabled — physically implausible for
 
 # --- Full-scale training parameters (NOT yet run — Block 15's job) ---
 fraction: 1.0        # full training set (all screening used a small fraction)
-epochs: 50           # see time estimate and rationale below
-patience: 15         # early stopping: halt if val fitness doesn't improve for 15 epochs
+epochs: 20           # REVISED before any training ran — see note below
+patience: 8          # early stopping: halt if val fitness doesn't improve for 8 epochs
 workers: 2
 device: "auto"
 
@@ -65,7 +65,14 @@ device: "auto"
 # E20 (imgsz=640, 12 epochs, 1013 images) took 670.7s -> ~55.9s/epoch at that scale.
 # Full train set has ~10,131 images (~10x E20's fraction) -> ~559s/epoch (train) +
 # ~30s/epoch (fixed validation cost on the full 2106-image valid set) =~ 590s/epoch.
-# 50 epochs -> ~29,500s =~ 8.2 hours on this project's Apple M1 Pro (MPS backend).
-# `patience: 15` may end training earlier if validation fitness plateaus.
+#
+# REVISION (before any full-scale training was run): epochs was originally set to 50
+# (~8.2 hours estimated). Given the master spec's operational deadline (Section 36:
+# 20 September 2026, 23:59 WIB — ~3 days from Block 14/15's execution date) and the
+# blocks remaining after this one (16-21: clean reproduction, notebook, README,
+# release, compliance audit, freeze), the user chose to reduce scope to leave more
+# deadline buffer for those blocks and any re-runs. epochs=20 -> ~11,800s =~ 3.3 hours.
+# `patience: 8` may end training earlier if validation fitness plateaus.
+# This revision was made BEFORE seeing any full-scale result — not tuned to an outcome.
 # Block 15 MUST re-verify this estimate (disk/RAM/device check) before committing
 # to the full run, per the master spec's resource-estimation requirement.
