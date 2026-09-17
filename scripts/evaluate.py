@@ -56,6 +56,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--split", required=True, choices=["train", "valid", "test"])
     parser.add_argument("--prepared-dir", default=Path("data/prepared"), type=Path)
     parser.add_argument("--data-yaml", default=None, type=Path, help="Defaults to <prepared-dir>/data.yaml")
+    parser.add_argument("--device", default="auto", help="'auto' resolves via agridata.device.detect_device() (no CUDA assumed).")
     parser.add_argument("--conf-threshold", type=float, default=0.25, help="Confidence threshold for the LOCAL F1 computation (configurable).")
     parser.add_argument("--collection-conf", type=float, default=0.001, help="Low threshold used once to collect raw predictions; --conf-threshold filters afterward.")
     parser.add_argument("--num-vis-samples", type=int, default=6)
@@ -183,6 +184,8 @@ def main() -> int:
     data_yaml = args.data_yaml or (args.prepared_dir / "data.yaml")
     manifest_path = args.prepared_dir / f"manifest_{args.split}.json"
     images_dir = args.prepared_dir / args.split / "images"
+    device = detect_device() if args.device == "auto" else args.device
+    logger.info("Device: %s", device)
 
     logger.info("Loading model from %s", args.weights)
     model = YOLO(str(args.weights))
