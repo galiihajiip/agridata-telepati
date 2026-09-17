@@ -183,8 +183,12 @@ def main() -> int:
     logger.info("Class mapping validated: model class order matches canonical mapping exactly.")
 
     # --- 1. NATIVE metrics (mAP@0.5, mAP@0.5:0.95) via Ultralytics val() ---
+    # Ultralytics' `split` argument is a literal lookup key into data.yaml
+    # (which uses the YOLO convention "val", not this project's "valid"
+    # directory/manifest naming) — translate explicitly rather than assume.
+    ultralytics_split = {"train": "train", "valid": "val", "test": "test"}[args.split]
     logger.info("Running native Ultralytics validation for mAP@0.5 / mAP@0.5:0.95 ...")
-    val_results = model.val(data=str(data_yaml), split=args.split, plots=False, verbose=False)
+    val_results = model.val(data=str(data_yaml), split=ultralytics_split, plots=False, verbose=False)
     native_metrics = {
         "mAP50": float(val_results.box.map50),
         "mAP50_95": float(val_results.box.map),
