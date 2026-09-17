@@ -111,10 +111,12 @@ def run_training(
         fraction=fraction,
         pretrained=False,
         plots=plots,
+        val=validate,
         project=str(Path(output_project).resolve()),
         name=run_name,
         exist_ok=True,
         verbose=True,
+        **(extra_train_kwargs or {}),
     )
 
     trainer = model.trainer
