@@ -1,6 +1,6 @@
 {
   "block": 7,
-  "git_commit": "e5a9d43ff9b13c875a32c285f782144f8796a05a",
+  "git_commit": "b727684d299797f42b726c7a4c6e9ee488a4e64d",
   "weights": "runs/detect/block6_baseline_smoke/weights/best.pt",
   "split": "valid",
   "data_yaml": "data/prepared/data.yaml",
