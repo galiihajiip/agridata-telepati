@@ -1,9 +1,9 @@
 {
   "block": 7,
-  "git_commit": "8df7efd35f0cf9037be488fcc70bbe512a5832a9",
-  "weights": "runs/detect/final/final_model/weights/best.pt",
+  "git_commit": "892f315c619ede405e38e46e94bf6c8d861e75bf",
+  "weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt",
   "split": "valid",
-  "data_yaml": "data/prepared/data.yaml",
+  "data_yaml": "/Users/macbookpro/Projects/agridata/data/prepared/data.yaml",
   "iou_threshold": 0.5,
   "native_metrics": {
     "description": "Computed via ultralytics model.val() \u2014 source of truth for mAP. IoU thresholds: torch.linspace(0.5, 0.95, 10); mAP50 uses index 0 (IoU=0.50). Run in its own subprocess \u2014 see module docstring for why.",
