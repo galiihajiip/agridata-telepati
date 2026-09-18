@@ -5,6 +5,15 @@
 # artifacts/reports/block14_final_model_selection.md for full reasoning).
 # This is NOT a trained model — it is the exact, reproducible recipe Block 15
 # will execute to produce the final submitted weights.
+#
+# REVISION (2026-09-18): epochs raised from 20 to 50 at the user's explicit
+# request, after the first 20-epoch run (mAP@0.5=0.5620) was already
+# finalized through Block 19. This is a genuine fresh run from scratch, not
+# a resume — the prior run's last.pt had already been stripped of
+# optimizer/epoch state by Ultralytics (standard behavior once training
+# finishes normally), so a true continuation from epoch 20 was not possible.
+# The complete 20-epoch result set is preserved for the record at
+# artifacts/archive/20epoch_run/.
 
 seed: 42
 
@@ -56,7 +65,7 @@ flipud: 0.0   # vertical flip explicitly disabled — physically implausible for
 
 # --- Full-scale training parameters (NOT yet run — Block 15's job) ---
 fraction: 1.0        # full training set (all screening used a small fraction)
-epochs: 20           # REVISED before any training ran — see note below
+epochs: 50           # REVISED twice — see notes below and at the top of this file
 patience: 8          # early stopping: halt if val fitness doesn't improve for 8 epochs
 workers: 2
 device: "auto"
@@ -66,13 +75,19 @@ device: "auto"
 # Full train set has ~10,131 images (~10x E20's fraction) -> ~559s/epoch (train) +
 # ~30s/epoch (fixed validation cost on the full 2106-image valid set) =~ 590s/epoch.
 #
-# REVISION (before any full-scale training was run): epochs was originally set to 50
-# (~8.2 hours estimated). Given the master spec's operational deadline (Section 36:
-# 20 September 2026, 23:59 WIB — ~3 days from Block 14/15's execution date) and the
-# blocks remaining after this one (16-21: clean reproduction, notebook, README,
-# release, compliance audit, freeze), the user chose to reduce scope to leave more
-# deadline buffer for those blocks and any re-runs. epochs=20 -> ~11,800s =~ 3.3 hours.
-# `patience: 8` may end training earlier if validation fitness plateaus.
-# This revision was made BEFORE seeing any full-scale result — not tuned to an outcome.
+# REVISION 1 (before any full-scale training was run): epochs was originally set to 50
+# (~8.2 hours estimated). Given the master spec's operational deadline and the blocks
+# remaining after this one, the user chose to reduce scope to epochs=20 (~3.3 hours)
+# to leave more deadline buffer. Made BEFORE seeing any full-scale result.
+#
+# REVISION 2 (2026-09-18, after the epochs=20 run had already been finalized through
+# Block 19, mAP@0.5=0.5620): the user explicitly requested extending to epochs=50 for
+# a potentially better result. The actual observed rate from the epochs=20 run was
+# ~942s/epoch (5.23 hours / 20 epochs) — noticeably higher than the estimate above,
+# likely fixed per-epoch overhead (validation, checkpoint I/O) not fully amortized at
+# only 20 epochs. epochs=50 at ~942s/epoch =~ 13.1 hours estimated. This is a genuine
+# fresh run from scratch (see top-of-file note on why a true resume was not possible),
+# so none of the previous 5.23 hours of compute is reused.
+# `patience: 8` may still end training earlier if validation fitness plateaus.
 # Block 15 MUST re-verify this estimate (disk/RAM/device check) before committing
 # to the full run, per the master spec's resource-estimation requirement.
