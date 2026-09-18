@@ -1,0 +1,503 @@
+{
+  "dataset_root": "Telepati 8.0 Datasets",
+  "small_object_threshold": 0.01,
+  "splits": {
+    "train": {
+      "images": 10133,
+      "annotations_canonical": 20163,
+      "class_imbalance": {
+        "per_class_instances": {
+          "Bacterial leaf blight": 476,
+          "Bacterial panicle blight": 528,
+          "Blast": 4149,
+          "Brown spot": 5010,
+          "False smut": 852,
+          "Healthy": 2374,
+          "Leaf roller": 812,
+          "Leaf scald": 1438,
+          "Narrow brown": 222,
+          "Sheath blight": 1762,
+          "Tungro": 2540
+        },
+        "per_class_images": {
+          "Bacterial leaf blight": 234,
+          "Bacterial panicle blight": 519,
+          "Blast": 1919,
+          "Brown spot": 1122,
+          "False smut": 832,
+          "Healthy": 2198,
+          "Leaf roller": 803,
+          "Leaf scald": 837,
+          "Narrow brown": 222,
+          "Sheath blight": 629,
+          "Tungro": 773
+        },
+        "per_class_instance_share": {
+          "Bacterial leaf blight": 0.023607598075683182,
+          "Bacterial panicle blight": 0.02618657937806874,
+          "Blast": 0.2057729504538015,
+          "Brown spot": 0.24847492932599316,
+          "False smut": 0.04225561672370183,
+          "Healthy": 0.11774041561275604,
+          "Leaf roller": 0.04027178495263602,
+          "Leaf scald": 0.071318752169816,
+          "Narrow brown": 0.011010266329415265,
+          "Sheath blight": 0.0873877895154491,
+          "Tungro": 0.12597331746267917
+        },
+        "most_frequent_class": "Brown spot",
+        "least_frequent_class": "Narrow brown",
+        "max_instances": 5010,
+        "min_instances": 222,
+        "imbalance_ratio": 22.56756756756757,
+        "classes_with_zero_instances": []
+      },
+      "bbox_geometry": {
+        "count": 20163,
+        "median_area_px2": 12238.28,
+        "median_relative_area": 0.029879,
+        "median_aspect_ratio": 0.8837,
+        "small_object_share": 0.381
+      },
+      "resolution": {
+        "count": 10133,
+        "distinct_resolutions": 1,
+        "most_common_resolution": [
+          640,
+          640
+        ],
+        "most_common_share": 1.0
+      },
+      "missingness": {
+        "split": "train",
+        "checks": [
+          {
+            "check": "Berkas citra hilang (dirujuk JSON, tidak ada di disk)",
+            "count": 0,
+            "total": 10133,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Berkas citra di disk tanpa record JSON",
+            "count": 0,
+            "total": 10133,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Citra tanpa anotasi",
+            "count": 59,
+            "total": 10133,
+            "percentage": 0.5823,
+            "status": "PERLU DITINJAU",
+            "detail": ""
+          },
+          {
+            "check": "Anotasi merujuk image_id yang tidak ada",
+            "count": 0,
+            "total": 20163,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Anotasi merujuk category_id yang tidak ada",
+            "count": 0,
+            "total": 20163,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Bounding box kosong atau tidak lengkap",
+            "count": 0,
+            "total": 20163,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Bounding box dengan lebar atau tinggi tidak valid",
+            "count": 0,
+            "total": 20163,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Metadata dimensi citra tidak tersedia",
+            "count": 0,
+            "total": 10133,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Kategori tanpa anotasi",
+            "count": 3,
+            "total": 21,
+            "percentage": 14.2857,
+            "status": "PERLU DITINJAU",
+            "detail": "Leaf-blight, Rice-Leaf-Diseasee, paddy"
+          }
+        ]
+      },
+      "scene_density": {
+        "crowded_threshold": 3,
+        "images_with_annotations": 10074,
+        "median_annotations_per_image": 1.0,
+        "max_annotations_in_one_image": 178,
+        "crowded_images": 1057,
+        "crowded_share": 0.1049
+      }
+    },
+    "valid": {
+      "images": 2106,
+      "annotations_canonical": 4888,
+      "class_imbalance": {
+        "per_class_instances": {
+          "Bacterial leaf blight": 125,
+          "Bacterial panicle blight": 45,
+          "Blast": 947,
+          "Brown spot": 1461,
+          "False smut": 86,
+          "Healthy": 424,
+          "Leaf roller": 87,
+          "Leaf scald": 390,
+          "Narrow brown": 75,
+          "Sheath blight": 488,
+          "Tungro": 760
+        },
+        "per_class_images": {
+          "Bacterial leaf blight": 69,
+          "Bacterial panicle blight": 45,
+          "Blast": 382,
+          "Brown spot": 300,
+          "False smut": 83,
+          "Healthy": 388,
+          "Leaf roller": 87,
+          "Leaf scald": 244,
+          "Narrow brown": 75,
+          "Sheath blight": 184,
+          "Tungro": 239
+        },
+        "per_class_instance_share": {
+          "Bacterial leaf blight": 0.025572831423895253,
+          "Bacterial panicle blight": 0.009206219312602291,
+          "Blast": 0.19373977086743044,
+          "Brown spot": 0.2988952536824877,
+          "False smut": 0.017594108019639936,
+          "Healthy": 0.0867430441898527,
+          "Leaf roller": 0.017798690671031098,
+          "Leaf scald": 0.0797872340425532,
+          "Narrow brown": 0.015343698854337152,
+          "Sheath blight": 0.09983633387888707,
+          "Tungro": 0.15548281505728315
+        },
+        "most_frequent_class": "Brown spot",
+        "least_frequent_class": "Bacterial panicle blight",
+        "max_instances": 1461,
+        "min_instances": 45,
+        "imbalance_ratio": 32.46666666666667,
+        "classes_with_zero_instances": []
+      },
+      "bbox_geometry": {
+        "count": 4888,
+        "median_area_px2": 7051.56,
+        "median_relative_area": 0.017216,
+        "median_aspect_ratio": 0.8816,
+        "small_object_share": 0.4329
+      },
+      "resolution": {
+        "count": 2106,
+        "distinct_resolutions": 1,
+        "most_common_resolution": [
+          640,
+          640
+        ],
+        "most_common_share": 1.0
+      },
+      "missingness": {
+        "split": "valid",
+        "checks": [
+          {
+            "check": "Berkas citra hilang (dirujuk JSON, tidak ada di disk)",
+            "count": 0,
+            "total": 2106,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Berkas citra di disk tanpa record JSON",
+            "count": 0,
+            "total": 2106,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Citra tanpa anotasi",
+            "count": 13,
+            "total": 2106,
+            "percentage": 0.6173,
+            "status": "PERLU DITINJAU",
+            "detail": ""
+          },
+          {
+            "check": "Anotasi merujuk image_id yang tidak ada",
+            "count": 0,
+            "total": 4888,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Anotasi merujuk category_id yang tidak ada",
+            "count": 0,
+            "total": 4888,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Bounding box kosong atau tidak lengkap",
+            "count": 0,
+            "total": 4888,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Bounding box dengan lebar atau tinggi tidak valid",
+            "count": 0,
+            "total": 4888,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Metadata dimensi citra tidak tersedia",
+            "count": 0,
+            "total": 2106,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Kategori tanpa anotasi",
+            "count": 3,
+            "total": 21,
+            "percentage": 14.2857,
+            "status": "PERLU DITINJAU",
+            "detail": "Leaf-blight, Rice-Leaf-Diseasee, paddy"
+          }
+        ]
+      },
+      "scene_density": {
+        "crowded_threshold": 3,
+        "images_with_annotations": 2093,
+        "median_annotations_per_image": 1,
+        "max_annotations_in_one_image": 104,
+        "crowded_images": 290,
+        "crowded_share": 0.1386
+      }
+    },
+    "test": {
+      "images": 1059,
+      "annotations_canonical": 2670,
+      "class_imbalance": {
+        "per_class_instances": {
+          "Bacterial leaf blight": 59,
+          "Bacterial panicle blight": 27,
+          "Blast": 535,
+          "Brown spot": 840,
+          "False smut": 43,
+          "Healthy": 184,
+          "Leaf roller": 44,
+          "Leaf scald": 222,
+          "Narrow brown": 36,
+          "Sheath blight": 269,
+          "Tungro": 411
+        },
+        "per_class_images": {
+          "Bacterial leaf blight": 29,
+          "Bacterial panicle blight": 27,
+          "Blast": 214,
+          "Brown spot": 135,
+          "False smut": 42,
+          "Healthy": 178,
+          "Leaf roller": 43,
+          "Leaf scald": 122,
+          "Narrow brown": 36,
+          "Sheath blight": 100,
+          "Tungro": 130
+        },
+        "per_class_instance_share": {
+          "Bacterial leaf blight": 0.022097378277153558,
+          "Bacterial panicle blight": 0.010112359550561797,
+          "Blast": 0.20037453183520598,
+          "Brown spot": 0.3146067415730337,
+          "False smut": 0.01610486891385768,
+          "Healthy": 0.06891385767790262,
+          "Leaf roller": 0.01647940074906367,
+          "Leaf scald": 0.08314606741573034,
+          "Narrow brown": 0.01348314606741573,
+          "Sheath blight": 0.10074906367041199,
+          "Tungro": 0.15393258426966291
+        },
+        "most_frequent_class": "Brown spot",
+        "least_frequent_class": "Bacterial panicle blight",
+        "max_instances": 840,
+        "min_instances": 27,
+        "imbalance_ratio": 31.11111111111111,
+        "classes_with_zero_instances": []
+      },
+      "bbox_geometry": {
+        "count": 2670,
+        "median_area_px2": 5578.95,
+        "median_relative_area": 0.01362,
+        "median_aspect_ratio": 0.7484,
+        "small_object_share": 0.4678
+      },
+      "resolution": {
+        "count": 1059,
+        "distinct_resolutions": 1,
+        "most_common_resolution": [
+          640,
+          640
+        ],
+        "most_common_share": 1.0
+      },
+      "missingness": {
+        "split": "test",
+        "checks": [
+          {
+            "check": "Berkas citra hilang (dirujuk JSON, tidak ada di disk)",
+            "count": 0,
+            "total": 1059,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Berkas citra di disk tanpa record JSON",
+            "count": 0,
+            "total": 1059,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Citra tanpa anotasi",
+            "count": 5,
+            "total": 1059,
+            "percentage": 0.4721,
+            "status": "PERLU DITINJAU",
+            "detail": ""
+          },
+          {
+            "check": "Anotasi merujuk image_id yang tidak ada",
+            "count": 0,
+            "total": 2670,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Anotasi merujuk category_id yang tidak ada",
+            "count": 0,
+            "total": 2670,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Bounding box kosong atau tidak lengkap",
+            "count": 0,
+            "total": 2670,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Bounding box dengan lebar atau tinggi tidak valid",
+            "count": 0,
+            "total": 2670,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Metadata dimensi citra tidak tersedia",
+            "count": 0,
+            "total": 1059,
+            "percentage": 0.0,
+            "status": "OK",
+            "detail": ""
+          },
+          {
+            "check": "Kategori tanpa anotasi",
+            "count": 3,
+            "total": 21,
+            "percentage": 14.2857,
+            "status": "PERLU DITINJAU",
+            "detail": "Leaf-blight, Rice-Leaf-Diseasee, paddy"
+          }
+        ]
+      },
+      "scene_density": {
+        "crowded_threshold": 3,
+        "images_with_annotations": 1054,
+        "median_annotations_per_image": 1.0,
+        "max_annotations_in_one_image": 250,
+        "crowded_images": 156,
+        "crowded_share": 0.148
+      }
+    }
+  },
+  "figures": {
+    "train": {
+      "class_distribution": "artifacts/figures/final_submission/train_class_distribution.png",
+      "relative_area": "artifacts/figures/final_submission/train_bbox_relative_area.png",
+      "aspect_ratio": "artifacts/figures/final_submission/train_bbox_aspect_ratio.png",
+      "resolution": "artifacts/figures/final_submission/train_image_resolution.png"
+    },
+    "valid": {
+      "class_distribution": "artifacts/figures/final_submission/valid_class_distribution.png",
+      "relative_area": "artifacts/figures/final_submission/valid_bbox_relative_area.png",
+      "aspect_ratio": "artifacts/figures/final_submission/valid_bbox_aspect_ratio.png",
+      "resolution": "artifacts/figures/final_submission/valid_image_resolution.png"
+    },
+    "test": {
+      "class_distribution": "artifacts/figures/final_submission/test_class_distribution.png",
+      "relative_area": "artifacts/figures/final_submission/test_bbox_relative_area.png",
+      "aspect_ratio": "artifacts/figures/final_submission/test_bbox_aspect_ratio.png",
+      "resolution": "artifacts/figures/final_submission/test_image_resolution.png"
+    },
+    "split_overview": "artifacts/figures/final_submission/split_overview.png"
+  },
+  "duplicates": {
+    "available": true,
+    "pairs": {
+      "train_vs_valid": 0,
+      "train_vs_test": 1,
+      "valid_vs_test": 0
+    },
+    "matches": {
+      "train_vs_valid": [],
+      "train_vs_test": [
+        {
+          "hash": "04871474346779054b65889680248dd2",
+          "train": "leaf_scald-230-_jpg.rf.b33be69848eb828d425b5c8e603c01c2.jpg",
+          "test": "leaf_scald-230-_jpg.rf.d871f088c1010827d3b13501d870db02.jpg"
+        }
+      ],
+      "valid_vs_test": []
+    },
+    "total_exact_duplicates": 1
+  }
+}
