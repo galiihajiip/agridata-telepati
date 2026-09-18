@@ -108,13 +108,14 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 | MODEL | 5 | 0 | 0 | 0 |
 | REPRODUCIBILITY | 6 | 0 | 0 | 0 |
 | GITHUB | 4 | 1 | 0 | 0 |
-| DOCUMENTS | 2 | 1 | 1 | 0 |
+| DOCUMENTS | 3 | 1 | 0 | 0 |
 | AUDIT | 5 | 0 | 0 | 0 |
-| **Total** | **29** | **2** | **1** | **4** |
+| **Total** | **30** | **2** | **0** | **4** |
 
-**Blocking items before final submission:**
-1. **GITHUB #4 / DOCUMENTS #1 (WARN):** Publish the prepared GitHub Release so the model weights have a direct download link. Command and assets are ready (see `weights/README.md`).
-2. **DOCUMENTS #4 (FAIL):** Add an originality-statement placeholder/checklist file to the repository. The actual physical signature remains the team's own responsibility, outside this AI's scope.
-3. **TEAM #1–4 (NOT VERIFIED):** Confirm team composition (2–3 students, same university, one leader, one supervisor) against the competition registration — this cannot be checked from the repository.
+**Blocking items before final submission (updated after Block 21 fix):**
+1. **GITHUB #4 / DOCUMENTS #1 (WARN):** Publish the prepared GitHub Release so the model weights have a direct download link. Command and assets are ready (see `weights/README.md`). Still pending an explicit publish decision.
+2. **TEAM #1–4 (NOT VERIFIED):** Confirm team composition (2–3 students, same university, one leader, one supervisor) against the competition registration — this cannot be checked from the repository.
 
-This audit does not mark the submission ready. Two of the three open items (release publish, originality placeholder) are actionable and low-effort; the third (team composition) requires the team's own confirmation.
+DOCUMENTS #4 (originality statement placeholder) was FAIL at Block 20 and is now PASS — fixed in Block 21 via `docs/originality_statement_placeholder.md`.
+
+This audit does not mark the submission fully ready: the release publish decision and team composition confirmation remain open, and both require action outside this AI's authority (an explicit publish confirmation, and human team facts respectively).
