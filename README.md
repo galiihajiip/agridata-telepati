@@ -335,14 +335,16 @@ agridata-telepati8/
 ## 20. Known Limitations
 
 - **Local F1 metric shows observed run-to-run variance** on this project's
-  Apple Silicon/MPS hardware: standalone script runs measured F1@0.25 in the
-  range ~0.31–0.34, but one run (executed from within a live Jupyter kernel
-  subprocess) measured 0.16 — native mAP@0.5 was **exactly** 0.5620 in every
-  single run, including that one. This suggests GPU resource contention
-  between a long-lived parent process and a spawned subprocess, not a
-  pipeline defect, but was not exhaustively root-caused. **Recommendation
-  for audit purposes: treat mAP@0.5 as the primary, stable point of
-  comparison; treat the local F1 as an approximate secondary metric.**
+  Apple Silicon/MPS hardware: for the final 50-epoch model, three standalone
+  evaluation runs against the identical checkpoint measured F1@0.25 at 0.221,
+  0.422, and 0.333 — native mAP@0.5 was **exactly** 0.6276771766514752 in
+  every single run. (The earlier 20-epoch model showed the same pattern at a
+  narrower range, ~0.16–0.34; see `artifacts/archive/20epoch_run/`.) This
+  suggests GPU resource contention or MPS-backend non-determinism affecting
+  inference-time confidence scores/NMS, not a pipeline defect, but was not
+  exhaustively root-caused. **Recommendation for audit purposes: treat
+  mAP@0.5 as the primary, stable point of comparison; treat the local F1 as
+  an approximate secondary metric only.**
 - **Residual, unconfirmed perceptual-hash overlap candidates** across splits
   (Block 2: 426 train-valid, 210 train-test, 84 valid-test candidates from a
   coarse 8×8 average-hash) were never individually visually confirmed as
