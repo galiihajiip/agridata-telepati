@@ -160,31 +160,36 @@ Final model, evaluated on the official **validation** split (2,106 images,
 
 | Metric | Value |
 |---|---:|
-| mAP@0.5 | **0.5620** |
-| mAP@0.5:0.95 | 0.3278 |
-| Precision (native, Ultralytics' internal best-F1 point) | 0.6073 |
-| Recall (native, Ultralytics' internal best-F1 point) | 0.5562 |
-| F1 (local, confidence≥0.25) | ~0.31–0.34* |
+| mAP@0.5 | **0.6277** |
+| mAP@0.5:0.95 | 0.3905 |
+| Precision (native, Ultralytics' internal best-F1 point) | 0.6406 |
+| Recall (native, Ultralytics' internal best-F1 point) | 0.6237 |
+| F1 (local, confidence≥0.25) | ~0.22–0.42* |
 
 *See [Known Limitations](#20-known-limitations) — the local F1 metric showed
 observed run-to-run variance on this hardware; mAP@0.5 was exactly identical
-across every run performed.
+(0.6276771766514752) across every run performed.
+
+This model was trained for 50 epochs (see [Training Configuration](#7-training-configuration));
+an earlier 20-epoch run (mAP@0.5=0.5620) was extended at the user's request
+for a better result — the full prior result set is preserved at
+[`artifacts/archive/20epoch_run/`](artifacts/archive/20epoch_run/).
 
 **Per-class AP@0.5:**
 
 | Canonical class | AP@0.5 |
 |---|---:|
-| Narrow brown | 0.9411 |
-| False smut | 0.9009 |
-| Healthy | 0.8580 |
-| Leaf roller | 0.7829 |
-| Tungro | 0.5328 |
-| Bacterial panicle blight | 0.4728 |
-| Blast | 0.4147 |
-| Sheath blight | 0.3507 |
-| Leaf scald | 0.3475 |
-| Bacterial leaf blight | 0.3153 |
-| Brown spot | 0.2656 |
+| Narrow brown | 0.9631 |
+| False smut | 0.9436 |
+| Leaf roller | 0.8734 |
+| Healthy | 0.8712 |
+| Bacterial panicle blight | 0.6216 |
+| Tungro | 0.5980 |
+| Blast | 0.4855 |
+| Sheath blight | 0.4804 |
+| Leaf scald | 0.3880 |
+| Bacterial leaf blight | 0.3887 |
+| Brown spot | 0.2909 |
 
 Classes with the smallest bounding boxes on average (disease lesions:
 Brown spot, Blast, Bacterial leaf blight — see
