@@ -94,7 +94,7 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 | 1 | Notebook runs | PASS | Re-confirmed in this session: 39 cells, 0 error outputs. |
 | 2 | Weights load | PASS | Re-confirmed in this session (Block 19 clean-subprocess load test, and again referenced here). |
 | 3 | Predictions work | PASS | Same clean-subprocess test produced 1 detection on a real image; also verified at scale via `scripts/evaluate.py` (2106 valid images) and `scripts/run_error_analysis.py`. |
-| 4 | Metrics generated | PASS | `artifacts/reports/evaluation_valid.json`/`.md` contain full per-class precision/recall/mAP results; `final_model_metadata.json` contains the summary numbers (mAP50=0.5620, mAP50-95=0.3278, precision=0.6073, recall=0.5562). |
+| 4 | Metrics generated | PASS | `artifacts/reports/evaluation_valid.json`/`.md` contain full per-class precision/recall/mAP results; `final_model_metadata.json` contains the summary numbers (mAP50=0.6277, mAP50-95=0.3905, precision=0.6406, recall=0.6237). |
 | 5 | Clean environment test passed | PASS | `artifacts/audit/block16_clean_reproduction_test.md` documents a genuine fresh-venv, fresh-install reproduction that found and fixed two real defects (a numpy pin conflict and an MPS large-batch crash) before they could have broken a judge's audit run. |
 
 ---
