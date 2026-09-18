@@ -187,8 +187,8 @@ for a better result — the full prior result set is preserved at
 | Tungro | 0.5980 |
 | Blast | 0.4855 |
 | Sheath blight | 0.4804 |
-| Leaf scald | 0.3880 |
 | Bacterial leaf blight | 0.3887 |
+| Leaf scald | 0.3880 |
 | Brown spot | 0.2909 |
 
 Classes with the smallest bounding boxes on average (disease lesions:
