@@ -42,6 +42,32 @@ logger = logging.getLogger("agridata.scripts.run_error_analysis")
 CLASS_NAMES = {i: name for i, name in enumerate(CANONICAL_CLASSES)}
 
 
+def _caveat_text(per_class_pr: dict) -> str:
+    """Describe how much of the class space this checkpoint has actually learned.
+
+    Computed from this run's real per-class TP counts — never a hardcoded
+    description of some other, earlier checkpoint. A prior version of this
+    function hardcoded prose about a specific 10-epoch screening checkpoint
+    (E08); that text kept printing verbatim for every later checkpoint this
+    script analyzed, including the final submitted model, which had already
+    learned every class. Fixed to be dynamic."""
+    zero_tp = [cls for cls, pr in per_class_pr.items() if pr["tp"] == 0]
+    total = len(per_class_pr)
+    if not zero_tp:
+        return (
+            f"This checkpoint has at least one true positive on all {total}/{total} classes — "
+            "confusion patterns above reflect genuine model behavior, not simply classes the "
+            "model has not learned yet."
+        )
+    return (
+        f"This checkpoint has zero true positives on {len(zero_tp)}/{total} classes "
+        f"({', '.join(zero_tp)}) — it has not learned those classes at all. Confusion patterns "
+        "above involving those classes mostly reflect \"the model hasn't learned this yet\", not "
+        "a stable, meaningful semantic confusion. Only classes with non-trivial TP counts support "
+        "any real interpretation at this stage."
+    )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Object detection error analysis (read-only; proposes, does not apply, changes).")
     parser.add_argument("--weights", required=True, type=Path)
