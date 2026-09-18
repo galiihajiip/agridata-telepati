@@ -283,7 +283,7 @@ results = model.predict("path/to/image.jpg")
 ## 17. Model Weights
 
 - Local path: `runs/detect/final/final_model/weights/best.pt` (6.3MB)
-- SHA-256: `a48da07d91188b9985171bda8c2ebc745699fb21a1fa059291b014e6951b12e6`
+- SHA-256: `9d74fffdd977a7bb6749bc828fe908278c5d3eaa24c3cfdbbe5a560d41f5d308`
 - See [`weights/README.md`](weights/README.md) for release/download details.
 
 ## 18. Repository Structure
