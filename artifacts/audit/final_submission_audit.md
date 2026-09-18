@@ -107,15 +107,16 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 | DATA | 6 | 0 | 0 | 0 |
 | MODEL | 5 | 0 | 0 | 0 |
 | REPRODUCIBILITY | 6 | 0 | 0 | 0 |
-| GITHUB | 4 | 1 | 0 | 0 |
+| GITHUB | 3 | 2 | 0 | 0 |
 | DOCUMENTS | 3 | 1 | 0 | 0 |
 | AUDIT | 5 | 0 | 0 | 0 |
-| **Total** | **30** | **2** | **0** | **4** |
+| **Total** | **29** | **3** | **0** | **4** |
 
-**Blocking items before final submission (updated after Block 21 fix):**
-1. **GITHUB #4 / DOCUMENTS #1 (WARN):** Publish the prepared GitHub Release so the model weights have a direct download link. Command and assets are ready (see `weights/README.md`). Still pending an explicit publish decision.
-2. **TEAM #1–4 (NOT VERIFIED):** Confirm team composition (2–3 students, same university, one leader, one supervisor) against the competition registration — this cannot be checked from the repository.
+**Blocking items before final submission (updated after the 50-epoch model extension):**
+1. **GITHUB #2 (WARN, most urgent):** Force-push the rewritten local git history to `origin/main`. Without this, the public repository is stuck at a stale, pre-extension state and does not reflect the current (better) model, the updated README/notebook/audit, or any commit made after the history rewrite. Deliberately left for the user to run directly (`git push --force origin main`) — this AI does not run git commit/push in this project.
+2. **GITHUB #4 / DOCUMENTS #1 (WARN):** Publish the prepared GitHub Release so the model weights have a direct download link. Command and assets are ready and up to date (see `weights/README.md`) — must be re-run after item 1, since the release should point at the pushed, current state.
+3. **TEAM #1–4 (NOT VERIFIED):** Confirm team composition (2–3 students, same university, one leader, one supervisor) against the competition registration — this cannot be checked from the repository.
 
 DOCUMENTS #4 (originality statement placeholder) was FAIL at Block 20 and is now PASS — fixed in Block 21 via `docs/originality_statement_placeholder.md`.
 
-This audit does not mark the submission fully ready: the release publish decision and team composition confirmation remain open, and both require action outside this AI's authority (an explicit publish confirmation, and human team facts respectively).
+This audit does not mark the submission ready: the force-push, the release publish decision, and team composition confirmation all remain open, and all three require action outside this AI's authority.
