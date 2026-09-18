@@ -1,6 +1,6 @@
 """Dataset distribution plots for EDA (Block 4).
 
-All functions save a figure to disk and close it — nothing is shown
+All functions save a figure to disk and close it. Nothing is shown
 interactively, since this runs from a script/CI context.
 """
 
