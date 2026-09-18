@@ -192,10 +192,11 @@ for a better result — the full prior result set is preserved at
 | Brown spot | 0.2909 |
 
 Classes with the smallest bounding boxes on average (disease lesions:
-Brown spot, Blast, Bacterial leaf blight — see
+Brown spot, Bacterial leaf blight, Leaf scald — see
 [`artifacts/reports/class_imbalance_diagnostics.md`](artifacts/reports/class_imbalance_diagnostics.md))
-score lowest, consistent with the well-known difficulty of small-object
-detection — confirmed independently via error analysis
+still score lowest even after the extended 50-epoch run, consistent with the
+well-known difficulty of small-object detection — confirmed independently
+via error analysis
 ([`artifacts/reports/block13_error_analysis.md`](artifacts/reports/block13_error_analysis.md)),
 not just this final result.
 
