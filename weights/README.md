@@ -40,9 +40,27 @@ To verify the checksum of your own copy:
 shasum -a 256 runs/detect/final/final_model/weights/best.pt
 ```
 
-## Planned: GitHub Release / Git LFS
+## Planned: GitHub Release
 
 Per the master spec (Section 31), the final submission requires the weights
 to be published via a GitHub Release or Git LFS, with a direct link — not a
-personal cloud-storage link. This will be completed in Block 19; this file
-will be updated with the direct release link at that time.
+personal cloud-storage link. Given the file size (6.3MB, well under GitHub's
+per-file limits), a plain GitHub Release attachment was chosen over Git LFS
+as the simpler, equally-compliant option.
+
+The release is prepared but **not yet published** — publishing is a
+public, hard-to-reverse action on the repository and is deferred until
+explicitly confirmed. The prepared command:
+
+```bash
+gh release create v1.0.0-final-model \
+  runs/detect/final/final_model/weights/best.pt \
+  weights/best.pt.sha256 \
+  artifacts/reports/final_model_metadata.json \
+  --title "Final Model v1.0.0 — YOLOv8n Rice Disease Detector" \
+  --notes-file <release notes>
+```
+
+Once published, this section will be updated with the direct asset URL and
+`artifacts/reports/final_model_metadata.json`'s `release` field will be set
+to `published: true` with the method and URL.
