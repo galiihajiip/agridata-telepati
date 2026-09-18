@@ -83,7 +83,7 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 | 1 | Model weights | WARN | File exists locally, checksum-verified, load/inference-verified — but not yet attached to a public GitHub Release (see GITHUB #4). Judges cannot download it yet as of this audit. |
 | 2 | Notebook | PASS | Same evidence as GITHUB #5. |
 | 3 | Repository | PASS | Public, staged, documented (see GITHUB section). |
-| 4 | Originality statement placeholder/checklist | FAIL | No placeholder or checklist file for the physically-signed originality statement exists anywhere in the repository (checked: `docs/`, `README.md`, `artifacts/`, no file or section mentions "originality" outside the master spec document itself). This is explicitly outside this AI's capability to produce as a signed document, but a placeholder/checklist referencing it should exist in the repo per the master spec's DOCUMENTS checklist, and currently does not. **Action needed:** add a short placeholder (e.g. `docs/originality_statement_placeholder.md` or a README section) noting the physically-signed statement is prepared/submitted separately, so the audit trail is complete. |
+| 4 | Originality statement placeholder/checklist | PASS (as of Block 21) | `docs/originality_statement_placeholder.md` added, with an explicit human-completed checklist and a clear statement that the physical signature itself remains outside this AI's scope. Originally FAIL at Block 20 time; fixed before the Block 21 freeze since it was a documentation-only, non-model change. |
 
 ---
 
