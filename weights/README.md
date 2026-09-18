@@ -1,9 +1,11 @@
 # Model Weights
 
-**Status: not yet published as a GitHub Release.** Release preparation is a
-separate, later step (Block 19) — this file documents the current, local
-state of the final trained weights so it is not left unrecorded in the
-meantime.
+**Status: release prepared (Block 19), pending explicit publish confirmation.**
+The checksum file (`best.pt.sha256`) and metadata (`../artifacts/reports/final_model_metadata.json`)
+are finalized and committed. The weights file itself is a large generated
+binary and is intentionally not committed to git (see `.gitignore`); it is
+distributed via a GitHub Release attachment instead. See "Planned: GitHub
+Release" below for the exact prepared command and asset list.
 
 ## Current final model
 
