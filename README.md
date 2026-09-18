@@ -114,7 +114,7 @@ screening experiment that justified it).
 | Seed | 42 |
 | Image size | 640 |
 | Batch size | 16 |
-| Epochs | 20 (originally 50; reduced given competition deadline proximity — see config file's inline note) |
+| Epochs | 50 (initially reduced to 20 for deadline buffer, then extended back to 50 after the 20-epoch result was already finalized — see config file's inline revision notes) |
 | Optimizer | AdamW |
 | Learning rate | 0.001 |
 | Weight decay | 0.0005 |
