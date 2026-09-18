@@ -14,11 +14,16 @@ Release" below for the exact prepared command and asset list.
 | File | `runs/detect/final/final_model/weights/best.pt` |
 | Format | PyTorch checkpoint (`.pt`) |
 | Size | 6.3 MB |
-| SHA-256 | `a48da07d91188b9985171bda8c2ebc745699fb21a1fa059291b014e6951b12e6` |
+| SHA-256 | `9d74fffdd977a7bb6749bc828fe908278c5d3eaa24c3cfdbbe5a560d41f5d308` |
 | Architecture | YOLOv8n (Ultralytics), built from `yolov8n.yaml`, `pretrained=False` |
-| Training config | [`configs/final_model_config.yaml`](../configs/final_model_config.yaml) |
+| Training config | [`configs/final_model_config.yaml`](../configs/final_model_config.yaml) — 50 epochs |
 | Training summary | [`artifacts/reports/block15_final_training_summary.json`](../artifacts/reports/block15_final_training_summary.json) |
-| Training git commit | `20222441681255a2312dc4edfc52be1a06f4a85d` |
+| Training git commit | `28668899fb000cee3a2a8386ac65ddeba2d04d02` |
+| Results | mAP@0.5=0.6277, mAP@0.5:0.95=0.3905 (see [`README.md`](../README.md#10-results)) |
+
+An earlier 20-epoch model (mAP@0.5=0.5620) was superseded at the user's
+request to extend training for a better result; its full result set is
+preserved at [`artifacts/archive/20epoch_run/`](../artifacts/archive/20epoch_run/).
 
 This file is not committed to git (see `.gitignore` — `*.pt` and `runs/` are
 excluded, consistent with the master spec's guidance against storing large
