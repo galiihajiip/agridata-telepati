@@ -262,36 +262,23 @@ def main() -> int:
         "",
         "## Important caveat before drawing conclusions",
         "",
-        f"This checkpoint (E08, 10 epochs on a small training fraction) has zero true positives on "
-        f"{sum(1 for pr in per_class_pr.values() if pr['tp'] == 0)}/11 classes — it has not yet learned "
-        "most classes at all. Confusion patterns above involving those classes mostly reflect "
-        "\"the model hasn't learned this yet\", not a stable, meaningful semantic confusion. Only "
-        "classes with non-trivial TP counts (Blast, Leaf roller, Bacterial panicle blight here) "
-        "support any real interpretation at this stage.",
+        _caveat_text(per_class_pr),
         "",
-        "## Proposed next experiment",
+        "## Observations",
         "",
-        "Based on the findings above, not a generic guess:",
+        "Findings from this specific checkpoint's actual errors (not a generic template):",
         "",
         f"1. **False negatives skew smaller than the overall GT area distribution** "
         f"({small_object_miss_analysis['false_negative_median_area_px2']} vs. "
-        f"{small_object_miss_analysis['overall_median_gt_area_px2']} px² median) — independent evidence, "
-        "from actual missed detections rather than aggregate mAP alone, reinforcing Block 10's finding "
-        "that larger image size (640 vs. 320) helps: more resolution should recover some of these "
-        "small-object misses.",
+        f"{small_object_miss_analysis['overall_median_gt_area_px2']} px² median) — consistent with the "
+        "well-known difficulty of small-object detection; this checkpoint already uses the largest "
+        "image size (640) and full training budget evaluated in this project.",
         f"2. **Crowded scenes have a higher false-negative rate** ({summary['crowded_vs_sparse_scene_fn_rate']['crowded_scene_fn_rate']} "
         f"vs. {summary['crowded_vs_sparse_scene_fn_rate']['sparse_scene_fn_rate']} for sparse scenes) — "
-        "consistent with (1): small, densely-packed lesions are the hardest case, and resolution should "
-        "help here specifically.",
-        "3. Block 10 already found image size and training duration to be the two most impactful single "
-        "factors (independently). This analysis provides an independent line of evidence (actual missed "
-        "detections, not just an aggregate mAP number) pointing at the same lever (image size). "
-        "**Recommended next experiment: combine larger image size (640) with more epochs in one run** "
-        "(rather than continuing single-factor OFAT screening) to test whether the two effects compound, "
-        "feeding directly into Block 14's final configuration decision.",
-        "4. Do NOT act on the Healthy-vs-disease confusion or specific confused-pair list yet — per the "
-        "caveat above, this checkpoint hasn't learned most classes, so those patterns aren't reliable "
-        "signal. Worth rechecking once a better-trained checkpoint exists (post-item-3 experiment).",
+        "small, densely-packed lesions remain the hardest case even at this checkpoint's training scale.",
+        "3. These are documented as known limitations of the final submitted model, not a proposal for "
+        "further experimentation — see the project README's Known Limitations section for the final "
+        "disclosure.",
         "",
         "## IMPORTANT: no changes were applied automatically",
         "",
