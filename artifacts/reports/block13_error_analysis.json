@@ -1,17 +1,30 @@
 {
-  "weights": "runs/detect/matrix/E08/weights/best.pt",
+  "weights": "runs/detect/final/final_model/weights/best.pt",
   "split": "valid",
   "confidence_threshold": 0.1,
   "counts": {
-    "true_positives": 97,
-    "class_confusions": 399,
-    "background_false_positives": 1843,
-    "false_negatives": 4392
+    "true_positives": 1441,
+    "class_confusions": 79,
+    "background_false_positives": 2325,
+    "false_negatives": 3368
   },
   "confusion_matrix": {
     "Bacterial leaf blight": {
+      "Bacterial leaf blight": 74,
+      "Bacterial panicle blight": 0,
+      "Blast": 2,
+      "Brown spot": 0,
+      "False smut": 0,
+      "Healthy": 2,
+      "Leaf roller": 0,
+      "Leaf scald": 1,
+      "Narrow brown": 0,
+      "Sheath blight": 1,
+      "Tungro": 2
+    },
+    "Bacterial panicle blight": {
       "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 1,
+      "Bacterial panicle blight": 0,
       "Blast": 0,
       "Brown spot": 0,
       "False smut": 0,
@@ -22,53 +35,40 @@
       "Sheath blight": 0,
       "Tungro": 0
     },
-    "Bacterial panicle blight": {
-      "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 11,
-      "Blast": 4,
-      "Brown spot": 0,
-      "False smut": 0,
-      "Healthy": 0,
-      "Leaf roller": 5,
-      "Leaf scald": 0,
-      "Narrow brown": 0,
-      "Sheath blight": 0,
-      "Tungro": 0
-    },
     "Blast": {
       "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 34,
-      "Blast": 41,
-      "Brown spot": 0,
+      "Bacterial panicle blight": 0,
+      "Blast": 272,
+      "Brown spot": 17,
       "False smut": 0,
-      "Healthy": 0,
-      "Leaf roller": 9,
-      "Leaf scald": 0,
-      "Narrow brown": 0,
-      "Sheath blight": 0,
+      "Healthy": 2,
+      "Leaf roller": 0,
+      "Leaf scald": 1,
+      "Narrow brown": 3,
+      "Sheath blight": 4,
       "Tungro": 0
     },
     "Brown spot": {
-      "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 4,
-      "Blast": 62,
-      "Brown spot": 0,
+      "Bacterial leaf blight": 1,
+      "Bacterial panicle blight": 0,
+      "Blast": 15,
+      "Brown spot": 309,
       "False smut": 0,
-      "Healthy": 0,
+      "Healthy": 1,
       "Leaf roller": 1,
       "Leaf scald": 0,
-      "Narrow brown": 0,
+      "Narrow brown": 2,
       "Sheath blight": 0,
       "Tungro": 0
     },
     "False smut": {
       "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 38,
-      "Blast": 6,
+      "Bacterial panicle blight": 0,
+      "Blast": 0,
       "Brown spot": 0,
-      "False smut": 0,
+      "False smut": 1,
       "Healthy": 0,
-      "Leaf roller": 2,
+      "Leaf roller": 0,
       "Leaf scald": 0,
       "Narrow brown": 0,
       "Sheath blight": 0,
@@ -76,12 +76,12 @@
     },
     "Healthy": {
       "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 42,
-      "Blast": 4,
-      "Brown spot": 0,
+      "Bacterial panicle blight": 0,
+      "Blast": 0,
+      "Brown spot": 4,
       "False smut": 0,
-      "Healthy": 0,
-      "Leaf roller": 66,
+      "Healthy": 169,
+      "Leaf roller": 0,
       "Leaf scald": 0,
       "Narrow brown": 0,
       "Sheath blight": 0,
@@ -89,238 +89,238 @@
     },
     "Leaf roller": {
       "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 7,
+      "Bacterial panicle blight": 0,
+      "Blast": 0,
+      "Brown spot": 0,
+      "False smut": 0,
+      "Healthy": 0,
+      "Leaf roller": 0,
+      "Leaf scald": 0,
+      "Narrow brown": 0,
+      "Sheath blight": 0,
+      "Tungro": 0
+    },
+    "Leaf scald": {
+      "Bacterial leaf blight": 0,
+      "Bacterial panicle blight": 0,
+      "Blast": 0,
+      "Brown spot": 0,
+      "False smut": 0,
+      "Healthy": 0,
+      "Leaf roller": 0,
+      "Leaf scald": 128,
+      "Narrow brown": 0,
+      "Sheath blight": 3,
+      "Tungro": 8
+    },
+    "Narrow brown": {
+      "Bacterial leaf blight": 0,
+      "Bacterial panicle blight": 0,
+      "Blast": 0,
+      "Brown spot": 2,
+      "False smut": 0,
+      "Healthy": 0,
+      "Leaf roller": 0,
+      "Leaf scald": 0,
+      "Narrow brown": 73,
+      "Sheath blight": 0,
+      "Tungro": 0
+    },
+    "Sheath blight": {
+      "Bacterial leaf blight": 0,
+      "Bacterial panicle blight": 0,
       "Blast": 2,
       "Brown spot": 0,
       "False smut": 0,
       "Healthy": 0,
-      "Leaf roller": 45,
-      "Leaf scald": 0,
+      "Leaf roller": 1,
+      "Leaf scald": 1,
       "Narrow brown": 0,
-      "Sheath blight": 0,
-      "Tungro": 0
-    },
-    "Leaf scald": {
-      "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 1,
-      "Blast": 16,
-      "Brown spot": 0,
-      "False smut": 0,
-      "Healthy": 0,
-      "Leaf roller": 9,
-      "Leaf scald": 0,
-      "Narrow brown": 0,
-      "Sheath blight": 0,
-      "Tungro": 0
-    },
-    "Narrow brown": {
-      "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 1,
-      "Blast": 4,
-      "Brown spot": 0,
-      "False smut": 0,
-      "Healthy": 0,
-      "Leaf roller": 3,
-      "Leaf scald": 0,
-      "Narrow brown": 0,
-      "Sheath blight": 0,
-      "Tungro": 0
-    },
-    "Sheath blight": {
-      "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 14,
-      "Blast": 7,
-      "Brown spot": 0,
-      "False smut": 0,
-      "Healthy": 0,
-      "Leaf roller": 22,
-      "Leaf scald": 0,
-      "Narrow brown": 0,
-      "Sheath blight": 0,
+      "Sheath blight": 146,
       "Tungro": 0
     },
     "Tungro": {
-      "Bacterial leaf blight": 0,
-      "Bacterial panicle blight": 14,
-      "Blast": 16,
-      "Brown spot": 0,
+      "Bacterial leaf blight": 1,
+      "Bacterial panicle blight": 0,
+      "Blast": 0,
+      "Brown spot": 1,
       "False smut": 0,
       "Healthy": 0,
-      "Leaf roller": 5,
-      "Leaf scald": 0,
+      "Leaf roller": 0,
+      "Leaf scald": 1,
       "Narrow brown": 0,
       "Sheath blight": 0,
-      "Tungro": 0
+      "Tungro": 269
     }
   },
   "top_confused_pairs": [
     {
-      "true_class": "Healthy",
-      "predicted_class": "Leaf roller",
-      "count": 66
+      "true_class": "Blast",
+      "predicted_class": "Brown spot",
+      "count": 17
     },
     {
       "true_class": "Brown spot",
       "predicted_class": "Blast",
-      "count": 62
-    },
-    {
-      "true_class": "Healthy",
-      "predicted_class": "Bacterial panicle blight",
-      "count": 42
-    },
-    {
-      "true_class": "False smut",
-      "predicted_class": "Bacterial panicle blight",
-      "count": 38
-    },
-    {
-      "true_class": "Blast",
-      "predicted_class": "Bacterial panicle blight",
-      "count": 34
-    },
-    {
-      "true_class": "Sheath blight",
-      "predicted_class": "Leaf roller",
-      "count": 22
+      "count": 15
     },
     {
       "true_class": "Leaf scald",
+      "predicted_class": "Tungro",
+      "count": 8
+    },
+    {
+      "true_class": "Blast",
+      "predicted_class": "Sheath blight",
+      "count": 4
+    },
+    {
+      "true_class": "Healthy",
+      "predicted_class": "Brown spot",
+      "count": 4
+    },
+    {
+      "true_class": "Blast",
+      "predicted_class": "Narrow brown",
+      "count": 3
+    },
+    {
+      "true_class": "Leaf scald",
+      "predicted_class": "Sheath blight",
+      "count": 3
+    },
+    {
+      "true_class": "Bacterial leaf blight",
       "predicted_class": "Blast",
-      "count": 16
+      "count": 2
     },
     {
-      "true_class": "Tungro",
-      "predicted_class": "Blast",
-      "count": 16
+      "true_class": "Bacterial leaf blight",
+      "predicted_class": "Healthy",
+      "count": 2
     },
     {
-      "true_class": "Sheath blight",
-      "predicted_class": "Bacterial panicle blight",
-      "count": 14
-    },
-    {
-      "true_class": "Tungro",
-      "predicted_class": "Bacterial panicle blight",
-      "count": 14
+      "true_class": "Bacterial leaf blight",
+      "predicted_class": "Tungro",
+      "count": 2
     }
   ],
   "per_class_precision_recall": {
     "Bacterial leaf blight": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "tp": 0,
-      "fp": 0,
-      "fn": 125
+      "precision": 0.3231441048034934,
+      "recall": 0.592,
+      "tp": 74,
+      "fp": 155,
+      "fn": 51
     },
     "Bacterial panicle blight": {
-      "precision": 0.017377567140600316,
-      "recall": 0.24444444444444444,
-      "tp": 11,
-      "fp": 622,
-      "fn": 34
+      "precision": 0.0,
+      "recall": 0.0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 45
     },
     "Blast": {
-      "precision": 0.040156709108716944,
-      "recall": 0.04329461457233368,
-      "tp": 41,
-      "fp": 980,
-      "fn": 906
+      "precision": 0.42105263157894735,
+      "recall": 0.28722280887011614,
+      "tp": 272,
+      "fp": 374,
+      "fn": 675
     },
     "Brown spot": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "tp": 0,
-      "fp": 0,
-      "fn": 1461
+      "precision": 0.3,
+      "recall": 0.21149897330595482,
+      "tp": 309,
+      "fp": 721,
+      "fn": 1152
     },
     "False smut": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "tp": 0,
-      "fp": 0,
-      "fn": 86
+      "precision": 0.5,
+      "recall": 0.011627906976744186,
+      "tp": 1,
+      "fp": 1,
+      "fn": 85
     },
     "Healthy": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "tp": 0,
-      "fp": 0,
-      "fn": 424
+      "precision": 0.7544642857142857,
+      "recall": 0.39858490566037735,
+      "tp": 169,
+      "fp": 55,
+      "fn": 255
     },
     "Leaf roller": {
-      "precision": 0.06569343065693431,
-      "recall": 0.5172413793103449,
-      "tp": 45,
-      "fp": 640,
-      "fn": 42
+      "precision": 0.0,
+      "recall": 0.0,
+      "tp": 0,
+      "fp": 17,
+      "fn": 87
     },
     "Leaf scald": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "tp": 0,
-      "fp": 0,
-      "fn": 390
+      "precision": 0.2857142857142857,
+      "recall": 0.3282051282051282,
+      "tp": 128,
+      "fp": 320,
+      "fn": 262
     },
     "Narrow brown": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "tp": 0,
-      "fp": 0,
-      "fn": 75
+      "precision": 0.5447761194029851,
+      "recall": 0.9733333333333334,
+      "tp": 73,
+      "fp": 61,
+      "fn": 2
     },
     "Sheath blight": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "tp": 0,
-      "fp": 0,
-      "fn": 488
+      "precision": 0.31533477321814257,
+      "recall": 0.29918032786885246,
+      "tp": 146,
+      "fp": 317,
+      "fn": 342
     },
     "Tungro": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "tp": 0,
-      "fp": 0,
-      "fn": 760
+      "precision": 0.4125766871165644,
+      "recall": 0.3539473684210526,
+      "tp": 269,
+      "fp": 383,
+      "fn": 491
     }
   },
   "confidence_stats": {
     "true_positive_confidence": {
-      "mean": 0.25287995333831337,
-      "median": 0.21372385323047638
+      "mean": 0.48712447056602387,
+      "median": 0.47310924530029297
     },
     "false_positive_confidence": {
-      "mean": 0.19266902454975032,
-      "median": 0.16243627667427063
+      "mean": 0.21532583692902932,
+      "median": 0.16950666159391403
     }
   },
   "small_object_miss_analysis": {
     "overall_median_gt_area_px2": 7051.6,
-    "false_negative_median_area_px2": 4710.4,
+    "false_negative_median_area_px2": 3295.0,
     "false_negatives_are_smaller_than_average": true
   },
   "crowded_vs_sparse_scene_fn_rate": {
-    "crowded_scene_fn_rate": 0.9734,
-    "sparse_scene_fn_rate": 0.7094,
+    "crowded_scene_fn_rate": 0.7484,
+    "sparse_scene_fn_rate": 0.5393,
     "crowded_threshold_instances": 1
   },
   "difficult_background_candidates": [
-    "BROWNSPOT5_031_jpg.rf.43bd1f683ec8b1b1ca31113cb545bc84.jpg",
-    "BROWNSPOT3_039_jpg.rf.622da808d37afba4f55b4edbb9ea9311.jpg",
-    "BLAST4_160_jpg.rf.70a0e9491c83b59b0d0be7e3741a983e.jpg",
-    "BROWNSPOT5_130_jpg.rf.03ac43297f95c91693f9ec741e32e904.jpg",
-    "BROWNSPOT2_033_jpg.rf.0529c8dc7a8d38687ac93135eac83be1.jpg"
+    "BROWNSPOT6_194_jpg.rf.b2ef46a9b340f833592d72bea1058e0f.jpg",
+    "sb_wb_52_jpg.rf.3d97d6ed4d7226295281e3074248f2b4.jpg",
+    "brown_spot-22-_jpg.rf.bf0db732c7e78d74d928b106b56436bc.jpg",
+    "BROWNSPOT2_098_jpg.rf.ae6f388c9b5867ff0292af5e89d12935.jpg",
+    "05-leaf-Blast_jpg.rf.194eb375c4dbe4607bc3a86bd3058862.jpg"
   ],
   "fp_example_images": [
-    "artifacts/figures/error_analysis/bg_fp_id2_IMG-20241012-WA0099_jpg.rf.052715be2fdca8f048e88ae49189c283.jpg",
-    "artifacts/figures/error_analysis/bg_fp_id4_IMG-20240927-WA0204_jpg.rf.08d9cd91a261a0fac5a9eddf03f8313b.jpg",
-    "artifacts/figures/error_analysis/bg_fp_id5_IMG-20240926-WA0174_jpg.rf.0877f8b16302ce982b768ca746a3185a.jpg",
-    "artifacts/figures/error_analysis/bg_fp_id7_20240915_150129_jpg.rf.045091b7ad6b9cc08f3265fce3a6ad3a.jpg"
+    "artifacts/figures/error_analysis/bg_fp_id0_IMG-20241014-WA0381_jpg.rf.02d81d946e4969027004eb331b2636b5.jpg",
+    "artifacts/figures/error_analysis/bg_fp_id501_SheathBlight_245_jpg.rf.684c2a577e91cc4995a38999932fb8b8.jpg",
+    "artifacts/figures/error_analysis/bg_fp_id503_BLAST9_150_JPG_jpg.rf.6b018c5dcf5292737747023ed7627597.jpg",
+    "artifacts/figures/error_analysis/bg_fp_id504_BLAST9_032_jpg.rf.6b0232049f6de25065d02a35d5e59ee7.jpg"
   ],
   "fn_example_images": [
     "artifacts/figures/error_analysis/fn_id0_IMG-20241014-WA0381_jpg.rf.02d81d946e4969027004eb331b2636b5.jpg",
+    "artifacts/figures/error_analysis/fn_id1_IMG-20241014-WA0258_jpg.rf.010c555e9aec70ddf42e72f285068311.jpg",
     "artifacts/figures/error_analysis/fn_id2_IMG-20241012-WA0099_jpg.rf.052715be2fdca8f048e88ae49189c283.jpg",
-    "artifacts/figures/error_analysis/fn_id3_IMG-20240927-WA0215_jpg.rf.02427045292acba0cf19b92c6a42caf2.jpg",
-    "artifacts/figures/error_analysis/fn_id4_IMG-20240927-WA0204_jpg.rf.08d9cd91a261a0fac5a9eddf03f8313b.jpg"
+    "artifacts/figures/error_analysis/fn_id3_IMG-20240927-WA0215_jpg.rf.02427045292acba0cf19b92c6a42caf2.jpg"
   ]
 }
