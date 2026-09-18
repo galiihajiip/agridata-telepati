@@ -260,8 +260,8 @@ The primary end-to-end submission notebook:
 [`notebooks/final_agriData_telepati8.ipynb`](notebooks/final_agriData_telepati8.ipynb).
 Restart & Run All completes in a few minutes by default (loads the existing
 final model rather than retraining); set `SKIP_TRAINING = False` in the
-training cell to reproduce the full ~5.2-hour training run from the frozen
-configuration.
+training cell to reproduce the full ~7.3-hour, 50-epoch training run from
+the frozen configuration.
 
 ### 16. Inference
 
