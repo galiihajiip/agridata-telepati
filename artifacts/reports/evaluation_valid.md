@@ -1,6 +1,6 @@
 # Evaluation Report — split: `valid`
 
-Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `c9da362f5e6c3d67091eab2a22a277a27898e608`
+Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `72da96fbcde2741c77037b4544e4df07975de4e8`
 
 ## Native metrics (Ultralytics, source of truth for mAP)
 
@@ -24,21 +24,21 @@ Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `c9da36
 
 ## Local F1 metrics (implementation detail, confidence threshold = 0.25)
 
-- Overall precision: 0.6818
-- Overall recall: 0.1320
-- Overall F1: 0.2211
-- TP=645 FP=301 FN=4243
+- Overall precision: 0.6757
+- Overall recall: 0.3073
+- Overall F1: 0.4224
+- TP=1502 FP=721 FN=3386
 
 | canonical class | precision | recall | F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|---:|
-| Leaf scald | 0.7121 | 0.1205 | 0.2061 | 47 | 19 | 343 |
-| Brown spot | 0.6250 | 0.0787 | 0.1398 | 115 | 69 | 1346 |
-| Healthy | 0.8953 | 0.1816 | 0.3020 | 77 | 9 | 347 |
-| Leaf roller | 0.0000 | 0.0000 | 0.0000 | 0 | 7 | 87 |
-| Tungro | 0.7446 | 0.2263 | 0.3471 | 172 | 59 | 588 |
-| Blast | 0.6848 | 0.1193 | 0.2032 | 113 | 52 | 834 |
-| Narrow brown | 0.8421 | 0.2133 | 0.3404 | 16 | 3 | 59 |
-| Sheath blight | 0.5759 | 0.1865 | 0.2817 | 91 | 67 | 397 |
-| Bacterial leaf blight | 0.4483 | 0.1040 | 0.1688 | 13 | 16 | 112 |
-| False smut | 1.0000 | 0.0116 | 0.0230 | 1 | 0 | 85 |
-| Bacterial panicle blight | 0.0000 | 0.0000 | 0.0000 | 0 | 0 | 45 |
+| Leaf scald | 0.5946 | 0.1692 | 0.2635 | 66 | 45 | 324 |
+| Brown spot | 0.5882 | 0.1369 | 0.2221 | 200 | 140 | 1261 |
+| Healthy | 0.8571 | 0.7075 | 0.7752 | 300 | 50 | 124 |
+| Leaf roller | 0.7353 | 0.8621 | 0.7937 | 75 | 27 | 12 |
+| Tungro | 0.7104 | 0.3132 | 0.4347 | 238 | 97 | 522 |
+| Blast | 0.6474 | 0.2714 | 0.3824 | 257 | 140 | 690 |
+| Narrow brown | 0.7826 | 0.9600 | 0.8623 | 72 | 20 | 3 |
+| Sheath blight | 0.5830 | 0.2807 | 0.3790 | 137 | 98 | 351 |
+| Bacterial leaf blight | 0.4490 | 0.3520 | 0.3946 | 44 | 54 | 81 |
+| False smut | 0.7941 | 0.9419 | 0.8617 | 81 | 21 | 5 |
+| Bacterial panicle blight | 0.5246 | 0.7111 | 0.6038 | 32 | 29 | 13 |
