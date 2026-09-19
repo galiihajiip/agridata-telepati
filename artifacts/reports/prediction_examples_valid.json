@@ -1,0 +1,30 @@
+{
+  "split": "valid",
+  "confidence_threshold": 0.25,
+  "iou_threshold": 0.5,
+  "selection_rule": {
+    "success": "tp >= 1 dan fn == 0 dan fp == 0, diurutkan menurun berdasarkan jumlah tp lalu image_id",
+    "failure": "fn + fp > 0, diurutkan menurun berdasarkan jumlah kesalahan lalu image_id"
+  },
+  "images_with_perfect_detection": 469,
+  "images_with_any_error": 1624,
+  "total_images_with_ground_truth": 2093,
+  "success_image_ids": [
+    750,
+    862,
+    582
+  ],
+  "failure_image_ids": [
+    873,
+    2025,
+    718
+  ],
+  "figures": {
+    "success": [
+      "artifacts/figures/final_submission/success_cases_valid.png"
+    ],
+    "failure": [
+      "artifacts/figures/final_submission/failure_cases_valid.png"
+    ]
+  }
+}
