@@ -56,11 +56,11 @@ checkpoints/
 auto_commit.log
 .auto_commit.pid
 
-# Raw stdout logs from long-running training runs — superseded by the
+# Raw stdout logs from long-running training runs, superseded by the
 # structured JSON summaries in artifacts/reports/, not meant to be committed.
 artifacts/archive/*.log
 
-# Research Assistant local session/runtime state (session locks, etc.) — not
+# Research Assistant local session/runtime state (session locks, etc.), not
 # meaningful to a judge cloning this repo, and would churn every session.
 .agent/
 
@@ -70,10 +70,10 @@ artifacts/archive/*.log
 
 # Generated, training-ready dataset representation (Block 5): symlinked
 # images + YOLO labels + per-split manifests. Fully regenerable via
-# scripts/prepare_dataset.py — never committed. A small summary report is
+# scripts/prepare_dataset.py, never committed. A small summary report is
 # committed separately under artifacts/reports/.
 /data/prepared/
 
 # Block 12: oversampled train-only variant (symlinks + labels), regenerable
-# via scripts/prepare_oversampled_train.py — never committed.
+# via scripts/prepare_oversampled_train.py, never committed.
 /data/prepared_oversampled/
