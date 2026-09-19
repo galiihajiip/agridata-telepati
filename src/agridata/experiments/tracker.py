@@ -2,7 +2,7 @@
 
 Deliberately avoids MLflow/W&B: this project's audit constraints prioritize
 zero external dependencies, no internet requirement, no privacy exposure,
-and minimal moving parts for a judge to reproduce — a single JSON file that
+and minimal moving parts for a judge to reproduce, a single JSON file that
 any script (or a human) can read is enough for this project's scale. Each
 experiment is one record with a fixed schema; see `ExperimentRecord`.
 """
@@ -20,7 +20,7 @@ DEFAULT_LOG_PATH = Path("artifacts/experiments/experiment_log.json")
 
 @dataclass
 class ExperimentRecord:
-    """One row of the experiment tracker — fields per the master spec's Block 9 schema."""
+    """One row of the experiment tracker, fields per the master spec's Block 9 schema."""
 
     experiment_id: str
     timestamp_utc: str
@@ -48,7 +48,7 @@ class ExperimentRecord:
 
 
 def compute_manifest_hash(manifest_path: Path) -> str:
-    """SHA-256 of a prepared-dataset manifest file — a concrete, verifiable
+    """SHA-256 of a prepared-dataset manifest file, a concrete, verifiable
     "dataset version" fingerprint tying an experiment to the exact data it
     was trained/evaluated on."""
     with manifest_path.open("rb") as f:
@@ -64,12 +64,12 @@ def load_experiments(log_path: Path = DEFAULT_LOG_PATH) -> list[dict[str, Any]]:
 
 def append_experiment(record: ExperimentRecord, log_path: Path = DEFAULT_LOG_PATH) -> None:
     """Append one experiment record to the log (read-modify-write on a single
-    JSON array — sufficient at this project's scale; a real database is
+    JSON array, sufficient at this project's scale; a real database is
     unnecessary complexity for a handful of tracked experiments)."""
     records = load_experiments(log_path)
     existing_ids = {r["experiment_id"] for r in records}
     if record.experiment_id in existing_ids:
-        raise ValueError(f"experiment_id '{record.experiment_id}' already exists in {log_path} — use a unique ID.")
+        raise ValueError(f"experiment_id '{record.experiment_id}' already exists in {log_path}, use a unique ID.")
 
     records.append(asdict(record))
     log_path.parent.mkdir(parents=True, exist_ok=True)

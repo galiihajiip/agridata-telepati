@@ -1,7 +1,7 @@
 """Environment/version/git capture utilities (Block 8).
 
 Consolidates logic that was previously duplicated ad hoc in
-scripts/prepare_dataset.py, scripts/train.py, and scripts/evaluate.py — one
+scripts/prepare_dataset.py, scripts/train.py, and scripts/evaluate.py, one
 source of truth for "what does an audit report need to record about the
 machine and code state that produced it."
 """
@@ -28,7 +28,7 @@ def get_git_commit() -> str | None:
 def get_git_status() -> dict[str, Any]:
     """Return whether the working tree is clean and, if not, which files changed.
 
-    A dirty working tree at report-generation time is recorded, not hidden —
+    A dirty working tree at report-generation time is recorded, not hidden,
     an auditor rerunning the pipeline needs to know if the artifact was
     produced from exactly the committed code or from local, uncommitted edits.
     """

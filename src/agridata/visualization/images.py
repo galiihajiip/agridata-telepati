@@ -3,7 +3,7 @@
 Used for the mandatory visual sanity checks in Block 4: every saved image
 must show the canonical class name, the bounding box, and the source
 filename/image ID so a human can visually confirm boxes are correctly
-aligned (per the master spec — "jangan hanya percaya angka").
+aligned (per the master spec, "jangan hanya percaya angka").
 """
 
 from __future__ import annotations
@@ -33,7 +33,7 @@ def draw_annotated_image(
     """Return a copy of the image at `image_path` with GT boxes and labels drawn.
 
     Each box is labeled with its canonical class name. The filename is not
-    embedded in the pixels (kept out of the image itself) — callers should
+    embedded in the pixels (kept out of the image itself), callers should
     use it in the saved output filename instead, per the audit-friendly
     convention used throughout this project.
     """

@@ -4,13 +4,13 @@ Maps the official dataset's raw COCO category names to the official 11
 canonical disease/health classes defined by the competition regulation
 (master spec, Section 10). The mapping table below was cross-checked against
 the actual dataset in Block 2 (see artifacts/audit/dataset_audit_report.md):
-all three splits contain exactly 21 raw categories — 3 supercategory
+all three splits contain exactly 21 raw categories, 3 supercategory
 placeholders with zero annotations (Leaf-blight, Rice-Leaf-Diseasee, paddy,
 per Section 11) plus 18 real leaf/plant condition labels, all 18 of which are
 covered here with zero unexpected names.
 
 This mapping is deterministic and, by design, refuses to silently map any
-raw name it does not recognize — an unrecognized label must be investigated
+raw name it does not recognize, an unrecognized label must be investigated
 and explicitly added, never guessed.
 """
 
@@ -108,7 +108,7 @@ def map_raw_category(raw_category_id: int, raw_name: str) -> CategoryMappingResu
         raise UnknownRawCategoryError(
             f"Raw category '{raw_name}' (id={raw_category_id}) has no known canonical "
             "mapping and is not a recognized supercategory placeholder. Refusing to "
-            "silently map it — verify against the official mapping and update "
+            "silently map it, verify against the official mapping and update "
             "RAW_TO_CANONICAL or KNOWN_SUPERCATEGORY_LABELS explicitly."
         )
 
@@ -125,7 +125,7 @@ def map_categories(categories: list[dict[str, Any]]) -> list[CategoryMappingResu
 def build_mapping_report(categories: list[dict[str, Any]]) -> dict[str, Any]:
     """Build a structured, non-fatal report comparing raw categories to the official mapping.
 
-    Unlike `map_raw_category`, this does not raise on an unknown category —
+    Unlike `map_raw_category`, this does not raise on an unknown category,
     it records it in `unmapped_raw_categories` so a full audit report can
     still be produced. Use `map_raw_category`/`map_categories` directly
     wherever strict fail-loudly behavior is required (e.g. dataset

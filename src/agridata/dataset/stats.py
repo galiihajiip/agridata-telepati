@@ -1,7 +1,7 @@
 """Canonical-mapped dataset statistics for EDA (Block 4).
 
 Loads the raw COCO annotations for a split, applies the Block 3 canonical
-mapping (fail-loudly on any unrecognized raw category — see
+mapping (fail-loudly on any unrecognized raw category, see
 `agridata.dataset.mapping`), and exposes simple in-memory records plus
 aggregate statistics (per-class instance/image counts, bbox and image
 dimension distributions). This module is read-only with respect to the raw
@@ -47,7 +47,7 @@ def load_canonical_split(dataset_root: Path, split: str, annotation_filename: st
 
     Supercategory placeholder categories (Leaf-blight, Rice-Leaf-Diseasee,
     paddy) are skipped, matching the Block 2/3 finding that they carry zero
-    annotations in the official dataset — if that ever changes, those
+    annotations in the official dataset, if that ever changes, those
     annotations are counted and reported via the returned skip count rather
     than silently dropped without a trace.
     """

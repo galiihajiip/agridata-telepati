@@ -2,26 +2,26 @@
 
 Two complementary, clearly labeled metric pathways are used:
 
-1. NATIVE metrics (mAP@0.5, mAP@0.5:0.95) — computed by calling Ultralytics'
+1. NATIVE metrics (mAP@0.5, mAP@0.5:0.95), computed by calling Ultralytics'
    `model.val()`, not reimplemented here. Verified by reading
    `ultralytics/utils/metrics.py::ap_per_class` and
    `ultralytics/models/yolo/detect/val.py`: AP is the standard 101-point
    interpolated precision-recall-curve integration per class, evaluated at
-   `iouv = torch.linspace(0.5, 0.95, 10)` — index 0 is exactly IoU=0.50,
+   `iouv = torch.linspace(0.5, 0.95, 10)`, index 0 is exactly IoU=0.50,
    which is what "mAP@50" refers to in the competition regulation. This
    project treats Ultralytics' implementation as the source of truth for
    mAP rather than re-deriving AP integration from scratch.
 
-2. LOCAL precision/recall/F1 at a caller-specified confidence threshold —
+2. LOCAL precision/recall/F1 at a caller-specified confidence threshold,
    implemented here via a standard greedy IoU>=0.5 matching algorithm
    (predictions sorted by descending confidence; each is matched to the
    highest-IoU unmatched ground-truth box of the same class in the same
    image if IoU >= 0.5; unmatched predictions are false positives,
    unmatched ground truths are false negatives). This exists because
    Ultralytics' own reported precision/recall corresponds to an
-   INTERNALLY AUTO-SELECTED confidence threshold — the one maximizing mean
+   INTERNALLY AUTO-SELECTED confidence threshold, the one maximizing mean
    F1 across classes (`ap_per_class`: `i = smooth(f1_curve.mean(0),
-   0.1).argmax()`) — which is not configurable by the caller. Per the
+   0.1).argmax()`), which is not configurable by the caller. Per the
    master spec, this local computation is explicitly labeled as an
    implementation detail: the official competition scoring is the source
    of truth, and this is a documented, reproducible approximation of the

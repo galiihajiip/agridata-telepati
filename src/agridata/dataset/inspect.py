@@ -5,7 +5,7 @@ never renames, moves, edits, or deletes any raw file. It inspects the actual
 COCO-style annotation JSON and image files for each split and reports
 structural findings (schema, counts, categories) and integrity findings
 (missing files, invalid boxes, duplicates, corrupt images, cross-split
-overlap) without applying any canonical class mapping — that mapping is a
+overlap) without applying any canonical class mapping, that mapping is a
 separate, later step (Block 3) so this audit reflects the dataset exactly as
 the competition organizers shipped it.
 """
@@ -98,7 +98,7 @@ def _average_hash(image: Image.Image, hash_size: int = 8) -> str:
     This is a best-effort perceptual hash: an exact aHash match strongly
     suggests two images are visually near-identical (e.g. an accidental
     duplicate export under a different filename). It is NOT a full
-    nearest-neighbor search over Hamming distance — only exact-hash bucket
+    nearest-neighbor search over Hamming distance, only exact-hash bucket
     collisions are reported, matching the "if practical" scope requested for
     this audit. Any match should be treated as a candidate for visual
     confirmation, not proof of leakage.

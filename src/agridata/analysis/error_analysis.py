@@ -3,7 +3,7 @@
 Standard object-detection error taxonomy (similar in spirit to tools like
 TIDE, simplified): matching is done in two stages so that "the model looked
 in the wrong place" (localization error) can be separated from "the model
-found the object but named it wrong" (class confusion) — a plain
+found the object but named it wrong" (class confusion), a plain
 class-restricted matcher (as used for mAP/F1 in Block 7) cannot make this
 distinction, since it never considers a prediction against a
 different-class ground truth at all.
