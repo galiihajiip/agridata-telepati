@@ -14,13 +14,13 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 
 | # | Requirement | Status | Evidence |
 |---|---|---|---|
-| 1 | 2–3 active students | NOT VERIFIED | Team roster/composition is not something this AI has access to or authority over. No file in this repository records team membership. Must be confirmed by the team directly against the competition registration. |
+| 1 | 2-3 active students | NOT VERIFIED | Team roster/composition is not something this AI has access to or authority over. No file in this repository records team membership. Must be confirmed by the team directly against the competition registration. |
 | 2 | Same university | NOT VERIFIED | Same reason as above, outside this repository's scope. |
 | 3 | One team leader | NOT VERIFIED | Same reason as above. |
 | 4 | One supervisor | NOT VERIFIED | Same reason as above. |
 | 5 | One model | PASS | Exactly one final model exists: `runs/detect/final/final_model/weights/best.pt` (YOLOv8n). No competing/alternate final model is present in `runs/` or referenced in `artifacts/reports/final_model_metadata.json`. |
 
-**Note:** Items 1–4 are administrative/organizational facts about the human team, not artifacts in this codebase. They cannot be verified by inspecting code, data, or git history, and must be confirmed by the team before submission.
+**Note:** Items 1-4 are administrative/organizational facts about the human team, not artifacts in this codebase. They cannot be verified by inspecting code, data, or git history, and must be confirmed by the team before submission.
 
 ---
 
@@ -55,12 +55,12 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 |---|---|---|---|
 | 1 | Seed present | PASS | `set_global_seed(42)` in `src/agridata/seed.py`, seeds Python `random`, NumPy, PyTorch (+ CUDA if present), and `PYTHONHASHSEED`. Recorded as `seed: 42` in `configs/final_model_config.yaml` and every experiment record. |
 | 2 | Preprocessing reproducible | PASS | `artifacts/audit/reproducibility_checklist.md` item #1: rerun dataset manifest is byte-for-byte identical to the checked-in manifest. Symlink-based, deterministic. |
-| 3 | Notebook reproducible | PASS | `notebooks/final_agriData_telepati8.ipynb` (39 cells) executed twice via `jupyter nbconvert --execute --inplace`; 0 error outputs both times (re-verified in this audit: `error outputs: 0`). |
+| 3 | Notebook reproducible | PASS | `notebooks/final_agriData_telepati8.ipynb` (117 cells, 45 code cells) executed via `jupyter nbconvert --execute --inplace`; 0 error outputs, 0 unexecuted code cells (re-verified after the BLOCK C rewrite and subsequent additions). |
 | 4 | Dependencies documented | PASS | `requirements.txt` fully pinned (11 packages with explicit versions); validated via a genuine clean-environment `pip install -r requirements.txt` in Block 16 (which caught and fixed a real numpy version conflict). |
 | 5 | Git commit history present | PASS | `git log` shows a staged commit history from Block 0 through Block 19 (59 tests passing at HEAD, confirmed in this session). |
 | 6 | Paths configurable | PASS | `git grep` for `/Users/` or hardcoded absolute paths in `src/agridata/*.py`, `configs/*.yaml`, `data_config.yaml` returns no matches. Scripts accept root/output directory arguments rather than hardcoding personal paths. |
 
-**Caveat carried forward from Block 8/16 (not a failure, a documented boundary):** training is reproducible in *configuration* (same seed, hyperparameters, code version) but not claimed bit-exact numerically, because PyTorch's MPS backend (Apple Silicon) has no deterministic implementation for `scatter_reduce_mps`/`index_put_with_accumulate_mps`. This is disclosed in `artifacts/audit/reproducibility_checklist.md` and in `README.md`. For the final 50-epoch model, mAP@0.5 was empirically stable at exactly 0.6276771766514752 across 3 independent evaluation reruns; the custom local F1 metric showed run-to-run variance (0.221, 0.422, 0.333), documented honestly, not hidden. (The earlier 20-epoch model showed the same pattern: mAP@0.5 exactly 0.5620 across 5 reruns, local F1 0.31–0.34 typical with one 0.1647 anomaly, see `artifacts/archive/20epoch_run/`.)
+**Caveat carried forward from Block 8/16 (not a failure, a documented boundary):** training is reproducible in *configuration* (same seed, hyperparameters, code version) but not claimed bit-exact numerically, because PyTorch's MPS backend (Apple Silicon) has no deterministic implementation for `scatter_reduce_mps`/`index_put_with_accumulate_mps`. This is disclosed in `artifacts/audit/reproducibility_checklist.md` and in `README.md`. For the final 50-epoch model, mAP@0.5 was empirically stable at exactly 0.6276771766514752 across 3 independent evaluation reruns; the custom local F1 metric showed run-to-run variance (0.221, 0.422, 0.333), documented honestly, not hidden. (The earlier 20-epoch model showed the same pattern: mAP@0.5 exactly 0.5620 across 5 reruns, local F1 0.31-0.34 typical with one 0.1647 anomaly, see `artifacts/archive/20epoch_run/`.)
 
 ---
 
@@ -91,7 +91,7 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 
 | # | Requirement | Status | Evidence |
 |---|---|---|---|
-| 1 | Notebook runs | PASS | Re-confirmed in this session: 39 cells, 0 error outputs. |
+| 1 | Notebook runs | PASS | Re-confirmed in this session: 117 cells, 45 code cells, 0 error outputs. |
 | 2 | Weights load | PASS | Re-confirmed in this session (Block 19 clean-subprocess load test, and again referenced here). |
 | 3 | Predictions work | PASS | Same clean-subprocess test produced 1 detection on a real image; also verified at scale via `scripts/evaluate.py` (2106 valid images) and `scripts/run_error_analysis.py`. |
 | 4 | Metrics generated | PASS | `artifacts/reports/evaluation_valid.json`/`.md` contain full per-class precision/recall/mAP results; `final_model_metadata.json` contains the summary numbers (mAP50=0.6277, mAP50-95=0.3905, precision=0.6406, recall=0.6237). |
@@ -115,7 +115,7 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 **Blocking items before final submission (updated after the 50-epoch model extension):**
 1. **GITHUB #2 (WARN, most urgent):** Force-push the rewritten local git history to `origin/main`. Without this, the public repository is stuck at a stale, pre-extension state and does not reflect the current (better) model, the updated README/notebook/audit, or any commit made after the history rewrite. Deliberately left for the user to run directly (`git push --force origin main`), this AI does not run git commit/push in this project.
 2. **GITHUB #4 / DOCUMENTS #1 (WARN):** Publish the prepared GitHub Release so the model weights have a direct download link. Command and assets are ready and up to date (see `weights/README.md`), must be re-run after item 1, since the release should point at the pushed, current state.
-3. **TEAM #1–4 (NOT VERIFIED):** Confirm team composition (2–3 students, same university, one leader, one supervisor) against the competition registration, this cannot be checked from the repository.
+3. **TEAM #1-4 (NOT VERIFIED):** Confirm team composition (2-3 students, same university, one leader, one supervisor) against the competition registration, this cannot be checked from the repository.
 
 DOCUMENTS #4 (originality statement placeholder) was FAIL at Block 20 and is now PASS, fixed in Block 21 via `docs/originality_statement_placeholder.md`.
 

@@ -26,7 +26,7 @@ Exit code 0, no output, no whitespace errors. PASS.
 
 ## 3. Notebook validation
 
-`notebooks/final_agriData_telepati8.ipynb`: 39 cells, re-executed in full via
+`notebooks/final_agriData_telepati8.ipynb`: 117 cells (45 code cells), re-executed in full via
 `jupyter nbconvert --execute --inplace` against the 50-epoch model. 0 error
 outputs, 0 unexecuted code cells. PASS.
 
@@ -118,7 +118,7 @@ the Block 20 audit.
 ## 14. Git log review
 
 178 commits on `main`, staged one-per-change throughout the project
-(Blocks 0–21), semantic messages where not overtaken by the user's own
+(Blocks 0-21), semantic messages where not overtaken by the user's own
 auto-commit daemon (every such occurrence disclosed in its block's status
 report throughout this project). Most recent: `ddb26a3af29c0895de8c6692bf2f94b62a4acd67`.
 PASS.
@@ -143,7 +143,7 @@ PASS.
 | Public GitHub repository | ✅ Verified (repo itself) |
 | **Local history rewrite pushed to remote** | ❌ **Pending, user action required** |
 | **GitHub Release published with weight download link** | ❌ **Pending, user action required** |
-| Team composition (2–3 students, same university, leader, supervisor) | ⚠️ Not verifiable from repository, confirm separately |
+| Team composition (2-3 students, same university, leader, supervisor) | ⚠️ Not verifiable from repository, confirm separately |
 | Physically signed originality statement | ⚠️ Outside this AI's capability, team's own responsibility |
 
 ## Final artifact inventory
