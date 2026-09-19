@@ -263,6 +263,49 @@ def plot_per_class_ap(per_class_ap: dict[str, float], output_path: Path) -> Path
     return _save(fig, output_path)
 
 
+def plot_ofat_deltas(baseline_id: str, rows: list[dict], output_path: Path) -> Path:
+    """Selisih mAP@0.5 tiap varian OFAT terhadap baseline pada skala penyaringan."""
+    labels = [f"{r['experiment_id']}: {r['factor']}" for r in rows]
+    deltas = [r["delta"] for r in rows]
+    colors = ["#5a9367" if d > 0 else "#c1432f" for d in deltas]
+
+    fig, ax = plt.subplots(figsize=(9, 4.8))
+    ax.barh(labels, deltas, color=colors)
+    ax.invert_yaxis()
+    ax.axvline(0, color="#333333", linewidth=1)
+    ax.set_xlabel(f"Selisih mAP@0.5 terhadap baseline {baseline_id}")
+    ax.set_title("Pengaruh satu faktor pada satu waktu (skala penyaringan)")
+    for i, d in enumerate(deltas):
+        offset = 0.00015 if d >= 0 else -0.00015
+        ax.text(d + offset, i, f"{d:+.4f}", va="center",
+                ha="left" if d >= 0 else "right", fontsize=8)
+    ax.margins(x=0.18)
+    ax.grid(axis="x", alpha=0.25)
+    fig.tight_layout()
+    return _save(fig, output_path)
+
+
+def plot_experiment_overview(experiments: list[dict], output_path: Path) -> Path:
+    """Sebaran mAP@0.5 seluruh percobaan, diberi warna menurut ukuran citra."""
+    ids = [e["experiment_id"] for e in experiments]
+    values = [e["best_val_map50"] for e in experiments]
+    colors = ["#4363d8" if e["image_size"] == 640 else "#9dc6e0" for e in experiments]
+
+    fig, ax = plt.subplots(figsize=(11, 4.8))
+    ax.bar(ids, values, color=colors)
+    ax.set_ylabel("mAP@0.5 (skala penyaringan)")
+    ax.set_xlabel("ID percobaan")
+    ax.set_title("Hasil 21 percobaan terkontrol pada skala penyaringan")
+    handles = [
+        plt.Rectangle((0, 0), 1, 1, color="#4363d8"),
+        plt.Rectangle((0, 0), 1, 1, color="#9dc6e0"),
+    ]
+    ax.legend(handles, ["image size 640", "image size 320"], loc="upper left")
+    ax.grid(axis="y", alpha=0.25)
+    fig.tight_layout()
+    return _save(fig, output_path)
+
+
 def plot_threshold_sensitivity(rows: list[dict], output_path: Path) -> Path:
     """Kurva precision, recall, dan F1 lokal terhadap confidence threshold."""
     thresholds = [r["threshold"] for r in rows]
