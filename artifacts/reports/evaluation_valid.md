@@ -1,6 +1,6 @@
-# Evaluation Report — split: `valid`
+# Laporan Evaluasi, split: `valid`
 
-Weights: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Git commit: `10d96b2f6df5cffea2f364d1db867e5d0e2a4275`
+Weights: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Git commit: `d1729013880a82a80cc3eed42a828852685ed3c7`
 
 ## Native metrics (Ultralytics, source of truth for mAP)
 
