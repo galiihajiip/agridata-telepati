@@ -7,10 +7,10 @@ Usage:
 Two metric pathways (see src/agridata/metrics/detection.py for full
 documentation of why both exist and exactly how each is computed):
 
-  1. NATIVE mAP@0.5 / mAP@0.5:0.95 — via Ultralytics' `model.val()`. This is
+  1. NATIVE mAP@0.5 / mAP@0.5:0.95 via Ultralytics' `model.val()`. This is
      the source of truth for mAP; this project does not reimplement AP
      integration.
-  2. LOCAL precision/recall/F1 at `--conf-threshold` — via our own greedy
+  2. LOCAL precision/recall/F1 at `--conf-threshold`, via our own greedy
      IoU>=0.5 matching, because Ultralytics' own reported precision/recall
      uses an internally auto-selected confidence threshold that is not
      configurable.
@@ -19,7 +19,7 @@ These two stages run in SEPARATE PROCESSES, not sequentially in one. A
 Block 16 clean-environment reproduction test found that running
 `model.val()` followed by `model.predict(..., stream=True)` on the same (or
 even a freshly reloaded) model object in one process corrupts the MPS
-backend's internal state — it fails with either "MPSGraph does not support
+backend's internal state. It fails with either "MPSGraph does not support
 tensor dims larger than INT_MAX" or an explicit MPS out-of-memory error,
 regardless of `torch.mps.empty_cache()` + `gc.collect()` between the calls.
 Only full process-level isolation (a fresh Python interpreter and GPU
@@ -28,7 +28,7 @@ transparently spawns itself twice (via `--stage`) to achieve that; the
 external CLI is unchanged.
 
 Test-set evaluation is for final reporting only, never for iterative model
-tuning — a WARNING is logged whenever `--split test` is used.
+tuning. A WARNING is logged whenever `--split test` is used.
 """
 
 from __future__ import annotations
@@ -97,7 +97,7 @@ def validate_class_mapping(model) -> None:
     if model_names != list(CANONICAL_CLASSES):
         raise ValueError(
             f"Model class order {model_names} does not match the canonical class "
-            f"order {list(CANONICAL_CLASSES)} — ground truth and predictions would "
+            f"order {list(CANONICAL_CLASSES)}, ground truth and predictions would "
             "not be comparable. Refusing to compute metrics."
         )
 
@@ -124,7 +124,7 @@ def collect_predictions(
     no re-inference needed per threshold).
 
     Uses `stream=True` so Ultralytics yields one Result at a time instead of
-    accumulating all of them (each holding image tensors) in RAM — necessary
+    accumulating all of them (each holding image tensors) in RAM, which is necessary
     at full-dataset scale (Ultralytics itself warns against the non-streamed
     form for exactly this reason).
 
@@ -132,7 +132,7 @@ def collect_predictions(
     list. A Block 16 clean-environment reproduction test found that passing
     the full valid-split path list (2106 images) to a single `predict(...,
     stream=True)` call fails with "MPSGraph does not support tensor dims
-    larger than INT_MAX" on this project's numpy/torch/MPS combination —
+    larger than INT_MAX" on this project's numpy/torch/MPS combination,
     reproduced with zero relation to any prior `val()` call, purely from
     the size of the path list itself (confirmed working up to 1000 paths in
     one call, confirmed failing at 2106). Root cause not fully isolated
@@ -321,7 +321,7 @@ def main() -> int:
     if args.split == "test":
         logger.warning(
             "Evaluating on the TEST split. Per the master spec, test ground truth must "
-            "NEVER be used to tune the model — this run should only happen for final, "
+            "NEVER be used to tune the model. This run should only happen for final, "
             "frozen-model reporting (Block 15+), not iterative experimentation."
         )
 
@@ -344,9 +344,9 @@ def main() -> int:
         "data_yaml": str(data_yaml),
         "iou_threshold": 0.5,
         "native_metrics": {
-            "description": "Computed via ultralytics model.val() — source of truth for mAP. "
+            "description": "Computed via ultralytics model.val(), source of truth for mAP. "
             "IoU thresholds: torch.linspace(0.5, 0.95, 10); mAP50 uses index 0 (IoU=0.50). "
-            "Run in its own subprocess — see module docstring for why.",
+            "Run in its own subprocess, see module docstring for why.",
             **native_metrics,
             "per_class_AP50": per_class_map50,
         },
@@ -371,7 +371,7 @@ def main() -> int:
         json.dump(summary, f, indent=2)
 
     md_lines = [
-        f"# Evaluation Report — split: `{args.split}`",
+        f"# Laporan Evaluasi, split: `{args.split}`",
         "",
         f"Weights: `{args.weights}`  |  Git commit: `{summary['git_commit']}`",
         "",
