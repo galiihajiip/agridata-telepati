@@ -191,6 +191,12 @@ def main() -> int:
     with summary_path.open("w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
+    # runs/ is gitignored, so the per-epoch history is copied into the tracked
+    # reports directory; without this a fresh clone cannot plot training curves.
+    history_src = Path(result["save_dir"]) / "results.csv"
+    if history_src.exists():
+        shutil.copyfile(history_src, args.report_dir / "final_training_history.csv")
+
     print(f"\nFinal training summary written to: {summary_path}")
     print(f"Best weights: {result['best_weights']}")
     print(f"Clean-process load validation: {'PASS' if clean_load['success'] else 'FAIL'}")
