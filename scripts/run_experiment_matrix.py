@@ -9,7 +9,7 @@ one baseline plus N variants, each changing exactly one axis from the
 baseline. Every experiment uses the same dataset/split/seed/evaluation
 method and no external pretrained weights (enforced by
 agridata.training.train.build_compliant_model). Each run is logged to the
-Block 9 experiment tracker with real, measured values — nothing here is
+Block 9 experiment tracker with real, measured values, nothing here is
 estimated or assumed after the fact.
 
 Before running, this script reports disk/RAM/device so a long matrix is
@@ -120,7 +120,7 @@ def run_one_experiment(config: dict, project: Path, git_commit: str | None, mani
     )
     duration = time.monotonic() - started_at
 
-    # One authoritative val() pass post-training — same native-metric
+    # One authoritative val() pass post-training, same native-metric
     # methodology Block 7 established (mAP@0.5 via Ultralytics' own
     # implementation), used consistently across every experiment here.
     from ultralytics import YOLO
@@ -160,7 +160,7 @@ def run_one_experiment(config: dict, project: Path, git_commit: str | None, mani
 def build_recommendation(results: list[dict]) -> str:
     baseline = next(r for r in results if r["config"]["axis"] == "baseline")
     lines = [
-        "# Block 10 — Baseline Experiment Matrix: Results & Recommendation",
+        "# Block 10. Baseline Experiment Matrix: Results & Recommendation",
         "",
         "**Scale caveat**: this matrix uses a small fraction of train data and few epochs "
         "(a fast comparative screening pass), not the final training regime. Absolute mAP "
@@ -196,7 +196,7 @@ def build_recommendation(results: list[dict]) -> str:
         f"Highest mAP@0.5 in this screening pass: **{best['config']['experiment_id']}** ({best['config']['axis']}, "
         f"mAP@0.5={best['record'].best_val_map50:.4f}).",
         "",
-        "This is NOT declared the final configuration — per the master spec, no configuration is "
+        "This is NOT declared the final configuration, per the master spec, no configuration is "
         "called \"best\" until measured at full scale. This result should inform, not replace, the "
         "ablations in Blocks 11-13 (augmentation, class imbalance, error analysis) before Block 14 "
         "freezes a final configuration.",

@@ -2,7 +2,7 @@
 
 The slower checks that actually re-execute pipeline scripts (e.g. rerunning
 dataset preparation and diffing manifests) live in
-scripts/check_reproducibility.py, not here — this file only covers
+scripts/check_reproducibility.py, not here, this file only covers
 pure-function determinism that should run in milliseconds as part of the
 normal test suite.
 """
@@ -25,7 +25,7 @@ def test_canonical_mapping_report_is_pure_and_deterministic() -> None:
 
 def test_mapping_table_hash_is_stable_within_a_process() -> None:
     """Regression guard: if RAW_TO_CANONICAL or KNOWN_SUPERCATEGORY_LABELS ever
-    change, this hash changes too — a reminder to bump MAPPING_VERSION."""
+    change, this hash changes too, a reminder to bump MAPPING_VERSION."""
     table_repr = json.dumps(
         {"raw_to_canonical": RAW_TO_CANONICAL, "supercategories": sorted(KNOWN_SUPERCATEGORY_LABELS)},
         sort_keys=True,

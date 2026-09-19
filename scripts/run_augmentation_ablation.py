@@ -10,7 +10,7 @@ augmentation bundle silently active). Each augmentation type is assessed for
 physical/semantic plausibility for agricultural imagery *before* being run
 (see the YAML config's `plausibility` field per variant), and every result
 is logged to the same Block 9 experiment tracker used throughout this
-project. Validation/test images are never touched — augmentation only
+project. Validation/test images are never touched, augmentation only
 applies to the training dataloader (Ultralytics' default behavior, verified
 by design: only `train:` split images pass through the augmentation
 pipeline; `val:`/`test:` inference uses un-augmented images).
@@ -61,21 +61,21 @@ if the optional `albumentations` package were installed:
     A.RandomBrightnessContrast(p=0.0), A.RandomGamma(p=0.0), A.ImageCompression(p=0.0)
 
 `albumentations` is NOT currently installed in this project, so none of this
-fires today — confirmed, not assumed (`pip show albumentations` finds nothing).
+fires today, confirmed, not assumed (`pip show albumentations` finds nothing).
 
 Assessment:
-- **Blur / MedianBlur (p=0.01 each)**: PLAUSIBLE — mild focus/motion blur is
+- **Blur / MedianBlur (p=0.01 each)**: PLAUSIBLE, mild focus/motion blur is
   common in real field photography. But at 1% probability each, across ~800
   train images x 5 epochs (~4000 image-views), only ~80 image-views would
-  ever see either transform — far too sparse to produce a measurable mAP
+  ever see either transform, far too sparse to produce a measurable mAP
   difference at this screening scale. An empirical run would mostly measure
   noise, not the transform's effect.
-- **ToGray (p=0.01)**: QUESTIONABLE for this domain specifically — lesion
+- **ToGray (p=0.01)**: QUESTIONABLE for this domain specifically, lesion
   color is a genuine diagnostic feature for several canonical classes (e.g.
   Brown spot vs. Blast). Converting to grayscale removes exactly the signal
   the `color_only` variant above was deliberately kept conservative to
   protect.
-- **CLAHE (p=0.01)**: PLAUSIBLE — adaptive contrast enhancement helps with
+- **CLAHE (p=0.01)**: PLAUSIBLE, adaptive contrast enhancement helps with
   lighting variability, similar reasoning to `brightness_only`.
 
 **Decision**: do not add `albumentations` as a project dependency at this
@@ -170,7 +170,7 @@ def run_one(experiment_id: str, axis: str, plausibility: str, extra_kwargs: dict
 
 def build_report(results: list[dict], baseline_default_map50: float) -> str:
     lines = [
-        "# Block 11 — Augmentation Ablation",
+        "# Block 11. Augmentation Ablation",
         "",
         "**Scale note**: same small-fraction/few-epoch screening scale as Block 10, for direct "
         "comparability. Absolute mAP values are low; only relative effects matter here.",
@@ -186,7 +186,7 @@ def build_report(results: list[dict], baseline_default_map50: float) -> str:
     ]
     for r in results:
         rec = r["record"]
-        plausibility_short = r["plausibility"].split(" — ")[0]
+        plausibility_short = r["plausibility"].split(", ")[0]
         lines.append(
             f"| {rec.experiment_id} | {r['axis']} | {plausibility_short} | {rec.best_val_map50:.4f} | "
             f"{rec.precision:.4f} | {rec.recall:.4f} | {rec.training_duration_seconds:.1f} |"
@@ -210,9 +210,9 @@ def build_report(results: list[dict], baseline_default_map50: float) -> str:
         "just raw numbers at a tiny screening scale. Concretely:",
         "",
         "- Recommend **keeping**: horizontal flip, rotation (moderate), scaling, translation, "
-        "brightness/contrast, conservative color jitter — all physically plausible for field-captured "
+        "brightness/contrast, conservative color jitter, all physically plausible for field-captured "
         "rice imagery, regardless of their small individual effect at this screening scale.",
-        "- Recommend **excluding**: vertical flip — even if it measured a positive effect above, it is "
+        "- Recommend **excluding**: vertical flip, even if it measured a positive effect above, it is "
         "physically implausible for gravity-oriented plants and risks teaching the model orientations "
         "it will never see deployed. Domain reasoning overrides a marginal metric gain here.",
         "- **Mosaic**: kept only if its measured effect above is neutral-to-positive; if it clearly hurts "
@@ -221,7 +221,7 @@ def build_report(results: list[dict], baseline_default_map50: float) -> str:
         "- Mild blur/noise: deliberately not adopted at this stage (see analysis above).",
         "",
         "This is a screening-scale recommendation to carry into Block 12 (class imbalance) and Block 14 "
-        "(final config freeze) — not a final decision on its own.",
+        "(final config freeze), not a final decision on its own.",
     ]
     return "\n".join(lines) + "\n"
 

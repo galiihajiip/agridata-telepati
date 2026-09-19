@@ -4,7 +4,7 @@
 Usage:
     python scripts/train.py --config configs/experiments/baseline_smoke.yaml
 
-This is a SMOKE TEST, not final training — see the config file's header
+This is a SMOKE TEST, not final training, see the config file's header
 comment. No external pretrained weights are used; see
 src/agridata/training/train.py for the enforced compliance checks.
 """

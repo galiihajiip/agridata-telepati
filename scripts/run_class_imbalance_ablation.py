@@ -6,7 +6,7 @@ Usage:
 
 Compares baseline (natural class distribution) vs. targeted oversampling of
 rare classes (Block 12's chosen mitigation strategy), holding EVERYTHING
-else fixed — including total training image COUNT, not just a percentage —
+else fixed, including total training image COUNT, not just a percentage,
 so the comparison isolates the effect of rebalancing class representation
 rather than confounding it with "the oversampled run just saw more data."
 
@@ -16,10 +16,10 @@ image count, not a percentage), applied to both the original 10,132-image
 pool and the oversampled 15,352-entry pool alike.
 
 Validation is the ORIGINAL, unmodified valid split in both cases (see
-scripts/prepare_oversampled_train.py — val/test paths are identical files,
+scripts/prepare_oversampled_train.py, val/test paths are identical files,
 not copies). Per-class AP@0.5 is reported specifically for the rare classes
 targeted by oversampling, not just the aggregate mAP@0.5, since the whole
-point of this ablation is whether THEY improved — an aggregate-only view
+point of this ablation is whether THEY improved, an aggregate-only view
 could hide a rare-class win under common-class noise, or vice versa.
 """
 
@@ -137,10 +137,10 @@ def run_one(experiment_id: str, label: str, data_yaml: Path, notes: str, project
 
 def build_report(baseline: dict, oversampled: dict, rare_classes: list[str]) -> str:
     lines = [
-        "# Block 12 — Class Imbalance Mitigation Ablation",
+        "# Block 12. Class Imbalance Mitigation Ablation",
         "",
         f"Both runs use the identical training image COUNT ({TRAIN_IMAGE_COUNT}, an absolute count via "
-        "an integer `fraction`, verified via source not to be a percentage) — the only difference is "
+        "an integer `fraction`, verified via source not to be a percentage), the only difference is "
         "whether rare-class images are duplicated in the sampling pool. Same seed, same hyperparameters, "
         "same validation data (byte-identical files in both cases).",
         "",
@@ -154,7 +154,7 @@ def build_report(baseline: dict, oversampled: dict, rare_classes: list[str]) -> 
         f"| baseline (natural distribution) | {baseline['record'].best_val_map50:.4f} | {baseline['record'].precision:.4f} | {baseline['record'].recall:.4f} | {baseline['record'].training_duration_seconds:.1f} |",
         f"| oversampled (rare classes x3) | {oversampled['record'].best_val_map50:.4f} | {oversampled['record'].precision:.4f} | {oversampled['record'].recall:.4f} | {oversampled['record'].training_duration_seconds:.1f} |",
         "",
-        "## Per-class AP@0.5 — rare classes specifically (the actual point of this ablation)",
+        "## Per-class AP@0.5, rare classes specifically (the actual point of this ablation)",
         "",
         "| Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |",
         "|---|---:|---:|---:|",
@@ -164,7 +164,7 @@ def build_report(baseline: dict, oversampled: dict, rare_classes: list[str]) -> 
         o = oversampled["per_class_ap50"].get(cls, 0.0)
         lines.append(f"| {cls} | {b:.4f} | {o:.4f} | {o - b:+.4f} |")
 
-    lines += ["", "## Per-class AP@0.5 — all classes (checking oversampling didn't hurt common classes)", "", "| Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |", "|---|---:|---:|---:|"]
+    lines += ["", "## Per-class AP@0.5, all classes (checking oversampling didn't hurt common classes)", "", "| Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |", "|---|---:|---:|---:|"]
     for cls in CANONICAL_CLASSES:
         b = baseline["per_class_ap50"].get(cls, 0.0)
         o = oversampled["per_class_ap50"].get(cls, 0.0)
@@ -189,7 +189,7 @@ def build_report(baseline: dict, oversampled: dict, rare_classes: list[str]) -> 
         verdict = (
             "Oversampling shows a measured net benefit for the targeted rare classes at this screening "
             "scale, without a larger corresponding cost to common classes. Worth carrying into Block 14 "
-            "as a candidate for the final config — NOT adopted automatically, per the master spec, "
+            "as a candidate for the final config, NOT adopted automatically, per the master spec, "
             "pending re-verification at full training scale."
         )
     else:

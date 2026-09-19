@@ -1,4 +1,4 @@
-# Block 13 — Error Analysis
+# Block 13. Error Analysis
 
 Weights: `runs/detect/final/final_model/weights/best.pt` | Split: `valid` | Confidence threshold: 0.1
 
@@ -67,16 +67,16 @@ Weights: `runs/detect/final/final_model/weights/best.pt` | Split: `valid` | Conf
 
 ## Important caveat before drawing conclusions
 
-This checkpoint has at least one true positive on all 11/11 classes — confusion patterns above reflect genuine model behavior, not simply classes the model has not learned yet.
+This checkpoint has at least one true positive on all 11/11 classes, confusion patterns above reflect genuine model behavior, not simply classes the model has not learned yet.
 
 ## Observations
 
 Findings from this specific checkpoint's actual errors (not a generic template):
 
-1. **False negatives skew smaller than the overall GT area distribution** (3376.0 vs. 7051.6 px² median) — consistent with the well-known difficulty of small-object detection; this checkpoint already uses the largest image size (640) and full training budget evaluated in this project.
-2. **Crowded scenes have a higher false-negative rate** (0.7981 vs. 0.4542 for sparse scenes) — small, densely-packed lesions remain the hardest case even at this checkpoint's training scale.
-3. These are documented as known limitations of the final submitted model, not a proposal for further experimentation — see the project README's Known Limitations section for the final disclosure.
+1. **False negatives skew smaller than the overall GT area distribution** (3376.0 vs. 7051.6 px² median), consistent with the well-known difficulty of small-object detection; this checkpoint already uses the largest image size (640) and full training budget evaluated in this project.
+2. **Crowded scenes have a higher false-negative rate** (0.7981 vs. 0.4542 for sparse scenes), small, densely-packed lesions remain the hardest case even at this checkpoint's training scale.
+3. These are documented as known limitations of the final submitted model, not a proposal for further experimentation, see the project README's Known Limitations section for the final disclosure.
 
 ## IMPORTANT: no changes were applied automatically
 
-This script only analyzes and reports. Any data or model change suggested by these findings (e.g. relabeling, excluding an image, adjusting a class's augmentation) must be a separate, explicitly documented decision — never applied automatically from this analysis, per the master spec.
+This script only analyzes and reports. Any data or model change suggested by these findings (e.g. relabeling, excluding an image, adjusting a class's augmentation) must be a separate, explicitly documented decision, never applied automatically from this analysis, per the master spec.

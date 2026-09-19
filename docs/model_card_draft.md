@@ -1,4 +1,4 @@
-# Model Card (Draft) — AgriData TELEPATI 8.0 Rice Disease Detector
+# Model Card (Draft). AgriData TELEPATI 8.0 Rice Disease Detector
 
 **Status: DRAFT.** Training config is frozen (`configs/final_model_config.yaml`); weights, final metrics, and
 evaluation results will be filled in after Block 15 (final training run) and Block 16 (clean
@@ -7,14 +7,14 @@ reproduction test). Do not treat any number in this draft as final.
 ## Intended use
 
 Object detection of rice plant disease/health conditions from field-captured imagery (drone or
-handheld camera), as a component of a Smart Agriculture monitoring system — per the TELEPATI 8.0
+handheld camera), as a component of a Smart Agriculture monitoring system, per the TELEPATI 8.0
 AgriData Intelligence Race case study (assisting a farmer in monitoring large plots without
 exhaustive manual inspection).
 
 ## Model architecture
 
 YOLOv8n (Ultralytics), initialized from an architecture-only definition (no external pretrained
-weights — `pretrained=False`, verified via source inspection and empty-checkpoint-cache checks in
+weights, `pretrained=False`, verified via source inspection and empty-checkpoint-cache checks in
 Block 6). ~3.0M parameters, 11-class detection head.
 
 ## Training data
@@ -28,15 +28,15 @@ One confirmed exact-duplicate image across train/test was excluded from training
 ## Training procedure
 
 See `configs/final_model_config.yaml` for the complete, version-controlled configuration. Selected from 21
-controlled screening experiments (Blocks 10-13) — see
+controlled screening experiments (Blocks 10-13), see
 `artifacts/reports/block14_final_model_selection.md` for full reasoning per hyperparameter.
 
 ## Evaluation
 
-*Pending Block 15/16.* Metrics will be computed via `scripts/evaluate.py` (mAP@0.5 — Ultralytics'
-native implementation; F1 — a documented local implementation via greedy IoU≥0.5 matching at a
+*Pending Block 15/16.* Metrics will be computed via `scripts/evaluate.py` (mAP@0.5. Ultralytics'
+native implementation; F1, a documented local implementation via greedy IoU≥0.5 matching at a
 configurable confidence threshold, since Ultralytics' own reported precision/recall uses an
-internally auto-selected threshold that is not configurable — see
+internally auto-selected threshold that is not configurable, see
 `src/agridata/metrics/detection.py`).
 
 ## Known limitations (as of this draft)
@@ -48,7 +48,7 @@ internally auto-selected threshold that is not configurable — see
 - No bit-for-bit training determinism guarantee on Apple Silicon / MPS (confirmed non-deterministic
   kernels for two operations used in this pipeline).
 - Class imbalance is real (22.6x max/min instance ratio); a targeted-oversampling mitigation was
-  tested (Block 12) and did not show a clear benefit at screening scale — not adopted in the final
+  tested (Block 12) and did not show a clear benefit at screening scale, not adopted in the final
   config as of this draft; may be revisited after Block 15's full-scale results.
 
 ## Compliance statement

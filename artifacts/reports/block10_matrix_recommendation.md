@@ -1,4 +1,4 @@
-# Block 10 — Baseline Experiment Matrix: Results & Recommendation
+# Block 10. Baseline Experiment Matrix: Results & Recommendation
 
 **Scale caveat**: this matrix uses a small fraction of train data and few epochs (a fast comparative screening pass), not the final training regime. Absolute mAP values are expected to be low here; only *relative* differences between variants and the baseline are meaningful at this stage.
 
@@ -27,4 +27,4 @@
 
 Highest mAP@0.5 in this screening pass: **E08** (training_duration, mAP@0.5=0.0134).
 
-This is NOT declared the final configuration — per the master spec, no configuration is called "best" until measured at full scale. This result should inform, not replace, the ablations in Blocks 11-13 (augmentation, class imbalance, error analysis) before Block 14 freezes a final configuration.
+This is NOT declared the final configuration, per the master spec, no configuration is called "best" until measured at full scale. This result should inform, not replace, the ablations in Blocks 11-13 (augmentation, class imbalance, error analysis) before Block 14 freezes a final configuration.

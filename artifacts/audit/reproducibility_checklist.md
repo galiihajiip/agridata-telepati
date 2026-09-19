@@ -1,10 +1,10 @@
 # Reproducibility Checklist (Block 8)
 
-## Determinism boundary — read this before trusting any PASS below
+## Determinism boundary, read this before trusting any PASS below
 
 - **Deterministic PREPROCESSING**: verified bit-for-bit (dataset preparation, canonical mapping).
-- **Deterministic TRAINING**: NOT claimed bit-for-bit. Block 6 logged real PyTorch warnings — `scatter_reduce_mps` and `index_put_with_accumulate_mps` have no deterministic implementation on this project's Apple Silicon / MPS backend. Training is reproducible in *configuration* (same seed/hyperparameters/code version), not guaranteed bit-exact in numerical output.
-- **Reproducible EXPERIMENT CONFIGURATION**: verified — every run's seed, hyperparameters, model architecture, and git commit are captured in a committed report.
+- **Deterministic TRAINING**: NOT claimed bit-for-bit. Block 6 logged real PyTorch warnings, `scatter_reduce_mps` and `index_put_with_accumulate_mps` have no deterministic implementation on this project's Apple Silicon / MPS backend. Training is reproducible in *configuration* (same seed/hyperparameters/code version), not guaranteed bit-exact in numerical output.
+- **Reproducible EXPERIMENT CONFIGURATION**: verified, every run's seed, hyperparameters, model architecture, and git commit are captured in a committed report.
 
 ## Checklist
 
@@ -12,7 +12,7 @@
 |---:|---|---|---|
 | 1 | same seed -> same dataset manifest | PASS | Rerun manifest (10132 images) is byte-for-byte identical to the checked-in manifest. |
 | 2 | same seed -> same canonical mapping | PASS | Mapping table hash for version 1.0.0: b88a0260138244fb. build_mapping_report is deterministic (identical input -> identical output). If this hash ever changes unexpectedly on a rerun, MAPPING_VERSION must be bumped. |
-| 3 | same config -> same generated metadata | PASS | Deterministic fields (seed, mapping_version, per-split image/annotation counts) are identical across reruns of the same config; only the recorded timestamp and git commit (if code changed between runs) are expected to vary — these are provenance fields, not outputs of the computation itself. |
+| 3 | same config -> same generated metadata | PASS | Deterministic fields (seed, mapping_version, per-split image/annotation counts) are identical across reruns of the same config; only the recorded timestamp and git commit (if code changed between runs) are expected to vary, these are provenance fields, not outputs of the computation itself. |
 | 4 | training configuration is fully logged | PASS | All required training configuration fields present in /Users/macbookpro/Projects/agridata/artifacts/reports/block6_baseline_smoke_summary.json. |
 | 5 | random seeds are recorded | PASS | Seed=42 recorded in both the experiment config and the run summary. |
 | 6 | dependency versions are recordable | PASS | `pip freeze` returned 44 pinned packages. |

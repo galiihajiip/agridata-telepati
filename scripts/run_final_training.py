@@ -11,7 +11,7 @@ the resulting weights load and run inference from a completely clean
 Python process (not just the training process that produced them).
 
 Never touches test data. No external pretrained weights, no external
-dataset, no LLM/API processing — enforced the same way as every prior
+dataset, no LLM/API processing, enforced the same way as every prior
 training block (YOLO_OFFLINE, architecture-only .yaml construction).
 """
 
@@ -61,7 +61,7 @@ def print_disclosures(cfg: dict, device: str, manifest_hash: str, git_commit: st
     import ultralytics
 
     print("=" * 70)
-    print("BLOCK 15 — FINAL TRAINING RUN — PRE-TRAINING DISCLOSURES")
+    print("BLOCK 15, FINAL TRAINING RUN, PRE-TRAINING DISCLOSURES")
     print("=" * 70)
     print(f"1.  Git commit hash:        {git_commit}")
     print(f"2.  Python version:         {sys.version.split()[0]}")
@@ -92,8 +92,8 @@ def check_resources() -> dict:
 
 
 def validate_clean_process_load(weights_path: Path, sample_image: Path) -> dict:
-    """Load the checkpoint and run inference in a brand-new Python subprocess —
-    not just the training process that produced it — to prove the artifact is
+    """Load the checkpoint and run inference in a brand-new Python subprocess,
+    not just the training process that produced it, to prove the artifact is
     genuinely portable and loadable independent of any in-memory state."""
     script = f"""
 import os

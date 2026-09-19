@@ -1,15 +1,15 @@
-# FINAL MODEL CONFIGURATION (Block 14) — frozen for Block 15's full-scale training run.
+# FINAL MODEL CONFIGURATION (Block 14), frozen for Block 15's full-scale training run.
 #
 # Selected from 21 logged screening-scale experiments (E01-E21, see
 # artifacts/experiments/experiment_log.json and
 # artifacts/reports/block14_final_model_selection.md for full reasoning).
-# This is NOT a trained model — it is the exact, reproducible recipe Block 15
+# This is NOT a trained model, it is the exact, reproducible recipe Block 15
 # will execute to produce the final submitted weights.
 #
 # REVISION (2026-09-18): epochs raised from 20 to 50 at the user's explicit
 # request, after the first 20-epoch run (mAP@0.5=0.5620) was already
 # finalized through Block 19. This is a genuine fresh run from scratch, not
-# a resume — the prior run's last.pt had already been stripped of
+# a resume, the prior run's last.pt had already been stripped of
 # optimizer/epoch state by Ultralytics (standard behavior once training
 # finishes normally), so a true continuation from epoch 20 was not possible.
 # The complete 20-epoch result set is preserved for the record at
@@ -17,7 +17,7 @@
 
 seed: 42
 
-model_arch: "yolov8n.yaml"   # architecture definition ONLY — never a .pt checkpoint
+model_arch: "yolov8n.yaml"   # architecture definition ONLY, never a .pt checkpoint
 pretrained: false
 
 data_yaml: "data/prepared/data.yaml"
@@ -26,13 +26,13 @@ data_yaml: "data/prepared/data.yaml"
 image_size: 640
 # Rationale: E03 (imgsz=640, +0.0023 vs. 320 baseline at 5 epochs), and
 # independently confirmed by Block 13's error analysis (false negatives
-# skew smaller than the overall GT area distribution — more resolution
+# skew smaller than the overall GT area distribution, more resolution
 # should recover small-lesion misses). E20/E21 (imgsz=640 + 12 epochs)
 # produced the two best mAP@0.5 results of all 21 experiments.
 
 batch_size: 16
 # Rationale: E04 (batch=32) underperformed the batch=16 baseline
-# (-0.0013 mAP@0.5) — fewer gradient updates per epoch at the same
+# (-0.0013 mAP@0.5), fewer gradient updates per epoch at the same
 # screening-scale epoch count. batch=16 used successfully throughout.
 
 optimizer: "AdamW"
@@ -48,24 +48,24 @@ scheduler: "linear"   # Ultralytics default when cos_lr=False; not separately ab
 # Rationale is NOT purely the screening numbers: at 5 epochs (Block 11),
 # every augmentation variant underperformed a no-augmentation reference
 # (a known low-epoch/low-data artifact). At 12 epochs (E20 default-aug vs.
-# E21 no-aug), the gap shrank to +0.0013 (~5%) in favor of no-augmentation —
+# E21 no-aug), the gap shrank to +0.0013 (~5%) in favor of no-augmentation,
 # a much smaller margin, consistent with augmentation's benefit emerging
 # with more training budget. Combined with domain reasoning (a deployed
 # camera/drone system will see real lighting/angle/distance variation this
 # training set alone does not cover), augmentation is KEPT for full-scale
 # training, with one deliberate override:
-flipud: 0.0   # vertical flip explicitly disabled — physically implausible for
+flipud: 0.0   # vertical flip explicitly disabled, physically implausible for
               # gravity-oriented plants (Block 11 finding); this already matches
               # the Ultralytics default, kept explicit here so it can never be
               # silently re-enabled by a future config change.
 # All other augmentation parameters (hsv_h, hsv_s, hsv_v, degrees, translate,
 # scale, shear, perspective, fliplr, mosaic, mixup, copy_paste) are left at
-# Ultralytics' defaults — each individually assessed as physically plausible
+# Ultralytics' defaults, each individually assessed as physically plausible
 # for field-captured rice imagery in Block 11.
 
-# --- Full-scale training parameters (NOT yet run — Block 15's job) ---
+# --- Full-scale training parameters (NOT yet run. Block 15's job) ---
 fraction: 1.0        # full training set (all screening used a small fraction)
-epochs: 50           # REVISED twice — see notes below and at the top of this file
+epochs: 50           # REVISED twice, see notes below and at the top of this file
 patience: 8          # early stopping: halt if val fitness doesn't improve for 8 epochs
 workers: 2
 device: "auto"
@@ -83,7 +83,7 @@ device: "auto"
 # REVISION 2 (2026-09-18, after the epochs=20 run had already been finalized through
 # Block 19, mAP@0.5=0.5620): the user explicitly requested extending to epochs=50 for
 # a potentially better result. The actual observed rate from the epochs=20 run was
-# ~942s/epoch (5.23 hours / 20 epochs) — noticeably higher than the estimate above,
+# ~942s/epoch (5.23 hours / 20 epochs), noticeably higher than the estimate above,
 # likely fixed per-epoch overhead (validation, checkpoint I/O) not fully amortized at
 # only 20 epochs. epochs=50 at ~942s/epoch =~ 13.1 hours estimated. This is a genuine
 # fresh run from scratch (see top-of-file note on why a true resume was not possible),

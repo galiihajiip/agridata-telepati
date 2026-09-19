@@ -8,7 +8,7 @@ Reuses the Block 4 stats module (agridata.dataset.stats) for consistency
 rather than recomputing counts a different way. Read-only against the raw
 dataset. Reports instance/image counts, relative frequency, min/max
 imbalance ratio, rare classes, and "visually difficult" classes (via median
-bbox area — small objects are harder to localize, per the Block 4 finding
+bbox area, small objects are harder to localize, per the Block 4 finding
 that disease-lesion classes have systematically smaller boxes than
 whole-plant labels like Healthy).
 """

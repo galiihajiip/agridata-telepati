@@ -11,7 +11,7 @@ Usage:
         --compliance-notes "no external pretrained weights; YOLO_OFFLINE enforced"
 
 Reads the training and (optional) evaluation summaries already produced by
-scripts/train.py / scripts/evaluate.py rather than re-deriving anything —
+scripts/train.py / scripts/evaluate.py rather than re-deriving anything,
 this script's only job is to assemble and append one ExperimentRecord.
 """
 

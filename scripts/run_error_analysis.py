@@ -6,7 +6,7 @@ Usage:
 
 Read-only against the model and dataset: this script only ANALYZES and
 REPORTS. It never modifies training data or the model based on what it
-finds — per the master spec, any data change proposed from visual
+finds, per the master spec, any data change proposed from visual
 inspection must be a separate, explicitly documented decision made by a
 human/later block, not applied automatically here.
 """
@@ -45,7 +45,7 @@ CLASS_NAMES = {i: name for i, name in enumerate(CANONICAL_CLASSES)}
 def _caveat_text(per_class_pr: dict) -> str:
     """Describe how much of the class space this checkpoint has actually learned.
 
-    Computed from this run's real per-class TP counts — never a hardcoded
+    Computed from this run's real per-class TP counts, never a hardcoded
     description of some other, earlier checkpoint. A prior version of this
     function hardcoded prose about a specific 10-epoch screening checkpoint
     (E08); that text kept printing verbatim for every later checkpoint this
@@ -55,13 +55,13 @@ def _caveat_text(per_class_pr: dict) -> str:
     total = len(per_class_pr)
     if not zero_tp:
         return (
-            f"This checkpoint has at least one true positive on all {total}/{total} classes — "
+            f"This checkpoint has at least one true positive on all {total}/{total} classes, "
             "confusion patterns above reflect genuine model behavior, not simply classes the "
             "model has not learned yet."
         )
     return (
         f"This checkpoint has zero true positives on {len(zero_tp)}/{total} classes "
-        f"({', '.join(zero_tp)}) — it has not learned those classes at all. Confusion patterns "
+        f"({', '.join(zero_tp)}), it has not learned those classes at all. Confusion patterns "
         "above involving those classes mostly reflect \"the model hasn't learned this yet\", not "
         "a stable, meaningful semantic confusion. Only classes with non-trivial TP counts support "
         "any real interpretation at this stage."
@@ -96,7 +96,7 @@ def collect_predictions(model: YOLO, images_dir: Path, images_by_id: dict[int, d
     """Chunked to avoid a Block 16-confirmed failure: passing a very large
     (2000+) explicit path list to a single `predict(..., stream=True)` call
     fails with "MPSGraph does not support tensor dims larger than INT_MAX"
-    on this project's numpy/torch/MPS combination — see
+    on this project's numpy/torch/MPS combination, see
     scripts/evaluate.py::collect_predictions for the full investigation."""
     CHUNK_SIZE = 500
     ordered_ids = list(images_by_id.keys())
@@ -230,7 +230,7 @@ def main() -> int:
         json.dump(summary, f, indent=2)
 
     md_lines = [
-        "# Block 13 — Error Analysis",
+        "# Block 13. Error Analysis",
         "",
         f"Weights: `{args.weights}` | Split: `{args.split}` | Confidence threshold: {args.confidence_threshold}",
         "",
@@ -296,21 +296,21 @@ def main() -> int:
         "",
         f"1. **False negatives skew smaller than the overall GT area distribution** "
         f"({small_object_miss_analysis['false_negative_median_area_px2']} vs. "
-        f"{small_object_miss_analysis['overall_median_gt_area_px2']} px² median) — consistent with the "
+        f"{small_object_miss_analysis['overall_median_gt_area_px2']} px² median), consistent with the "
         "well-known difficulty of small-object detection; this checkpoint already uses the largest "
         "image size (640) and full training budget evaluated in this project.",
         f"2. **Crowded scenes have a higher false-negative rate** ({summary['crowded_vs_sparse_scene_fn_rate']['crowded_scene_fn_rate']} "
-        f"vs. {summary['crowded_vs_sparse_scene_fn_rate']['sparse_scene_fn_rate']} for sparse scenes) — "
+        f"vs. {summary['crowded_vs_sparse_scene_fn_rate']['sparse_scene_fn_rate']} for sparse scenes), "
         "small, densely-packed lesions remain the hardest case even at this checkpoint's training scale.",
         "3. These are documented as known limitations of the final submitted model, not a proposal for "
-        "further experimentation — see the project README's Known Limitations section for the final "
+        "further experimentation, see the project README's Known Limitations section for the final "
         "disclosure.",
         "",
         "## IMPORTANT: no changes were applied automatically",
         "",
         "This script only analyzes and reports. Any data or model change suggested by these "
         "findings (e.g. relabeling, excluding an image, adjusting a class's augmentation) must be "
-        "a separate, explicitly documented decision — never applied automatically from this "
+        "a separate, explicitly documented decision, never applied automatically from this "
         "analysis, per the master spec.",
     ]
 

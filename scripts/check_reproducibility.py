@@ -2,7 +2,7 @@
 """Reproducibility harness (Block 8).
 
 This script VERIFIES reproducibility claims by actually re-executing steps
-and diffing results — it does not just assert that things "should" be
+and diffing results, it does not just assert that things "should" be
 reproducible. Produces a PASS/WARN/FAIL/NOT VERIFIED checklist covering the
 ten items from the master spec's Block 8:
 
@@ -22,7 +22,7 @@ rather than lumping them together:
   - deterministic PREPROCESSING (dataset prep, canonical mapping): verified
     bit-for-bit reproducible below.
   - deterministic TRAINING: NOT claimed bit-for-bit on this project's Apple
-    Silicon / MPS backend — Block 6 logged genuine PyTorch warnings that
+    Silicon / MPS backend. Block 6 logged genuine PyTorch warnings that
     `scatter_reduce_mps` and `index_put_with_accumulate_mps` have no
     deterministic implementation. This is real evidence, not a hedge.
   - reproducible EXPERIMENT CONFIGURATION: the seed, hyperparameters, model
@@ -69,7 +69,7 @@ def check_dataset_manifest_determinism(dataset_root: Path) -> dict:
     differ and is not part of what "same seed -> same manifest" claims)."""
     existing_manifest = PROJECT_ROOT / "data" / "prepared" / "manifest_train.json"
     if not existing_manifest.exists():
-        return {"status": "NOT VERIFIED", "detail": "No existing data/prepared/manifest_train.json to compare against — run Block 5 first."}
+        return {"status": "NOT VERIFIED", "detail": "No existing data/prepared/manifest_train.json to compare against, run Block 5 first."}
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp_output = Path(tmp) / "prepared"
@@ -93,7 +93,7 @@ def check_dataset_manifest_determinism(dataset_root: Path) -> dict:
 
         if original == rerun:
             return {"status": "PASS", "detail": f"Rerun manifest ({len(rerun)} images) is byte-for-byte identical to the checked-in manifest."}
-        return {"status": "FAIL", "detail": "Rerun manifest differs from the checked-in manifest — preprocessing is not deterministic."}
+        return {"status": "FAIL", "detail": "Rerun manifest differs from the checked-in manifest, preprocessing is not deterministic."}
 
 
 def check_canonical_mapping_determinism() -> dict:
@@ -134,7 +134,7 @@ def check_generated_metadata_reproducible(dataset_manifest_check: dict) -> dict:
         "status": "PASS",
         "detail": "Deterministic fields (seed, mapping_version, per-split image/annotation counts) are "
         "identical across reruns of the same config; only the recorded timestamp and git commit "
-        "(if code changed between runs) are expected to vary — these are provenance fields, not "
+        "(if code changed between runs) are expected to vary, these are provenance fields, not "
         "outputs of the computation itself.",
     }
 
@@ -142,7 +142,7 @@ def check_generated_metadata_reproducible(dataset_manifest_check: dict) -> dict:
 def check_training_config_logged() -> dict:
     summary_path = PROJECT_ROOT / "artifacts" / "reports" / "block6_baseline_smoke_summary.json"
     if not summary_path.exists():
-        return {"status": "NOT VERIFIED", "detail": "No training summary found — run Block 6 first."}
+        return {"status": "NOT VERIFIED", "detail": "No training summary found, run Block 6 first."}
     with summary_path.open() as f:
         summary = json.load(f)
     required_keys = {"seed", "device", "model_arch", "pretrained", "image_size", "batch_size", "epochs", "data_yaml"}
@@ -167,7 +167,7 @@ def check_seeds_recorded() -> dict:
 def check_dependency_versions_recordable() -> dict:
     packages = get_installed_packages()
     if not packages:
-        return {"status": "FAIL", "detail": "`pip freeze` returned no output — dependency versions are not recordable."}
+        return {"status": "FAIL", "detail": "`pip freeze` returned no output, dependency versions are not recordable."}
     return {"status": "PASS", "detail": f"`pip freeze` returned {len(packages)} pinned packages."}
 
 
@@ -175,19 +175,19 @@ def check_git_commit_recorded() -> dict:
     commit = get_git_commit()
     status = get_git_status()
     if commit is None:
-        return {"status": "FAIL", "detail": "Not inside a git repository, or git unavailable — commit hash cannot be recorded."}
+        return {"status": "FAIL", "detail": "Not inside a git repository, or git unavailable, commit hash cannot be recorded."}
     detail = f"Current commit: {commit}."
     result_status = "PASS"
     if status.get("clean") is False:
         result_status = "WARN"
-        detail += f" WARNING: working tree is dirty ({len(status['changed_files'])} changed files) — any artifact generated right now would not be traceable to a clean commit."
+        detail += f" WARNING: working tree is dirty ({len(status['changed_files'])} changed files), any artifact generated right now would not be traceable to a clean commit."
     return {"status": result_status, "detail": detail}
 
 
 def check_model_config_recorded() -> dict:
     summary_path = PROJECT_ROOT / "artifacts" / "reports" / "block6_baseline_smoke_summary.json"
     if not summary_path.exists():
-        return {"status": "NOT VERIFIED", "detail": "No training summary found — run Block 6 first."}
+        return {"status": "NOT VERIFIED", "detail": "No training summary found, run Block 6 first."}
     with summary_path.open() as f:
         summary = json.load(f)
     if not summary.get("model_arch") or "pretrained" not in summary:
@@ -238,14 +238,14 @@ def build_report(results: dict[str, dict]) -> str:
     lines = [
         "# Reproducibility Checklist (Block 8)",
         "",
-        "## Determinism boundary — read this before trusting any PASS below",
+        "## Determinism boundary, read this before trusting any PASS below",
         "",
         "- **Deterministic PREPROCESSING**: verified bit-for-bit (dataset preparation, canonical mapping).",
-        "- **Deterministic TRAINING**: NOT claimed bit-for-bit. Block 6 logged real PyTorch warnings — "
+        "- **Deterministic TRAINING**: NOT claimed bit-for-bit. Block 6 logged real PyTorch warnings, "
         "`scatter_reduce_mps` and `index_put_with_accumulate_mps` have no deterministic implementation "
         "on this project's Apple Silicon / MPS backend. Training is reproducible in *configuration* "
         "(same seed/hyperparameters/code version), not guaranteed bit-exact in numerical output.",
-        "- **Reproducible EXPERIMENT CONFIGURATION**: verified — every run's seed, hyperparameters, "
+        "- **Reproducible EXPERIMENT CONFIGURATION**: verified, every run's seed, hyperparameters, "
         "model architecture, and git commit are captured in a committed report.",
         "",
         "## Checklist",

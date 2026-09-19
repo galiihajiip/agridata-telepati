@@ -1,4 +1,4 @@
-# Block 10 — controlled baseline hyperparameter experiment matrix.
+# Block 10, controlled baseline hyperparameter experiment matrix.
 #
 # Methodology: one-factor-at-a-time (OFAT), not full factorial. Every
 # variant changes exactly ONE axis from `baseline`; everything else is
@@ -8,7 +8,7 @@
 #
 # Scale note: this matrix intentionally uses a SMALL fraction of train data
 # and few epochs to keep total wall-clock time bounded for a comparative
-# screening pass — it is NOT the final training regime. The best-performing
+# screening pass, it is NOT the final training regime. The best-performing
 # configuration found here is a candidate for further investigation in
 # later blocks (11-14), not a final answer.
 #

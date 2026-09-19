@@ -1,6 +1,6 @@
-# Block 12 — Class Imbalance Mitigation Ablation
+# Block 12. Class Imbalance Mitigation Ablation
 
-Both runs use the identical training image COUNT (810, an absolute count via an integer `fraction`, verified via source not to be a percentage) — the only difference is whether rare-class images are duplicated in the sampling pool. Same seed, same hyperparameters, same validation data (byte-identical files in both cases).
+Both runs use the identical training image COUNT (810, an absolute count via an integer `fraction`, verified via source not to be a percentage), the only difference is whether rare-class images are duplicated in the sampling pool. Same seed, same hyperparameters, same validation data (byte-identical files in both cases).
 
 Rare classes targeted for oversampling (< 20% of the most common class's instance count, per `artifacts/reports/class_imbalance_diagnostics.md`): ['Bacterial leaf blight', 'Bacterial panicle blight', 'False smut', 'Leaf roller', 'Narrow brown']
 
@@ -11,7 +11,7 @@ Rare classes targeted for oversampling (< 20% of the most common class's instanc
 | baseline (natural distribution) | 0.0071 | 0.1143 | 0.0550 | 135.2 |
 | oversampled (rare classes x3) | 0.0005 | 0.1825 | 0.0111 | 119.7 |
 
-## Per-class AP@0.5 — rare classes specifically (the actual point of this ablation)
+## Per-class AP@0.5, rare classes specifically (the actual point of this ablation)
 
 | Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |
 |---|---:|---:|---:|
@@ -21,7 +21,7 @@ Rare classes targeted for oversampling (< 20% of the most common class's instanc
 | Leaf roller | 0.0677 | 0.0001 | -0.0676 |
 | Narrow brown | 0.0000 | 0.0000 | +0.0000 |
 
-## Per-class AP@0.5 — all classes (checking oversampling didn't hurt common classes)
+## Per-class AP@0.5, all classes (checking oversampling didn't hurt common classes)
 
 | Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |
 |---|---:|---:|---:|

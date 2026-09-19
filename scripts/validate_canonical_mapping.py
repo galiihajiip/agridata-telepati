@@ -6,7 +6,7 @@ Usage:
     python scripts/validate_canonical_mapping.py --dataset-root "<PATH>"
 
 Read-only: loads each split's COCO JSON to read `categories` only. Does not
-mutate any raw file and does not mutate the annotations — this only checks
+mutate any raw file and does not mutate the annotations, this only checks
 that every raw category name is covered by RAW_TO_CANONICAL or recognized as
 a non-canonical supercategory placeholder.
 """
@@ -102,10 +102,10 @@ def main() -> int:
 
     any_unmapped = any(r["unmapped_raw_categories"] for r in per_split_reports.values())
     if any_unmapped:
-        print("\nVALIDATION RESULT: FAIL — unmapped raw categories found.", file=sys.stderr)
+        print("\nVALIDATION RESULT: FAIL, unmapped raw categories found.", file=sys.stderr)
         return 1
 
-    print("\nVALIDATION RESULT: PASS — every raw category is covered by the canonical mapping or is a recognized supercategory placeholder.")
+    print("\nVALIDATION RESULT: PASS, every raw category is covered by the canonical mapping or is a recognized supercategory placeholder.")
     return 0
 
 

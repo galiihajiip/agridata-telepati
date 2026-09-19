@@ -1,9 +1,9 @@
-# Originality Statement — Placeholder
+# Originality Statement. Placeholder
 
 TELEPATI 8.0 – AgriData Intelligence Race requires a physically signed
 originality statement as part of the final submission package. Producing,
 signing, and submitting that document is outside the scope of this
-repository and this AI's capability — it must be handled directly by the
+repository and this AI's capability, it must be handled directly by the
 team.
 
 This file exists so the requirement is tracked in the audit trail

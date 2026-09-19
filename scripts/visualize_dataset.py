@@ -7,7 +7,7 @@ Usage:
 
 Read-only with respect to the raw dataset. Applies the Block 3 canonical
 mapping when loading annotations (fails loudly on any unmapped raw
-category — same behavior as the rest of the pipeline). Sampling is
+category, same behavior as the rest of the pipeline). Sampling is
 deterministic (seeded) so repeated runs pick the same images.
 """
 

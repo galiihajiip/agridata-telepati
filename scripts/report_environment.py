@@ -4,7 +4,7 @@
 Usage:
     python scripts/report_environment.py
 
-Writes artifacts/reports/environment_snapshot.json — Python/platform info,
+Writes artifacts/reports/environment_snapshot.json. Python/platform info,
 resolved compute device, torch/CUDA/MPS availability, git commit + dirty
 status, and full `pip freeze` output. Any script in this project can call
 `agridata.reproducibility.environment.capture_environment_snapshot()`

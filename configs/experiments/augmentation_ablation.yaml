@@ -1,14 +1,14 @@
-# Block 11 — controlled augmentation ablation.
+# Block 11, controlled augmentation ablation.
 #
 # Methodology: one-factor-at-a-time from a clean NO-AUGMENTATION reference
 # (not from Block 10's baseline, which already had Ultralytics' default
-# augmentation bundle active) — this isolates each augmentation type's true
+# augmentation bundle active), this isolates each augmentation type's true
 # individual effect. Same scale as Block 10 (imgsz=320, batch=16, 5 epochs,
 # 8% of train) for direct comparability with E02 (default combined
 # augmentation, mAP@0.5=0.0018), reused as a reference rather than rerun.
 #
 # Semantic plausibility was reasoned about BEFORE running anything (see
-# artifacts/reports/block11_augmentation_ablation.md) — e.g. vertical flip
+# artifacts/reports/block11_augmentation_ablation.md), e.g. vertical flip
 # is tested empirically but flagged as physically implausible for
 # gravity-oriented plants regardless of its measured effect.
 
@@ -29,7 +29,7 @@ common:
   momentum: 0.9
   weight_decay: 0.0005
 
-# All augmentation off — the reference point for this block's ablation.
+# All augmentation off, the reference point for this block's ablation.
 no_augmentation:
   hsv_h: 0.0
   hsv_s: 0.0
@@ -50,39 +50,39 @@ variants:
   - id: hflip_only
     augmentation: "horizontal_flip"
     overrides: { fliplr: 0.5 }
-    plausibility: "PLAUSIBLE — a leaf/plant photographed from the mirrored lateral side is physically realistic; disease identity does not depend on left-right orientation."
+    plausibility: "PLAUSIBLE, a leaf/plant photographed from the mirrored lateral side is physically realistic; disease identity does not depend on left-right orientation."
 
   - id: vflip_only
     augmentation: "vertical_flip"
     overrides: { flipud: 0.5 }
-    plausibility: "QUESTIONABLE — rice plants/leaves have a gravity-determined orientation (growth direction, how a camera/drone would ever realistically capture them). An upside-down plant is not a scenario the deployed system would see. Tested empirically anyway, but flagged for exclusion from the final config regardless of measured effect unless evidence strongly overrides this reasoning."
+    plausibility: "QUESTIONABLE, rice plants/leaves have a gravity-determined orientation (growth direction, how a camera/drone would ever realistically capture them). An upside-down plant is not a scenario the deployed system would see. Tested empirically anyway, but flagged for exclusion from the final config regardless of measured effect unless evidence strongly overrides this reasoning."
 
   - id: rotation_only
     augmentation: "rotation"
     overrides: { degrees: 15.0 }
-    plausibility: "PLAUSIBLE in moderation — simulates realistic camera tilt (handheld/drone not perfectly level). Kept well short of large-angle rotation, which would reintroduce the same gravity-orientation problem as vertical flip."
+    plausibility: "PLAUSIBLE in moderation, simulates realistic camera tilt (handheld/drone not perfectly level). Kept well short of large-angle rotation, which would reintroduce the same gravity-orientation problem as vertical flip."
 
   - id: scale_only
     augmentation: "scaling"
     overrides: { scale: 0.5 }
-    plausibility: "PLAUSIBLE — camera-to-subject distance varies naturally (drone altitude, handheld distance)."
+    plausibility: "PLAUSIBLE, camera-to-subject distance varies naturally (drone altitude, handheld distance)."
 
   - id: translate_only
     augmentation: "translation"
     overrides: { translate: 0.1 }
-    plausibility: "PLAUSIBLE — subject framing/position within the shot varies naturally."
+    plausibility: "PLAUSIBLE, subject framing/position within the shot varies naturally."
 
   - id: brightness_only
     augmentation: "brightness_contrast"
     overrides: { hsv_v: 0.4 }
-    plausibility: "PLAUSIBLE — outdoor field lighting varies hugely (sun/cloud/shade/time of day)."
+    plausibility: "PLAUSIBLE, outdoor field lighting varies hugely (sun/cloud/shade/time of day)."
 
   - id: color_only
     augmentation: "color_transform"
     overrides: { hsv_h: 0.015, hsv_s: 0.7 }
-    plausibility: "PLAUSIBLE but bounded deliberately — hue shift is kept small (1.5%) because lesion color is a genuine diagnostic feature for several canonical classes (e.g. Brown spot vs. Blast); an aggressive hue shift risks producing images whose true label no longer visually matches, which would actively mislead the model, not just add noise."
+    plausibility: "PLAUSIBLE but bounded deliberately, hue shift is kept small (1.5%) because lesion color is a genuine diagnostic feature for several canonical classes (e.g. Brown spot vs. Blast); an aggressive hue shift risks producing images whose true label no longer visually matches, which would actively mislead the model, not just add noise."
 
   - id: mosaic_only
-    augmentation: "mosaic (not in the master spec's candidate list, but active by default in Ultralytics — included for completeness since it silently affected every Block 10 run)"
+    augmentation: "mosaic (not in the master spec's candidate list, but active by default in Ultralytics, included for completeness since it silently affected every Block 10 run)"
     overrides: { mosaic: 1.0 }
-    plausibility: "QUESTIONABLE for this domain — mosaic composites 4 unrelated training images into one tile, which can distort the object-scale signal that Block 4/10 already showed is diagnostically meaningful per class (disease-lesion classes have characteristically small boxes; 'Healthy' has characteristically large ones). Tested empirically rather than assumed either way."
+    plausibility: "QUESTIONABLE for this domain, mosaic composites 4 unrelated training images into one tile, which can distort the object-scale signal that Block 4/10 already showed is diagnostically meaningful per class (disease-lesion classes have characteristically small boxes; 'Healthy' has characteristically large ones). Tested empirically rather than assumed either way."

@@ -7,7 +7,7 @@ Usage:
 Reviews all logged experiments (artifacts/experiments/experiment_log.json)
 and produces a factual selection report plus model metadata / model-card
 draft. This selects and freezes a CONFIGURATION, not a trained weights
-file — the actual final weights are produced by Block 15 using
+file, the actual final weights are produced by Block 15 using
 configs/final_model_config.yaml. Per the master spec, no configuration is
 declared "acceptable" on validation performance until the full-scale run
 completes; this report says so explicitly rather than overclaiming.
@@ -77,11 +77,11 @@ def build_compliance_checklist(experiments: list[dict]) -> list[dict]:
         },
         {
             "item": "No data leakage",
-            "status": "PARTIAL — one confirmed case fixed, residual risk documented",
+            "status": "PARTIAL, one confirmed case fixed, residual risk documented",
             "evidence": "Block 2 forensic audit found exactly one exact-duplicate image (MD5-identical) "
             "across train/test ('leaf_scald-230...'); Block 5 excludes it from the prepared train "
             "manifest. Perceptual-hash overlap candidates (Block 2) are unconfirmed and were not "
-            "further investigated — flagged as a residual, documented risk, not silently ignored.",
+            "further investigated, flagged as a residual, documented risk, not silently ignored.",
         },
         {
             "item": "Official canonical 11 classes",
@@ -105,10 +105,10 @@ def build_compliance_checklist(experiments: list[dict]) -> list[dict]:
         },
         {
             "item": "Valid checkpoint",
-            "status": "PASS for screening checkpoints — PENDING for final weights",
+            "status": "PASS for screening checkpoints, PENDING for final weights",
             "evidence": "All 21 screening experiments produced a loadable best.pt (verified by reloading "
             "fresh in evaluate.py/error-analysis runs). The actual final-submission checkpoint does not "
-            "exist yet — it is produced by Block 15 and must be re-verified there.",
+            "exist yet, it is produced by Block 15 and must be re-verified there.",
         },
         {
             "item": "Successful inference",
@@ -119,7 +119,7 @@ def build_compliance_checklist(experiments: list[dict]) -> list[dict]:
         },
         {
             "item": "Acceptable validation performance",
-            "status": "PENDING — NOT YET MET, explicitly not claimed",
+            "status": "PENDING, NOT YET MET, explicitly not claimed",
             "evidence": f"Best screening result so far: {best['experiment_id']} at mAP@0.5="
             f"{best['best_val_map50']:.4f}, trained on only ~10% of train data for {best['epochs']} epochs. "
             "This is a screening-scale number, not a competitive result, and is not represented as one. "
@@ -132,10 +132,10 @@ def build_compliance_checklist(experiments: list[dict]) -> list[dict]:
 def build_report(experiments: list[dict], checklist: list[dict], git_commit: str) -> str:
     best = max(experiments, key=lambda r: r["best_val_map50"])
     lines = [
-        "# Block 14 — Final Model Configuration Selection",
+        "# Block 14. Final Model Configuration Selection",
         "",
         f"Reviewed all {len(experiments)} logged experiments (E01-E{len(experiments):02d}). This block "
-        "selects and freezes a CONFIGURATION for full-scale training (Block 15) — it does not itself "
+        "selects and freezes a CONFIGURATION for full-scale training (Block 15), it does not itself "
         "produce the final submitted weights.",
         "",
         "## All candidate experiments (sorted by mAP@0.5)",
@@ -145,7 +145,7 @@ def build_report(experiments: list[dict], checklist: list[dict], git_commit: str
         f"## Selected configuration: see `{FINAL_CONFIG_PATH}`",
         "",
         f"Best individual screening result: **{best['experiment_id']}** (mAP@0.5={best['best_val_map50']:.4f}). "
-        "The frozen final config does not simply copy this one experiment's settings verbatim — it "
+        "The frozen final config does not simply copy this one experiment's settings verbatim, it "
         "synthesizes evidence across all 21 experiments (see the config file's inline rationale comments "
         "for each hyperparameter) plus Block 11's semantic-plausibility reasoning and Block 13's "
         "independent error-analysis evidence.",
@@ -168,10 +168,10 @@ def build_report(experiments: list[dict], checklist: list[dict], git_commit: str
         "acted on.",
         "- All 21 screening experiments used a small fraction of train data (8-10%) and few epochs "
         "(5-12); the frozen config's full-scale numbers (epochs=50, fraction=1.0) are extrapolated, "
-        "not directly measured — Block 15 is the first point at which the real full-scale behavior "
+        "not directly measured. Block 15 is the first point at which the real full-scale behavior "
         "is observed.",
         "- MPS backend has confirmed non-deterministic kernels for `scatter_reduce_mps` and "
-        "`index_put_with_accumulate_mps` (Block 6/8 finding) — exact bit-for-bit reproducibility of "
+        "`index_put_with_accumulate_mps` (Block 6/8 finding), exact bit-for-bit reproducibility of "
         "training is not guaranteed, only reproducible configuration/preprocessing.",
         "- Estimated full-scale training time (~8.2 hours on this project's hardware) is long; "
         "`patience=15` may shorten it, but Block 15 must re-verify this estimate before committing.",
@@ -198,7 +198,7 @@ def build_model_metadata(git_commit: str) -> dict:
             "llm_api_dataset_processing": False,
             "yolo_offline_enforced": True,
         },
-        "status": "CONFIGURATION FROZEN — weights not yet produced (pending Block 15)",
+        "status": "CONFIGURATION FROZEN, weights not yet produced (pending Block 15)",
         "selected_at_utc": datetime.now(timezone.utc).isoformat(),
         "git_commit_at_selection": git_commit,
         "weights_path": None,
@@ -207,7 +207,7 @@ def build_model_metadata(git_commit: str) -> dict:
 
 
 def build_model_card_draft() -> str:
-    return f"""# Model Card (Draft) — AgriData TELEPATI 8.0 Rice Disease Detector
+    return f"""# Model Card (Draft). AgriData TELEPATI 8.0 Rice Disease Detector
 
 **Status: DRAFT.** Training config is frozen (`{FINAL_CONFIG_PATH}`); weights, final metrics, and
 evaluation results will be filled in after Block 15 (final training run) and Block 16 (clean
@@ -216,14 +216,14 @@ reproduction test). Do not treat any number in this draft as final.
 ## Intended use
 
 Object detection of rice plant disease/health conditions from field-captured imagery (drone or
-handheld camera), as a component of a Smart Agriculture monitoring system — per the TELEPATI 8.0
+handheld camera), as a component of a Smart Agriculture monitoring system, per the TELEPATI 8.0
 AgriData Intelligence Race case study (assisting a farmer in monitoring large plots without
 exhaustive manual inspection).
 
 ## Model architecture
 
 YOLOv8n (Ultralytics), initialized from an architecture-only definition (no external pretrained
-weights — `pretrained=False`, verified via source inspection and empty-checkpoint-cache checks in
+weights, `pretrained=False`, verified via source inspection and empty-checkpoint-cache checks in
 Block 6). ~3.0M parameters, 11-class detection head.
 
 ## Training data
@@ -237,15 +237,15 @@ One confirmed exact-duplicate image across train/test was excluded from training
 ## Training procedure
 
 See `{FINAL_CONFIG_PATH}` for the complete, version-controlled configuration. Selected from 21
-controlled screening experiments (Blocks 10-13) — see
+controlled screening experiments (Blocks 10-13), see
 `artifacts/reports/block14_final_model_selection.md` for full reasoning per hyperparameter.
 
 ## Evaluation
 
-*Pending Block 15/16.* Metrics will be computed via `scripts/evaluate.py` (mAP@0.5 — Ultralytics'
-native implementation; F1 — a documented local implementation via greedy IoU≥0.5 matching at a
+*Pending Block 15/16.* Metrics will be computed via `scripts/evaluate.py` (mAP@0.5. Ultralytics'
+native implementation; F1, a documented local implementation via greedy IoU≥0.5 matching at a
 configurable confidence threshold, since Ultralytics' own reported precision/recall uses an
-internally auto-selected threshold that is not configurable — see
+internally auto-selected threshold that is not configurable, see
 `src/agridata/metrics/detection.py`).
 
 ## Known limitations (as of this draft)
@@ -257,7 +257,7 @@ internally auto-selected threshold that is not configurable — see
 - No bit-for-bit training determinism guarantee on Apple Silicon / MPS (confirmed non-deterministic
   kernels for two operations used in this pipeline).
 - Class imbalance is real (22.6x max/min instance ratio); a targeted-oversampling mitigation was
-  tested (Block 12) and did not show a clear benefit at screening scale — not adopted in the final
+  tested (Block 12) and did not show a clear benefit at screening scale, not adopted in the final
   config as of this draft; may be revisited after Block 15's full-scale results.
 
 ## Compliance statement

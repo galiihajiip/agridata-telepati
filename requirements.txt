@@ -1,12 +1,12 @@
 # Minimal dependencies for the current project stage. Heavier stack (torch,
 # object-detection framework, etc.) is added in later blocks once the
-# dataset audit determines actual requirements — per the master spec, the
+# dataset audit determines actual requirements, per the master spec, the
 # stack must not be locked in before that audit.
 #
 # numpy is intentionally NOT pinned to 2.1.x: ultralytics==8.4.154 explicitly
 # excludes numpy 2.0.x-2.3.4 on macOS (platform_system == "Darwin"). The
 # original 2.1.3 pin (set in Block 1, before ultralytics existed in this
-# project) was never re-validated against that later constraint — an
+# project) was never re-validated against that later constraint, an
 # incrementally-built virtualenv masked the conflict, but a fresh single-shot
 # `pip install -r requirements.txt` fails immediately (caught in Block 16's
 # clean-environment reproduction test). 2.4.6 is what pip's resolver picks
@@ -24,7 +24,7 @@ matplotlib==3.10.0
 
 # Block 6 (baseline object detector): architecture + training loop.
 # IMPORTANT: models are always built from a .yaml architecture definition
-# with pretrained=False — never from a .pt checkpoint. See
+# with pretrained=False, never from a .pt checkpoint. See
 # src/agridata/training/train.py for the enforced compliance checks, and
 # note that YOLO_OFFLINE=1 is forced on before ultralytics is imported so any
 # accidental network call (telemetry, checkpoint download) fails loudly.
