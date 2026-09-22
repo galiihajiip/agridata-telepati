@@ -17,8 +17,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-# Bump this whenever RAW_TO_CANONICAL or KNOWN_SUPERCATEGORY_LABELS changes,
-# so prepared dataset outputs can record exactly which mapping produced them.
+# Naikkan versi setiap kali RAW_TO_CANONICAL atau KNOWN_SUPERCATEGORY_LABELS
+# berubah, agar keluaran dataset mencatat pemetaan mana yang menghasilkannya.
 MAPPING_VERSION = "1.0.0"
 
 CANONICAL_CLASSES: tuple[str, ...] = (
@@ -37,13 +37,13 @@ CANONICAL_CLASSES: tuple[str, ...] = (
 
 CANONICAL_NUM_CLASSES = len(CANONICAL_CLASSES)  # 11, per competition regulation
 
-# Canonical id (1-indexed, matches the official numbering in the master spec) -> name.
+# Id canonical (mulai dari 1, mengikuti penomoran resmi) menuju nama kelas.
 CANONICAL_ID_TO_NAME: dict[int, str] = {i + 1: name for i, name in enumerate(CANONICAL_CLASSES)}
 CANONICAL_NAME_TO_ID: dict[str, int] = {name: i for i, name in CANONICAL_ID_TO_NAME.items()}
 
 # Raw category name -> canonical class name.
-# Source: TELEPATI 8.0 master spec Section 10, verified against the actual
-# dataset's raw categories in the Block 2 forensic audit.
+# Sumber: regulasi TELEPATI 8.0, diverifikasi terhadap kategori mentah dataset
+# aktual pada audit forensik dataset.
 RAW_TO_CANONICAL: dict[str, str] = {
     "Bacterial leaf blight": "Bacterial leaf blight",
     "Bacterial panicle Blight": "Bacterial panicle blight",
@@ -65,24 +65,24 @@ RAW_TO_CANONICAL: dict[str, str] = {
     "Rice-Tungro": "Tungro",
 }
 
-# Known non-canonical supercategory labels present in the raw dataset. These
-# carry zero annotations (verified in the Block 2 audit) and are explicitly
-# excluded as object-detection targets per master spec Section 11.
+# Label supercategory non-canonical yang ada pada dataset mentah. Ketiganya
+# tidak memuat anotasi sama sekali, terverifikasi pada audit dataset, dan
+# secara eksplisit dikecualikan sebagai target deteksi.
 KNOWN_SUPERCATEGORY_LABELS: frozenset[str] = frozenset({"Leaf-blight", "Rice-Leaf-Diseasee", "paddy"})
 
 
 class UnknownRawCategoryError(ValueError):
-    """Raised when a raw category name has no known canonical mapping and is
+    """Dilempar ketika nama kategori mentah tidak memiliki pemetaan canonical dan
     not a recognized supercategory placeholder.
 
-    This fails loudly by design: per the master spec, an unrecognized raw
+    Kegagalan ini disengaja agar terlihat jelas. Kategori mentah yang tidak
     label must never be silently mapped or dropped.
     """
 
 
 @dataclass(frozen=True)
 class CategoryMappingResult:
-    """Result of mapping one raw COCO category to its canonical class."""
+    """Hasil pemetaan satu kategori COCO mentah ke kelas canonical-nya."""
 
     raw_category_id: int
     raw_name: str
@@ -92,7 +92,7 @@ class CategoryMappingResult:
 
 
 def map_raw_category(raw_category_id: int, raw_name: str) -> CategoryMappingResult:
-    """Map a single raw COCO category to its canonical class.
+    """Memetakan satu kategori COCO mentah ke kelas canonical-nya.
 
     Raises:
         UnknownRawCategoryError: if `raw_name` is neither a known canonical
@@ -116,14 +116,15 @@ def map_raw_category(raw_category_id: int, raw_name: str) -> CategoryMappingResu
 
 
 def map_categories(categories: list[dict[str, Any]]) -> list[CategoryMappingResult]:
-    """Map a list of raw COCO category dicts (each with at least 'id' and 'name')."""
+    """Memetakan daftar kategori COCO mentah yang memuat 'id' dan 'name'."""
     return [map_raw_category(c["id"], c["name"]) for c in categories]
 
 
 def build_mapping_report(categories: list[dict[str, Any]]) -> dict[str, Any]:
-    """Build a structured, non-fatal report comparing raw categories to the official mapping.
+    """Menyusun laporan terstruktur yang membandingkan kategori mentah dengan pemetaan resmi.
 
-    Unlike `map_raw_category`, this does not raise on an unknown category,
+    Berbeda dengan `map_raw_category`, fungsi ini tidak melempar kesalahan pada
+    kategori yang tidak dikenali,
     it records it in `unmapped_raw_categories` so a full audit report can
     still be produced. Use `map_raw_category`/`map_categories` directly
     wherever strict fail-loudly behavior is required (e.g. dataset
