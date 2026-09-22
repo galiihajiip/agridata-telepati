@@ -33,7 +33,7 @@ MIN_PLAUSIBLE_BBOX_AREA = 4.0
 # flagged as suspiciously large (may indicate a mislabeled full-image box).
 MAX_PLAUSIBLE_BBOX_AREA_FRACTION = 0.98
 # Kotak yang melewati batas citra tidak lebih dari jumlah piksel ini dianggap
-# treated as float-rounding noise (WARNING, clampable) rather than a broken
+# sebagai derau pembulatan (PERINGATAN, dapat dipotong) dan bukan sebagai
 # bukan anotasi rusak. Diverifikasi empiris pada dataset ini: seluruh
 # "exceeds image bounds" case across train/valid/test overshoots by <= 0.5px
 # kelebihan berasal dari pembulatan ekspor, sehingga 1,0 piksel merupakan
