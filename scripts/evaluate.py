@@ -69,6 +69,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--prepared-dir", default=Path("data/prepared"), type=Path)
     parser.add_argument("--data-yaml", default=None, type=Path, help="Defaults to <prepared-dir>/data.yaml")
     parser.add_argument("--device", default="auto", help="'auto' resolves via agridata.device.detect_device() (no CUDA assumed).")
+    parser.add_argument(
+        "--nms-iou", type=float, default=0.5,
+        help=(
+            "NMS IoU threshold passed to model.val(). Default 0.5 rather than Ultralytics' "
+            "0.7: a sweep on the validation split (artifacts/reports/inference_tuning_nms.json) "
+            "showed 0.5 gives +0.0124 mAP@0.5 and +0.0202 macro F1 on this dataset, which is "
+            "dominated by small, densely packed objects. This is the value used for every "
+            "reported metric."
+        ),
+    )
     parser.add_argument("--conf-threshold", type=float, default=0.25, help="Confidence threshold for the LOCAL F1 computation (configurable).")
     parser.add_argument("--collection-conf", type=float, default=0.001, help="Low threshold used once to collect raw predictions; --conf-threshold filters afterward.")
     parser.add_argument("--num-vis-samples", type=int, default=6)
@@ -209,13 +219,33 @@ def run_native_val_stage(args: argparse.Namespace) -> None:
     validate_class_mapping(model)
 
     ultralytics_split = {"train": "train", "valid": "val", "test": "test"}[args.split]
-    val_results = model.val(data=str(data_yaml), split=ultralytics_split, plots=False, verbose=False, device=device)
+    val_results = model.val(
+        data=str(data_yaml), split=ultralytics_split, iou=args.nms_iou,
+        plots=False, verbose=False, device=device,
+    )
+
+    # Macro F1: per-class F1 curves averaged across classes, taken at the single
+    # confidence threshold that maximises that average. This is the reported
+    # F1-Score. The local micro-averaged F1 computed in the other stage is a
+    # secondary diagnostic, not the reported figure. See
+    # artifacts/audit/metrics_methodology.md.
+    import numpy as np
+
+    f1_per_class = np.array(val_results.box.f1_curve)
+    conf_grid = np.linspace(0, 1, f1_per_class.shape[1])
+    macro_f1_curve = f1_per_class.mean(axis=0)
+    best = int(macro_f1_curve.argmax())
 
     native_metrics = {
         "mAP50": float(val_results.box.map50),
         "mAP50_95": float(val_results.box.map),
         "precision_at_internal_best_f1_point": float(val_results.box.mp),
         "recall_at_internal_best_f1_point": float(val_results.box.mr),
+        "nms_iou": float(args.nms_iou),
+        "macro_f1": float(macro_f1_curve[best]),
+        "macro_f1_confidence": float(conf_grid[best]),
+        "precision_at_macro_f1_point": float(np.array(val_results.box.p_curve).mean(axis=0)[best]),
+        "recall_at_macro_f1_point": float(np.array(val_results.box.r_curve).mean(axis=0)[best]),
     }
     per_class_map50 = {}
     for idx, class_id in enumerate(val_results.box.ap_class_index):
