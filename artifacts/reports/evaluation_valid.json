@@ -1,6 +1,6 @@
 {
   "block": 7,
-  "git_commit": "3230fa6a574da9c000ed3ab14aaf310e7b3c0a54",
+  "git_commit": "18f03e1cef34eaea85fa2b837a35c6338422e7de",
   "weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt",
   "split": "valid",
   "data_yaml": "/Users/macbookpro/Projects/agridata/data/prepared/data.yaml",
@@ -29,114 +29,114 @@
     "description": "LOCAL implementation detail (not the official scoring formula): greedy IoU>=0.5 matching at a caller-specified confidence threshold. See src/agridata/metrics/detection.py for full methodology. Run in its own subprocess.",
     "confidence_threshold": 0.25,
     "overall": {
-      "true_positives": 645,
-      "false_positives": 301,
-      "false_negatives": 4243,
-      "precision": 0.6818181818181818,
-      "recall": 0.1319558101472995,
-      "f1": 0.22111758656153582
+      "true_positives": 1544,
+      "false_positives": 784,
+      "false_negatives": 3344,
+      "precision": 0.6632302405498282,
+      "recall": 0.3158756137479542,
+      "f1": 0.42793791574279383
     },
     "per_class": {
       "Leaf scald": {
-        "true_positives": 47,
-        "false_positives": 19,
-        "false_negatives": 343,
-        "precision": 0.7121212121212122,
-        "recall": 0.12051282051282051,
-        "f1": 0.20614035087719298
+        "true_positives": 65,
+        "false_positives": 46,
+        "false_negatives": 325,
+        "precision": 0.5855855855855856,
+        "recall": 0.16666666666666666,
+        "f1": 0.25948103792415167
       },
       "Brown spot": {
-        "true_positives": 115,
-        "false_positives": 69,
-        "false_negatives": 1346,
-        "precision": 0.625,
-        "recall": 0.07871321013004791,
-        "f1": 0.1398176291793313
+        "true_positives": 209,
+        "false_positives": 137,
+        "false_negatives": 1252,
+        "precision": 0.6040462427745664,
+        "recall": 0.1430527036276523,
+        "f1": 0.23132263420033206
       },
       "Healthy": {
-        "true_positives": 77,
-        "false_positives": 9,
-        "false_negatives": 347,
-        "precision": 0.8953488372093024,
-        "recall": 0.18160377358490565,
-        "f1": 0.30196078431372547
-      },
-      "Leaf roller": {
-        "true_positives": 0,
-        "false_positives": 7,
-        "false_negatives": 87,
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1": 0.0
-      },
-      "Tungro": {
-        "true_positives": 172,
-        "false_positives": 59,
-        "false_negatives": 588,
-        "precision": 0.7445887445887446,
-        "recall": 0.22631578947368422,
-        "f1": 0.34712411705348134
+        "true_positives": 311,
+        "false_positives": 62,
+        "false_negatives": 113,
+        "precision": 0.8337801608579088,
+        "recall": 0.7334905660377359,
+        "f1": 0.7804265997490589
       },
       "Blast": {
-        "true_positives": 113,
-        "false_positives": 52,
-        "false_negatives": 834,
-        "precision": 0.6848484848484848,
-        "recall": 0.11932418162618796,
-        "f1": 0.20323741007194243
+        "true_positives": 289,
+        "false_positives": 164,
+        "false_negatives": 658,
+        "precision": 0.6379690949227373,
+        "recall": 0.3051742344244984,
+        "f1": 0.41285714285714287
+      },
+      "Leaf roller": {
+        "true_positives": 75,
+        "false_positives": 25,
+        "false_negatives": 12,
+        "precision": 0.75,
+        "recall": 0.8620689655172413,
+        "f1": 0.8021390374331552
+      },
+      "Tungro": {
+        "true_positives": 244,
+        "false_positives": 137,
+        "false_negatives": 516,
+        "precision": 0.6404199475065617,
+        "recall": 0.32105263157894737,
+        "f1": 0.427695004382121
       },
       "Narrow brown": {
-        "true_positives": 16,
-        "false_positives": 3,
-        "false_negatives": 59,
-        "precision": 0.8421052631578947,
-        "recall": 0.21333333333333335,
-        "f1": 0.34042553191489366
+        "true_positives": 72,
+        "false_positives": 20,
+        "false_negatives": 3,
+        "precision": 0.782608695652174,
+        "recall": 0.96,
+        "f1": 0.8622754491017965
       },
       "Sheath blight": {
-        "true_positives": 91,
-        "false_positives": 67,
-        "false_negatives": 397,
-        "precision": 0.5759493670886076,
-        "recall": 0.1864754098360656,
-        "f1": 0.28173374613003094
+        "true_positives": 122,
+        "false_positives": 88,
+        "false_negatives": 366,
+        "precision": 0.580952380952381,
+        "recall": 0.25,
+        "f1": 0.3495702005730659
       },
       "Bacterial leaf blight": {
-        "true_positives": 13,
-        "false_positives": 16,
-        "false_negatives": 112,
-        "precision": 0.4482758620689655,
-        "recall": 0.104,
-        "f1": 0.16883116883116883
+        "true_positives": 44,
+        "false_positives": 55,
+        "false_negatives": 81,
+        "precision": 0.4444444444444444,
+        "recall": 0.352,
+        "f1": 0.3928571428571428
       },
       "False smut": {
-        "true_positives": 1,
-        "false_positives": 0,
-        "false_negatives": 85,
-        "precision": 1.0,
-        "recall": 0.011627906976744186,
-        "f1": 0.022988505747126436
+        "true_positives": 81,
+        "false_positives": 21,
+        "false_negatives": 5,
+        "precision": 0.7941176470588235,
+        "recall": 0.9418604651162791,
+        "f1": 0.8617021276595744
       },
       "Bacterial panicle blight": {
-        "true_positives": 0,
-        "false_positives": 0,
-        "false_negatives": 45,
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1": 0.0
+        "true_positives": 32,
+        "false_positives": 29,
+        "false_negatives": 13,
+        "precision": 0.5245901639344263,
+        "recall": 0.7111111111111111,
+        "f1": 0.6037735849056605
       }
     }
   },
-  "num_detections_collected": 56661,
+  "num_detections_collected": 95016,
   "num_ground_truth_boxes": 4888,
   "predictions_artifact": "artifacts/predictions/predictions_valid.json",
   "sample_prediction_figures": [
     "artifacts/figures/predictions/pred_id0_IMG-20241014-WA0381_jpg.rf.02d81d946e4969027004eb331b2636b5.jpg",
-    "artifacts/figures/predictions/pred_id500_aug_0_1405_jpg.rf.6a0e56ea1553e786b36ac75cb36c1fed.jpg",
-    "artifacts/figures/predictions/pred_id1000_BLAST3_160_jpg.rf.ce82a246072316e4a902b17f5497cdf8.jpg",
-    "artifacts/figures/predictions/pred_id1001_SheathBlight_233_jpg.rf.cd85e49f8ff8b34b2816feafdcd0ffd0.jpg",
-    "artifacts/figures/predictions/pred_id1002_TUNGRO2_188_JPG_jpg.rf.cdc57c6aa131c5bf7077010a6de44a5d.jpg",
-    "artifacts/figures/predictions/pred_id1003_BLAST9_151_jpg.rf.ce425ec97808e50bfbaa93d072b68cfe.jpg"
+    "artifacts/figures/predictions/pred_id1_IMG-20241014-WA0258_jpg.rf.010c555e9aec70ddf42e72f285068311.jpg",
+    "artifacts/figures/predictions/pred_id2_IMG-20241012-WA0099_jpg.rf.052715be2fdca8f048e88ae49189c283.jpg",
+    "artifacts/figures/predictions/pred_id3_IMG-20240927-WA0215_jpg.rf.02427045292acba0cf19b92c6a42caf2.jpg",
+    "artifacts/figures/predictions/pred_id4_IMG-20240927-WA0204_jpg.rf.08d9cd91a261a0fac5a9eddf03f8313b.jpg",
+    "artifacts/figures/predictions/pred_id5_IMG-20240926-WA0174_jpg.rf.0877f8b16302ce982b768ca746a3185a.jpg"
   ],
   "test_set_tuning_warning_issued": false
 }
