@@ -143,4 +143,4 @@ pada `artifacts/audit/reproducibility_checklist.md`.
 
 Tanpa *external pretrained weights*, tanpa dataset eksternal, dan tanpa
 pemrosesan dataset menggunakan LLM maupun API. Audit lengkap tersedia pada
-`artifacts/audit/final_submission_audit.md`.
+`artifacts/audit/final_submission_readiness.md`.

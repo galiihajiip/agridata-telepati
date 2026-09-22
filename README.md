@@ -396,7 +396,7 @@ agridata/
 | Satu model final | Patuh | `artifacts/reports/final_model_metadata.json` |
 
 Audit lengkap tersedia pada
-[`artifacts/audit/final_submission_audit.md`](artifacts/audit/final_submission_audit.md).
+[`artifacts/audit/final_submission_readiness.md`](artifacts/audit/final_submission_readiness.md).
 
 ## Referensi
 

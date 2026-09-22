@@ -7,7 +7,7 @@ repository ini dan harus ditangani langsung oleh tim.
 
 Berkas ini ada agar kewajiban tersebut tercatat pada jejak audit, bukan
 hilang tanpa keterangan. Lihat
-[`artifacts/audit/final_submission_audit.md`](../artifacts/audit/final_submission_audit.md)
+[`artifacts/audit/final_submission_readiness.md`](../artifacts/audit/final_submission_readiness.md)
 bagian DOCUMENTS.
 
 ## Daftar periksa (diselesaikan oleh tim, tidak dapat diverifikasi otomatis)
@@ -25,7 +25,7 @@ Aspek orisinalitas yang dapat diperiksa secara teknis sudah tercakup pada
 audit kepatuhan, yaitu tanpa dataset eksternal, tanpa *external pretrained
 weights*, dan tanpa pemrosesan dataset menggunakan LLM maupun API. Rinciannya
 berada pada bagian DATA dan MODEL di
-[`artifacts/audit/final_submission_audit.md`](../artifacts/audit/final_submission_audit.md).
+[`artifacts/audit/final_submission_readiness.md`](../artifacts/audit/final_submission_readiness.md).
 
 Dokumen bertanda tangan itu sendiri merupakan artefak manusia di luar
 repository, sehingga tidak dapat dan tidak boleh diklaim selesai oleh proses

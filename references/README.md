@@ -39,8 +39,7 @@ terlihat ilmiah.
 ## Sumber kompetisi
 
 Dokumen guidebook dan regulasi TELEPATI 8.0 merupakan dokumen kompetisi yang
-tidak dipublikasikan. Salinan konteks yang dipakai pada pekerjaan ini berada
-pada `TELEPATI_8_AgriData_Master_Context.md` di root repository.
+tidak dipublikasikan dan tidak disertakan pada repository ini.
 
 Seluruh pernyataan berikut bersumber dari dokumen tersebut dan **tidak**
 diberi sitasi ilmiah, karena memang bukan klaim ilmiah:
