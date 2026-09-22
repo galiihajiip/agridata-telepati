@@ -82,13 +82,17 @@ tercatat pada `configs/final_model_config.yaml` dan
 Dievaluasi pada *split* validasi. Data uji tidak pernah dipakai untuk
 penyetelan apa pun.
 
+Konvensi: mAP@50 dari `model.val()`, *F1-Score* sebagai rata-rata antar
+kelas (*macro*) dari kurva *F1* pada titik operasi terbaik, ambang NMS IoU
+0,5.
+
 | Metrik | Nilai |
 |---|---:|
-| mAP@0.5 | 0,6277 |
-| mAP@0.5:0.95 | 0,3905 |
-| *Precision* | 0,6406 |
-| *Recall* | 0,6237 |
-| *F1* lokal pada *confidence* 0,25 | 0,3326 |
+| **mAP@50** | **64,01%** |
+| **F1-Score** | **63,83%** |
+| mAP@0.5:0.95 | 0,3856 |
+| *Precision* pada titik operasi | 0,6406 |
+| *Recall* pada titik operasi | 0,6237 |
 
 AP@0.5 per kelas berkisar dari 0,9631 (Narrow brown) sampai 0,2909
 (Brown spot). Rincian lengkap tersedia pada
@@ -121,8 +125,10 @@ terhadap *split* validasi.
 5. **Ketidakseimbangan kelas nyata**, yaitu rasio 22,6 kali pada *split*
    latih. Mitigasi *oversampling* diuji dan tidak menunjukkan manfaat pada
    skala penyaringan, sehingga tidak diadopsi.
-6. **Nilai *F1* lokal tidak stabil**, bervariasi pada rentang 0,22 sampai
-   0,42 antar pengulangan pada *checkpoint* yang sama.
+6. **Metrik lokal diagnostik tidak stabil**, bervariasi pada rentang 0,22
+   sampai 0,42 antar pengulangan. Metrik ini berstatus sekunder dan bukan
+   *F1* yang dilaporkan. *F1* macro yang dilaporkan dihitung dari `model.val()`
+   dan stabil.
 7. **Tidak ada jaminan determinisme bit per bit** pada Apple Silicon dengan
    *backend* MPS.
 8. **Belum ada validasi eksternal** di luar dataset kompetisi.
