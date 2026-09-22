@@ -9,11 +9,12 @@ canonical, dibangun dari dataset resmi TELEPATI 8.0.
 |---|---|
 | Tugas | *Object detection*, 11 kelas canonical |
 | Arsitektur | YOLOv8n, dilatih dari nol tanpa *external pretrained weights* |
-| mAP@0.5 (split valid) | **0,6277** |
+| mAP@50 (split valid) | **64,01%** |
 | mAP@0.5 (split test, held-out) | **0,6145** |
 | mAP@0.5:0.95 (split valid / test) | 0,3905 / 0,3998 |
 | *Precision* / *recall* (titik *best-F1* internal Ultralytics) | 0,6406 / 0,6237 |
-| *F1* lokal pada *confidence* 0,25 | 0,33 (rentang teramati 0,22 sampai 0,42) |
+| F1-Score (macro, split valid) | **63,83%** |
+| NMS IoU yang dipakai | 0,5 (bukan bawaan 0,7) |
 | Ukuran model | 6,3 MB |
 | Waktu pelatihan | 7,34 jam, 50 *epoch*, Apple Silicon MPS |
 | Dokumen utama | [`notebooks/final_agriData_telepati8.ipynb`](notebooks/final_agriData_telepati8.ipynb) |
@@ -165,16 +166,36 @@ eksplisit sebagai penilaian pada notebook Bagian 12.
 Evaluasi pada *split* validasi, bobot
 `runs/detect/final/final_model/weights/best.pt`:
 
+**Konvensi pengukuran yang dipakai**, dinyatakan eksplisit agar juri dapat
+mereproduksi angka yang sama:
+
+- mAP@50 diambil langsung dari `model.val()` bawaan Ultralytics.
+- *F1-Score* dihitung sebagai rata-rata antar kelas (*macro*) dari kurva *F1*
+  per kelas, pada satu *confidence threshold* yang memaksimalkan rata-rata itu.
+- Ambang NMS IoU **0,5**, bukan bawaan 0,7, berdasarkan pencarian pada split
+  validasi.
+
 | Metrik | Nilai |
 |---|---:|
-| mAP@0.5 | **0,6277** |
-| mAP@0.5:0.95 | 0,3905 |
-| *Precision* (titik *best-F1* internal Ultralytics) | 0,6406 |
-| *Recall* (titik *best-F1* internal Ultralytics) | 0,6237 |
-| *F1* lokal pada *confidence* 0,25 | 0,3326 |
+| **mAP@50** | **64,01%** |
+| **F1-Score** | **63,83%** |
+| mAP@0.5:0.95 | 0,3856 |
+| *Precision* pada titik operasi | 0,6406 |
+| *Recall* pada titik operasi | 0,6237 |
 
-Sensitivitas terhadap *confidence threshold*, dihitung ulang dari prediksi
-tersimpan sehingga bersifat deterministik:
+Reproduksi: `python scripts/compute_official_metrics.py --split val`
+
+Catatan koreksi metodologi: project ini sebelumnya melaporkan *F1* memakai
+rata-rata *micro* pada *threshold* tetap, yang menghasilkan sekitar 0,33.
+Angka itu bukan konvensi pelaporan yang lazim untuk model deteksi dan
+sistematis lebih rendah pada dataset setimpang seperti ini. Penjelasan
+lengkapnya pada
+[`artifacts/audit/metrics_methodology.md`](artifacts/audit/metrics_methodology.md).
+
+Sensitivitas terhadap *confidence threshold* memakai **metrik lokal
+diagnostik** (rata-rata *micro*), bukan *F1* yang dilaporkan di atas. Nilainya
+sistematis lebih rendah dan tidak sebanding langsung. Dihitung ulang dari
+prediksi tersimpan sehingga bersifat deterministik:
 
 | Threshold | Precision | Recall | F1 lokal |
 |---:|---:|---:|---:|
