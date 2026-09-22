@@ -14,7 +14,7 @@ diagnostik, dan tidak boleh disejajarkan dengan angka final.
 |---|---|---|---|---|
 | 0,5620 | Historis | 20 *epoch*, resolusi 640 | NMS 0,7 | `artifacts/archive/20epoch_run/evaluation_valid.json` |
 | 0,6277 | Historis | 50 *epoch*, resolusi 640 | NMS 0,7 | `artifacts/archive/50epoch_640_run/evaluation_valid.json` |
-| **0,6401** | **FINAL** | 50 *epoch*, resolusi 640 | **NMS 0,5** | `artifacts/reports/evaluation_valid.json` |
+| **0,6401** | **FINAL, *split* valid** | 50 *epoch*, resolusi 640 | **NMS 0,5** | `artifacts/reports/evaluation_valid.json` |
 | 0,6145 | Historis | 50 *epoch*, resolusi 640 | NMS 0,7, *split* test | `artifacts/archive/50epoch_640_run/evaluation_test.json` |
 | **0,6246** | **FINAL, *split* test** | 50 *epoch*, resolusi 640 | **NMS 0,5** | `artifacts/reports/evaluation_test.json` |
 | 0,4200 | Eksperimen | 50 *epoch*, latih 640 | inferensi pada 960 | `artifacts/reports/inference_tuning_imgsz.json` |
