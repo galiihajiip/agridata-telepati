@@ -1,4 +1,4 @@
-"""Detection evaluation metrics for the TELEPATI 8.0 AgriData pipeline (Block 7).
+"""Metrik evaluasi deteksi objek.
 
 Two complementary, clearly labeled metric pathways are used:
 
@@ -32,7 +32,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-# Per competition regulation (master spec Section 13): mAP@50 and F1 are
+# Sesuai regulasi kompetisi: mAP@50 dan F1 merupakan
 # both evaluated at IoU threshold 0.50.
 IOU_MATCH_THRESHOLD = 0.5
 
@@ -96,14 +96,14 @@ def match_detections_to_ground_truth(
 ) -> dict:
     """Greedy IoU-based matching at a fixed confidence threshold.
 
-    Predictions below `confidence_threshold` are dropped first. Remaining
+    Prediksi di bawah `confidence_threshold` dibuang lebih dulu. Sisanya
     predictions are grouped by (image_id, class_id) alongside ground truths
     in the same group, then matched greedily in descending-confidence order:
     each prediction takes the highest-IoU unmatched ground truth in its
     group if that IoU >= `iou_threshold`, else it counts as a false
     positive. Ground truths never matched count as false negatives.
 
-    Returns a dict with "overall" (micro-averaged across all classes) and
+    Mengembalikan dict berisi "overall" (rata-rata micro seluruh kelas) dan
     "per_class" (keyed by class_id) `PRF1Result` values, plus the thresholds
     used (for audit traceability).
     """

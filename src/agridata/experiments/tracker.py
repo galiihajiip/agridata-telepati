@@ -20,7 +20,7 @@ DEFAULT_LOG_PATH = Path("artifacts/experiments/experiment_log.json")
 
 @dataclass
 class ExperimentRecord:
-    """One row of the experiment tracker, fields per the master spec's Block 9 schema."""
+    """Satu baris catatan percobaan beserta seluruh field yang diwajibkan."""
 
     experiment_id: str
     timestamp_utc: str
@@ -63,8 +63,8 @@ def load_experiments(log_path: Path = DEFAULT_LOG_PATH) -> list[dict[str, Any]]:
 
 
 def append_experiment(record: ExperimentRecord, log_path: Path = DEFAULT_LOG_PATH) -> None:
-    """Append one experiment record to the log (read-modify-write on a single
-    JSON array, sufficient at this project's scale; a real database is
+    """Menambahkan satu catatan percobaan ke log. Pola baca-ubah-tulis pada satu
+    array JSON sudah memadai untuk skala project ini, basis data sungguhan
     unnecessary complexity for a handful of tracked experiments)."""
     records = load_experiments(log_path)
     existing_ids = {r["experiment_id"] for r in records}
@@ -78,7 +78,7 @@ def append_experiment(record: ExperimentRecord, log_path: Path = DEFAULT_LOG_PAT
 
 
 def build_markdown_table(records: list[dict[str, Any]]) -> str:
-    """Render the experiment log as a Markdown table, sorted by experiment_id."""
+    """Menyajikan log percobaan sebagai tabel Markdown, diurutkan menurut experiment_id."""
     lines = [
         "# Experiment Log",
         "",

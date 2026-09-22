@@ -1,1 +1,1 @@
-"""Reproducibility harness: environment capture and determinism checks."""
+"""Perangkat reproduktibilitas: perekaman lingkungan dan pemeriksaan determinisme."""

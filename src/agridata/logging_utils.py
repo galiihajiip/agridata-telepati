@@ -1,4 +1,4 @@
-"""Structured logging setup for the AgriData pipeline."""
+"""Penyiapan logging terstruktur untuk pipeline AgriData."""
 
 from __future__ import annotations
 
@@ -10,9 +10,9 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 def setup_logging(level: int = logging.INFO) -> logging.Logger:
-    """Configure and return the shared 'agridata' logger.
+    """Mengonfigurasi dan mengembalikan logger bersama 'agridata'.
 
-    Safe to call multiple times: handlers are only attached once so repeated
+    Aman dipanggil berkali-kali karena handler hanya dipasang sekali, sehingga
     calls (e.g. across notebook cells) do not duplicate log lines.
     """
     logger = logging.getLogger("agridata")

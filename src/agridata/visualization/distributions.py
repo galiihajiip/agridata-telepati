@@ -1,4 +1,4 @@
-"""Dataset distribution plots for EDA (Block 4).
+"""Grafik distribusi dataset untuk keperluan eksplorasi data.
 
 All functions save a figure to disk and close it. Nothing is shown
 interactively, since this runs from a script/CI context.
@@ -19,14 +19,14 @@ from agridata.visualization.images import CLASS_COLORS
 
 
 def _ordered_counts(counts: Counter[str]) -> tuple[list[str], list[int]]:
-    """Return (labels, values) in fixed canonical class order (0 if absent)."""
+    """Mengembalikan (label, nilai) dalam urutan kelas canonical tetap, 0 bila tidak ada."""
     labels = list(CANONICAL_CLASSES)
     values = [counts.get(cls, 0) for cls in labels]
     return labels, values
 
 
 def plot_class_counts(counts: Counter[str], title: str, output_path: Path) -> Path:
-    """Bar chart of a per-class count (instance count or image count)."""
+    """Diagram batang jumlah per kelas, baik jumlah instance maupun jumlah citra."""
     labels, values = _ordered_counts(counts)
     colors = [CLASS_COLORS[label] for label in labels]
 
@@ -46,7 +46,7 @@ def plot_class_counts(counts: Counter[str], title: str, output_path: Path) -> Pa
 
 
 def plot_bbox_size_distribution(bbox_dims: list[tuple[float, float]], title: str, output_path: Path) -> Path:
-    """Scatter of bbox width vs height, to visualize size/aspect-ratio spread."""
+    """Sebaran lebar terhadap tinggi bounding box, untuk melihat ragam ukuran dan rasio aspek."""
     widths = [w for w, _ in bbox_dims]
     heights = [h for _, h in bbox_dims]
 
@@ -64,7 +64,7 @@ def plot_bbox_size_distribution(bbox_dims: list[tuple[float, float]], title: str
 
 
 def plot_image_dimension_distribution(image_dims: list[tuple[int, int]], title: str, output_path: Path) -> Path:
-    """Scatter of image width vs height, to visualize resolution spread."""
+    """Sebaran lebar terhadap tinggi citra, untuk melihat ragam resolusi."""
     widths = [w for w, _ in image_dims]
     heights = [h for _, h in image_dims]
 

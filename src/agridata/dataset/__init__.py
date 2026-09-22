@@ -1,1 +1,1 @@
-"""Dataset inspection, validation, and preparation utilities."""
+"""Utilitas pemeriksaan, validasi, dan penyiapan dataset."""

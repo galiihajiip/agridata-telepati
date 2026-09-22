@@ -1,4 +1,4 @@
-"""Deterministic seeding utility for the AgriData pipeline.
+"""Utilitas penyemaian deterministik untuk pipeline AgriData.
 
 Seeds every known source of randomness reachable at the current project
 stage. PyTorch is optional here (not yet a required dependency) and is
@@ -18,11 +18,11 @@ logger = logging.getLogger("agridata.seed")
 
 
 def set_global_seed(seed: int) -> None:
-    """Seed Python's ``random``, NumPy, and (if installed) PyTorch.
+    """Menyemai ``random`` bawaan Python, NumPy, dan PyTorch bila terpasang.
 
     Also sets ``PYTHONHASHSEED`` so hash-based randomization (e.g. dict/set
     iteration order in some contexts) is fixed for the current process.
-    Note: PYTHONHASHSEED only takes effect for processes started with it
+    Catatan: PYTHONHASHSEED hanya berlaku untuk proses yang dimulai dengan
     already set in the environment; setting it here documents intent and
     affects any subprocesses this process spawns.
     """

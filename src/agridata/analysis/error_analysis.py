@@ -81,7 +81,7 @@ class ErrorAnalysisResult:
         return matrix
 
     def per_class_precision_recall(self, class_names: list[str]) -> dict[str, dict[str, float]]:
-        """Precision/recall per class from this analysis's own matching (same
+        """Precision dan recall per kelas dari pencocokan analisis ini sendiri (sama
         underlying data used for the error categorization, avoiding any
         inconsistency between the two views)."""
         tp_count = {c: 0 for c in class_names}
@@ -116,7 +116,7 @@ def analyze_errors(
     confidence_threshold: float,
     iou_threshold: float = IOU_THRESHOLD,
 ) -> ErrorAnalysisResult:
-    """Run the class-agnostic error analysis described in this module's docstring."""
+    """Menjalankan analisis kesalahan tanpa memandang kelas, sesuai penjelasan modul ini."""
     filtered = [d for d in detections if d.confidence >= confidence_threshold]
 
     dets_by_image: dict[int, list[Detection]] = {}
