@@ -121,11 +121,10 @@ def run_training(
     # hanya ada pada objek optimizer, sehingga dibaca dari sana agar pencatatan
     # percobaan merekam yang benar-benar dipakai.
     # `param_groups[i]["lr"]` menurun sepanjang pelatihan karena scheduler.
-    # value the scheduler was actually initialized with is preserved in
-    # "initial_lr" (set once at optimizer/scheduler construction, see
-    # torch.optim.lr_scheduler.LRScheduler.__init__). That, not the decayed
-    # end-of-training value, is the meaningful "learning rate" hyperparameter
-    # for experiment tracking.
+    # Nilai awal yang dipakai scheduler tersimpan pada "initial_lr", disetel
+    # sekali saat optimizer dan scheduler dibuat. Nilai itulah, bukan nilai
+    # akhir yang sudah menurun, yang bermakna sebagai hyperparameter
+    # learning rate untuk pencatatan percobaan.
     resolved_optimizer = type(trainer.optimizer).__name__ if trainer.optimizer is not None else trainer.args.optimizer
     resolved_lr = (
         trainer.optimizer.param_groups[0].get("initial_lr", trainer.optimizer.param_groups[0]["lr"])
