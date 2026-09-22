@@ -20,6 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from agridata.analysis.dataset_profile import (  # noqa: E402
+    analyze_annotation_overlap,
     audit_missingness,
     compute_bbox_geometry,
     load_duplicate_summary,
@@ -76,6 +77,7 @@ def main() -> int:
         resolution = summarize_resolution(split_data)
         missingness = audit_missingness(args.dataset_root, split, args.annotation_filename)
         density = scene_density_summary(split_data)
+        overlap = analyze_annotation_overlap(split_data)
 
         split_counts[split] = {
             "images": len(split_data.images),
@@ -90,6 +92,7 @@ def main() -> int:
             "resolution": resolution.summary(),
             "missingness": missingness.to_dict(),
             "scene_density": density,
+            "annotation_overlap": overlap,
         }
 
         figs = {}
@@ -142,7 +145,8 @@ def main() -> int:
         print(
             f"  {split:5s}: {s['images']:5d} citra | {s['annotations_canonical']:6d} anotasi canonical | "
             f"rasio imbalance {ci['imbalance_ratio']:.1f}x | "
-            f"objek kecil {s['bbox_geometry']['small_object_share']:.1%}"
+            f"objek kecil {s['bbox_geometry']['small_object_share']:.1%} | "
+            f"anotasi bertumpuk kelas sama {s['annotation_overlap']['overlapping_same_class']}"
         )
     return 0
 

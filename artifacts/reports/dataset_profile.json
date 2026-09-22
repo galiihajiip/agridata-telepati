@@ -152,6 +152,68 @@
         "max_annotations_in_one_image": 178,
         "crowded_images": 1057,
         "crowded_share": 0.1049
+      },
+      "annotation_overlap": {
+        "iou_threshold": 0.5,
+        "pairs_checked": 91368,
+        "overlapping_same_class": 85,
+        "overlapping_cross_class": 1,
+        "images_affected": 62,
+        "images_with_annotations": 10074,
+        "share_images_affected": 0.0062,
+        "same_class_examples": [
+          {
+            "image_id": 4447,
+            "kelas": "Tungro",
+            "iou": 0.9519
+          },
+          {
+            "image_id": 4602,
+            "kelas": "Sheath blight",
+            "iou": 0.5544
+          },
+          {
+            "image_id": 4684,
+            "kelas": "Blast",
+            "iou": 0.5519
+          },
+          {
+            "image_id": 4703,
+            "kelas": "Blast",
+            "iou": 0.9467
+          },
+          {
+            "image_id": 4865,
+            "kelas": "Sheath blight",
+            "iou": 0.6653
+          },
+          {
+            "image_id": 4896,
+            "kelas": "Blast",
+            "iou": 0.8163
+          },
+          {
+            "image_id": 4951,
+            "kelas": "Brown spot",
+            "iou": 0.6508
+          },
+          {
+            "image_id": 4951,
+            "kelas": "Brown spot",
+            "iou": 0.6207
+          },
+          {
+            "image_id": 5033,
+            "kelas": "Leaf scald",
+            "iou": 0.989
+          },
+          {
+            "image_id": 5087,
+            "kelas": "Tungro",
+            "iou": 1.0
+          }
+        ],
+        "catatan": "Tumpang tindih kelas sama berpotensi merupakan anotasi ganda. Tumpang tindih antar kelas umumnya wajar pada citra daun. Tidak ada anotasi yang diubah berdasarkan analisis ini."
       }
     },
     "valid": {
@@ -304,6 +366,68 @@
         "max_annotations_in_one_image": 104,
         "crowded_images": 290,
         "crowded_share": 0.1386
+      },
+      "annotation_overlap": {
+        "iou_threshold": 0.5,
+        "pairs_checked": 26338,
+        "overlapping_same_class": 16,
+        "overlapping_cross_class": 0,
+        "images_affected": 15,
+        "images_with_annotations": 2093,
+        "share_images_affected": 0.0072,
+        "same_class_examples": [
+          {
+            "image_id": 525,
+            "kelas": "Leaf scald",
+            "iou": 0.615
+          },
+          {
+            "image_id": 633,
+            "kelas": "Sheath blight",
+            "iou": 0.6653
+          },
+          {
+            "image_id": 861,
+            "kelas": "Healthy",
+            "iou": 0.7052
+          },
+          {
+            "image_id": 895,
+            "kelas": "Sheath blight",
+            "iou": 0.6148
+          },
+          {
+            "image_id": 908,
+            "kelas": "Healthy",
+            "iou": 0.7052
+          },
+          {
+            "image_id": 1090,
+            "kelas": "Tungro",
+            "iou": 0.7199
+          },
+          {
+            "image_id": 1223,
+            "kelas": "Tungro",
+            "iou": 0.619
+          },
+          {
+            "image_id": 1223,
+            "kelas": "Tungro",
+            "iou": 0.8946
+          },
+          {
+            "image_id": 1252,
+            "kelas": "Blast",
+            "iou": 0.5918
+          },
+          {
+            "image_id": 1278,
+            "kelas": "Tungro",
+            "iou": 0.6719
+          }
+        ],
+        "catatan": "Tumpang tindih kelas sama berpotensi merupakan anotasi ganda. Tumpang tindih antar kelas umumnya wajar pada citra daun. Tidak ada anotasi yang diubah berdasarkan analisis ini."
       }
     },
     "test": {
@@ -456,6 +580,68 @@
         "max_annotations_in_one_image": 250,
         "crowded_images": 156,
         "crowded_share": 0.148
+      },
+      "annotation_overlap": {
+        "iou_threshold": 0.5,
+        "pairs_checked": 42078,
+        "overlapping_same_class": 13,
+        "overlapping_cross_class": 0,
+        "images_affected": 11,
+        "images_with_annotations": 1054,
+        "share_images_affected": 0.0104,
+        "same_class_examples": [
+          {
+            "image_id": 304,
+            "kelas": "Tungro",
+            "iou": 0.6961
+          },
+          {
+            "image_id": 449,
+            "kelas": "Blast",
+            "iou": 0.8655
+          },
+          {
+            "image_id": 449,
+            "kelas": "Blast",
+            "iou": 0.929
+          },
+          {
+            "image_id": 457,
+            "kelas": "Sheath blight",
+            "iou": 0.9813
+          },
+          {
+            "image_id": 518,
+            "kelas": "Sheath blight",
+            "iou": 0.7424
+          },
+          {
+            "image_id": 537,
+            "kelas": "Tungro",
+            "iou": 0.5038
+          },
+          {
+            "image_id": 558,
+            "kelas": "Tungro",
+            "iou": 0.543
+          },
+          {
+            "image_id": 558,
+            "kelas": "Tungro",
+            "iou": 1.0
+          },
+          {
+            "image_id": 715,
+            "kelas": "Leaf scald",
+            "iou": 0.508
+          },
+          {
+            "image_id": 721,
+            "kelas": "Sheath blight",
+            "iou": 0.7424
+          }
+        ],
+        "catatan": "Tumpang tindih kelas sama berpotensi merupakan anotasi ganda. Tumpang tindih antar kelas umumnya wajar pada citra daun. Tidak ada anotasi yang diubah berdasarkan analisis ini."
       }
     }
   },
