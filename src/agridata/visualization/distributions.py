@@ -1,7 +1,7 @@
 """Grafik distribusi dataset untuk keperluan eksplorasi data.
 
-All functions save a figure to disk and close it. Nothing is shown
-interactively, since this runs from a script/CI context.
+Seluruh fungsi menyimpan figur ke disk lalu menutupnya. Tidak ada tampilan
+interaktif karena modul ini dijalankan dari skrip tanpa layar.
 """
 
 from __future__ import annotations
@@ -11,7 +11,7 @@ from pathlib import Path
 
 import matplotlib
 
-matplotlib.use("Agg")  # headless: no display backend required
+matplotlib.use("Agg")  # tanpa layar, tidak memerlukan backend tampilan
 import matplotlib.pyplot as plt
 
 from agridata.dataset.mapping import CANONICAL_CLASSES
@@ -33,7 +33,7 @@ def plot_class_counts(counts: Counter[str], title: str, output_path: Path) -> Pa
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.bar(labels, values, color=colors)
     ax.set_title(title)
-    ax.set_ylabel("Count")
+    ax.set_ylabel("Jumlah")
     ax.tick_params(axis="x", rotation=45)
     for tick in ax.get_xticklabels():
         tick.set_ha("right")
@@ -52,8 +52,8 @@ def plot_bbox_size_distribution(bbox_dims: list[tuple[float, float]], title: str
 
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.scatter(widths, heights, s=4, alpha=0.3)
-    ax.set_xlabel("bbox width (px)")
-    ax.set_ylabel("bbox height (px)")
+    ax.set_xlabel("Lebar bounding box (piksel)")
+    ax.set_ylabel("Tinggi bounding box (piksel)")
     ax.set_title(title)
     fig.tight_layout()
 
@@ -70,8 +70,8 @@ def plot_image_dimension_distribution(image_dims: list[tuple[int, int]], title: 
 
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.scatter(widths, heights, s=8, alpha=0.4, color="#4363d8")
-    ax.set_xlabel("image width (px)")
-    ax.set_ylabel("image height (px)")
+    ax.set_xlabel("Lebar citra (piksel)")
+    ax.set_ylabel("Tinggi citra (piksel)")
     ax.set_title(title)
     fig.tight_layout()
 
@@ -89,7 +89,7 @@ def _save(fig, output_path: Path) -> Path:
 
 
 def plot_split_overview(split_counts: dict[str, dict[str, int]], output_path: Path) -> Path:
-    """Grouped bars: jumlah citra dan jumlah anotasi per split."""
+    """Diagram batang berkelompok: jumlah citra dan jumlah anotasi per split."""
     splits = list(split_counts.keys())
     images = [split_counts[s]["images"] for s in splits]
     annotations = [split_counts[s]["annotations"] for s in splits]
@@ -117,7 +117,7 @@ def plot_class_distribution_comparison(
     title: str,
     output_path: Path,
 ) -> Path:
-    """Bandingkan jumlah instance dan jumlah citra per kelas dalam satu grafik.
+    """Membandingkan jumlah instance dan jumlah citra per kelas dalam satu grafik.
 
     Dua besaran ini berbeda: satu citra dapat memuat banyak instance, sehingga
     kelas dengan banyak instance belum tentu tersebar di banyak citra.
@@ -186,7 +186,7 @@ def plot_instances_vs_performance(
     per_class_ap: dict[str, float],
     output_path: Path,
 ) -> Path:
-    """Sebar jumlah instance latih terhadap AP@0.5 per kelas.
+    """Menyebar jumlah instance latih terhadap AP@0.5 per kelas.
 
     Hubungan yang ditampilkan bersifat observasional, bukan kausal.
     """
