@@ -65,17 +65,17 @@ def run_training(
     validate: bool = True,
     extra_train_kwargs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Run a compliant training job and return key result paths.
+    """Menjalankan pelatihan yang patuh dan mengembalikan lokasi hasil utama.
 
-    `pretrained=False` is passed explicitly to `model.train()` as a
-    belt-and-suspenders safeguard, even though the model was already built
-    from a weights-free `.yaml` definition in `build_compliant_model`.
+    `pretrained=False` tetap diteruskan ke `model.train()` sebagai pengaman
+    berlapis, meskipun model sudah dibangun dari definisi `.yaml` tanpa bobot
+    pada `build_compliant_model`.
 
-    `validate=False` skips Ultralytics' per-epoch validation on the full
-    validation split (expensive when repeated every epoch across many
-    experiments), verified via source (`engine/trainer.py`) that `best.pt`
-    selection still works correctly in this case, falling back to a
-    loss-based fitness score. Use `agridata.metrics`/`scripts/evaluate.py`
+    `validate=False` melewati validasi per epoch pada seluruh split validasi,
+    yang mahal bila diulang setiap epoch pada banyak percobaan. Diverifikasi
+    melalui sumber `engine/trainer.py` bahwa pemilihan `best.pt` tetap bekerja
+    dengan jatuh kembali ke skor fitness berbasis loss. Gunakan
+    `agridata.metrics` atau `scripts/evaluate.py`
     for the authoritative post-hoc mAP@0.5/F1 instead.
 
     `extra_train_kwargs` passes additional Ultralytics train() arguments
@@ -90,7 +90,7 @@ def run_training(
         data_yaml, image_size, batch_size, epochs, device, seed, fraction,
     )
 
-    # Ultralytics resolves a *relative* `project` path against the global,
+    # Ultralytics menyelesaikan path `project` yang relatif terhadap
     # machine-specific Ultralytics settings' `runs_dir` (see
     # ultralytics.cfg.get_save_dir) rather than the current working
     # directory, silently making output location depend on per-machine
