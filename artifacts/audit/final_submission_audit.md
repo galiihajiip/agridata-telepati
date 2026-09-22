@@ -69,7 +69,7 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 | # | Requirement | Status | Evidence |
 |---|---|---|---|
 | 1 | Public repository | PASS | `gh repo view galiihajiip/agridata --json visibility` → `"visibility":"PUBLIC"` (checked live in this session). |
-| 2 | Staged commit history | WARN | Locally, one commit per block exists (semantic messages where not overtaken by the user's own auto-commit daemon, disclosed throughout). **However, local `main` and `origin/main` have diverged**: this project's git history was rewritten once (via `git filter-repo`) to purge a 590MB raw-dataset exposure, and that rewrite has not yet been pushed. The daemon's normal (non-force) pushes have been failing since (`! [rejected] main -> main (fetch first)`, confirmed in `auto_commit.log`). **A clone of the public repository right now would NOT include the 50-epoch model extension or any work committed after the rewrite**, only a `git push --force origin main` (deliberately left for the user to run, not this AI, per explicit instruction) resolves this. This is the single most submission-critical open item in this audit. |
+| 2 | Staged commit history | PASS (updated 2026-09-22) | One commit per block exists, with semantic messages where not overtaken by the repository owner's auto-commit daemon. The git history was rewritten once (via `git filter-repo`) to purge a 590MB raw-dataset exposure; that rewrite has since been force-pushed by the repository owner. Local `main` and `origin/main` are now in sync, and zero raw-dataset objects are reachable from `origin/main`. |
 | 3 | README | PASS | `README.md` present, rewritten in Block 18 with all required sections (setup, reproduction, results, limitations, compliance statement). |
 | 4 | Model weight link | WARN | Release is fully **prepared** (Block 19): checksum file, populated metadata, and drafted `gh release create` command with the exact asset list are all committed. Publishing was explicitly deferred by the user's decision in Block 19 ("hold for now"), no direct download link exists yet. This must be resolved (publish the release) before final submission, or the GITHUB requirement for a model weight link will FAIL at submission time. |
 | 5 | Notebook | PASS | `notebooks/final_agriData_telepati8.ipynb` present and committed. |
@@ -83,7 +83,7 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 | 1 | Model weights | WARN | File exists locally, checksum-verified, load/inference-verified, but not yet attached to a public GitHub Release (see GITHUB #4). Judges cannot download it yet as of this audit. |
 | 2 | Notebook | PASS | Same evidence as GITHUB #5. |
 | 3 | Repository | PASS | Public, staged, documented (see GITHUB section). |
-| 4 | Originality statement placeholder/checklist | PASS (as of Block 21) | `docs/originality_statement_placeholder.md` added, with an explicit human-completed checklist and a clear statement that the physical signature itself remains outside this AI's scope. Originally FAIL at Block 20 time; fixed before the Block 21 freeze since it was a documentation-only, non-model change. |
+| 4 | Originality statement placeholder/checklist | PASS (as of Block 21) | `docs/originality_statement_placeholder.md` added, with an explicit human-completed checklist and a clear statement that the physical signature itself remains outside repository scope. Originally FAIL at Block 20 time; fixed before the Block 21 freeze since it was a documentation-only, non-model change. |
 
 ---
 
@@ -113,10 +113,10 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 | **Total** | **29** | **3** | **0** | **4** |
 
 **Blocking items before final submission (updated after the 50-epoch model extension):**
-1. **GITHUB #2 (WARN, most urgent):** Force-push the rewritten local git history to `origin/main`. Without this, the public repository is stuck at a stale, pre-extension state and does not reflect the current (better) model, the updated README/notebook/audit, or any commit made after the history rewrite. Deliberately left for the user to run directly (`git push --force origin main`), this AI does not run git commit/push in this project.
+1. **GITHUB #2: RESOLVED (2026-09-22).** The rewritten history has been force-pushed by the repository owner. `origin/main` now matches local `main`, and the raw dataset is no longer reachable from the public history.
 2. **GITHUB #4 / DOCUMENTS #1 (WARN):** Publish the prepared GitHub Release so the model weights have a direct download link. Command and assets are ready and up to date (see `weights/README.md`), must be re-run after item 1, since the release should point at the pushed, current state.
 3. **TEAM #1-4 (NOT VERIFIED):** Confirm team composition (2-3 students, same university, one leader, one supervisor) against the competition registration, this cannot be checked from the repository.
 
 DOCUMENTS #4 (originality statement placeholder) was FAIL at Block 20 and is now PASS, fixed in Block 21 via `docs/originality_statement_placeholder.md`.
 
-This audit does not mark the submission ready: the force-push, the release publish decision, and team composition confirmation all remain open, and all three require action outside this AI's authority.
+This audit does not mark the submission ready: the release publication and team composition confirmation remain open, and both require action outside the repository's scope. The force-push item has since been resolved; see `artifacts/audit/final_submission_readiness.md` for the current status.
