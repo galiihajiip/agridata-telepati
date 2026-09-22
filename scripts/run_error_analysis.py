@@ -4,11 +4,10 @@
 Usage:
     python scripts/run_error_analysis.py --weights runs/detect/matrix/E08/weights/best.pt --split valid
 
-Read-only against the model and dataset: this script only ANALYZES and
-REPORTS. It never modifies training data or the model based on what it
-finds, per the master spec, any data change proposed from visual
-inspection must be a separate, explicitly documented decision made by a
-human/later block, not applied automatically here.
+Bersifat baca saja terhadap model dan dataset. Skrip ini hanya menganalisis
+dan melaporkan, tidak pernah mengubah data latih maupun model berdasarkan
+temuannya. Setiap usulan perubahan data harus menjadi keputusan terpisah yang
+didokumentasikan secara eksplisit, bukan diterapkan otomatis di sini.
 """
 
 from __future__ import annotations
@@ -43,33 +42,29 @@ CLASS_NAMES = {i: name for i, name in enumerate(CANONICAL_CLASSES)}
 
 
 def _caveat_text(per_class_pr: dict) -> str:
-    """Describe how much of the class space this checkpoint has actually learned.
+    """Menjelaskan seberapa banyak kelas yang benar-benar sudah dipelajari checkpoint.
 
-    Computed from this run's real per-class TP counts, never a hardcoded
-    description of some other, earlier checkpoint. A prior version of this
-    function hardcoded prose about a specific 10-epoch screening checkpoint
-    (E08); that text kept printing verbatim for every later checkpoint this
-    script analyzed, including the final submitted model, which had already
-    learned every class. Fixed to be dynamic."""
+    Dihitung dari jumlah true positive per kelas pada eksekusi ini, bukan
+    deskripsi yang ditulis permanen untuk checkpoint lain."""
     zero_tp = [cls for cls, pr in per_class_pr.items() if pr["tp"] == 0]
     total = len(per_class_pr)
     if not zero_tp:
         return (
-            f"This checkpoint has at least one true positive on all {total}/{total} classes, "
-            "confusion patterns above reflect genuine model behavior, not simply classes the "
-            "model has not learned yet."
+            f"Checkpoint ini memiliki minimal satu true positive pada seluruh {total} dari {total} kelas. "
+            "Pola kebingungan di atas mencerminkan perilaku model yang sebenarnya, bukan sekadar "
+            "kelas yang belum dipelajari model."
         )
     return (
-        f"This checkpoint has zero true positives on {len(zero_tp)}/{total} classes "
-        f"({', '.join(zero_tp)}), it has not learned those classes at all. Confusion patterns "
-        "above involving those classes mostly reflect \"the model hasn't learned this yet\", not "
-        "a stable, meaningful semantic confusion. Only classes with non-trivial TP counts support "
-        "any real interpretation at this stage."
+        f"Checkpoint ini tidak memiliki true positive pada {len(zero_tp)} dari {total} kelas "
+        f"({', '.join(zero_tp)}), sehingga kelas tersebut belum dipelajari sama sekali. Pola "
+        "kebingungan yang melibatkan kelas itu lebih mencerminkan keadaan belum dipelajari, "
+        "bukan kebingungan semantik yang bermakna. Hanya kelas dengan jumlah true positive "
+        "memadai yang dapat ditafsirkan pada tahap ini."
     )
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Object detection error analysis (read-only; proposes, does not apply, changes).")
+    parser = argparse.ArgumentParser(description="Analisis kesalahan deteksi objek, bersifat baca saja.")
     parser.add_argument("--weights", required=True, type=Path)
     parser.add_argument("--split", default="valid")
     parser.add_argument("--prepared-dir", default=Path("data/prepared"), type=Path)
@@ -93,11 +88,10 @@ def load_ground_truth(manifest_path: Path) -> tuple[list[GroundTruthBox], dict[i
 
 
 def collect_predictions(model: YOLO, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str) -> list[Detection]:
-    """Chunked to avoid a Block 16-confirmed failure: passing a very large
-    (2000+) explicit path list to a single `predict(..., stream=True)` call
-    fails with "MPSGraph does not support tensor dims larger than INT_MAX"
-    on this project's numpy/torch/MPS combination, see
-    scripts/evaluate.py::collect_predictions for the full investigation."""
+    """Dipecah menjadi potongan untuk menghindari kegagalan yang sudah terkonfirmasi:
+    meneruskan daftar path yang sangat panjang ke satu panggilan
+    `predict(..., stream=True)` gagal dengan galat MPSGraph pada kombinasi
+    numpy, torch, dan MPS di project ini."""
     CHUNK_SIZE = 500
     ordered_ids = list(images_by_id.keys())
     image_paths = [str(images_dir / images_by_id[iid]["file_name"]) for iid in ordered_ids]
@@ -114,7 +108,7 @@ def collect_predictions(model: YOLO, images_dir: Path, images_by_id: dict[int, d
 
 
 def save_examples(images_dir: Path, images_by_id: dict, entries: list, tag: str, output_dir: Path, num: int, det_or_gt: str) -> list[str]:
-    """Save a handful of images annotated with the specific error-type boxes drawn."""
+    """Menyimpan beberapa citra beranotasi dengan kotak sesuai jenis kesalahannya."""
     by_image: dict[int, list] = {}
     for e in entries:
         by_image.setdefault(e.image_id, []).append(e)
@@ -153,7 +147,7 @@ def main() -> int:
 
     result = analyze_errors(detections, ground_truths, CLASS_NAMES, args.confidence_threshold)
 
-    # --- confusion matrix (only non-empty entries, for readability) ---
+    # Matriks kebingungan, hanya entri tidak kosong agar mudah dibaca.
     matrix = result.confusion_matrix(list(CANONICAL_CLASSES))
     confused_pairs = sorted(
         ((t, p, matrix[t][p]) for t in matrix for p in matrix[t] if t != p and matrix[t][p] > 0),
