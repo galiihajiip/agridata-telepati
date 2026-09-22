@@ -10,7 +10,8 @@ canonical, dibangun dari dataset resmi TELEPATI 8.0.
 | Tugas | *Object detection*, 11 kelas canonical |
 | Arsitektur | YOLOv8n, dilatih dari nol tanpa *external pretrained weights* |
 | mAP@0.5 (split valid) | **0,6277** |
-| mAP@0.5:0.95 (split valid) | 0,3905 |
+| mAP@0.5 (split test, held-out) | **0,6145** |
+| mAP@0.5:0.95 (split valid / test) | 0,3905 / 0,3998 |
 | *Precision* / *recall* (titik *best-F1* internal Ultralytics) | 0,6406 / 0,6237 |
 | *F1* lokal pada *confidence* 0,25 | 0,33 (rentang teramati 0,22 sampai 0,42) |
 | Ukuran model | 6,3 MB |
