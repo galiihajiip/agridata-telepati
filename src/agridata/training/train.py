@@ -90,13 +90,11 @@ def run_training(
         data_yaml, image_size, batch_size, epochs, device, seed, fraction,
     )
 
-    # Ultralytics menyelesaikan path `project` yang relatif terhadap
-    # machine-specific Ultralytics settings' `runs_dir` (see
-    # ultralytics.cfg.get_save_dir) rather than the current working
-    # directory, silently making output location depend on per-machine
-    # global config. Passing an absolute path here bypasses that entirely,
-    # so outputs always land exactly where this project's code says they
-    # should, regardless of the audit machine's global Ultralytics settings.
+    # Path `project` yang relatif diselesaikan Ultralytics terhadap `runs_dir`
+    # pada setelan globalnya, bukan terhadap direktori kerja saat ini, sehingga
+    # lokasi keluaran bergantung pada konfigurasi tiap mesin. Path absolut
+    # menghindari hal itu agar keluaran selalu berada di lokasi yang ditentukan
+    # kode project ini.
     model.train(
         data=str(data_yaml),
         imgsz=image_size,
@@ -118,12 +116,11 @@ def run_training(
 
     trainer = model.trainer
 
-    # `trainer.args.optimizer` stays "auto" (the raw config value) even after
-    # Ultralytics auto-selects a concrete optimizer (e.g. AdamW) internally,
-    # the resolved choice only exists on the instantiated optimizer object.
-    # Read it there so the experiment tracker (Block 9) records what actually
-    # ran, not the unresolved config string.
-    # `param_groups[i]["lr"]` decays over training (scheduler-driven); the
+    # `trainer.args.optimizer` tetap bernilai "auto" meskipun Ultralytics sudah
+    # memilih optimizer konkret secara internal. Pilihan yang sudah diselesaikan
+    # hanya ada pada objek optimizer, sehingga dibaca dari sana agar pencatatan
+    # percobaan merekam yang benar-benar dipakai.
+    # `param_groups[i]["lr"]` menurun sepanjang pelatihan karena scheduler.
     # value the scheduler was actually initialized with is preserved in
     # "initial_lr" (set once at optimizer/scheduler construction, see
     # torch.optim.lr_scheduler.LRScheduler.__init__). That, not the decayed
