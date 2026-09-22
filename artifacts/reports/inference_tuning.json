@@ -1,0 +1,72 @@
+{
+  "split_untuk_pencarian": "val",
+  "catatan": "Bobot model tidak diubah. Yang dicari hanya parameter inferensi. Split test tidak pernah dipakai untuk memilih parameter.",
+  "baseline": {
+    "imgsz": 640,
+    "nms_iou": 0.7,
+    "augment": false,
+    "map50": 0.627677116032399,
+    "map50_95": 0.3905414251182048,
+    "mean_precision": 0.6406314683740555,
+    "mean_recall": 0.6237467162343596,
+    "best_f1": 0.6181185066910589,
+    "best_f1_conf": 0.2652652652652653
+  },
+  "terbaik_map50": {
+    "imgsz": 640,
+    "nms_iou": 0.7,
+    "augment": false,
+    "map50": 0.627677116032399,
+    "map50_95": 0.3905414251182048,
+    "mean_precision": 0.6406314683740555,
+    "mean_recall": 0.6237467162343596,
+    "best_f1": 0.6181185066910589,
+    "best_f1_conf": 0.2652652652652653
+  },
+  "terbaik_f1": {
+    "imgsz": 640,
+    "nms_iou": 0.7,
+    "augment": false,
+    "map50": 0.627677116032399,
+    "map50_95": 0.3905414251182048,
+    "mean_precision": 0.6406314683740555,
+    "mean_recall": 0.6237467162343596,
+    "best_f1": 0.6181185066910589,
+    "best_f1_conf": 0.2652652652652653
+  },
+  "semua_hasil": [
+    {
+      "imgsz": 640,
+      "nms_iou": 0.7,
+      "augment": false,
+      "map50": 0.627677116032399,
+      "map50_95": 0.3905414251182048,
+      "mean_precision": 0.6406314683740555,
+      "mean_recall": 0.6237467162343596,
+      "best_f1": 0.6181185066910589,
+      "best_f1_conf": 0.2652652652652653
+    },
+    {
+      "imgsz": 960,
+      "nms_iou": 0.7,
+      "augment": false,
+      "map50": 0.4200363801437502,
+      "map50_95": 0.14628772347252095,
+      "mean_precision": 0.4235818117715158,
+      "mean_recall": 0.5078360995535773,
+      "best_f1": 0.4307516679630408,
+      "best_f1_conf": 0.3053053053053053
+    },
+    {
+      "imgsz": 1280,
+      "nms_iou": 0.7,
+      "augment": false,
+      "map50": 0.11638196866989335,
+      "map50_95": 0.042546209728696265,
+      "mean_precision": 0.1901430243554148,
+      "mean_recall": 0.23002624159530996,
+      "best_f1": 0.19218390076798408,
+      "best_f1_conf": 0.2702702702702703
+    }
+  ]
+}
