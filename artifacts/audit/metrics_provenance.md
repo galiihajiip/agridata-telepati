@@ -16,6 +16,7 @@ diagnostik, dan tidak boleh disejajarkan dengan angka final.
 | 0,6277 | Historis | 50 *epoch*, resolusi 640 | NMS 0,7 | `artifacts/archive/50epoch_640_run/evaluation_valid.json` |
 | **0,6401** | **FINAL** | 50 *epoch*, resolusi 640 | **NMS 0,5** | `artifacts/reports/evaluation_valid.json` |
 | 0,6145 | Historis | 50 *epoch*, resolusi 640 | NMS 0,7, *split* test | `artifacts/archive/50epoch_640_run/evaluation_test.json` |
+| **0,6246** | **FINAL, *split* test** | 50 *epoch*, resolusi 640 | **NMS 0,5** | `artifacts/reports/evaluation_test.json` |
 | 0,4200 | Eksperimen | 50 *epoch*, latih 640 | inferensi pada 960 | `artifacts/reports/inference_tuning_imgsz.json` |
 | 0,1164 | Eksperimen | 50 *epoch*, latih 640 | inferensi pada 1280 | `artifacts/reports/inference_tuning_imgsz.json` |
 
@@ -26,7 +27,8 @@ diagnostik, dan tidak boleh disejajarkan dengan angka final.
 | 0,3326 | Historis, metodologi lama | *micro*, *threshold* tetap 0,25 | NMS 0,7 | Bukan konvensi pelaporan yang lazim, lihat `metrics_methodology.md` |
 | 0,3479 | Diagnostik | *micro*, *threshold* 0,15 | NMS 0,7 | Puncak sapuan *threshold* pada metrik lokal |
 | 0,6181 | Historis | *macro*, titik operasi terbaik | NMS 0,7 | Sebelum ambang NMS diturunkan |
-| **0,6383** | **FINAL** | ***macro*, titik operasi terbaik** | **NMS 0,5** | `artifacts/reports/evaluation_valid.json` |
+| **0,6383** | **FINAL, *split* valid** | ***macro*, titik operasi terbaik** | **NMS 0,5** | `artifacts/reports/evaluation_valid.json` |
+| **0,6272** | **FINAL, *split* test** | ***macro*, titik operasi terbaik** | **NMS 0,5** | `artifacts/reports/evaluation_test.json` |
 | 0,6321 | Tidak dipakai | *harmonic mean* dari *mean P* dan *mean R* | NMS 0,7 | Menggabungkan titik operasi berbeda antar kelas, lebih sulit direproduksi |
 
 ## 3. Mengapa Terdapat Banyak Nilai
@@ -49,10 +51,16 @@ tidak ada yang dilakukan setelah melihat hasil pada *split* test.
 
 ## 4. Angka yang Dilaporkan
 
-| Metrik | Nilai | Sumber |
-|---|---:|---|
-| mAP@50 | **64,01%** | `artifacts/reports/official_metrics_valid.json` |
-| F1-Score macro | **63,83%** | `artifacts/reports/official_metrics_valid.json` |
+| Metrik | *Split* valid | *Split* test | Sumber |
+|---|---:|---:|---|
+| mAP@50 | **64,01%** | **62,46%** | `official_metrics_{split}.json` |
+| F1-Score macro | **63,83%** | **62,72%** | `official_metrics_{split}.json` |
+
+Selisih valid terhadap test sebesar 1,55 poin pada mAP dan 1,11 poin pada F1.
+*Split* test tidak pernah dipakai untuk penyetelan apa pun, sehingga selisih
+sekecil itu konsisten dengan generalisasi yang stabil pada kedua *split*.
+Namun satu evaluasi *held-out* tidak cukup untuk membuktikan ketiadaan
+*overfitting*.
 
 Konfigurasi yang menghasilkan angka tersebut:
 
