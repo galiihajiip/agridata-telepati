@@ -1,17 +1,14 @@
-"""Compliant baseline training entrypoint (Block 6+).
+"""Titik masuk pelatihan yang patuh terhadap batasan kompetisi.
 
-This module NEVER references a pretrained checkpoint (.pt), models are
-always constructed from an architecture-only .yaml definition with
-pretrained=False, per the competition's explicit prohibition on external
-pretrained weights (master spec Section 8).
+Modul ini tidak pernah merujuk berkas checkpoint. Model selalu dibangun dari
+definisi arsitektur .yaml dengan pretrained=False, sesuai larangan penggunaan
+external pretrained weights.
 
-`YOLO_OFFLINE` is forced on *before* importing ultralytics, because
-`ultralytics.utils.ONLINE` is computed once at import time from that
-environment variable. With it set, any accidental network call this code
-does not intend (telemetry sync, an update check, or, critically, a
-checkpoint download) fails loudly with a `ConnectionError` instead of
-silently succeeding. This gives a genuine, verifiable "network blocked" test
-rather than just a configuration claim.
+`YOLO_OFFLINE` diaktifkan sebelum ultralytics diimpor karena
+`ultralytics.utils.ONLINE` dihitung sekali saat impor dari variabel
+lingkungan tersebut. Dengan begitu setiap panggilan jaringan yang tidak
+diinginkan, termasuk pengunduhan checkpoint, gagal dengan ConnectionError
+dan bukan berhasil secara diam-diam.
 """
 
 from __future__ import annotations
@@ -30,25 +27,25 @@ logger = logging.getLogger("agridata.training")
 
 
 def build_compliant_model(model_arch: str, pretrained: bool) -> YOLO:
-    """Construct a YOLO model with zero external pretrained weights.
+    """Membangun model YOLO tanpa external pretrained weights.
 
     Raises:
-        ValueError: if `model_arch` looks like a pretrained checkpoint file
+        ValueError: bila `model_arch` menyerupai berkas checkpoint
             (.pt) rather than an architecture-only definition (.yaml), or if
-            `pretrained` is True, both would violate the competition's
-            prohibition on external pretrained weights.
+            atau bila `pretrained` bernilai True. Keduanya melanggar
+            larangan penggunaan external pretrained weights.
     """
     if pretrained:
-        raise ValueError("pretrained=True is not permitted in this project, see master spec Section 8.")
+        raise ValueError("pretrained=True tidak diizinkan pada project ini.")
     if model_arch.endswith((".pt", ".pth", ".ckpt")):
         raise ValueError(
-            f"model_arch '{model_arch}' looks like a pretrained checkpoint file. "
+            f"model_arch '{model_arch}' menyerupai berkas checkpoint. "
             "Use an architecture-only .yaml definition instead (e.g. 'yolov8n.yaml')."
         )
 
-    logger.info("Building model from architecture definition '%s' (pretrained=False)", model_arch)
+    logger.info("Membangun model dari definisi arsitektur '%s' (pretrained=False)", model_arch)
     model = YOLO(model_arch)
-    logger.info("Model built from architecture only. No external checkpoint was referenced or downloaded.")
+    logger.info("Model dibangun dari arsitektur saja. Tidak ada checkpoint eksternal yang dirujuk maupun diunduh.")
     return model
 
 
