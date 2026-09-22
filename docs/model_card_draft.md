@@ -94,6 +94,19 @@ AP@0.5 per kelas berkisar dari 0,9631 (Narrow brown) sampai 0,2909
 (Brown spot). Rincian lengkap tersedia pada
 `artifacts/reports/evaluation_valid.md`.
 
+Evaluasi tunggal pada *split* test, yang tidak pernah dipakai untuk
+penyetelan, dilakukan setelah model dibekukan:
+
+| Metrik | Test |
+|---|---:|
+| mAP@0.5 | 0,6145 |
+| mAP@0.5:0.95 | 0,3998 |
+| *Precision* | 0,6595 |
+| *Recall* | 0,6160 |
+
+Selisih mAP@0.5 terhadap validasi hanya -0,0132, tanpa indikasi *overfitting*
+terhadap *split* validasi.
+
 ## Keterbatasan
 
 1. **Model dilatih dari nol** tanpa *external pretrained weights*, sesuai

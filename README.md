@@ -99,6 +99,7 @@ Temuan utama dari `scripts/profile_dataset.py`:
 | Rasio ketidakseimbangan kelas | 22,6x | 32,5x | 31,1x |
 | Porsi objek kecil (kurang dari 1 persen luas citra) | 38,1% | 43,3% | 46,8% |
 | Citra tanpa anotasi | 59 | 13 | 5 |
+| Anotasi bertumpuk kelas sama (IoU >= 0,5) | 85 | 16 | 13 |
 
 Audit *missingness* khusus deteksi objek menghasilkan nol temuan pada
 seluruh pemeriksaan integritas referensi, yaitu berkas citra hilang, berkas
@@ -184,6 +185,24 @@ tersimpan sehingga bersifat deterministik:
 
 Faktor pembatas adalah *recall*, bukan *precision*. Nilai *recall* tertinggi
 pada seluruh rentang hanya 0,3331.
+
+### Hasil pada *split* test (held-out)
+
+*Split* test tidak pernah dipakai untuk penyetelan apa pun. Evaluasi berikut
+dijalankan satu kali setelah model dibekukan.
+
+| Metrik | Valid | Test | Selisih |
+|---|---:|---:|---:|
+| mAP@0.5 | 0,6277 | **0,6145** | -0,0132 |
+| mAP@0.5:0.95 | 0,3905 | 0,3998 | +0,0093 |
+| *Precision* | 0,6406 | 0,6595 | +0,0189 |
+| *Recall* | 0,6237 | 0,6160 | -0,0077 |
+
+Selisih mAP@0.5 yang hanya 0,0132 menunjukkan performa model tidak
+bergantung pada *split* validasi tertentu, sehingga tidak ada indikasi
+konfigurasi final ter-*overfit* terhadap data validasi meskipun 21 percobaan
+dijalankan di atasnya. Urutan kelas juga konsisten: Narrow brown tertinggi
+(0,9809) dan Brown spot terendah (0,2582) pada kedua *split*.
 
 Komposisi kesalahan pada analisis kesalahan:
 
