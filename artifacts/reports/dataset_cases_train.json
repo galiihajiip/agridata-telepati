@@ -1,0 +1,36 @@
+{
+  "split": "train",
+  "small_object_threshold": 0.01,
+  "aturan_pemilihan": {
+    "crowded": "jumlah anotasi terbanyak dalam satu citra, diurutkan menurun lalu image_id",
+    "small_objects": "proporsi kotak di bawah ambang objek kecil tertinggi, minimal 3 anotasi per citra",
+    "difficult": "hasil kali jumlah anotasi dengan proporsi objek kecil, tertinggi"
+  },
+  "catatan": "Seluruh pemilihan bersifat deterministik dan tidak berdasarkan penampilan visual.",
+  "groups": {
+    "crowded": {
+      "figure": "artifacts/figures/final_submission/crowded_train.png",
+      "image_ids": [
+        9568,
+        7202,
+        9416
+      ]
+    },
+    "small_objects": {
+      "figure": "artifacts/figures/final_submission/small_objects_train.png",
+      "image_ids": [
+        4385,
+        4396,
+        4409
+      ]
+    },
+    "difficult": {
+      "figure": "artifacts/figures/final_submission/difficult_train.png",
+      "image_ids": [
+        9568,
+        7202,
+        9416
+      ]
+    }
+  }
+}
