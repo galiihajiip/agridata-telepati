@@ -211,3 +211,60 @@ tanggung jawab tim.
 Audit ini **tidak** menyatakan submission selesai. Audit ini menyatakan bahwa
 bagian yang berada dalam kendali repository sudah selesai dan terverifikasi,
 sedangkan empat item sisanya tercatat terbuka secara eksplisit.
+
+## 14. Pemaksimalan Lanjutan (22 September 2026)
+
+Setelah audit awal, beberapa celah terhadap tuntutan prompt ditutup.
+
+### 14.1 Evaluasi *split* test
+
+Sebelumnya *split* test memiliki *ground truth* (2.670 anotasi) tetapi belum
+pernah dievaluasi sama sekali. Evaluasi tunggal dijalankan setelah model
+dibekukan, tanpa dipakai untuk penyetelan apa pun.
+
+| Metrik | Valid | Test | Selisih |
+|---|---:|---:|---:|
+| mAP@0.5 | 0,6277 | 0,6145 | -0,0132 |
+| mAP@0.5:0.95 | 0,3905 | 0,3998 | +0,0093 |
+| *Precision* | 0,6406 | 0,6595 | +0,0189 |
+| *Recall* | 0,6237 | 0,6160 | -0,0077 |
+
+Selisih yang sangat kecil merupakan bukti bahwa performa tidak bergantung
+pada *split* validasi tertentu, sehingga tidak ada indikasi *overfitting*
+meskipun 21 percobaan dijalankan di atas *split* tersebut. Urutan kelas juga
+konsisten pada kedua *split*, dengan Narrow brown tertinggi dan Brown spot
+terendah.
+
+### 14.2 Analisis anotasi yang saling bertumpuk
+
+Pemeriksaan kualitas anotasi di dalam satu citra sebelumnya belum ada.
+Hasilnya: 85 pasang kelas sama pada *train*, 16 pada *valid*, 13 pada *test*,
+menyentuh kurang dari satu persen citra. Satu contoh mencapai IoU 0,9519 yang
+kemungkinan besar merupakan anotasi ganda. Tumpang tindih antar kelas hampir
+tidak ada, yaitu satu kejadian pada seluruh dataset.
+
+Tidak ada anotasi yang diubah berdasarkan temuan ini.
+
+### 14.3 Visualisasi kasus khas
+
+Tiga kelompok visual ditambahkan dengan aturan pemilihan eksplisit: adegan
+padat, objek kecil, dan kasus sulit. Temuan paling menonjol: ketiga citra
+terpadat seluruhnya kelas Brown spot, dengan 178, 126, dan 90 anotasi dalam
+satu gambar.
+
+Ini menghubungkan secara visual beberapa temuan yang sebelumnya terpisah,
+yaitu jumlah *instance* Brown spot tertinggi, dominasi objek kecil, rasio
+*false negative* adegan padat yang jauh lebih tinggi, dan AP@0.5 Brown spot
+yang terendah. Hubungan ini tetap bersifat observasional.
+
+### 14.4 Kondisi notebook setelah penambahan
+
+| Pemeriksaan | Hasil |
+|---|---|
+| Jumlah sel | 127 (49 sel kode) |
+| *Error* | 0 |
+| Sel belum dieksekusi | 0 |
+| Figur tertanam | 18 |
+| Bagian utama | 22 |
+| *Em dash* | 0 |
+| Uji unit | 69 lulus |
