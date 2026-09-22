@@ -1,13 +1,13 @@
-"""Raw dataset forensic audit for the TELEPATI 8.0 AgriData pipeline.
+"""Audit forensik dataset mentah.
 
-This module is strictly READ-ONLY with respect to the official dataset: it
-never renames, moves, edits, or deletes any raw file. It inspects the actual
-COCO-style annotation JSON and image files for each split and reports
-structural findings (schema, counts, categories) and integrity findings
-(missing files, invalid boxes, duplicates, corrupt images, cross-split
-overlap) without applying any canonical class mapping, that mapping is a
-separate, later step (Block 3) so this audit reflects the dataset exactly as
-the competition organizers shipped it.
+Modul ini bersifat baca saja terhadap dataset resmi: tidak pernah mengganti
+nama, memindahkan, menyunting, maupun menghapus berkas mentah. Modul memeriksa
+berkas anotasi COCO dan berkas citra pada setiap split, lalu melaporkan temuan
+struktural (skema, jumlah, kategori) dan temuan integritas (berkas hilang,
+kotak tidak valid, duplikat, citra rusak, tumpang tindih antar split).
+
+Pemetaan kelas canonical sengaja belum diterapkan di sini agar hasil audit
+mencerminkan dataset persis seperti yang diberikan panitia.
 """
 
 from __future__ import annotations

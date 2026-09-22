@@ -1,17 +1,15 @@
-"""Canonical 11-class label mapping for the TELEPATI 8.0 AgriData pipeline.
+"""Pemetaan label mentah menjadi 11 kelas canonical.
 
-Maps the official dataset's raw COCO category names to the official 11
-canonical disease/health classes defined by the competition regulation
-(master spec, Section 10). The mapping table below was cross-checked against
-the actual dataset in Block 2 (see artifacts/audit/dataset_audit_report.md):
-all three splits contain exactly 21 raw categories, 3 supercategory
-placeholders with zero annotations (Leaf-blight, Rice-Leaf-Diseasee, paddy,
-per Section 11) plus 18 real leaf/plant condition labels, all 18 of which are
-covered here with zero unexpected names.
+Memetakan nama kategori COCO pada dataset resmi menjadi 11 kelas canonical
+yang ditetapkan regulasi kompetisi. Tabel pemetaan di bawah sudah diperiksa
+silang terhadap dataset aktual, lihat artifacts/audit/dataset_audit_report.md:
+ketiga split memuat tepat 21 kategori mentah, terdiri atas 3 supercategory
+tanpa anotasi (Leaf-blight, Rice-Leaf-Diseasee, paddy) dan 18 label kondisi
+tanaman yang seluruhnya tercakup di sini tanpa nama tak terduga.
 
-This mapping is deterministic and, by design, refuses to silently map any
-raw name it does not recognize, an unrecognized label must be investigated
-and explicitly added, never guessed.
+Pemetaan bersifat deterministik dan sengaja menolak memetakan nama mentah
+yang tidak dikenali. Label yang tidak dikenali harus diselidiki dan
+ditambahkan secara eksplisit, tidak boleh ditebak.
 """
 
 from __future__ import annotations
