@@ -95,13 +95,13 @@ class SplitAudit:
 def _average_hash(image: Image.Image, hash_size: int = 8) -> str:
     """Menghitung average hash sederhana untuk deteksi duplikat perkiraan.
 
-    Ini perceptual hash yang bersifat perkiraan: kecocokan persis sangat
-    suggests two images are visually near-identical (e.g. an accidental
-    duplicate export under a different filename). It is NOT a full
-    nearest-neighbor search over Hamming distance, only exact-hash bucket
-    collisions are reported, matching the "if practical" scope requested for
-    this audit. Any match should be treated as a candidate for visual
-    confirmation, not proof of leakage.
+    Ini perceptual hash yang bersifat perkiraan. Kecocokan hash yang persis
+    merupakan indikasi kuat bahwa dua citra hampir identik secara visual,
+    misalnya duplikat ekspor dengan nama berkas berbeda. Fungsi ini bukan
+    pencarian tetangga terdekat berdasarkan jarak Hamming: hanya tabrakan
+    hash yang persis sama yang dilaporkan. Setiap kecocokan harus
+    diperlakukan sebagai kandidat yang perlu konfirmasi visual, bukan sebagai
+    bukti kebocoran.
     """
     small = image.convert("L").resize((hash_size, hash_size), Image.LANCZOS)
     pixels = list(small.getdata())
