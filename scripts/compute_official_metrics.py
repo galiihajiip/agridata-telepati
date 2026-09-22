@@ -52,7 +52,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--data-yaml", default=Path("data/prepared/data.yaml"), type=Path)
     p.add_argument("--split", default="val", choices=["val", "test"])
     p.add_argument("--imgsz", type=int, default=640)
-    p.add_argument("--nms-iou", type=float, default=0.7)
+    p.add_argument("--nms-iou", type=float, default=0.5)
     p.add_argument("--report-dir", default=Path("artifacts/reports"), type=Path)
     return p.parse_args()
 
