@@ -27,17 +27,17 @@ logger = logging.getLogger("agridata.dataset.inspect")
 
 REQUIRED_COCO_KEYS = ("images", "annotations", "categories")
 
-# Bounding boxes below this pixel area are flagged as suspiciously small.
+# Bounding box dengan luas piksel di bawah nilai ini ditandai mencurigakan kecil.
 MIN_PLAUSIBLE_BBOX_AREA = 4.0
-# Bounding boxes covering more than this fraction of the image area are
+# Bounding box yang menutupi lebih dari fraksi luas citra ini ditandai
 # flagged as suspiciously large (may indicate a mislabeled full-image box).
 MAX_PLAUSIBLE_BBOX_AREA_FRACTION = 0.98
-# Boxes that exceed the image boundary by no more than this many pixels are
+# Kotak yang melewati batas citra tidak lebih dari jumlah piksel ini dianggap
 # treated as float-rounding noise (WARNING, clampable) rather than a broken
-# annotation (FATAL). Verified empirically on this dataset: every
+# bukan anotasi rusak. Diverifikasi empiris pada dataset ini: seluruh
 # "exceeds image bounds" case across train/valid/test overshoots by <= 0.5px
-# (a Roboflow export rounding artifact), so 1.0px is a conservative cutoff
-# that would still catch a genuinely broken box.
+# kelebihan berasal dari pembulatan ekspor, sehingga 1,0 piksel merupakan
+# ambang konservatif yang tetap menangkap kotak yang benar-benar rusak.
 BBOX_BOUNDARY_TOLERANCE_PX = 1.0
 
 
@@ -54,7 +54,7 @@ class BBoxIssue:
 
 @dataclass
 class SplitAudit:
-    """Full forensic audit result for one dataset split (train/valid/test)."""
+    """Hasil audit forensik lengkap untuk satu split dataset."""
 
     split: str
     json_path: str
@@ -80,7 +80,7 @@ class SplitAudit:
 
     @property
     def is_fatal(self) -> bool:
-        """True if this split has an issue the audit script must fail loudly on."""
+        """True bila split ini memuat masalah yang harus menggagalkan skrip audit."""
         if self.parse_error is not None or not self.exists:
             return True
         if self.annotations_missing_image_ref:
@@ -93,9 +93,9 @@ class SplitAudit:
 
 
 def _average_hash(image: Image.Image, hash_size: int = 8) -> str:
-    """Compute a simple average-hash (aHash) for approximate duplicate detection.
+    """Menghitung average hash sederhana untuk deteksi duplikat perkiraan.
 
-    This is a best-effort perceptual hash: an exact aHash match strongly
+    Ini perceptual hash yang bersifat perkiraan: kecocokan persis sangat
     suggests two images are visually near-identical (e.g. an accidental
     duplicate export under a different filename). It is NOT a full
     nearest-neighbor search over Hamming distance, only exact-hash bucket
@@ -111,7 +111,7 @@ def _average_hash(image: Image.Image, hash_size: int = 8) -> str:
 
 
 def _md5_of_file(path: Path, chunk_size: int = 1 << 20) -> str:
-    """Compute the MD5 hex digest of a file's exact byte content."""
+    """Menghitung digest MD5 dari isi byte berkas secara persis."""
     hasher = hashlib.md5()
     with path.open("rb") as f:
         for chunk in iter(lambda: f.read(chunk_size), b""):
@@ -120,7 +120,7 @@ def _md5_of_file(path: Path, chunk_size: int = 1 << 20) -> str:
 
 
 def audit_split(split: str, split_dir: Path, annotation_filename: str) -> SplitAudit:
-    """Run the full forensic audit for a single dataset split. Strictly read-only."""
+    """Menjalankan audit forensik lengkap untuk satu split dataset. Bersifat baca saja."""
     json_path = split_dir / annotation_filename
     audit = SplitAudit(split=split, json_path=str(json_path))
 

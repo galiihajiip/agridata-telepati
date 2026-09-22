@@ -157,7 +157,7 @@ def summarize_class_imbalance(split_data: SplitData) -> ClassImbalance:
 
 
 def compute_bbox_geometry(split_data: SplitData, small_object_threshold: float = 0.01) -> BboxGeometry:
-    """Bounding box geometry, including area relative to its own image.
+    """Geometri bounding box, termasuk luas relatif terhadap citranya sendiri.
 
     `small_object_threshold` is a fraction of image area: 0.01 means boxes
     covering under one percent of the image are counted as small objects.
@@ -222,9 +222,9 @@ def summarize_resolution(split_data: SplitData) -> ResolutionSummary:
 
 
 def audit_missingness(dataset_root: Path, split: str, annotation_filename: str) -> MissingnessReport:
-    """Object-detection-specific completeness checks on the raw COCO JSON.
+    """Pemeriksaan kelengkapan khusus deteksi objek pada berkas COCO mentah.
 
-    Missingness for a detection dataset is not a null cell in a table: it is
+    Missingness pada dataset deteksi bukan sel kosong pada tabel, melainkan
     a broken reference between the JSON and the image files, or a bounding
     box that cannot describe a region. Each check is reported even when its
     count is zero, because a zero is itself an audit result.
@@ -377,7 +377,7 @@ def analyze_annotation_overlap(split_data: SplitData, iou_threshold: float = 0.5
 
 
 def load_duplicate_summary(audit_report_path: Path) -> dict:
-    """Read the Block 2 forensic audit's cross-split duplicate findings."""
+    """Membaca temuan duplikat lintas split dari audit forensik dataset."""
     if not audit_report_path.exists():
         return {"available": False, "reason": f"{audit_report_path} tidak ditemukan"}
 

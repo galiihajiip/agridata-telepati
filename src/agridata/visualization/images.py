@@ -71,9 +71,9 @@ def save_annotated_sample(
     output_dir: Path,
     tag: str,
 ) -> Path:
-    """Draw and save one annotated sample image; returns the output path.
+    """Menggambar dan menyimpan satu citra contoh beranotasi, mengembalikan path keluaran.
 
-    Output filename embeds the split, tag (e.g. "random", "rare_class",
+    Nama berkas keluaran memuat split, penanda (misalnya "random", "rare_class"),
     "crowded"), image ID, and original filename for full audit traceability.
     """
     image_path = dataset_root / split / image_record.file_name
