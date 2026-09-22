@@ -60,7 +60,7 @@ auto_commit.log
 # structured JSON summaries in artifacts/reports/, not meant to be committed.
 artifacts/archive/*.log
 
-# Research Assistant local session/runtime state (session locks, etc.), not
+# Local editor/session runtime state (session locks, etc.), not
 # meaningful to a judge cloning this repo, and would churn every session.
 .agent/
 

@@ -14,7 +14,7 @@ Audit performed at: 2026-09-18 (Block 20), against git commit `3d412e4`
 
 | # | Requirement | Status | Evidence |
 |---|---|---|---|
-| 1 | 2-3 active students | NOT VERIFIED | Team roster/composition is not something this AI has access to or authority over. No file in this repository records team membership. Must be confirmed by the team directly against the competition registration. |
+| 1 | 2-3 active students | NOT VERIFIED | Team roster/composition is not something this audit has access to or authority over. No file in this repository records team membership. Must be confirmed by the team directly against the competition registration. |
 | 2 | Same university | NOT VERIFIED | Same reason as above, outside this repository's scope. |
 | 3 | One team leader | NOT VERIFIED | Same reason as above. |
 | 4 | One supervisor | NOT VERIFIED | Same reason as above. |

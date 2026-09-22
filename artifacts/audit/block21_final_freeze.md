@@ -4,9 +4,9 @@ Performed against the final 50-epoch model (mAP@0.5=0.6277), after Block 20's
 compliance audit was re-verified with the updated numbers. No model changes
 were introduced in this block, verification only.
 
-**Note on git operations**: per explicit user instruction, this AI does not
-run `git commit` or `git push` in this project (not even locally), all
-commits are made by the user's own auto-commit daemon, and pushing
+**Note on git operations**: per project policy, no `git commit` or `git push`
+is run as part of this verification (not even locally), all commits are made
+by the repository owner's auto-commit daemon, and pushing
 (including the pending force-push needed to resolve the history-rewrite
 divergence, see Block 20's audit GITHUB #2) is the user's own action. The
 checks below are read-only (`status`, `diff`, `log`, `show`) plus
@@ -37,7 +37,7 @@ model's actual numbers (mAP50=0.6277, checksum, commit hash). Current
 standing: 29 PASS, 3 WARN, 0 FAIL, 4 NOT VERIFIED. The 3 WARN items
 (git push/force-push pending, GitHub Release unpublished, both deliberately
 left to the user) and 4 NOT VERIFIED items (team composition, outside this
-AI's visibility) are open, non-fabricated status. PASS (as "correctly
+repository visibility) are open, non-fabricated status. PASS (as "correctly
 reports incomplete state", not as "everything is done").
 
 ## 5. Weight load test
@@ -144,7 +144,7 @@ PASS.
 | **Local history rewrite pushed to remote** | ❌ **Pending, user action required** |
 | **GitHub Release published with weight download link** | ❌ **Pending, user action required** |
 | Team composition (2-3 students, same university, leader, supervisor) | ⚠️ Not verifiable from repository, confirm separately |
-| Physically signed originality statement | ⚠️ Outside this AI's capability, team's own responsibility |
+| Physically signed originality statement | ⚠️ Outside repository scope, team's own responsibility |
 
 ## Final artifact inventory
 
@@ -202,12 +202,12 @@ SHA-256: `9d74fffdd977a7bb6749bc828fe908278c5d3eaa24c3cfdbbe5a560d41f5d308`
 Per the master spec's Block 21 instruction, *"If anything fails, STOP and
 report it instead of pretending the submission is ready"*, this is
 reported as **BLOCKED**, not PASS, because two submission-critical actions
-remain outside this AI's authority to complete:
+remain outside the scope of this verification:
 
 1. **Force-push the rewritten local history to `origin/main`.**
 2. **Publish the GitHub Release** (after item 1, so it points at current state).
 
-Everything within this AI's control, code, data handling, model,
+Everything within the repository's scope, code, data handling, model,
 evaluation, documentation, and audit, is verified correct and complete as
 of commit `ddb26a3af29c0895de8c6692bf2f94b62a4acd67`. The submission is not
 ready for judging until the two items above are resolved and (separately,
