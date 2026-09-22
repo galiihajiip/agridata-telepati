@@ -27,17 +27,19 @@ logger = logging.getLogger("agridata.dataset.inspect")
 
 REQUIRED_COCO_KEYS = ("images", "annotations", "categories")
 
-# Bounding box dengan luas piksel di bawah nilai ini ditandai mencurigakan kecil.
+# Bounding box dengan luas di bawah nilai ini ditandai mencurigakan kecil.
 MIN_PLAUSIBLE_BBOX_AREA = 4.0
+
 # Bounding box yang menutupi lebih dari fraksi luas citra ini ditandai
-# flagged as suspiciously large (may indicate a mislabeled full-image box).
+# mencurigakan besar, kemungkinan kotak selebar citra yang salah label.
 MAX_PLAUSIBLE_BBOX_AREA_FRACTION = 0.98
+
 # Kotak yang melewati batas citra tidak lebih dari jumlah piksel ini dianggap
-# sebagai derau pembulatan (PERINGATAN, dapat dipotong) dan bukan sebagai
-# bukan anotasi rusak. Diverifikasi empiris pada dataset ini: seluruh
-# "exceeds image bounds" case across train/valid/test overshoots by <= 0.5px
-# kelebihan berasal dari pembulatan ekspor, sehingga 1,0 piksel merupakan
-# ambang konservatif yang tetap menangkap kotak yang benar-benar rusak.
+# derau pembulatan, berstatus peringatan dan dapat dipotong, bukan anotasi
+# rusak. Diverifikasi empiris pada dataset ini: seluruh kasus melewati batas
+# pada ketiga split hanya berlebih maksimal 0,5 piksel, berasal dari
+# pembulatan saat ekspor. Ambang 1,0 piksel karenanya konservatif dan tetap
+# menangkap kotak yang benar-benar rusak.
 BBOX_BOUNDARY_TOLERANCE_PX = 1.0
 
 
