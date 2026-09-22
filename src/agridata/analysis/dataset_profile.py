@@ -305,6 +305,77 @@ def scene_density_summary(split_data: SplitData, crowded_threshold: int = 3) -> 
     }
 
 
+def _iou_xywh(a: tuple, b: tuple) -> float:
+    ax, ay, aw, ah = a
+    bx, by, bw, bh = b
+    x1, y1 = max(ax, bx), max(ay, by)
+    x2, y2 = min(ax + aw, bx + bw), min(ay + ah, by + bh)
+    if x2 <= x1 or y2 <= y1:
+        return 0.0
+    inter = (x2 - x1) * (y2 - y1)
+    union = aw * ah + bw * bh - inter
+    return inter / union if union > 0 else 0.0
+
+
+def analyze_annotation_overlap(split_data: SplitData, iou_threshold: float = 0.5) -> dict:
+    """Cari anotasi yang saling bertumpuk di dalam citra yang sama.
+
+    Tumpang tindih tinggi antar dua kotak pada kelas yang sama dapat menandakan
+    anotasi ganda untuk objek yang sama. Tumpang tindih antar kelas berbeda
+    lebih sering wajar, misalnya gejala penyakit pada helai daun yang sama.
+
+    Ini bersifat indikasi, bukan vonis: tidak ada kotak yang dihapus atau
+    diubah berdasarkan analisis ini.
+    """
+    by_image: dict[int, list] = {}
+    for ann in split_data.annotations:
+        by_image.setdefault(ann.image_id, []).append(ann)
+
+    same_class = 0
+    cross_class = 0
+    same_class_examples: list[dict] = []
+    images_affected: set[int] = set()
+    pairs_checked = 0
+
+    for image_id, anns in by_image.items():
+        if len(anns) < 2:
+            continue
+        for i in range(len(anns)):
+            for j in range(i + 1, len(anns)):
+                pairs_checked += 1
+                iou = _iou_xywh(anns[i].bbox, anns[j].bbox)
+                if iou < iou_threshold:
+                    continue
+                images_affected.add(image_id)
+                if anns[i].canonical_class == anns[j].canonical_class:
+                    same_class += 1
+                    if len(same_class_examples) < 10:
+                        same_class_examples.append({
+                            "image_id": image_id,
+                            "kelas": anns[i].canonical_class,
+                            "iou": round(iou, 4),
+                        })
+                else:
+                    cross_class += 1
+
+    total_images = len({a.image_id for a in split_data.annotations})
+    return {
+        "iou_threshold": iou_threshold,
+        "pairs_checked": pairs_checked,
+        "overlapping_same_class": same_class,
+        "overlapping_cross_class": cross_class,
+        "images_affected": len(images_affected),
+        "images_with_annotations": total_images,
+        "share_images_affected": round(len(images_affected) / total_images, 4) if total_images else 0.0,
+        "same_class_examples": same_class_examples,
+        "catatan": (
+            "Tumpang tindih kelas sama berpotensi merupakan anotasi ganda. "
+            "Tumpang tindih antar kelas umumnya wajar pada citra daun. "
+            "Tidak ada anotasi yang diubah berdasarkan analisis ini."
+        ),
+    }
+
+
 def load_duplicate_summary(audit_report_path: Path) -> dict:
     """Read the Block 2 forensic audit's cross-split duplicate findings."""
     if not audit_report_path.exists():
