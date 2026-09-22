@@ -1,4 +1,4 @@
-"""Canonical-mapped dataset statistics for EDA (Block 4).
+"""Statistik dataset setelah pemetaan canonical, untuk keperluan eksplorasi data.
 
 Loads the raw COCO annotations for a split, applies the Block 3 canonical
 mapping (fail-loudly on any unrecognized raw category, see
@@ -43,7 +43,7 @@ class SplitData:
 
 
 def load_canonical_split(dataset_root: Path, split: str, annotation_filename: str) -> SplitData:
-    """Load one split's COCO JSON and map every annotation to its canonical class.
+    """Memuat JSON COCO satu split dan memetakan setiap anotasi ke kelas canonical.
 
     Supercategory placeholder categories (Leaf-blight, Rice-Leaf-Diseasee,
     paddy) are skipped, matching the Block 2/3 finding that they carry zero
@@ -83,12 +83,12 @@ def load_canonical_split(dataset_root: Path, split: str, annotation_filename: st
 
 
 def class_instance_counts(split_data: SplitData) -> Counter[str]:
-    """Number of annotated instances per canonical class."""
+    """Jumlah instance beranotasi per kelas canonical."""
     return Counter(ann.canonical_class for ann in split_data.annotations)
 
 
 def class_image_counts(split_data: SplitData) -> Counter[str]:
-    """Number of distinct images containing at least one instance of each canonical class."""
+    """Jumlah citra berbeda yang memuat minimal satu instance tiap kelas canonical."""
     images_per_class: dict[str, set[int]] = defaultdict(set)
     for ann in split_data.annotations:
         images_per_class[ann.canonical_class].add(ann.image_id)
@@ -96,15 +96,15 @@ def class_image_counts(split_data: SplitData) -> Counter[str]:
 
 
 def bbox_dimensions(split_data: SplitData) -> list[tuple[float, float]]:
-    """(width, height) for every annotation's bounding box."""
+    """Pasangan (lebar, tinggi) untuk setiap bounding box anotasi."""
     return [(ann.bbox[2], ann.bbox[3]) for ann in split_data.annotations]
 
 
 def image_dimensions(split_data: SplitData) -> list[tuple[int, int]]:
-    """(width, height) for every image in the split."""
+    """Pasangan (lebar, tinggi) untuk setiap citra pada split."""
     return [(img.width, img.height) for img in split_data.images]
 
 
 def annotations_per_image(split_data: SplitData) -> Counter[int]:
-    """Number of annotations per image_id (useful for finding crowded scenes)."""
+    """Jumlah anotasi per image_id, berguna untuk menemukan adegan padat."""
     return Counter(ann.image_id for ann in split_data.annotations)

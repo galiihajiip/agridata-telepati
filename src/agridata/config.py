@@ -1,4 +1,4 @@
-"""Central configuration loading for the AgriData pipeline.
+"""Pemuatan konfigurasi terpusat untuk pipeline AgriData.
 
 All path-dependent parameters (dataset location, split directory names, seed,
 etc.) are read from a single YAML source of truth so that no personal or
@@ -19,7 +19,7 @@ DEFAULT_CONFIG_PATH = PROJECT_ROOT / "configs" / "base.yaml"
 
 @dataclass(frozen=True)
 class DatasetPaths:
-    """Resolved, absolute filesystem paths for the official dataset splits."""
+    """Path absolut yang sudah diselesaikan untuk setiap split dataset resmi."""
 
     root: Path
     train_dir: Path
@@ -28,7 +28,7 @@ class DatasetPaths:
     annotation_filename: str
 
     def annotation_path(self, split_dir: Path) -> Path:
-        """Return the COCO annotation file path for a given split directory."""
+        """Mengembalikan path berkas anotasi COCO untuk direktori split tertentu."""
         return split_dir / self.annotation_filename
 
 
@@ -42,7 +42,7 @@ class AppConfig:
 
 
 def load_config(config_path: Path | str = DEFAULT_CONFIG_PATH) -> AppConfig:
-    """Load and validate the project configuration from a YAML file.
+    """Memuat dan memvalidasi konfigurasi project dari berkas YAML.
 
     Raises:
         FileNotFoundError: if the config file does not exist.

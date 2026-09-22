@@ -1,4 +1,4 @@
-"""Draw ground-truth bounding boxes with canonical class labels on an image.
+"""Menggambar bounding box ground truth beserta label kelas canonical pada citra.
 
 Used for the mandatory visual sanity checks in Block 4: every saved image
 must show the canonical class name, the bounding box, and the source
@@ -15,8 +15,8 @@ from PIL import Image, ImageDraw, ImageFont
 from agridata.dataset.mapping import CANONICAL_CLASSES
 from agridata.dataset.stats import AnnotationRecord, ImageRecord
 
-# Fixed, deterministic color per canonical class (not derived from a hash,
-# so the same class always gets the same color across every figure).
+# Warna tetap dan deterministik per kelas canonical, tidak diturunkan dari
+# hash, sehingga satu kelas selalu memakai warna yang sama di semua figur.
 _PALETTE = [
     "#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231",
     "#911eb4", "#46f0f0", "#f032e6", "#bcf60c", "#fabebe", "#008080",
@@ -30,9 +30,9 @@ def draw_annotated_image(
     annotations: list[AnnotationRecord],
     title_suffix: str = "",
 ) -> Image.Image:
-    """Return a copy of the image at `image_path` with GT boxes and labels drawn.
+    """Mengembalikan salinan citra dengan kotak ground truth dan labelnya tergambar.
 
-    Each box is labeled with its canonical class name. The filename is not
+    Setiap kotak diberi nama kelas canonical. Nama berkas tidak
     embedded in the pixels (kept out of the image itself), callers should
     use it in the saved output filename instead, per the audit-friendly
     convention used throughout this project.

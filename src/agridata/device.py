@@ -1,4 +1,4 @@
-"""Compute device detection with Apple Silicon awareness and CPU fallback.
+"""Deteksi perangkat komputasi dengan dukungan Apple Silicon dan fallback CPU.
 
 Never assumes CUDA is available (the competition audit environment is
 unspecified and must not be assumed to be a Mac). CPU must always work.
@@ -13,14 +13,14 @@ logger = logging.getLogger("agridata.device")
 
 
 def is_apple_silicon() -> bool:
-    """Return True if running on macOS with an ARM64 (Apple Silicon) CPU."""
+    """Mengembalikan True bila berjalan pada macOS dengan prosesor ARM64 Apple Silicon."""
     return platform.system() == "Darwin" and platform.machine() == "arm64"
 
 
 def detect_device() -> str:
-    """Return the best available compute device string: 'cuda', 'mps', or 'cpu'.
+    """Mengembalikan perangkat komputasi terbaik yang tersedia: 'cuda', 'mps', atau 'cpu'.
 
-    Falls back to 'cpu' whenever torch is not installed or no accelerator is
+    Jatuh kembali ke 'cpu' bila torch tidak terpasang atau tidak ada akselerator
     usable, so the pipeline always has a working device.
     """
     try:

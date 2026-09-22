@@ -17,7 +17,7 @@ from agridata.device import detect_device, is_apple_silicon
 
 
 def get_git_commit() -> str | None:
-    """Return the current git commit hash, or None if unavailable."""
+    """Mengembalikan hash commit Git saat ini, atau None bila tidak tersedia."""
     try:
         result = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True)
         return result.stdout.strip()
@@ -26,9 +26,9 @@ def get_git_commit() -> str | None:
 
 
 def get_git_status() -> dict[str, Any]:
-    """Return whether the working tree is clean and, if not, which files changed.
+    """Mengembalikan status kebersihan working tree dan daftar berkas yang berubah.
 
-    A dirty working tree at report-generation time is recorded, not hidden,
+    Working tree yang kotor saat laporan dibuat tetap dicatat, tidak disembunyikan,
     an auditor rerunning the pipeline needs to know if the artifact was
     produced from exactly the committed code or from local, uncommitted edits.
     """
@@ -52,7 +52,7 @@ def get_installed_packages() -> list[str]:
 
 
 def get_device_info() -> dict[str, Any]:
-    """Report the resolved compute device plus raw torch accelerator availability."""
+    """Melaporkan perangkat komputasi terpilih beserta ketersediaan akselerator torch."""
     info: dict[str, Any] = {"resolved_device": detect_device(), "is_apple_silicon": is_apple_silicon()}
     try:
         import torch
@@ -68,7 +68,7 @@ def get_device_info() -> dict[str, Any]:
 
 
 def capture_environment_snapshot() -> dict[str, Any]:
-    """Capture everything an auditor needs to know about the environment/code
+    """Merekam seluruh informasi lingkungan dan kode yang dibutuhkan auditor
     state that produced a given run: Python/platform, dependency versions,
     git commit + dirty status, and resolved compute device."""
     return {
