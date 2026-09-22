@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Controlled augmentation ablation (Block 11).
+"""Ablasi augmentasi satu faktor pada satu waktu.
 
 Usage:
     python scripts/run_augmentation_ablation.py --config configs/experiments/augmentation_ablation.yaml

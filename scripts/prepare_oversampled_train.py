@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Targeted oversampling of rare-class training images (Block 12 ablation).
+"""Penyiapan varian data latih dengan oversampling kelas minoritas.
 
 Usage:
     python scripts/prepare_oversampled_train.py \\

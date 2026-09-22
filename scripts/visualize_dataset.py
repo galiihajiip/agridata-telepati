@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI for dataset EDA and visual annotation sanity-checking (Block 4).
+"""Visualisasi contoh citra dataset beserta anotasinya.
 
 Usage:
     python scripts/visualize_dataset.py --dataset-root "<PATH>" \

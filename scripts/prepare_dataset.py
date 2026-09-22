@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic dataset preparation for object detection training (Block 5).
+"""Penyiapan dataset deterministik untuk pelatihan deteksi objek.
 
 Builds a training-ready representation from the RAW OFFICIAL DATASET without
 altering it:

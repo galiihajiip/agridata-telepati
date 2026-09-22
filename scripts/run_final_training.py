@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Final compliant training run (Block 15).
+"""Pelatihan model final yang patuh terhadap batasan kompetisi.
 
 Usage:
     python scripts/run_final_training.py --config configs/final_model_config.yaml

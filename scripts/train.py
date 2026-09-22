@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI for compliant baseline training (Block 6).
+"""Pelatihan model pada skala penyaringan.
 
 Usage:
     python scripts/train.py --config configs/experiments/baseline_smoke.yaml

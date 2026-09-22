@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI to snapshot the current environment/version/git state (Block 8).
+"""Perekaman informasi lingkungan eksekusi untuk keperluan audit.
 
 Usage:
     python scripts/report_environment.py

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI to validate the official 11-class canonical mapping against the actual
+"""Validasi pemetaan 11 kelas canonical terhadap dataset aktual.
 raw dataset categories (Block 3).
 
 Usage:

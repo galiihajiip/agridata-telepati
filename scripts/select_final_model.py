@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Final model configuration selection report (Block 14).
+"""Pemilihan konfigurasi model final berdasarkan bukti percobaan.
 
 Usage:
     python scripts/select_final_model.py

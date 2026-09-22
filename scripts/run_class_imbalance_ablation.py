@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Class imbalance mitigation ablation (Block 12).
+"""Ablasi penanganan ketidakseimbangan kelas.
 
 Usage:
     python scripts/run_class_imbalance_ablation.py

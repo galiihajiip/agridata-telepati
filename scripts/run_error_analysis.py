@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Object detection error analysis (Block 13).
+"""Analisis kesalahan model deteksi objek.
 
 Usage:
     python scripts/run_error_analysis.py --weights runs/detect/matrix/E08/weights/best.pt --split valid

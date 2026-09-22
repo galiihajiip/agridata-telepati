@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproducibility harness (Block 8).
+"""Perangkat verifikasi reproduktibilitas.
 
 This script VERIFIES reproducibility claims by actually re-executing steps
 and diffing results, it does not just assert that things "should" be

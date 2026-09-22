@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI entrypoint for the raw dataset forensic audit (Block 2).
+"""Audit forensik dataset mentah.
 
 Usage:
     python scripts/audit_dataset.py --dataset-root "<PATH>" [--output-dir artifacts/audit]

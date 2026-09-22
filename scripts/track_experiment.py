@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI to log a completed training run into the experiment tracker (Block 9).
+"""Pencatatan satu percobaan ke dalam log percobaan.
 
 Usage:
     python scripts/track_experiment.py \\

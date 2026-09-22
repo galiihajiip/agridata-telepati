@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Controlled baseline hyperparameter experiment matrix (Block 10).
+"""Matriks percobaan terkontrol satu faktor pada satu waktu.
 
 Usage:
     python scripts/run_experiment_matrix.py --matrix-config configs/experiments/matrix.yaml

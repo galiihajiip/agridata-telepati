@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI for reproducible mAP@50 and F1 evaluation (Block 7).
+"""Antarmuka baris perintah untuk evaluasi mAP@50 dan F1 yang dapat direproduksi.
 
 Usage:
     python scripts/evaluate.py --weights <PATH> --split valid --config configs/base.yaml

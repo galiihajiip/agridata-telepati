@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Class imbalance diagnostics (Block 12).
+"""Diagnostik ketidakseimbangan kelas.
 
 Usage:
     python scripts/analyze_class_imbalance.py --dataset-root "<PATH>"
