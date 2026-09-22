@@ -10,10 +10,7 @@ canonical, dibangun dari dataset resmi TELEPATI 8.0.
 | Tugas | *Object detection*, 11 kelas canonical |
 | Arsitektur | YOLOv8n, dilatih dari nol tanpa *external pretrained weights* |
 | mAP@50 (split valid) | **64,01%** |
-| mAP@0.5 (split test, held-out) | **0,6145** |
-| mAP@0.5:0.95 (split valid / test) | 0,3905 / 0,3998 |
-| *Precision* / *recall* (titik *best-F1* internal Ultralytics) | 0,6406 / 0,6237 |
-| F1-Score (macro, split valid) | **63,83%** |
+| F1-Score macro (split valid) | **63,83%** |
 | NMS IoU yang dipakai | 0,5 (bukan bawaan 0,7) |
 | Ukuran model | 6,3 MB |
 | Waktu pelatihan | 7,34 jam, 50 *epoch*, Apple Silicon MPS |
@@ -183,7 +180,7 @@ mereproduksi angka yang sama:
 | *Precision* pada titik operasi | 0,6406 |
 | *Recall* pada titik operasi | 0,6237 |
 
-Reproduksi: `python scripts/compute_official_metrics.py --split val`
+Reproduksi: `python scripts/compute_official_metrics.py --split valid`
 
 Catatan koreksi metodologi: project ini sebelumnya melaporkan *F1* memakai
 rata-rata *micro* pada *threshold* tetap, yang menghasilkan sekitar 0,33.
