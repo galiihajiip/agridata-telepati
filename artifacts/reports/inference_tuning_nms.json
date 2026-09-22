@@ -1,0 +1,49 @@
+{
+  "model": "50epoch_640",
+  "split": "val",
+  "catatan": "Sweep NMS IoU pada model 640. Bobot tidak diubah, hanya parameter inferensi. Dipilih pada split validasi.",
+  "hasil": [
+    {
+      "imgsz": 640,
+      "nms_iou": 0.5,
+      "map50": 0.6401,
+      "map50_95": 0.3856,
+      "best_f1": 0.6383,
+      "best_f1_conf": 0.169
+    },
+    {
+      "imgsz": 640,
+      "nms_iou": 0.6,
+      "map50": 0.638,
+      "map50_95": 0.389,
+      "best_f1": 0.6325,
+      "best_f1_conf": 0.231
+    },
+    {
+      "imgsz": 640,
+      "nms_iou": 0.7,
+      "map50": 0.6277,
+      "map50_95": 0.3905,
+      "best_f1": 0.6181,
+      "best_f1_conf": 0.265
+    },
+    {
+      "imgsz": 640,
+      "nms_iou": 0.8,
+      "map50": 0.6038,
+      "map50_95": 0.3844,
+      "best_f1": 0.5795,
+      "best_f1_conf": 0.329
+    }
+  ],
+  "terbaik": {
+    "nms_iou": 0.5,
+    "map50": 0.6401,
+    "best_f1": 0.6383
+  },
+  "baseline_default": {
+    "nms_iou": 0.7,
+    "map50": 0.6277,
+    "best_f1": 0.6181
+  }
+}
