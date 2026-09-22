@@ -1,6 +1,6 @@
 # Laporan Evaluasi, split: `valid`
 
-Weights: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Git commit: `18f03e1cef34eaea85fa2b837a35c6338422e7de`
+Weights: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Git commit: `424747e1a390787b017f3528d602a4beaaf2584f`
 
 ## Native metrics (Ultralytics, source of truth for mAP)
 
@@ -24,21 +24,21 @@ Weights: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weig
 
 ## Local F1 metrics (implementation detail, confidence threshold = 0.25)
 
-- Overall precision: 0.6632
-- Overall recall: 0.3159
-- Overall F1: 0.4279
-- TP=1544 FP=784 FN=3344
+- Overall precision: 0.6390
+- Overall recall: 0.2248
+- Overall F1: 0.3326
+- TP=1099 FP=621 FN=3789
 
 | canonical class | precision | recall | F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|---:|
-| Leaf scald | 0.5856 | 0.1667 | 0.2595 | 65 | 46 | 325 |
-| Brown spot | 0.6040 | 0.1431 | 0.2313 | 209 | 137 | 1252 |
-| Healthy | 0.8338 | 0.7335 | 0.7804 | 311 | 62 | 113 |
-| Blast | 0.6380 | 0.3052 | 0.4129 | 289 | 164 | 658 |
-| Leaf roller | 0.7500 | 0.8621 | 0.8021 | 75 | 25 | 12 |
-| Tungro | 0.6404 | 0.3211 | 0.4277 | 244 | 137 | 516 |
+| Leaf scald | 0.5728 | 0.1513 | 0.2394 | 59 | 44 | 331 |
+| Brown spot | 0.6066 | 0.1383 | 0.2252 | 202 | 131 | 1259 |
+| Healthy | 0.8325 | 0.3986 | 0.5391 | 169 | 34 | 255 |
+| Blast | 0.6418 | 0.2270 | 0.3354 | 215 | 120 | 732 |
+| Leaf roller | 0.0000 | 0.0000 | 0.0000 | 0 | 7 | 87 |
+| Tungro | 0.6394 | 0.2987 | 0.4072 | 227 | 128 | 533 |
 | Narrow brown | 0.7826 | 0.9600 | 0.8623 | 72 | 20 | 3 |
-| Sheath blight | 0.5810 | 0.2500 | 0.3496 | 122 | 88 | 366 |
+| Sheath blight | 0.5729 | 0.2254 | 0.3235 | 110 | 82 | 378 |
 | Bacterial leaf blight | 0.4444 | 0.3520 | 0.3929 | 44 | 55 | 81 |
-| False smut | 0.7941 | 0.9419 | 0.8617 | 81 | 21 | 5 |
-| Bacterial panicle blight | 0.5246 | 0.7111 | 0.6038 | 32 | 29 | 13 |
+| False smut | 1.0000 | 0.0116 | 0.0230 | 1 | 0 | 85 |
+| Bacterial panicle blight | 0.0000 | 0.0000 | 0.0000 | 0 | 0 | 45 |
