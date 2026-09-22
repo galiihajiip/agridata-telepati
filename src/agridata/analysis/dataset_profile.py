@@ -1,12 +1,12 @@
-"""Submission-grade dataset profiling (BLOCK B).
+"""Profiling dataset untuk keperluan submission.
 
-Pure analysis helpers that turn a split's raw COCO JSON and its canonical
-view into structured summaries: class balance, bounding box geometry, image
-resolution, and an object-detection-specific missingness audit. Every
-function returns plain data so the notebook can render it without embedding
-analysis logic.
+Fungsi analisis murni yang mengubah berkas COCO mentah dan tampilan
+canonical-nya menjadi ringkasan terstruktur: keseimbangan kelas, geometri
+bounding box, resolusi citra, dan audit missingness khusus deteksi objek.
+Seluruh fungsi mengembalikan data biasa agar notebook cukup menampilkannya
+tanpa memuat logika analisis.
 
-Nothing here writes to the raw dataset.
+Modul ini tidak pernah menulis ke dataset mentah.
 """
 
 from __future__ import annotations
@@ -159,8 +159,9 @@ def summarize_class_imbalance(split_data: SplitData) -> ClassImbalance:
 def compute_bbox_geometry(split_data: SplitData, small_object_threshold: float = 0.01) -> BboxGeometry:
     """Geometri bounding box, termasuk luas relatif terhadap citranya sendiri.
 
-    `small_object_threshold` is a fraction of image area: 0.01 means boxes
-    covering under one percent of the image are counted as small objects.
+    `small_object_threshold` merupakan fraksi luas citra. Nilai 0,01 berarti
+    kotak yang menutupi kurang dari satu persen luas citra dihitung sebagai
+    objek kecil.
     """
     widths: list[float] = []
     heights: list[float] = []
@@ -225,9 +226,10 @@ def audit_missingness(dataset_root: Path, split: str, annotation_filename: str) 
     """Pemeriksaan kelengkapan khusus deteksi objek pada berkas COCO mentah.
 
     Missingness pada dataset deteksi bukan sel kosong pada tabel, melainkan
-    a broken reference between the JSON and the image files, or a bounding
-    box that cannot describe a region. Each check is reported even when its
-    count is zero, because a zero is itself an audit result.
+    relasi yang putus antara berkas JSON dan berkas citra, atau bounding box
+    yang tidak dapat mendeskripsikan suatu wilayah. Setiap pemeriksaan tetap
+    dilaporkan meskipun hasilnya nol, karena nilai nol merupakan hasil audit
+    yang sah.
     """
     split_dir = dataset_root / split
     with (split_dir / annotation_filename).open("r", encoding="utf-8") as f:
