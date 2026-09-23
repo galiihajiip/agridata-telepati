@@ -6,27 +6,27 @@ Laporan ini meninjau seluruh 21 percobaan yang tercatat (E01 sampai E21). Yang d
 
 | Percobaan | imgsz | epoch | optimizer | mAP@0.5 | Precision | Recall | Durasi (detik) | Catatan |
 |---|---:|---:|---|---:|---:|---:|---:|---|
-| E21 | 640 | 12 | AdamW | 0.0247 | 0.1403 | 0.0552 | 659 | Block 11 augmentation ablation: combined_no_aug. Block 14 confirmation |
-| E20 | 640 | 12 | AdamW | 0.0234 | 0.1344 | 0.0622 | 671 | Block 11 augmentation ablation: combined_default_aug. Block 14 confirm |
-| E09 | 320 | 5 | AdamW | 0.0200 | 0.3004 | 0.0305 | 152 | Block 11 augmentation ablation: none. Reference point: all augmentatio |
-| E17 | 320 | 5 | AdamW | 0.0140 | 0.3867 | 0.0167 | 114 | Block 11 augmentation ablation: mosaic (not in the master spec's candi |
-| E08 | 320 | 10 | AdamW | 0.0134 | 0.2921 | 0.0406 | 208 | OFAT variant: training_duration changed from baseline; all else held f |
-| E11 | 320 | 5 | AdamW | 0.0130 | 0.3860 | 0.0221 | 135 | Block 11 augmentation ablation: vertical_flip. QUESTIONABLE — rice pla |
-| E15 | 320 | 5 | AdamW | 0.0110 | 0.1929 | 0.0385 | 131 | Block 11 augmentation ablation: brightness_contrast. PLAUSIBLE — outdo |
-| E10 | 320 | 5 | AdamW | 0.0095 | 0.2853 | 0.0361 | 145 | Block 11 augmentation ablation: horizontal_flip. PLAUSIBLE — a leaf/pl |
-| E14 | 320 | 5 | AdamW | 0.0091 | 0.2966 | 0.0219 | 136 | Block 11 augmentation ablation: translation. PLAUSIBLE — subject frami |
-| E12 | 320 | 5 | AdamW | 0.0091 | 0.2892 | 0.0183 | 149 | Block 11 augmentation ablation: rotation. PLAUSIBLE in moderation — si |
-| E16 | 320 | 5 | AdamW | 0.0081 | 0.1988 | 0.0256 | 132 | Block 11 augmentation ablation: color_transform. PLAUSIBLE but bounded |
-| E18 | 320 | 5 | AdamW | 0.0071 | 0.1143 | 0.0550 | 135 | Block 12 class-imbalance ablation: baseline, natural class distributio |
-| E13 | 320 | 5 | AdamW | 0.0064 | 0.1932 | 0.0495 | 129 | Block 11 augmentation ablation: scaling. PLAUSIBLE — camera-to-subject |
-| E03 | 640 | 5 | AdamW | 0.0041 | 0.3724 | 0.0052 | 302 | OFAT variant: image_size changed from baseline; all else held fixed. |
-| E02 | 320 | 5 | AdamW | 0.0018 | 0.1840 | 0.0073 | 146 | Block 10 baseline (OFAT reference point). |
-| E07 | 320 | 5 | AdamW | 0.0007 | 0.2759 | 0.0061 | 134 | OFAT variant: augmentation_strength changed from baseline; all else he |
-| E19 | 320 | 5 | AdamW | 0.0005 | 0.1825 | 0.0111 | 120 | Block 12 class-imbalance ablation: rare classes ['Bacterial leaf bligh |
-| E04 | 320 | 5 | AdamW | 0.0005 | 0.0004 | 0.0828 | 119 | OFAT variant: batch_size changed from baseline; all else held fixed. |
-| E06 | 320 | 5 | SGD | 0.0003 | 0.0961 | 0.0003 | 128 | OFAT variant: optimizer changed from baseline; all else held fixed. |
-| E05 | 320 | 5 | AdamW | 0.0002 | 0.1820 | 0.0814 | 131 | OFAT variant: learning_rate changed from baseline; all else held fixed |
-| E01 | 320 | 2 | AdamW | 0.0000 | 0.0000 | 0.0000 | 127 | Block 6 smoke test: 2 epochs, 5% of train, imgsz=320. Proves pipeline  |
+| E21 | 640 | 12 | AdamW | 0.0247 | 0.1403 | 0.0552 | 659 | Ablasi augmentasi: combined_no_aug. Percobaan konfirmasi imgsz=640 dan |
+| E20 | 640 | 12 | AdamW | 0.0234 | 0.1344 | 0.0622 | 671 | Ablasi augmentasi: combined_default_aug. Percobaan konfirmasi imgsz=64 |
+| E09 | 320 | 5 | AdamW | 0.0200 | 0.3004 | 0.0305 | 152 | Ablasi augmentasi: none. Titik referensi dengan seluruh augmentasi dim |
+| E17 | 320 | 5 | AdamW | 0.0140 | 0.3867 | 0.0167 | 114 | Ablasi augmentasi: mosaic (tidak termasuk daftar kandidat awal, tetapi |
+| E08 | 320 | 10 | AdamW | 0.0134 | 0.2921 | 0.0406 | 208 | Varian satu faktor: training_duration diubah dari baseline, seluruh pa |
+| E11 | 320 | 5 | AdamW | 0.0130 | 0.3860 | 0.0221 | 135 | Ablasi augmentasi: vertical_flip. DIRAGUKAN, tanaman dan daun padi mem |
+| E15 | 320 | 5 | AdamW | 0.0110 | 0.1929 | 0.0385 | 131 | Ablasi augmentasi: brightness_contrast. MASUK AKAL, pencahayaan di lah |
+| E10 | 320 | 5 | AdamW | 0.0095 | 0.2853 | 0.0361 | 145 | Ablasi augmentasi: horizontal_flip. MASUK AKAL, daun atau tanaman yang |
+| E14 | 320 | 5 | AdamW | 0.0091 | 0.2966 | 0.0219 | 136 | Ablasi augmentasi: translation. MASUK AKAL, pembingkaian dan posisi ob |
+| E12 | 320 | 5 | AdamW | 0.0091 | 0.2892 | 0.0183 | 149 | Ablasi augmentasi: rotation. MASUK AKAL bila dibatasi, karena mensimul |
+| E16 | 320 | 5 | AdamW | 0.0081 | 0.1988 | 0.0256 | 132 | Ablasi augmentasi: color_transform. MASUK AKAL tetapi sengaja dibatasi |
+| E18 | 320 | 5 | AdamW | 0.0071 | 0.1143 | 0.0550 | 135 | Ablasi ketidakseimbangan kelas: baseline dengan distribusi kelas alami |
+| E13 | 320 | 5 | AdamW | 0.0064 | 0.1932 | 0.0495 | 129 | Ablasi augmentasi: scaling. MASUK AKAL, jarak kamera terhadap objek me |
+| E03 | 640 | 5 | AdamW | 0.0041 | 0.3724 | 0.0052 | 302 | Varian satu faktor: image_size diubah dari baseline, seluruh parameter |
+| E02 | 320 | 5 | AdamW | 0.0018 | 0.1840 | 0.0073 | 146 | Baseline matriks percobaan, dipakai sebagai titik referensi pengujian  |
+| E07 | 320 | 5 | AdamW | 0.0007 | 0.2759 | 0.0061 | 134 | Varian satu faktor: augmentation_strength diubah dari baseline, seluru |
+| E19 | 320 | 5 | AdamW | 0.0005 | 0.1825 | 0.0111 | 120 | Ablasi ketidakseimbangan kelas: kelas minoritas ['Bacterial leaf bligh |
+| E04 | 320 | 5 | AdamW | 0.0005 | 0.0004 | 0.0828 | 119 | Varian satu faktor: batch_size diubah dari baseline, seluruh parameter |
+| E06 | 320 | 5 | SGD | 0.0003 | 0.0961 | 0.0003 | 128 | Varian satu faktor: optimizer diubah dari baseline, seluruh parameter  |
+| E05 | 320 | 5 | AdamW | 0.0002 | 0.1820 | 0.0814 | 131 | Varian satu faktor: learning_rate diubah dari baseline, seluruh parame |
+| E01 | 320 | 2 | AdamW | 0.0000 | 0.0000 | 0.0000 | 127 | Uji asap pipeline: 2 epoch, 5 persen data latih, imgsz=320. Membuktika |
 
 ## Konfigurasi terpilih: lihat `configs/final_model_config.yaml`
 
@@ -52,4 +52,4 @@ Hasil penyaringan individual terbaik adalah **E21** (mAP@0.5=0.0247). Konfiguras
 - Backend MPS terbukti memiliki kernel yang tidak deterministik untuk `scatter_reduce_mps` dan `index_put_with_accumulate_mps`. Karena itu reproduksi pelatihan bit per bit tidak dijamin; yang dijamin hanya reproduksi konfigurasi dan prapemrosesan.
 - Perkiraan waktu pelatihan skala penuh sekitar 8,2 jam pada perangkat yang dipakai project ini tergolong lama. Nilai `patience=15` berpotensi memperpendeknya, tetapi perkiraan ini harus diverifikasi ulang saat pelatihan final dijalankan.
 
-Commit Git pada saat pemilihan: `50f89b1d370004cb884cdc09e4a0ae0037500979`
+Commit Git pada saat pemilihan: `9434561088209d839bedad69f0a02126bb4e3436`

@@ -80,9 +80,9 @@ def append_experiment(record: ExperimentRecord, log_path: Path = DEFAULT_LOG_PAT
 def build_markdown_table(records: list[dict[str, Any]]) -> str:
     """Menyajikan log percobaan sebagai tabel Markdown, diurutkan menurut experiment_id."""
     lines = [
-        "# Experiment Log",
+        "# Log Percobaan",
         "",
-        "| Experiment | Model | Image Size | Batch | Optimizer | LR | Weight Decay | Scheduler | Epochs | Device | Best mAP@50 | Best F1 | Precision | Recall | Duration (s) | Notes |",
+        "| Percobaan | Model | Ukuran Citra | Batch | Optimizer | LR | Weight Decay | Scheduler | Epoch | Perangkat | mAP@50 Terbaik | F1 Terbaik | Precision | Recall | Durasi (detik) | Catatan |",
         "|---|---|---:|---:|---|---:|---:|---|---:|---|---:|---:|---:|---:|---:|---|",
     ]
     for r in sorted(records, key=lambda r: r["experiment_id"]):
