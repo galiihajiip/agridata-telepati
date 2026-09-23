@@ -12,14 +12,13 @@ Konfigurasi percobaan dapat direproduksi dan hal ini sudah terverifikasi. Seed, 
 
 | # | Butir | Status | Rincian |
 |---:|---|---|---|
-| 1 | seed sama menghasilkan manifest dataset yang sama | GAGAL | Eksekusi ulang gagal: FATAL: dataset root does not exist: data/raw
- |
-| 2 | seed sama menghasilkan pemetaan canonical yang sama | LULUS | Mapping table hash for version 1.0.0: b88a0260138244fb. build_mapping_report is deterministic (identical input -> identical output). If this hash ever changes unexpectedly on a rerun, MAPPING_VERSION must be bumped. |
-| 3 | konfigurasi sama menghasilkan metadata yang sama | TIDAK DIVERIFIKASI | Bergantung pada pemeriksaan determinisme manifest dataset, yang tidak lulus. |
-| 4 | konfigurasi pelatihan tercatat lengkap | LULUS | Seluruh field konfigurasi pelatihan yang wajib tersedia pada /Users/macbookpro/Projects/agridata/artifacts/reports/block6_baseline_smoke_summary.json. |
+| 1 | seed sama menghasilkan manifest dataset yang sama | LULUS | Manifest hasil eksekusi ulang (10132 citra) identik byte per byte dengan manifest yang terkomit. |
+| 2 | seed sama menghasilkan pemetaan canonical yang sama | LULUS | Hash tabel pemetaan untuk versi 1.0.0: b88a0260138244fb. build_mapping_report bersifat deterministik, yaitu masukan identik menghasilkan keluaran identik. Bila hash ini berubah tak terduga pada eksekusi ulang, MAPPING_VERSION wajib dinaikkan. |
+| 3 | konfigurasi sama menghasilkan metadata yang sama | LULUS | Field deterministik (seed, mapping_version, jumlah citra dan anotasi per split) identical across reruns of the same config; only the recorded timestamp and git commit (if code changed between runs) are expected to vary, these are provenance fields, not outputs of the computation itself. |
+| 4 | konfigurasi pelatihan tercatat lengkap | LULUS | Seluruh field konfigurasi pelatihan yang wajib tersedia pada artifacts/reports/block6_baseline_smoke_summary.json. |
 | 5 | seed acak tercatat | LULUS | Seed=42 tercatat pada konfigurasi percobaan sekaligus ringkasan eksekusi. |
 | 6 | versi dependensi dapat dicatat | LULUS | `pip freeze` menghasilkan 125 paket dengan versi terkunci. |
-| 7 | hash commit git tercatat bila memungkinkan | LULUS | Current commit: 338e23fb49a9dce4b3ccea589e5acdecd7ee6843. |
+| 7 | hash commit git tercatat bila memungkinkan | LULUS | Commit saat ini: 4bd79f4d69bceb9a608b2156c3efd9d998dc6c22. |
 | 8 | konfigurasi model tercatat | LULUS | Tercatat model_arch=yolov8n.yaml dan pretrained=False. |
 | 9 | path data dapat dikonfigurasi | LULUS | Tidak ditemukan path personal yang dipatok keras pada configs/. Skrip yang menyentuh dataset menerima --dataset-root atau --prepared-dir. |
 | 10 | artefak hasil generate diversikan melalui metadata, bukan commit berukuran raksasa | LULUS | Direktori besar atau hasil generate sudah masuk gitignore: ['data/prepared', 'runs', '.venv'] |
