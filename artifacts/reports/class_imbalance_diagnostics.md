@@ -1,12 +1,12 @@
-# Class Imbalance Diagnostics (Block 12)
+# Diagnostik Ketidakseimbangan Kelas
 
-Split: `train` | Total instances: 20163 | Classes: 11
-Max/min instance-count imbalance ratio: **22.6x**
+Split: `train` | Total instance: 20163 | Jumlah kelas: 11
+Rasio ketidakseimbangan jumlah instance terbanyak terhadap tersedikit: **22.6 kali**
 
-Rare classes (< 20% of the most common class's count): **['Bacterial leaf blight', 'Bacterial panicle blight', 'False smut', 'Leaf roller', 'Narrow brown']**
-Small-object / visually difficult classes (< 10% of the largest median bbox area): **['Bacterial leaf blight', 'Blast', 'Brown spot', 'Sheath blight', 'Tungro']**
+Kelas minoritas, kurang dari 20 persen jumlah kelas terbanyak: **['Bacterial leaf blight', 'Bacterial panicle blight', 'False smut', 'Leaf roller', 'Narrow brown']**
+Kelas berobjek kecil atau sulit secara visual, kurang dari 10 persen median luas bbox terbesar: **['Bacterial leaf blight', 'Blast', 'Brown spot', 'Sheath blight', 'Tungro']**
 
-| Class | Instances | Images | % of total | Median bbox area (px²) | Rare | Small-object |
+| Kelas | Instance | Citra | Persen total | Median luas bbox (px²) | Minoritas | Objek kecil |
 |---|---:|---:|---:|---:|:---:|:---:|
 | Brown spot | 5010 | 1122 | 24.85 | 1022.3 |  | YES |
 | Blast | 4149 | 1919 | 20.58 | 7477.5 |  | YES |

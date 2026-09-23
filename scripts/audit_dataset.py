@@ -29,7 +29,7 @@ DEFAULT_ANNOTATION_FILENAME = "_annotations.coco.json"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Raw dataset forensic audit (read-only).")
+    parser = argparse.ArgumentParser(description="Audit forensik dataset mentah, hanya membaca tanpa mengubah.")
     parser.add_argument(
         "--dataset-root",
         required=True,
