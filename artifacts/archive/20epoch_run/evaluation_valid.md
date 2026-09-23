@@ -1,14 +1,20 @@
-# Evaluation Report — split: `valid`
+# Laporan Evaluasi, split: `valid`
 
-Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `cf1adab55eb96036ec97d067788af241130bf46a`
 
-## Native metrics (Ultralytics, source of truth for mAP)
+> Catatan: laporan arsip ini dihasilkan oleh versi templat evaluasi yang lebih lama,
+> sehingga belum memuat F1 macro dan ambang NMS. Seluruh angka dipertahankan apa adanya;
+> hanya label yang diterjemahkan. Angka yang berlaku untuk submission ada pada
+> `artifacts/reports/evaluation_valid.md`.
+
+Bobot: `runs/detect/final/final_model/weights/best.pt`  |  Commit Git: `cf1adab55eb96036ec97d067788af241130bf46a`
+
+## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
 - mAP@0.5: 0.5620
 - mAP@0.5:0.95: 0.3278
-- Precision/Recall at Ultralytics' internal best-F1 point: 0.6073 / 0.5562
+- Precision dan recall pada titik F1 terbaik internal Ultralytics: 0.6073 / 0.5562
 
-| canonical class | AP@0.5 |
+| kelas canonical | AP@0.5 |
 |---|---:|
 | Bacterial leaf blight | 0.3153 |
 | Bacterial panicle blight | 0.4728 |
@@ -22,14 +28,14 @@ Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `cf1ada
 | Sheath blight | 0.3507 |
 | Tungro | 0.5328 |
 
-## Local F1 metrics (implementation detail, confidence threshold = 0.25)
+## Metrik lokal diagnostik, rata-rata micro pada confidence 0.25
 
-- Overall precision: 0.6213
-- Overall recall: 0.2347
-- Overall F1: 0.3407
+- Precision keseluruhan: 0.6213
+- Recall keseluruhan: 0.2347
+- F1 keseluruhan: 0.3407
 - TP=1147 FP=699 FN=3741
 
-| canonical class | precision | recall | F1 | TP | FP | FN |
+| kelas canonical | precision | recall | F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|---:|
 | Leaf scald | 0.6643 | 0.2385 | 0.3509 | 93 | 47 | 297 |
 | Brown spot | 0.6424 | 0.1513 | 0.2449 | 221 | 123 | 1240 |

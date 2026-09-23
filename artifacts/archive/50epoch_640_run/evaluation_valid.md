@@ -1,14 +1,20 @@
 # Laporan Evaluasi, split: `valid`
 
-Weights: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Git commit: `424747e1a390787b017f3528d602a4beaaf2584f`
 
-## Native metrics (Ultralytics, source of truth for mAP)
+> Catatan: laporan arsip ini dihasilkan oleh versi templat evaluasi yang lebih lama,
+> sehingga belum memuat F1 macro dan ambang NMS. Seluruh angka dipertahankan apa adanya;
+> hanya label yang diterjemahkan. Angka yang berlaku untuk submission ada pada
+> `artifacts/reports/evaluation_valid.md`.
+
+Bobot: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Commit Git: `424747e1a390787b017f3528d602a4beaaf2584f`
+
+## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
 - mAP@0.5: 0.6277
 - mAP@0.5:0.95: 0.3905
-- Precision/Recall at Ultralytics' internal best-F1 point: 0.6406 / 0.6237
+- Precision dan recall pada titik F1 terbaik internal Ultralytics: 0.6406 / 0.6237
 
-| canonical class | AP@0.5 |
+| kelas canonical | AP@0.5 |
 |---|---:|
 | Bacterial leaf blight | 0.3887 |
 | Bacterial panicle blight | 0.6216 |
@@ -22,14 +28,14 @@ Weights: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weig
 | Sheath blight | 0.4804 |
 | Tungro | 0.5980 |
 
-## Local F1 metrics (implementation detail, confidence threshold = 0.25)
+## Metrik lokal diagnostik, rata-rata micro pada confidence 0.25
 
-- Overall precision: 0.6390
-- Overall recall: 0.2248
-- Overall F1: 0.3326
+- Precision keseluruhan: 0.6390
+- Recall keseluruhan: 0.2248
+- F1 keseluruhan: 0.3326
 - TP=1099 FP=621 FN=3789
 
-| canonical class | precision | recall | F1 | TP | FP | FN |
+| kelas canonical | precision | recall | F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|---:|
 | Leaf scald | 0.5728 | 0.1513 | 0.2394 | 59 | 44 | 331 |
 | Brown spot | 0.6066 | 0.1383 | 0.2252 | 202 | 131 | 1259 |
