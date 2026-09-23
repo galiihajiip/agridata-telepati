@@ -137,26 +137,28 @@ def run_one(experiment_id: str, label: str, data_yaml: Path, notes: str, project
 
 def build_report(baseline: dict, oversampled: dict, rare_classes: list[str]) -> str:
     lines = [
-        "# Block 12. Class Imbalance Mitigation Ablation",
+        "# Ablasi Mitigasi Ketidakseimbangan Kelas",
         "",
-        f"Both runs use the identical training image COUNT ({TRAIN_IMAGE_COUNT}, an absolute count via "
-        "an integer `fraction`, verified via source not to be a percentage), the only difference is "
-        "whether rare-class images are duplicated in the sampling pool. Same seed, same hyperparameters, "
-        "same validation data (byte-identical files in both cases).",
+        f"Kedua eksekusi memakai JUMLAH citra latih yang identik ({TRAIN_IMAGE_COUNT}), yaitu jumlah "
+        "absolut melalui `fraction` bertipe bilangan bulat, yang sudah diverifikasi lewat kode sumber "
+        "bahwa nilainya bukan persentase. Satu-satunya perbedaan adalah apakah citra kelas minoritas "
+        "digandakan di dalam kumpulan penyampelan. Seed sama, hyperparameter sama, dan data validasi "
+        "sama, dengan berkas yang identik byte per byte pada kedua kasus.",
         "",
-        f"Rare classes targeted for oversampling (< 20% of the most common class's instance count, per "
-        f"`artifacts/reports/class_imbalance_diagnostics.md`): {rare_classes}",
+        f"Kelas minoritas yang menjadi sasaran oversampling, yaitu kelas dengan jumlah instance kurang "
+        f"dari 20 persen kelas terbanyak menurut `artifacts/reports/class_imbalance_diagnostics.md`: "
+        f"{rare_classes}",
         "",
-        "## Overall results",
+        "## Hasil keseluruhan",
         "",
-        "| Run | mAP@0.5 | Precision | Recall | Duration (s) |",
+        "| Eksekusi | mAP@0.5 | Precision | Recall | Durasi (detik) |",
         "|---|---:|---:|---:|---:|",
-        f"| baseline (natural distribution) | {baseline['record'].best_val_map50:.4f} | {baseline['record'].precision:.4f} | {baseline['record'].recall:.4f} | {baseline['record'].training_duration_seconds:.1f} |",
-        f"| oversampled (rare classes x3) | {oversampled['record'].best_val_map50:.4f} | {oversampled['record'].precision:.4f} | {oversampled['record'].recall:.4f} | {oversampled['record'].training_duration_seconds:.1f} |",
+        f"| baseline, distribusi alami | {baseline['record'].best_val_map50:.4f} | {baseline['record'].precision:.4f} | {baseline['record'].recall:.4f} | {baseline['record'].training_duration_seconds:.1f} |",
+        f"| oversampled, kelas minoritas 3 kali | {oversampled['record'].best_val_map50:.4f} | {oversampled['record'].precision:.4f} | {oversampled['record'].recall:.4f} | {oversampled['record'].training_duration_seconds:.1f} |",
         "",
-        "## Per-class AP@0.5, rare classes specifically (the actual point of this ablation)",
+        "## AP@0.5 per kelas, khusus kelas minoritas, yang menjadi inti ablasi ini",
         "",
-        "| Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |",
+        "| Kelas | AP@0.5 baseline | AP@0.5 oversampled | Selisih |",
         "|---|---:|---:|---:|",
     ]
     for cls in rare_classes:
@@ -164,11 +166,11 @@ def build_report(baseline: dict, oversampled: dict, rare_classes: list[str]) -> 
         o = oversampled["per_class_ap50"].get(cls, 0.0)
         lines.append(f"| {cls} | {b:.4f} | {o:.4f} | {o - b:+.4f} |")
 
-    lines += ["", "## Per-class AP@0.5, all classes (checking oversampling didn't hurt common classes)", "", "| Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |", "|---|---:|---:|---:|"]
+    lines += ["", "## AP@0.5 per kelas, seluruh kelas, untuk memastikan oversampling tidak merugikan kelas mayoritas", "", "| Kelas | AP@0.5 baseline | AP@0.5 oversampled | Selisih |", "|---|---:|---:|---:|"]
     for cls in CANONICAL_CLASSES:
         b = baseline["per_class_ap50"].get(cls, 0.0)
         o = oversampled["per_class_ap50"].get(cls, 0.0)
-        marker = " (rare, targeted)" if cls in rare_classes else ""
+        marker = " (minoritas, disasar)" if cls in rare_classes else ""
         lines.append(f"| {cls}{marker} | {b:.4f} | {o:.4f} | {o - b:+.4f} |")
 
     rare_deltas = [oversampled["per_class_ap50"].get(c, 0.0) - baseline["per_class_ap50"].get(c, 0.0) for c in rare_classes]
@@ -179,26 +181,27 @@ def build_report(baseline: dict, oversampled: dict, rare_classes: list[str]) -> 
 
     lines += [
         "",
-        "## Verdict",
+        "## Kesimpulan",
         "",
-        f"Average AP@0.5 delta on targeted rare classes: {avg_rare_delta:+.4f}",
-        f"Average AP@0.5 delta on non-targeted (common) classes: {avg_common_delta:+.4f}",
+        f"Rata-rata selisih AP@0.5 pada kelas minoritas yang disasar: {avg_rare_delta:+.4f}",
+        f"Rata-rata selisih AP@0.5 pada kelas mayoritas yang tidak disasar: {avg_common_delta:+.4f}",
         "",
     ]
     if avg_rare_delta > 0 and avg_rare_delta > avg_common_delta:
         verdict = (
-            "Oversampling shows a measured net benefit for the targeted rare classes at this screening "
-            "scale, without a larger corresponding cost to common classes. Worth carrying into Block 14 "
-            "as a candidate for the final config, NOT adopted automatically, per the master spec, "
-            "pending re-verification at full training scale."
+            "Oversampling menunjukkan manfaat bersih yang terukur bagi kelas minoritas yang disasar pada "
+            "skala penyaringan ini, tanpa disertai kerugian yang lebih besar pada kelas mayoritas. "
+            "Layak dibawa sebagai kandidat konfigurasi final, tetapi TIDAK diadopsi secara otomatis, "
+            "dan masih menunggu verifikasi ulang pada skala pelatihan penuh."
         )
     else:
         verdict = (
-            "Oversampling did NOT show a clear net benefit at this screening scale (either rare classes "
-            "did not improve, or the improvement was outweighed by cost to common classes, or both). "
-            "Per the master spec ('do not automatically oversample'), this strategy is NOT recommended "
-            "for adoption based on this evidence. It may still be worth re-testing at full training "
-            "scale in Block 14, since class-imbalance effects can behave differently with more data/epochs."
+            "Oversampling TIDAK menunjukkan manfaat bersih yang jelas pada skala penyaringan ini, entah "
+            "karena kelas minoritas tidak membaik, karena perbaikannya kalah oleh kerugian pada kelas "
+            "mayoritas, atau keduanya sekaligus. Berdasarkan bukti ini, strategi tersebut TIDAK "
+            "direkomendasikan untuk diadopsi. Pengujian ulang pada skala pelatihan penuh masih layak "
+            "dipertimbangkan, karena efek ketidakseimbangan kelas dapat berperilaku berbeda dengan "
+            "data dan epoch yang lebih banyak."
         )
     lines.append(verdict)
     return "\n".join(lines) + "\n"
