@@ -51,43 +51,50 @@ logger = logging.getLogger("agridata.scripts.run_augmentation_ablation")
 VISUAL_VERIFICATION_VARIANTS = {"hflip_only", "rotation_only"}
 
 BLUR_NOISE_ANALYSIS = """
-## Candidate not empirically tested: mild blur/noise
+## Kandidat yang tidak diuji secara empiris: blur dan derau ringan
 
-Source inspection of `ultralytics/data/augment.py` (`Albumentations` class)
-shows the exact default transforms and probabilities Ultralytics would apply
-if the optional `albumentations` package were installed:
+Pemeriksaan kode sumber `ultralytics/data/augment.py` pada kelas
+`Albumentations` menunjukkan transformasi bawaan beserta probabilitasnya
+yang akan diterapkan Ultralytics bila paket opsional `albumentations`
+terpasang:
 
     A.Blur(p=0.01), A.MedianBlur(p=0.01), A.ToGray(p=0.01), A.CLAHE(p=0.01),
     A.RandomBrightnessContrast(p=0.0), A.RandomGamma(p=0.0), A.ImageCompression(p=0.0)
 
-`albumentations` is NOT currently installed in this project, so none of this
-fires today, confirmed, not assumed (`pip show albumentations` finds nothing).
+Paket `albumentations` TIDAK terpasang pada project ini, sehingga tidak ada
+satu pun transformasi di atas yang aktif. Hal ini dikonfirmasi, bukan
+diasumsikan, melalui `pip show albumentations` yang tidak menemukan apa pun.
 
-Assessment:
-- **Blur / MedianBlur (p=0.01 each)**: PLAUSIBLE, mild focus/motion blur is
-  common in real field photography. But at 1% probability each, across ~800
-  train images x 5 epochs (~4000 image-views), only ~80 image-views would
-  ever see either transform, far too sparse to produce a measurable mAP
-  difference at this screening scale. An empirical run would mostly measure
-  noise, not the transform's effect.
-- **ToGray (p=0.01)**: QUESTIONABLE for this domain specifically, lesion
-  color is a genuine diagnostic feature for several canonical classes (e.g.
-  Brown spot vs. Blast). Converting to grayscale removes exactly the signal
-  the `color_only` variant above was deliberately kept conservative to
-  protect.
-- **CLAHE (p=0.01)**: PLAUSIBLE, adaptive contrast enhancement helps with
-  lighting variability, similar reasoning to `brightness_only`.
+Penilaian kami atas ketiganya:
 
-**Decision**: do not add `albumentations` as a project dependency at this
-stage. The effect is real but too sparse (1% probability) to justify a new
-dependency and a live experiment whose result would be dominated by sampling
-noise at this scale. This can be revisited in Block 13 (error analysis) if
-blur-sensitivity turns out to be a real failure mode.
+- **Blur dan MedianBlur, masing-masing p=0,01.** MASUK AKAL, karena blur
+  ringan akibat fokus atau gerakan lazim terjadi pada fotografi lapangan.
+  Namun pada probabilitas 1 persen, terhadap sekitar 800 citra latih
+  dikali 5 epoch atau kurang lebih 4.000 tampilan citra, hanya sekitar 80
+  tampilan yang akan menerima salah satu transformasi tersebut. Terlalu
+  jarang untuk menghasilkan perbedaan mAP yang terukur pada skala
+  penyaringan ini, sehingga eksekusi empirisnya akan lebih banyak mengukur
+  derau daripada efek transformasinya.
+- **ToGray, p=0,01.** DIRAGUKAN khusus untuk domain ini, karena warna lesi
+  merupakan ciri diagnostik yang nyata bagi beberapa kelas canonical,
+  misalnya Brown spot terhadap Blast. Mengubah citra menjadi skala abu-abu
+  justru menghapus sinyal yang sengaja dijaga oleh varian `color_only` di
+  atas melalui pembatasan pergeseran hue.
+- **CLAHE, p=0,01.** MASUK AKAL, karena penguatan kontras adaptif membantu
+  menghadapi variasi pencahayaan, dengan penalaran serupa varian
+  `brightness_only`.
+
+**Keputusan:** `albumentations` tidak ditambahkan sebagai dependensi project
+pada tahap ini. Efeknya nyata tetapi terlalu jarang muncul pada probabilitas
+1 persen untuk membenarkan penambahan dependensi baru sekaligus percobaan
+langsung yang hasilnya akan didominasi derau penyampelan pada skala ini.
+Keputusan ini dapat ditinjau ulang pada analisis kesalahan bila kepekaan
+terhadap blur ternyata merupakan mode kegagalan yang nyata.
 """
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the Block 11 controlled augmentation ablation.")
+    parser = argparse.ArgumentParser(description="Menjalankan ablasi augmentasi terkontrol.")
     parser.add_argument("--config", default=Path("configs/experiments/augmentation_ablation.yaml"), type=Path)
     parser.add_argument("--project", default=Path("runs/detect/augmentation_ablation"), type=Path)
     parser.add_argument("--manifest", default=Path("data/prepared/manifest_train.json"), type=Path)
