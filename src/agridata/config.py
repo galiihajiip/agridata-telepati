@@ -1,8 +1,9 @@
 """Pemuatan konfigurasi terpusat untuk pipeline AgriData.
 
-All path-dependent parameters (dataset location, split directory names, seed,
-etc.) are read from a single YAML source of truth so that no personal or
-machine-specific paths are hardcoded in code.
+Seluruh parameter yang bergantung pada lokasi berkas, seperti letak dataset,
+nama direktori split, dan seed, dibaca dari satu sumber kebenaran berupa berkas
+YAML. Dengan begitu tidak ada path personal maupun path khas satu mesin yang
+dipatok keras di dalam kode.
 """
 
 from __future__ import annotations
@@ -44,9 +45,9 @@ class AppConfig:
 def load_config(config_path: Path | str = DEFAULT_CONFIG_PATH) -> AppConfig:
     """Memuat dan memvalidasi konfigurasi project dari berkas YAML.
 
-    Raises:
-        FileNotFoundError: if the config file does not exist.
-        ValueError: if required fields are missing from the config.
+    Melempar:
+        FileNotFoundError: bila berkas konfigurasi tidak ditemukan.
+        ValueError: bila ada field wajib yang hilang dari konfigurasi.
     """
     config_path = Path(config_path)
     if not config_path.exists():
