@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Pencatatan satu percobaan ke dalam log percobaan.
 
-Usage:
+Pemakaian:
     python scripts/track_experiment.py \\
         --experiment-id E01 \\
         --training-summary artifacts/reports/block6_baseline_smoke_summary.json \\
@@ -10,9 +10,10 @@ Usage:
         --notes "uji asap baseline" \\
         --compliance-notes "tanpa external pretrained weights; YOLO_OFFLINE ditegakkan"
 
-Reads the training and (optional) evaluation summaries already produced by
-scripts/train.py / scripts/evaluate.py rather than re-deriving anything,
-this script's only job is to assemble and append one ExperimentRecord.
+Skrip membaca ringkasan pelatihan, dan bila ada ringkasan evaluasi, yang sudah
+dihasilkan scripts/train.py dan scripts/evaluate.py, alih-alih menurunkan ulang
+apa pun. Satu-satunya tugasnya adalah menyusun lalu menambahkan satu
+ExperimentRecord ke log.
 """
 
 from __future__ import annotations
