@@ -133,9 +133,9 @@ def check_generated_metadata_reproducible(dataset_manifest_check: dict) -> dict:
     return {
         "status": "LULUS",
         "detail": "Field deterministik (seed, mapping_version, jumlah citra dan anotasi per split) "
-        "identical across reruns of the same config; only the recorded timestamp and git commit "
-        "(if code changed between runs) are expected to vary, these are provenance fields, not "
-        "outputs of the computation itself.",
+        "identik antar eksekusi ulang pada konfigurasi yang sama. Yang wajar berbeda hanya timestamp "
+        "dan commit git, itu pun bila kode berubah di antara dua eksekusi. Keduanya merupakan field "
+        "provenance, bukan keluaran dari komputasinya sendiri.",
     }
 
 
