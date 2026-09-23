@@ -286,26 +286,25 @@ def main() -> int:
         "",
         "## Pengamatan",
         "",
-        "Findings from this specific checkpoint's actual errors (not a generic template):",
+        "Temuan berikut berasal dari kesalahan aktual checkpoint ini, bukan template umum:",
         "",
-        f"1. **False negatives skew smaller than the overall GT area distribution** "
-        f"({small_object_miss_analysis['false_negative_median_area_px2']} vs. "
-        f"{small_object_miss_analysis['overall_median_gt_area_px2']} px² median), consistent with the "
-        "well-known difficulty of small-object detection; this checkpoint already uses the largest "
-        "image size (640) and full training budget evaluated in this project.",
-        f"2. **Crowded scenes have a higher false-negative rate** ({summary['crowded_vs_sparse_scene_fn_rate']['crowded_scene_fn_rate']} "
-        f"vs. {summary['crowded_vs_sparse_scene_fn_rate']['sparse_scene_fn_rate']} for sparse scenes), "
-        "small, densely-packed lesions remain the hardest case even at this checkpoint's training scale.",
-        "3. These are documented as known limitations of the final submitted model, not a proposal for "
-        "further experimentation, see the project README's Known Limitations section for the final "
-        "disclosure.",
+        f"1. **Objek yang terlewat cenderung lebih kecil daripada sebaran luas ground truth "
+        f"secara keseluruhan**, yaitu median {small_object_miss_analysis['false_negative_median_area_px2']} "
+        f"berbanding {small_object_miss_analysis['overall_median_gt_area_px2']} px persegi. Temuan ini "
+        "konsisten dengan kesulitan deteksi objek kecil yang dikenal luas dalam literatur.",
+        f"2. **Adegan padat memiliki rasio false negative lebih tinggi**, yaitu "
+        f"{summary['crowded_vs_sparse_scene_fn_rate']['crowded_scene_fn_rate']} berbanding "
+        f"{summary['crowded_vs_sparse_scene_fn_rate']['sparse_scene_fn_rate']} pada adegan jarang. "
+        "Lesi kecil yang berdesakan tetap menjadi kasus tersulit.",
+        "3. Kedua temuan dicatat sebagai keterbatasan model, bukan usulan eksperimen lanjutan. "
+        "Lihat bagian keterbatasan pada README untuk pengungkapan lengkapnya.",
         "",
         "## PENTING: tidak ada perubahan yang diterapkan otomatis",
         "",
-        "This script only analyzes and reports. Any data or model change suggested by these "
-        "findings (e.g. relabeling, excluding an image, adjusting a class's augmentation) must be "
-        "a separate, explicitly documented decision, never applied automatically from this "
-        "analysis, per the master spec.",
+        "Skrip ini hanya menganalisis dan melaporkan. Setiap perubahan data maupun model yang "
+        "disarankan oleh temuan di atas, misalnya pelabelan ulang, pengecualian citra, atau "
+        "penyesuaian augmentasi suatu kelas, harus menjadi keputusan terpisah yang "
+        "didokumentasikan secara eksplisit, tidak pernah diterapkan otomatis dari analisis ini.",
     ]
 
     md_path = args.report_dir / "block13_error_analysis.md"
