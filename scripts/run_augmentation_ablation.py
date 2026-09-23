@@ -177,18 +177,20 @@ def run_one(experiment_id: str, axis: str, plausibility: str, extra_kwargs: dict
 
 def build_report(results: list[dict], baseline_default_map50: float) -> str:
     lines = [
-        "# Block 11. Augmentation Ablation",
+        "# Ablasi Augmentasi",
         "",
-        "**Scale note**: same small-fraction/few-epoch screening scale as Block 10, for direct "
-        "comparability. Absolute mAP values are low; only relative effects matter here.",
+        "Skalanya sama dengan matriks percobaan, yaitu fraksi data kecil dengan sedikit *epoch*, "
+        "agar langsung sebanding. Nilai mAP absolutnya rendah, dan yang bermakna di sini hanya "
+        "efek relatifnya.",
         "",
-        f"Reference: Block 10's E02 (Ultralytics' default combined augmentation bundle) scored "
-        f"mAP@0.5={baseline_default_map50:.4f}. This block isolates each factor individually from "
-        "a clean no-augmentation reference (E09) instead.",
+        f"Sebagai pembanding, E02 pada matriks percobaan yang memakai paket augmentasi gabungan "
+        f"bawaan Ultralytics memperoleh mAP@0.5={baseline_default_map50:.4f}. Ablasi ini justru "
+        "mengisolasi setiap faktor satu per satu bertolak dari referensi bersih tanpa augmentasi, "
+        "yaitu E09.",
         "",
-        "## Results",
+        "## Hasil",
         "",
-        "| Experiment | Augmentation | Plausibility | mAP@0.5 | Precision | Recall | Duration (s) |",
+        "| Percobaan | Augmentasi | Kelayakan | mAP@0.5 | Precision | Recall | Durasi (detik) |",
         "|---|---|---|---:|---:|---:|---:|",
     ]
     for r in results:
@@ -200,35 +202,38 @@ def build_report(results: list[dict], baseline_default_map50: float) -> str:
         )
 
     no_aug = next(r for r in results if r["axis"] == "none")
-    lines += ["", "## Per-augmentation effect (relative to the no-augmentation reference)", ""]
+    lines += ["", "## Efek tiap augmentasi, relatif terhadap referensi tanpa augmentasi", ""]
     for r in results:
         if r["axis"] == "none":
             continue
         delta = r["record"].best_val_map50 - no_aug["record"].best_val_map50
-        direction = "improved" if delta > 0 else ("worsened" if delta < 0 else "no change")
-        lines.append(f"- **{r['axis']}**: mAP@0.5 {direction} by {delta:+.4f} vs. no-augmentation reference.")
+        direction = "naik" if delta > 0 else ("turun" if delta < 0 else "tidak berubah")
+        lines.append(f"- **{r['axis']}**: mAP@0.5 {direction} sebesar {delta:+.4f} terhadap referensi tanpa augmentasi.")
 
     lines.append(BLUR_NOISE_ANALYSIS)
 
     lines += [
-        "## Recommendation",
+        "## Rekomendasi",
         "",
-        "Per master spec: augmentation choice must weigh *semantic plausibility for this domain*, not "
-        "just raw numbers at a tiny screening scale. Concretely:",
+        "Pemilihan augmentasi harus menimbang *kelayakan semantik untuk domain ini*, bukan semata "
+        "angka mentah pada skala penyaringan yang kecil. Secara konkret:",
         "",
-        "- Recommend **keeping**: horizontal flip, rotation (moderate), scaling, translation, "
-        "brightness/contrast, conservative color jitter, all physically plausible for field-captured "
-        "rice imagery, regardless of their small individual effect at this screening scale.",
-        "- Recommend **excluding**: vertical flip, even if it measured a positive effect above, it is "
-        "physically implausible for gravity-oriented plants and risks teaching the model orientations "
-        "it will never see deployed. Domain reasoning overrides a marginal metric gain here.",
-        "- **Mosaic**: kept only if its measured effect above is neutral-to-positive; if it clearly hurts "
-        "at this scale, worth re-testing at full training scale before deciding (mosaic's benefits are "
-        "generally more visible with more data/epochs than this screening pass uses).",
-        "- Mild blur/noise: deliberately not adopted at this stage (see analysis above).",
+        "- Direkomendasikan **dipertahankan**: pembalikan horizontal, rotasi sedang, penskalaan, "
+        "translasi, kecerahan dan kontras, serta pergeseran warna yang konservatif. Seluruhnya "
+        "masuk akal secara fisik untuk citra padi hasil tangkapan lapangan, terlepas dari kecilnya "
+        "efek individual pada skala penyaringan ini.",
+        "- Direkomendasikan **dikeluarkan**: pembalikan vertikal. Sekalipun terukur berefek positif di "
+        "atas, transformasi itu tidak masuk akal secara fisik untuk tanaman yang orientasinya "
+        "ditentukan gravitasi, dan berisiko mengajarkan model orientasi yang tidak akan pernah "
+        "ditemuinya saat dipakai. Penalaran domain mengungguli perolehan metrik yang marginal.",
+        "- **Mosaic**: dipertahankan hanya bila efek terukurnya di atas netral sampai positif. Bila "
+        "jelas merugikan pada skala ini, sebaiknya diuji ulang pada skala pelatihan penuh sebelum "
+        "diputuskan, karena manfaat mosaic umumnya baru terlihat dengan data dan *epoch* yang lebih "
+        "banyak daripada tahap penyaringan ini.",
+        "- Blur dan derau ringan: sengaja tidak diadopsi pada tahap ini, lihat analisis di atas.",
         "",
-        "This is a screening-scale recommendation to carry into Block 12 (class imbalance) and Block 14 "
-        "(final config freeze), not a final decision on its own.",
+        "Ini merupakan rekomendasi berskala penyaringan yang dibawa ke ablasi ketidakseimbangan kelas "
+        "dan pembekuan konfigurasi final, bukan keputusan final yang berdiri sendiri.",
     ]
     return "\n".join(lines) + "\n"
 
