@@ -1,9 +1,9 @@
 """Menggambar bounding box ground truth beserta label kelas canonical pada citra.
 
-Used for the mandatory visual sanity checks in Block 4: every saved image
-must show the canonical class name, the bounding box, and the source
-filename/image ID so a human can visually confirm boxes are correctly
-aligned (per the master spec, "jangan hanya percaya angka").
+Modul ini dipakai untuk pemeriksaan visual yang wajib dilakukan. Setiap citra
+yang disimpan harus menampilkan nama kelas canonical, kotak pembatasnya, serta
+nama berkas atau ID citra asalnya, supaya manusia dapat memastikan sendiri bahwa
+kotaknya benar-benar sejajar dengan objeknya dan tidak hanya mempercayai angka.
 """
 
 from __future__ import annotations
@@ -32,10 +32,10 @@ def draw_annotated_image(
 ) -> Image.Image:
     """Mengembalikan salinan citra dengan kotak ground truth dan labelnya tergambar.
 
-    Setiap kotak diberi nama kelas canonical. Nama berkas tidak
-    embedded in the pixels (kept out of the image itself), callers should
-    use it in the saved output filename instead, per the audit-friendly
-    convention used throughout this project.
+    Setiap kotak diberi nama kelas canonical. Nama berkas sengaja tidak
+    ditanamkan ke dalam piksel citra; pemanggil sebaiknya memakainya pada nama
+    berkas keluaran, mengikuti konvensi ramah audit yang dipakai di seluruh
+    project ini.
     """
     image = Image.open(image_path).convert("RGB")
     draw = ImageDraw.Draw(image)
@@ -73,9 +73,9 @@ def save_annotated_sample(
 ) -> Path:
     """Menggambar dan menyimpan satu citra contoh beranotasi, mengembalikan path keluaran.
 
-    Nama berkas keluaran memuat split dan penanda, misalnya "random" atau
-    "rare_class".
-    "crowded"), image ID, and original filename for full audit traceability.
+    Nama berkas keluaran memuat split, penanda seperti "random", "rare_class",
+    atau "crowded", ID citra, dan nama berkas aslinya, demi keterlacakan audit
+    yang utuh.
     """
     image_path = dataset_root / split / image_record.file_name
     annotated = draw_annotated_image(image_path, image_record, annotations)

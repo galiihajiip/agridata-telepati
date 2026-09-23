@@ -1,9 +1,9 @@
-"""Environment/version/git capture utilities (Block 8).
+"""Utilitas perekam lingkungan, versi pustaka, dan status git.
 
-Consolidates logic that was previously duplicated ad hoc in
-scripts/prepare_dataset.py, scripts/train.py, and scripts/evaluate.py, one
-source of truth for "what does an audit report need to record about the
-machine and code state that produced it."
+Modul ini menyatukan logika yang sebelumnya tersebar dan terduplikasi di
+scripts/prepare_dataset.py, scripts/train.py, dan scripts/evaluate.py, sehingga
+ada satu sumber kebenaran tunggal mengenai apa saja yang perlu dicatat laporan
+audit tentang kondisi mesin dan kode yang menghasilkannya.
 """
 
 from __future__ import annotations
@@ -28,9 +28,10 @@ def get_git_commit() -> str | None:
 def get_git_status() -> dict[str, Any]:
     """Mengembalikan status kebersihan working tree dan daftar berkas yang berubah.
 
-    Working tree yang kotor saat laporan dibuat tetap dicatat, tidak disembunyikan,
-    an auditor rerunning the pipeline needs to know if the artifact was
-    produced from exactly the committed code or from local, uncommitted edits.
+    Working tree yang kotor saat laporan dibuat tetap dicatat, bukan
+    disembunyikan. Auditor yang menjalankan ulang pipeline perlu tahu apakah
+    artefaknya lahir dari kode yang persis terkomit atau dari suntingan lokal
+    yang belum dikomit.
     """
     try:
         result = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True)
@@ -68,9 +69,11 @@ def get_device_info() -> dict[str, Any]:
 
 
 def capture_environment_snapshot() -> dict[str, Any]:
-    """Merekam seluruh informasi lingkungan dan kode yang dibutuhkan auditor
-    state that produced a given run: Python/platform, dependency versions,
-    git commit + dirty status, and resolved compute device."""
+    """Merekam seluruh informasi lingkungan dan kode yang dibutuhkan auditor.
+
+    Cakupannya meliputi versi Python dan platform, versi dependensi, commit git
+    beserta status kebersihan working tree, dan perangkat komputasi yang
+    akhirnya dipakai."""
     return {
         "python_version": platform.python_version(),
         "python_executable": sys.executable,

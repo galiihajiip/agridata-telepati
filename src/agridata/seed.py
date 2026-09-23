@@ -1,9 +1,9 @@
 """Utilitas penyemaian deterministik untuk pipeline AgriData.
 
-Seeds every known source of randomness reachable at the current project
-stage. PyTorch is optional here (not yet a required dependency) and is
-seeded only if installed, so this utility works before and after the
-object-detection framework is added in a later block.
+Modul ini menyemai setiap sumber keacakan yang diketahui dan dapat dijangkau.
+PyTorch diperlakukan opsional dan hanya disemai bila terpasang, sehingga utilitas
+ini tetap berfungsi baik sebelum maupun sesudah framework deteksi objek
+ditambahkan ke project.
 """
 
 from __future__ import annotations
@@ -20,11 +20,14 @@ logger = logging.getLogger("agridata.seed")
 def set_global_seed(seed: int) -> None:
     """Menyemai ``random`` bawaan Python, NumPy, dan PyTorch bila terpasang.
 
-    Also sets ``PYTHONHASHSEED`` so hash-based randomization (e.g. dict/set
-    iteration order in some contexts) is fixed for the current process.
-    Catatan: PYTHONHASHSEED hanya berlaku untuk proses yang dimulai dengan
-    already set in the environment; setting it here documents intent and
-    affects any subprocesses this process spawns.
+    Fungsi ini juga menetapkan ``PYTHONHASHSEED`` supaya pengacakan berbasis
+    hash, misalnya urutan iterasi dict atau set pada konteks tertentu, tetap
+    konsisten untuk proses yang sedang berjalan.
+
+    Perlu dicatat bahwa ``PYTHONHASHSEED`` sesungguhnya hanya berpengaruh penuh
+    pada proses yang sejak awal dimulai dengan variabel itu sudah tersetel di
+    lingkungan. Menetapkannya di sini mendokumentasikan niat sekaligus
+    memengaruhi setiap subproses yang dijalankan dari proses ini.
     """
     os.environ["PYTHONHASHSEED"] = str(seed)
     random.seed(seed)
