@@ -102,15 +102,15 @@ def main() -> int:
         json.dump(report, f, indent=2)
 
     lines = [
-        "# Class Imbalance Diagnostics (Block 12)",
+        "# Diagnostik Ketidakseimbangan Kelas",
         "",
-        f"Split: `{args.split}` | Total instances: {total_instances} | Classes: {len(CANONICAL_CLASSES)}",
-        f"Max/min instance-count imbalance ratio: **{imbalance_ratio:.1f}x**",
+        f"Split: `{args.split}` | Total instance: {total_instances} | Jumlah kelas: {len(CANONICAL_CLASSES)}",
+        f"Rasio ketidakseimbangan jumlah instance terbanyak terhadap tersedikit: **{imbalance_ratio:.1f} kali**",
         "",
-        f"Rare classes (< {RARE_CLASS_THRESHOLD_FRACTION*100:.0f}% of the most common class's count): **{rare_classes}**",
-        f"Small-object / visually difficult classes (< {SMALL_OBJECT_THRESHOLD_FRACTION*100:.0f}% of the largest median bbox area): **{small_object_classes}**",
+        f"Kelas minoritas, kurang dari {RARE_CLASS_THRESHOLD_FRACTION*100:.0f} persen jumlah kelas terbanyak: **{rare_classes}**",
+        f"Kelas berobjek kecil atau sulit secara visual, kurang dari {SMALL_OBJECT_THRESHOLD_FRACTION*100:.0f} persen median luas bbox terbesar: **{small_object_classes}**",
         "",
-        "| Class | Instances | Images | % of total | Median bbox area (px²) | Rare | Small-object |",
+        "| Kelas | Instance | Citra | Persen total | Median luas bbox (px²) | Minoritas | Objek kecil |",
         "|---|---:|---:|---:|---:|:---:|:---:|",
     ]
     for c in sorted(per_class, key=lambda c: -c["instance_count"]):
