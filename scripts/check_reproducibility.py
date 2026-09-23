@@ -128,7 +128,7 @@ def check_canonical_mapping_determinism() -> dict:
 def check_generated_metadata_reproducible(dataset_manifest_check: dict) -> dict:
     """Same config -> same generated metadata: reuses the rerun from the
     manifest check above rather than re-executing prepare_dataset.py again."""
-    if dataset_manifest_check["status"] != "PASS":
+    if dataset_manifest_check["status"] != "LULUS":
         return {"status": "TIDAK DIVERIFIKASI", "detail": "Bergantung pada pemeriksaan determinisme manifest dataset, yang tidak lulus."}
     return {
         "status": "LULUS",
