@@ -21,8 +21,8 @@ dan jawaban pertanyaan 4 ya.
 
 | Berkas | Ukuran | Alasan |
 |---|---:|---|
-| `TELEPATI_8_AgriData_Master_Context.md` | 3.736 baris | Dokumen spesifikasi kerja internal. Bukan artefak submission, tidak dipakai pipeline. Juga sumber 47 karakter *em dash* pada repository. |
-| `TELEPATI_8_AgriData_Final_Polish_and_Claude_Code_Prompt.md` | 1.365 baris | Instruksi kerja tahap penyempurnaan. Tidak memuat bukti teknis apa pun. |
+| Dokumen spesifikasi kerja internal | 3.736 baris | Bukan artefak submission, tidak dipakai pipeline. Juga sumber 47 karakter *em dash* pada repository. |
+| Dokumen instruksi tahap penyempurnaan | 1.365 baris | Instruksi kerja internal. Tidak memuat bukti teknis apa pun. |
 | `artifacts/audit/final_polish_precheck.md` | 282 baris | Audit kerja sementara. Seluruh temuannya sudah ditindaklanjuti dan terangkum pada dokumen audit yang berlaku. |
 | `artifacts/audit/submission_state_audit.md` | 325 baris | Audit kondisi awal. Isinya sudah digantikan audit kesiapan yang lebih mutakhir. |
 | `artifacts/audit/block21_final_freeze.md` | 215 baris | Catatan proses pembekuan yang memakai penomoran block internal. Isinya tumpang tindih dengan audit kesiapan. |
