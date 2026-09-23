@@ -1,25 +1,27 @@
-"""Class-agnostic object detection error analysis (Block 13).
+"""Analisis kesalahan deteksi objek yang tidak memandang kelas saat mencocokkan.
 
-Standard object-detection error taxonomy (similar in spirit to tools like
-TIDE, simplified): matching is done in two stages so that "the model looked
-in the wrong place" (localization error) can be separated from "the model
-found the object but named it wrong" (class confusion), a plain
-class-restricted matcher (as used for mAP/F1 in Block 7) cannot make this
-distinction, since it never considers a prediction against a
-different-class ground truth at all.
+Taksonomi kesalahan yang dipakai merupakan taksonomi standar deteksi objek,
+serupa semangatnya dengan perkakas seperti TIDE namun disederhanakan.
+Pencocokan dilakukan dua tahap supaya kasus model mencari di tempat yang salah,
+yaitu kesalahan lokalisasi, dapat dipisahkan dari kasus model menemukan objeknya
+tetapi salah menamai, yaitu salah kelas. Pencocok biasa yang membatasi diri pada
+kelas yang sama, seperti yang dipakai untuk mAP dan F1, tidak dapat membedakan
+keduanya, karena sama sekali tidak pernah membandingkan prediksi dengan ground
+truth berkelas lain.
 
-Per image:
-  1. Predictions (above a confidence threshold) are matched to ANY unmatched
-     ground-truth box in the same image by IoU >= 0.5, regardless of class,
-     greedily in descending-confidence order.
-  2. If a match is found:
-     - predicted class == true class -> true positive
-     - predicted class != true class -> class confusion (localized right,
-       classified wrong)
-  3. If no ground-truth box reaches IoU >= 0.5 -> background false positive
-     (the model detected something where nothing relevant exists).
-  4. Any ground-truth box never matched by any prediction -> false negative
-     (missed entirely).
+Untuk setiap citra:
+  1. Prediksi di atas ambang confidence dicocokkan dengan kotak ground truth
+     mana pun yang belum berpasangan pada citra yang sama, berdasarkan IoU >=
+     0,5, tanpa memandang kelas, secara greedy menurut confidence menurun.
+  2. Bila pasangan ditemukan:
+     - kelas prediksi sama dengan kelas sebenarnya -> true positive
+     - kelas prediksi berbeda -> salah kelas, yaitu lokasinya benar tetapi
+       penamaannya keliru
+  3. Bila tidak ada kotak ground truth yang mencapai IoU >= 0,5 -> false
+     positive terhadap latar, yaitu model mendeteksi sesuatu di tempat yang
+     sebenarnya tidak ada objek relevan.
+  4. Setiap kotak ground truth yang tidak pernah dipasangkan prediksi mana pun
+     -> false negative, yaitu terlewat sepenuhnya.
 """
 
 from __future__ import annotations
@@ -72,7 +74,7 @@ class ErrorAnalysisResult:
     false_negatives: list[FalseNegative] = field(default_factory=list)
 
     def confusion_matrix(self, class_names: list[str]) -> dict[str, dict[str, int]]:
-        """Rows = true class, columns = predicted class. Diagonal = true positives."""
+        """Baris adalah kelas sebenarnya, kolom adalah kelas prediksi, dan diagonalnya merupakan true positive."""
         matrix = {t: {p: 0 for p in class_names} for t in class_names}
         for tp in self.true_positives:
             matrix[tp.canonical_class][tp.canonical_class] += 1
@@ -81,9 +83,11 @@ class ErrorAnalysisResult:
         return matrix
 
     def per_class_precision_recall(self, class_names: list[str]) -> dict[str, dict[str, float]]:
-        """Precision dan recall per kelas dari pencocokan analisis ini sendiri (sama
-        underlying data used for the error categorization, avoiding any
-        inconsistency between the two views)."""
+        """Precision dan recall per kelas dari pencocokan analisis ini sendiri.
+
+    Keduanya dihitung dari data yang sama persis dengan yang dipakai untuk
+    mengategorikan kesalahan, sehingga tidak muncul ketidaksesuaian antara kedua
+    sudut pandang tersebut."""
         tp_count = {c: 0 for c in class_names}
         for tp in self.true_positives:
             tp_count[tp.canonical_class] += 1
