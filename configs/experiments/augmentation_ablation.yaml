@@ -1,16 +1,19 @@
-# Block 11, controlled augmentation ablation.
+# Ablasi augmentasi terkontrol.
 #
-# Methodology: one-factor-at-a-time from a clean NO-AUGMENTATION reference
-# (not from Block 10's baseline, which already had Ultralytics' default
-# augmentation bundle active), this isolates each augmentation type's true
-# individual effect. Same scale as Block 10 (imgsz=320, batch=16, 5 epochs,
-# 8% of train) for direct comparability with E02 (default combined
-# augmentation, mAP@0.5=0.0018), reused as a reference rather than rerun.
+# Metodologi: pengujian satu faktor pada satu waktu, bertolak dari referensi
+# TANPA AUGMENTASI yang bersih, bukan dari baseline matriks percobaan yang
+# sudah mengaktifkan paket augmentasi bawaan Ultralytics. Dengan cara ini
+# efek individual setiap jenis augmentasi dapat diisolasi. Skalanya sama
+# dengan matriks percobaan (imgsz=320, batch=16, 5 epoch, 8 persen data
+# latih) agar langsung sebanding dengan E02, yaitu augmentasi gabungan
+# bawaan dengan mAP@0.5=0.0018, yang dipakai ulang sebagai referensi dan
+# tidak dijalankan ulang.
 #
-# Semantic plausibility was reasoned about BEFORE running anything (see
-# artifacts/reports/block11_augmentation_ablation.md), e.g. vertical flip
-# is tested empirically but flagged as physically implausible for
-# gravity-oriented plants regardless of its measured effect.
+# Kelayakan semantik dinilai SEBELUM percobaan apa pun dijalankan, lihat
+# artifacts/reports/block11_augmentation_ablation.md. Sebagai contoh,
+# pembalikan vertikal tetap diuji secara empiris tetapi sejak awal ditandai
+# tidak masuk akal secara fisik untuk tanaman yang orientasinya ditentukan
+# gravitasi, terlepas dari berapa pun efek yang terukur.
 
 common:
   seed: 42
@@ -29,7 +32,7 @@ common:
   momentum: 0.9
   weight_decay: 0.0005
 
-# All augmentation off, the reference point for this block's ablation.
+# Seluruh augmentasi dimatikan, menjadi titik referensi ablasi ini.
 no_augmentation:
   hsv_h: 0.0
   hsv_s: 0.0
@@ -50,39 +53,39 @@ variants:
   - id: hflip_only
     augmentation: "horizontal_flip"
     overrides: { fliplr: 0.5 }
-    plausibility: "PLAUSIBLE, a leaf/plant photographed from the mirrored lateral side is physically realistic; disease identity does not depend on left-right orientation."
+    plausibility: "MASUK AKAL, daun atau tanaman yang difoto dari sisi lateral yang dicerminkan tetap realistis secara fisik; identitas penyakit tidak bergantung pada orientasi kiri-kanan."
 
   - id: vflip_only
     augmentation: "vertical_flip"
     overrides: { flipud: 0.5 }
-    plausibility: "QUESTIONABLE, rice plants/leaves have a gravity-determined orientation (growth direction, how a camera/drone would ever realistically capture them). An upside-down plant is not a scenario the deployed system would see. Tested empirically anyway, but flagged for exclusion from the final config regardless of measured effect unless evidence strongly overrides this reasoning."
+    plausibility: "DIRAGUKAN, tanaman dan daun padi memiliki orientasi yang ditentukan gravitasi, baik dari arah tumbuhnya maupun dari cara kamera atau drone realistis merekamnya. Tanaman terbalik bukan kondisi yang akan ditemui sistem saat dipakai. Tetap diuji secara empiris, tetapi sejak awal ditandai untuk dikeluarkan dari konfigurasi final berapa pun efek yang terukur, kecuali ada bukti yang sangat kuat membantah penalaran ini."
 
   - id: rotation_only
     augmentation: "rotation"
     overrides: { degrees: 15.0 }
-    plausibility: "PLAUSIBLE in moderation, simulates realistic camera tilt (handheld/drone not perfectly level). Kept well short of large-angle rotation, which would reintroduce the same gravity-orientation problem as vertical flip."
+    plausibility: "MASUK AKAL bila dibatasi, karena mensimulasikan kemiringan kamera yang realistis ketika perangkat genggam atau drone tidak benar-benar datar. Sudutnya dijaga jauh di bawah rotasi bersudut besar, yang akan memunculkan kembali masalah orientasi gravitasi seperti pada pembalikan vertikal."
 
   - id: scale_only
     augmentation: "scaling"
     overrides: { scale: 0.5 }
-    plausibility: "PLAUSIBLE, camera-to-subject distance varies naturally (drone altitude, handheld distance)."
+    plausibility: "MASUK AKAL, jarak kamera terhadap objek memang bervariasi secara alami, baik karena ketinggian drone maupun jarak pengambilan dengan tangan."
 
   - id: translate_only
     augmentation: "translation"
     overrides: { translate: 0.1 }
-    plausibility: "PLAUSIBLE, subject framing/position within the shot varies naturally."
+    plausibility: "MASUK AKAL, pembingkaian dan posisi objek di dalam bidang gambar bervariasi secara alami."
 
   - id: brightness_only
     augmentation: "brightness_contrast"
     overrides: { hsv_v: 0.4 }
-    plausibility: "PLAUSIBLE, outdoor field lighting varies hugely (sun/cloud/shade/time of day)."
+    plausibility: "MASUK AKAL, pencahayaan di lahan terbuka sangat bervariasi mengikuti matahari, awan, naungan, dan waktu pengambilan."
 
   - id: color_only
     augmentation: "color_transform"
     overrides: { hsv_h: 0.015, hsv_s: 0.7 }
-    plausibility: "PLAUSIBLE but bounded deliberately, hue shift is kept small (1.5%) because lesion color is a genuine diagnostic feature for several canonical classes (e.g. Brown spot vs. Blast); an aggressive hue shift risks producing images whose true label no longer visually matches, which would actively mislead the model, not just add noise."
+    plausibility: "MASUK AKAL tetapi sengaja dibatasi. Pergeseran hue dijaga kecil (1,5 persen) karena warna lesi merupakan ciri diagnostik yang nyata bagi beberapa kelas canonical, misalnya Brown spot terhadap Blast. Pergeseran hue yang agresif berisiko menghasilkan citra yang label sebenarnya tidak lagi cocok secara visual, dan itu menyesatkan model, bukan sekadar menambah derau."
 
   - id: mosaic_only
-    augmentation: "mosaic (not in the master spec's candidate list, but active by default in Ultralytics, included for completeness since it silently affected every Block 10 run)"
+    augmentation: "mosaic (tidak termasuk daftar kandidat awal, tetapi aktif secara bawaan pada Ultralytics; disertakan demi kelengkapan karena diam-diam memengaruhi seluruh percobaan matriks)"
     overrides: { mosaic: 1.0 }
-    plausibility: "QUESTIONABLE for this domain, mosaic composites 4 unrelated training images into one tile, which can distort the object-scale signal that Block 4/10 already showed is diagnostically meaningful per class (disease-lesion classes have characteristically small boxes; 'Healthy' has characteristically large ones). Tested empirically rather than assumed either way."
+    plausibility: "DIRAGUKAN untuk domain ini, karena mosaic menggabungkan empat citra latih yang tidak berkaitan menjadi satu ubin. Penggabungan itu dapat merusak sinyal skala objek yang pada profiling dataset sudah terbukti bermakna diagnostik per kelas, yaitu kelas lesi penyakit yang khas berkotak kecil dan kelas Healthy yang khas berkotak besar. Tetap diuji secara empiris alih-alih diasumsikan ke salah satu arah."
