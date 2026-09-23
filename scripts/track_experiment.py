@@ -7,8 +7,8 @@ Usage:
         --training-summary artifacts/reports/block6_baseline_smoke_summary.json \\
         --evaluation-summary artifacts/reports/evaluation_valid.json \\
         --manifest data/prepared/manifest_train.json \\
-        --notes "baseline smoke test" \\
-        --compliance-notes "no external pretrained weights; YOLO_OFFLINE enforced"
+        --notes "uji asap baseline" \\
+        --compliance-notes "tanpa external pretrained weights; YOLO_OFFLINE ditegakkan"
 
 Reads the training and (optional) evaluation summaries already produced by
 scripts/train.py / scripts/evaluate.py rather than re-deriving anything,

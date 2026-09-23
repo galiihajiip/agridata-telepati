@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Pelatihan model pada skala penyaringan.
 
-Usage:
+Pemakaian:
     python scripts/train.py --config configs/experiments/baseline_smoke.yaml
 
-This is a SMOKE TEST, not final training, see the config file's header
-comment. No external pretrained weights are used; see
-src/agridata/training/train.py for the enforced compliance checks.
+Skrip ini merupakan UJI ASAP, bukan pelatihan final; lihat komentar kepala pada
+berkas konfigurasinya. Tidak ada external pretrained weights yang dipakai, dan
+pemeriksaan kepatuhan yang ditegakkan dapat dilihat pada
+src/agridata/training/train.py.
 """
 
 from __future__ import annotations
