@@ -1,14 +1,16 @@
 # Laporan Evaluasi, split: `test`
 
-Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `9072dc1f4028854461a89a976a5a7dc0dc0ec5d7`
+Bobot: `runs/detect/final/final_model/weights/best.pt`  |  Commit Git: `9072dc1f4028854461a89a976a5a7dc0dc0ec5d7`
 
-## Native metrics (Ultralytics, source of truth for mAP)
+## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
 - mAP@0.5: 0.6246
 - mAP@0.5:0.95: 0.3940
-- Precision/Recall at Ultralytics' internal best-F1 point: 0.6420 / 0.6391
+- Ambang NMS IoU: 0.5
+- F1 macro pada titik operasi terbaik: 0.6272 (confidence 0.2412)
+- Precision dan recall pada titik operasi tersebut: 0.6725 / 0.6279
 
-| canonical class | AP@0.5 |
+| Kelas canonical | AP@0.5 |
 |---|---:|
 | Bacterial leaf blight | 0.3230 |
 | Bacterial panicle blight | 0.6249 |
@@ -22,14 +24,14 @@ Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `9072dc
 | Sheath blight | 0.4729 |
 | Tungro | 0.6312 |
 
-## Local F1 metrics (implementation detail, confidence threshold = 0.25)
+## Metrik lokal diagnostik, rata-rata micro pada confidence 0.25
 
-- Overall precision: 0.6679
-- Overall recall: 0.4112
-- Overall F1: 0.5090
+- Precision keseluruhan: 0.6679
+- Recall keseluruhan: 0.4112
+- F1 keseluruhan: 0.5090
 - TP=1098 FP=546 FN=1572
 
-| canonical class | precision | recall | F1 | TP | FP | FN |
+| Kelas canonical | precision | recall | F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|---:|
 | Brown spot | 0.6381 | 0.1952 | 0.2990 | 164 | 93 | 676 |
 | Tungro | 0.6782 | 0.5742 | 0.6219 | 236 | 112 | 175 |
@@ -43,4 +45,4 @@ Weights: `runs/detect/final/final_model/weights/best.pt`  |  Git commit: `9072dc
 | Bacterial panicle blight | 0.5938 | 0.7037 | 0.6441 | 19 | 13 | 8 |
 | Leaf roller | 0.6441 | 0.8636 | 0.7379 | 38 | 21 | 6 |
 
-**WARNING: this is a test-split evaluation. Test ground truth must never be used for iterative model tuning.**
+**PERINGATAN: ini evaluasi pada split test. Ground truth test tidak boleh dipakai untuk penyetelan model secara berulang.**

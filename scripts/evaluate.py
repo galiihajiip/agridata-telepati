@@ -70,6 +70,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data-yaml", default=None, type=Path, help="Defaults to <prepared-dir>/data.yaml")
     parser.add_argument("--device", default="auto", help="'auto' resolves via agridata.device.detect_device() (no CUDA assumed).")
     parser.add_argument(
+        "--render-only",
+        action="store_true",
+        help="Membentuk ulang laporan Markdown dari evaluation_{split}.json yang sudah ada, "
+        "tanpa menjalankan inferensi. Dipakai ketika hanya format laporan yang berubah, "
+        "supaya angka tidak bergeser akibat nondeterminisme backend MPS.",
+    )
+    parser.add_argument(
         "--nms-iou", type=float, default=0.5,
         help=(
             "NMS IoU threshold passed to model.val(). Default 0.5 rather than Ultralytics' "
@@ -397,6 +404,17 @@ def build_markdown(summary: dict, conf_threshold: float) -> str:
 def main() -> int:
     setup_logging()
     args = parse_args()
+
+    if args.render_only:
+        json_path = args.report_dir / f"evaluation_{args.split}.json"
+        if not json_path.exists():
+            raise SystemExit(f"Tidak menemukan {json_path}. Jalankan evaluasi penuh terlebih dahulu.")
+        with json_path.open("r", encoding="utf-8") as f:
+            summary = json.load(f)
+        md_path = args.report_dir / f"evaluation_{args.split}.md"
+        md_path.write_text(build_markdown(summary, args.conf_threshold), encoding="utf-8")
+        print(f"Laporan dibentuk ulang dari {json_path} tanpa inferensi: {md_path}")
+        return 0
 
     if args.device == "auto":
         args.device = detect_device()
