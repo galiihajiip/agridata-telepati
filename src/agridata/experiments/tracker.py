@@ -1,10 +1,13 @@
-"""Lightweight, offline experiment tracker (Block 9).
+"""Pelacak percobaan yang ringan dan sepenuhnya luring.
 
-Deliberately avoids MLflow/W&B: this project's audit constraints prioritize
-zero external dependencies, no internet requirement, no privacy exposure,
-and minimal moving parts for a judge to reproduce, a single JSON file that
-any script (or a human) can read is enough for this project's scale. Each
-experiment is one record with a fixed schema; see `ExperimentRecord`.
+MLflow maupun W&B sengaja tidak dipakai. Batasan audit project ini menuntut nol
+dependensi eksternal, tanpa kebutuhan internet, tanpa paparan privasi, dan
+sesedikit mungkin komponen bergerak agar juri mudah mereproduksinya. Pada skala
+project ini, satu berkas JSON yang dapat dibaca skrip mana pun maupun manusia
+sudah memadai.
+
+Setiap percobaan tersimpan sebagai satu catatan dengan skema tetap, lihat
+`ExperimentRecord`.
 """
 
 from __future__ import annotations
@@ -48,9 +51,11 @@ class ExperimentRecord:
 
 
 def compute_manifest_hash(manifest_path: Path) -> str:
-    """SHA-256 of a prepared-dataset manifest file, a concrete, verifiable
-    "dataset version" fingerprint tying an experiment to the exact data it
-    was trained/evaluated on."""
+    """SHA-256 dari berkas manifest data siap latih.
+
+    Nilai ini berfungsi sebagai sidik jari versi dataset yang konkret dan dapat
+    diverifikasi, sehingga setiap percobaan terikat pada data persis yang
+    dipakai melatih dan mengevaluasinya."""
     with manifest_path.open("rb") as f:
         return hashlib.sha256(f.read()).hexdigest()
 
@@ -63,9 +68,11 @@ def load_experiments(log_path: Path = DEFAULT_LOG_PATH) -> list[dict[str, Any]]:
 
 
 def append_experiment(record: ExperimentRecord, log_path: Path = DEFAULT_LOG_PATH) -> None:
-    """Menambahkan satu catatan percobaan ke log. Pola baca-ubah-tulis pada satu
-    array JSON sudah memadai untuk skala project ini, basis data sungguhan
-    unnecessary complexity for a handful of tracked experiments)."""
+    """Menambahkan satu catatan percobaan ke log.
+
+    Pola baca, ubah, lalu tulis pada satu array JSON sudah memadai untuk skala
+    project ini. Memakai basis data sungguhan hanya akan menambah kerumitan yang
+    tidak diperlukan untuk percobaan sebanyak ini."""
     records = load_experiments(log_path)
     existing_ids = {r["experiment_id"] for r in records}
     if record.experiment_id in existing_ids:
