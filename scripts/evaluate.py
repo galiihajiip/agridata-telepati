@@ -332,118 +332,26 @@ def run_stage_in_subprocess(stage: str, args: argparse.Namespace) -> dict:
             return json.load(f)
 
 
-def main() -> int:
-    setup_logging()
-    args = parse_args()
+def build_markdown(summary: dict, conf_threshold: float) -> str:
+    """Menyusun laporan Markdown dari ringkasan evaluasi.
 
-    if args.device == "auto":
-        args.device = detect_device()
+    Dipisahkan dari alur inferensi agar laporan dapat dibentuk ulang dari berkas
+    JSON yang sudah tersimpan, tanpa menjalankan inferensi lagi. Dengan begitu
+    perubahan format laporan tidak berisiko menggeser angka, karena backend MPS
+    tidak menjamin hasil inferensi yang identik antar pengulangan.
+    """
+    native_metrics = summary["native_metrics"]
+    per_class_map50 = native_metrics["per_class_AP50"]
+    local_overall = summary["local_f1_metrics"]["overall"]
+    local_per_class = summary["local_f1_metrics"]["per_class"]
+    split = summary["split"]
 
-    # Internal invocation: run exactly one stage and exit.
-    if args.stage == "native_val":
-        run_native_val_stage(args)
-        return 0
-    if args.stage == "local_f1":
-        run_local_f1_stage(args)
-        return 0
-
-    # Top-level invocation: orchestrate both stages as separate processes.
-    if args.split == "test":
-        logger.warning(
-            "Evaluating on the TEST split. Per the master spec, test ground truth must "
-            "NEVER be used to tune the model. This run should only happen for final, "
-            "frozen-model reporting (Block 15+), not iterative experimentation."
-        )
-
-    logger.info("Device: %s", args.device)
-    data_yaml = args.data_yaml or (args.prepared_dir / "data.yaml")
-
-    native = run_stage_in_subprocess("native_val", args)
-    local = run_stage_in_subprocess("local_f1", args)
-
-    native_metrics = native["native_metrics"]
-    per_class_map50 = native["per_class_map50"]
-    local_overall = local["overall"]
-    local_per_class = local["per_class"]
-
-    summary = {
-        "block": 7,
-        "git_commit": get_git_commit(),
-        "weights": str(args.weights),
-        "split": args.split,
-        "data_yaml": str(data_yaml),
-        "iou_threshold": 0.5,
-        "native_metrics": {
-            "description": "Computed via ultralytics model.val(), source of truth for mAP. "
-            "IoU thresholds: torch.linspace(0.5, 0.95, 10); mAP50 uses index 0 (IoU=0.50). "
-            "Run in its own subprocess, see module docstring for why.",
-            **native_metrics,
-            "per_class_AP50": per_class_map50,
-        },
-        "local_f1_metrics": {
-            "description": "LOCAL implementation detail (not the official scoring formula): "
-            "greedy IoU>=0.5 matching at a caller-specified confidence threshold. See "
-            "src/agridata/metrics/detection.py for full methodology. Run in its own subprocess.",
-            "confidence_threshold": args.conf_threshold,
-            "overall": local_overall,
-            "per_class": local_per_class,
-        },
-        "num_detections_collected": local["num_detections_collected"],
-        "num_ground_truth_boxes": local["num_ground_truth_boxes"],
-        "predictions_artifact": local["predictions_artifact"],
-        "sample_prediction_figures": local["sample_prediction_figures"],
-        "test_set_tuning_warning_issued": args.split == "test",
-    }
-
-    args.report_dir.mkdir(parents=True, exist_ok=True)
-    json_path = args.report_dir / f"evaluation_{args.split}.json"
-    with json_path.open("w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=2)
-
-    md_lines = [
-        f"# Laporan Evaluasi, split: `{args.split}`",
-        "",
-        f"Bobot: `{args.weights}`  |  Commit Git: `{summary['git_commit']}`",
-        "",
-        "## Metrik native Ultralytics, sumber kebenaran untuk mAP",
-        "",
-        f"- mAP@0.5: {native_metrics['mAP50']:.4f}",
-        f"- mAP@0.5:0.95: {native_metrics['mAP50_95']:.4f}",
-        f"- Ambang NMS IoU: {native_metrics['nms_iou']}",
-        f"- F1 macro pada titik operasi terbaik: {native_metrics['macro_f1']:.4f} "
-        f"(confidence {native_metrics['macro_f1_confidence']:.4f})",
-        f"- Precision dan recall pada titik operasi tersebut: "
-        f"{native_metrics.get('precision_at_macro_f1_point', 0):.4f} / {native_metrics.get('recall_at_macro_f1_point', 0):.4f}",
-        "",
-        "| Kelas canonical | AP@0.5 |",
-        "|---|---:|",
-    ]
-    for cls, ap in per_class_map50.items():
-        md_lines.append(f"| {cls} | {ap:.4f} |")
-    md_lines += [
-        "",
-        f"## Metrik lokal diagnostik, rata-rata micro pada confidence {args.conf_threshold}",
-        "",
-        f"- Precision keseluruhan: {local_overall['precision']:.4f}",
-        f"- Recall keseluruhan: {local_overall['recall']:.4f}",
-        f"- F1 keseluruhan: {local_overall['f1']:.4f}",
-        f"- TP={local_overall['true_positives']} FP={local_overall['false_positives']} FN={local_overall['false_negatives']}",
-        "",
-        "| Kelas canonical | precision | recall | F1 | TP | FP | FN |",
-        "|---|---:|---:|---:|---:|---:|---:|",
-    ]
-    for cls, prf1 in local_per_class.items():
-        md_lines.append(
-            f"| {cls} | {prf1['precision']:.4f} | {prf1['recall']:.4f} | {prf1['f1']:.4f} | "
-            f"{prf1['true_positives']} | {prf1['false_positives']} | {prf1['false_negatives']} |"
-        )
-    if args.split == "test":
-        md_lines += ["", "**PERINGATAN: ini evaluasi pada split test. Ground truth test tidak boleh dipakai untuk penyetelan model secara berulang.**"]
+    markdown = build_markdown(summary, args.conf_threshold)
 
     md_path = args.report_dir / f"evaluation_{args.split}.md"
-    md_path.write_text("\n".join(md_lines) + "\n", encoding="utf-8")
+    md_path.write_text(markdown, encoding="utf-8")
 
-    print("\n".join(md_lines))
+    print(markdown)
     print(f"\nJSON report: {json_path}")
     print(f"Markdown report: {md_path}")
     print(f"Prediction artifacts: {local['predictions_artifact']}")
