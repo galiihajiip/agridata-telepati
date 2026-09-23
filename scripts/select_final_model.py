@@ -317,12 +317,14 @@ def main() -> int:
         (REPORT_DIR / "block14_final_model_selection.md").write_text(report, encoding="utf-8")
         ditulis.append(REPORT_DIR / "block14_final_model_selection.md")
 
+    if args.only in ("metadata", "all"):
+        # Snapshot lingkungan merekam kondisi pada saat pemilihan konfigurasi, sehingga tidak
+        # ditulis ulang saat laporan diregenerasi agar tidak berganti menjadi kondisi hari ini.
         env_snapshot = capture_environment_snapshot()
         with (REPORT_DIR / "block14_environment_snapshot.json").open("w", encoding="utf-8") as f:
             json.dump(env_snapshot, f, indent=2)
         ditulis.append(REPORT_DIR / "block14_environment_snapshot.json")
 
-    if args.only in ("metadata", "all"):
         metadata = build_model_metadata(git_commit)
         with (REPORT_DIR / "final_model_metadata.json").open("w", encoding="utf-8") as f:
             json.dump(metadata, f, indent=2)
