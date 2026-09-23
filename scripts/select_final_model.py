@@ -140,6 +140,61 @@ def build_compliance_checklist(experiments: list[dict]) -> list[dict]:
     ]
 
 
+def build_report(experiments: list[dict], checklist: list[dict], git_commit: str) -> str:
+    best = max(experiments, key=lambda r: r["best_val_map50"])
+    lines = [
+        "# Pemilihan Konfigurasi Model Final",
+        "",
+        f"Laporan ini meninjau seluruh {len(experiments)} percobaan yang tercatat "
+        f"(E01 sampai E{len(experiments):02d}). Yang dipilih dan dibekukan di sini adalah KONFIGURASI "
+        "untuk pelatihan skala penuh; laporan ini sendiri tidak menghasilkan bobot final yang disubmit.",
+        "",
+        "## Seluruh percobaan kandidat, diurutkan menurut mAP@0.5",
+        "",
+        build_candidate_table(experiments),
+        "",
+        f"## Konfigurasi terpilih: lihat `{FINAL_CONFIG_PATH}`",
+        "",
+        f"Hasil penyaringan individual terbaik adalah **{best['experiment_id']}** "
+        f"(mAP@0.5={best['best_val_map50']:.4f}). Konfigurasi final yang dibekukan tidak sekadar "
+        "menyalin pengaturan percobaan tersebut apa adanya, melainkan merangkum bukti dari seluruh 21 "
+        "percobaan. Alasan untuk setiap hyperparameter tercantum sebagai komentar di dalam berkas "
+        "konfigurasi, dan dilengkapi penalaran kelayakan semantik dari ablasi augmentasi serta bukti "
+        "independen dari analisis kesalahan.",
+        "",
+        "## Daftar periksa kepatuhan, berbasis bukti dan bukan sekadar pernyataan",
+        "",
+        "| # | Butir | Status | Bukti |",
+        "|---:|---|---|---|",
+    ]
+    for i, c in enumerate(checklist, start=1):
+        lines.append(f"| {i} | {c['item']} | {c['status']} | {c['evidence']} |")
+
+    lines += [
+        "",
+        "## Risiko yang diketahui",
+        "",
+        "- Kandidat tumpang tindih berbasis perceptual hash yang tersisa dari audit dataset "
+        "(train terhadap valid: 426, train terhadap test: 210, valid terhadap test: 84) tidak pernah "
+        "dikonfirmasi satu per satu secara visual, sehingga belum diketahui mana yang benar-benar "
+        "duplikat dan mana yang merupakan false positive dari aHash 8x8 yang kasar. Hanya satu duplikat "
+        "persis menurut MD5 yang ditindaklanjuti.",
+        "- Seluruh 21 percobaan penyaringan memakai sebagian kecil data latih (8 sampai 10 persen) dan "
+        "sedikit epoch (5 sampai 12). Angka skala penuh pada konfigurasi beku (epochs=50, fraction=1.0) "
+        "merupakan ekstrapolasi, bukan hasil pengukuran langsung. Perilaku skala penuh yang sebenarnya "
+        "baru teramati pada pelatihan final.",
+        "- Backend MPS terbukti memiliki kernel yang tidak deterministik untuk `scatter_reduce_mps` dan "
+        "`index_put_with_accumulate_mps`. Karena itu reproduksi pelatihan bit per bit tidak dijamin; "
+        "yang dijamin hanya reproduksi konfigurasi dan prapemrosesan.",
+        "- Perkiraan waktu pelatihan skala penuh sekitar 8,2 jam pada perangkat yang dipakai project ini "
+        "tergolong lama. Nilai `patience=15` berpotensi memperpendeknya, tetapi perkiraan ini harus "
+        "diverifikasi ulang saat pelatihan final dijalankan.",
+        "",
+        f"Commit Git pada saat pemilihan: `{git_commit}`",
+    ]
+    return "\n".join(lines) + "\n"
+
+
 def build_model_metadata(git_commit: str) -> dict:
     return {
         "model_name": "agridata-telepati8-yolov8n",
