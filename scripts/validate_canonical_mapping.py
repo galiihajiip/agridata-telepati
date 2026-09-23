@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Validasi pemetaan 11 kelas canonical terhadap dataset aktual.
-raw dataset categories (Block 3).
+"""Validasi pemetaan 11 kelas canonical terhadap kategori dataset yang sebenarnya.
 
-Usage:
+Pemakaian:
     python scripts/validate_canonical_mapping.py --dataset-root "<PATH>"
 
-Read-only: loads each split's COCO JSON to read `categories` only. Does not
-mutate any raw file and does not mutate the annotations, this only checks
-that every raw category name is covered by RAW_TO_CANONICAL or recognized as
-a non-canonical supercategory placeholder.
+Skrip hanya membaca: berkas COCO JSON setiap split dimuat semata untuk membaca
+`categories`. Tidak ada berkas mentah maupun anotasi yang diubah. Yang diperiksa
+hanyalah apakah setiap nama kategori mentah tercakup oleh RAW_TO_CANONICAL atau
+dikenali sebagai penanda supercategory yang memang bukan kelas canonical.
 """
 
 from __future__ import annotations

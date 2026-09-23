@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
 """Ablasi augmentasi satu faktor pada satu waktu.
 
-Usage:
+Pemakaian:
     python scripts/run_augmentation_ablation.py --config configs/experiments/augmentation_ablation.yaml
 
-One-factor-at-a-time from a clean NO-AUGMENTATION reference point (distinct
-from Block 10's baseline, which already had Ultralytics' default
-augmentation bundle silently active). Each augmentation type is assessed for
-physical/semantic plausibility for agricultural imagery *before* being run
-(see the YAML config's `plausibility` field per variant), and every result
-is logged to the same Block 9 experiment tracker used throughout this
-project. Validation/test images are never touched, augmentation only
-applies to the training dataloader (Ultralytics' default behavior, verified
-by design: only `train:` split images pass through the augmentation
-pipeline; `val:`/`test:` inference uses un-augmented images).
+Pengujian dilakukan satu faktor pada satu waktu, bertolak dari titik referensi
+bersih TANPA AUGMENTASI. Titik ini berbeda dari baseline matriks percobaan, yang
+sebenarnya sudah mengaktifkan paket augmentasi bawaan Ultralytics secara
+diam-diam.
+
+Setiap jenis augmentasi dinilai kelayakan fisik dan semantiknya untuk citra
+pertanian SEBELUM dijalankan, lihat field `plausibility` per varian pada berkas
+konfigurasi YAML. Seluruh hasilnya dicatat ke pelacak percobaan yang sama dengan
+yang dipakai di sepanjang project ini.
+
+Citra validasi dan uji tidak pernah disentuh. Augmentasi hanya berlaku pada
+dataloader pelatihan, sesuai perilaku bawaan Ultralytics: hanya citra split
+`train:` yang melewati pipeline augmentasi, sedangkan inferensi pada `val:` dan
+`test:` memakai citra tanpa augmentasi.
 """
 
 from __future__ import annotations

@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """Matriks percobaan terkontrol satu faktor pada satu waktu.
 
-Usage:
+Pemakaian:
     python scripts/run_experiment_matrix.py --matrix-config configs/experiments/matrix.yaml
 
-Runs a one-factor-at-a-time (OFAT) matrix defined in the given YAML config:
-one baseline plus N variants, each changing exactly one axis from the
-baseline. Every experiment uses the same dataset/split/seed/evaluation
-method and no external pretrained weights (enforced by
-agridata.training.train.build_compliant_model). Each run is logged to the
-Block 9 experiment tracker with real, measured values, nothing here is
-estimated or assumed after the fact.
+Skrip menjalankan matriks satu faktor pada satu waktu sesuai definisi pada berkas
+konfigurasi YAML yang diberikan, yaitu satu baseline ditambah N varian, dan
+setiap varian mengubah tepat satu faktor dari baseline.
 
-Before running, this script reports disk/RAM/device so a long matrix is
-never launched blind (per the master spec's explicit requirement).
+Seluruh percobaan memakai dataset, split, seed, dan metode evaluasi yang sama,
+serta tanpa external pretrained weights, yang ditegakkan oleh
+agridata.training.train.build_compliant_model. Setiap eksekusi dicatat ke pelacak
+percobaan dengan nilai hasil pengukuran yang sesungguhnya; tidak ada satu pun
+angka di sini yang diperkirakan atau diandaikan belakangan.
+
+Sebelum berjalan, skrip melaporkan kondisi disk, RAM, dan perangkat, supaya
+matriks yang panjang tidak pernah dijalankan tanpa gambaran sumber daya.
 """
 
 from __future__ import annotations

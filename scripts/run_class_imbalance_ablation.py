@@ -1,26 +1,29 @@
 #!/usr/bin/env python3
 """Ablasi penanganan ketidakseimbangan kelas.
 
-Usage:
+Pemakaian:
     python scripts/run_class_imbalance_ablation.py
 
-Compares baseline (natural class distribution) vs. targeted oversampling of
-rare classes (Block 12's chosen mitigation strategy), holding EVERYTHING
-else fixed, including total training image COUNT, not just a percentage,
-so the comparison isolates the effect of rebalancing class representation
-rather than confounding it with "the oversampled run just saw more data."
+Skrip membandingkan baseline berdistribusi kelas alami terhadap oversampling
+terarah pada kelas minoritas, dengan MENAHAN SEGALANYA yang lain tetap, termasuk
+JUMLAH citra latih dan bukan sekadar persentasenya. Dengan begitu perbandingan
+benar-benar mengisolasi efek penyeimbangan representasi kelas, bukan tercampur
+dengan kemungkinan bahwa eksekusi oversampling sekadar melihat lebih banyak data.
 
-This is achieved by passing an integer `fraction` to Ultralytics (verified
-via source: `ultralytics/data/base.py` uses an int fraction as an absolute
-image count, not a percentage), applied to both the original 10,132-image
-pool and the oversampled 15,352-entry pool alike.
+Hal itu dicapai dengan mengirimkan `fraction` bertipe bilangan bulat ke
+Ultralytics. Pemeriksaan kode sumber `ultralytics/data/base.py` memastikan bahwa
+fraction bertipe bilangan bulat diperlakukan sebagai jumlah citra absolut, bukan
+persentase. Nilai itu diterapkan sama rata pada kumpulan asli berisi 10.132 citra
+maupun kumpulan hasil oversampling berisi 15.352 entri.
 
-Validation is the ORIGINAL, unmodified valid split in both cases (see
-scripts/prepare_oversampled_train.py, val/test paths are identical files,
-not copies). Per-class AP@0.5 is reported specifically for the rare classes
-targeted by oversampling, not just the aggregate mAP@0.5, since the whole
-point of this ablation is whether THEY improved, an aggregate-only view
-could hide a rare-class win under common-class noise, or vice versa.
+Validasi pada kedua kasus memakai split valid ASLI yang tidak diubah; lihat
+scripts/prepare_oversampled_train.py, di mana path val dan test menunjuk ke
+berkas yang sama persis, bukan salinan.
+
+AP@0.5 per kelas dilaporkan khusus untuk kelas minoritas yang disasar
+oversampling, bukan hanya mAP@0.5 agregat. Inti ablasi ini memang apakah kelas
+tersebut membaik, dan pandangan agregat saja dapat menyembunyikan keberhasilan
+pada kelas minoritas di balik derau kelas mayoritas, atau justru sebaliknya.
 """
 
 from __future__ import annotations

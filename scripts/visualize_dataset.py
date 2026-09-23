@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Visualisasi contoh citra dataset beserta anotasinya.
 
-Usage:
+Pemakaian:
     python scripts/visualize_dataset.py --dataset-root "<PATH>" \
         --output-dir artifacts/figures --num-samples 8 --seed 42
 
-Read-only with respect to the raw dataset. Applies the Block 3 canonical
-mapping when loading annotations (fails loudly on any unmapped raw
-category, same behavior as the rest of the pipeline). Sampling is
-deterministic (seeded) so repeated runs pick the same images.
+Terhadap dataset mentah, skrip ini hanya membaca. Pemetaan canonical diterapkan
+saat memuat anotasi, dan akan gagal secara keras bila menemui kategori mentah
+yang tidak terpetakan, sama seperti perilaku bagian pipeline lainnya.
+
+Penyampelannya deterministik karena memakai seed tetap, sehingga eksekusi
+berulang selalu memilih citra yang sama.
 """
 
 from __future__ import annotations

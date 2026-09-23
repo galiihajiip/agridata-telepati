@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 """Pelatihan model final yang patuh terhadap batasan kompetisi.
 
-Usage:
+Pemakaian:
     python scripts/run_final_training.py --config configs/final_model_config.yaml
 
-Executes the frozen configuration from Block 14 at full scale (fraction=1.0,
-the entire prepared train set). Prints every disclosure the master spec
-requires before training starts, trains, saves all artifacts, and validates
-the resulting weights load and run inference from a completely clean
-Python process (not just the training process that produced them).
+Skrip menjalankan konfigurasi yang sudah dibekukan pada skala penuh, yaitu
+fraction=1.0 atas seluruh data latih yang sudah disiapkan. Sebelum pelatihan
+dimulai, skrip mencetak seluruh pengungkapan yang diwajibkan, lalu melatih,
+menyimpan seluruh artefak, dan memastikan bobot hasilnya dapat dimuat serta
+menjalankan inferensi dari proses Python yang benar-benar bersih, bukan sekadar
+dari proses pelatihan yang menghasilkannya.
 
-Never touches test data. No external pretrained weights, no external
-dataset, no LLM/API processing, enforced the same way as every prior
-training block (YOLO_OFFLINE, architecture-only .yaml construction).
+Data uji tidak pernah disentuh. Tidak ada external pretrained weights, dataset
+eksternal, maupun pemrosesan memakai LLM atau API. Ketiganya ditegakkan dengan
+cara yang sama seperti pada seluruh tahap pelatihan sebelumnya, yaitu melalui
+YOLO_OFFLINE dan pembangunan model dari berkas .yaml yang hanya memuat
+arsitektur.
 """
 
 from __future__ import annotations
@@ -92,9 +95,10 @@ def check_resources() -> dict:
 
 
 def validate_clean_process_load(weights_path: Path, sample_image: Path) -> dict:
-    """Load the checkpoint and run inference in a brand-new Python subprocess,
-    not just the training process that produced it, to prove the artifact is
-    genuinely portable and loadable independent of any in-memory state."""
+    """Memuat checkpoint lalu menjalankan inferensi pada subproses Python yang
+    benar-benar baru, bukan pada proses pelatihan yang menghasilkannya, untuk
+    membuktikan bahwa artefaknya sungguh portabel dan dapat dimuat tanpa
+    bergantung pada kondisi apa pun yang tersisa di memori."""
     script = f"""
 import os
 os.environ.setdefault("YOLO_OFFLINE", "1")
