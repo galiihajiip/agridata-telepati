@@ -1,7 +1,8 @@
 """Deteksi perangkat komputasi dengan dukungan Apple Silicon dan fallback CPU.
 
-Never assumes CUDA is available (the competition audit environment is
-unspecified and must not be assumed to be a Mac). CPU must always work.
+Ketersediaan CUDA tidak pernah diasumsikan. Lingkungan audit kompetisi tidak
+disebutkan spesifikasinya dan tidak boleh diandaikan sebagai Mac, sehingga jalur
+CPU harus selalu dapat berjalan.
 """
 
 from __future__ import annotations
@@ -21,7 +22,7 @@ def detect_device() -> str:
     """Mengembalikan perangkat komputasi terbaik yang tersedia: 'cuda', 'mps', atau 'cpu'.
 
     Jatuh kembali ke 'cpu' bila torch tidak terpasang atau tidak ada akselerator
-    usable, so the pipeline always has a working device.
+    yang dapat dipakai, sehingga pipeline selalu memiliki perangkat yang berfungsi.
     """
     try:
         import torch
