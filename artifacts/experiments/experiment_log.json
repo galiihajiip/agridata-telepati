@@ -36,7 +36,7 @@
     "precision": 0.0,
     "recall": 0.0,
     "training_duration_seconds": 127.444124,
-    "notes": "Block 6 smoke test: 2 epochs, 5% of train, imgsz=320. Proves pipeline works end-to-end, not a real model.",
+    "notes": "Uji asap pipeline: 2 epoch, 5 persen data latih, imgsz=320. Membuktikan pipeline berjalan dari ujung ke ujung, bukan model yang sesungguhnya.",
     "compliance_notes": "No external pretrained weights (built from yolov8n.yaml, pretrained=False). YOLO_OFFLINE enforced during training/eval."
   },
   {
@@ -76,7 +76,7 @@
     "precision": 0.18399133233702877,
     "recall": 0.0073145245559038665,
     "training_duration_seconds": 145.70708854100667,
-    "notes": "Block 10 baseline (OFAT reference point).",
+    "notes": "Baseline matriks percobaan, dipakai sebagai titik referensi pengujian satu faktor.",
     "compliance_notes": "No external pretrained weights (yaml-only architecture, pretrained=False). YOLO_OFFLINE enforced."
   },
   {
@@ -116,7 +116,7 @@
     "precision": 0.37242753852027344,
     "recall": 0.00522466039707419,
     "training_duration_seconds": 302.23566220793873,
-    "notes": "OFAT variant: image_size changed from baseline; all else held fixed.",
+    "notes": "Varian satu faktor: image_size diubah dari baseline, seluruh parameter lain ditahan tetap.",
     "compliance_notes": "No external pretrained weights (yaml-only architecture, pretrained=False). YOLO_OFFLINE enforced."
   },
   {
@@ -156,7 +156,7 @@
     "precision": 0.00041299496002423114,
     "recall": 0.08281040753822314,
     "training_duration_seconds": 119.4315569170285,
-    "notes": "OFAT variant: batch_size changed from baseline; all else held fixed.",
+    "notes": "Varian satu faktor: batch_size diubah dari baseline, seluruh parameter lain ditahan tetap.",
     "compliance_notes": "No external pretrained weights (yaml-only architecture, pretrained=False). YOLO_OFFLINE enforced."
   },
   {
@@ -196,7 +196,7 @@
     "precision": 0.1819894364503848,
     "recall": 0.08144945798516057,
     "training_duration_seconds": 130.6845751667861,
-    "notes": "OFAT variant: learning_rate changed from baseline; all else held fixed.",
+    "notes": "Varian satu faktor: learning_rate diubah dari baseline, seluruh parameter lain ditahan tetap.",
     "compliance_notes": "No external pretrained weights (yaml-only architecture, pretrained=False). YOLO_OFFLINE enforced."
   },
   {
@@ -236,7 +236,7 @@
     "precision": 0.09605248235751224,
     "recall": 0.00027663211480188736,
     "training_duration_seconds": 127.76779062510468,
-    "notes": "OFAT variant: optimizer changed from baseline; all else held fixed.",
+    "notes": "Varian satu faktor: optimizer diubah dari baseline, seluruh parameter lain ditahan tetap.",
     "compliance_notes": "No external pretrained weights (yaml-only architecture, pretrained=False). YOLO_OFFLINE enforced."
   },
   {
@@ -276,7 +276,7 @@
     "precision": 0.27593278008679145,
     "recall": 0.006060606060606061,
     "training_duration_seconds": 133.84303379198536,
-    "notes": "OFAT variant: augmentation_strength changed from baseline; all else held fixed.",
+    "notes": "Varian satu faktor: augmentation_strength diubah dari baseline, seluruh parameter lain ditahan tetap.",
     "compliance_notes": "No external pretrained weights (yaml-only architecture, pretrained=False). YOLO_OFFLINE enforced."
   },
   {
@@ -316,7 +316,7 @@
     "precision": 0.2920709281456899,
     "recall": 0.04056543294062866,
     "training_duration_seconds": 207.84370741713792,
-    "notes": "OFAT variant: training_duration changed from baseline; all else held fixed.",
+    "notes": "Varian satu faktor: training_duration diubah dari baseline, seluruh parameter lain ditahan tetap.",
     "compliance_notes": "No external pretrained weights (yaml-only architecture, pretrained=False). YOLO_OFFLINE enforced."
   },
   {
@@ -356,8 +356,8 @@
     "precision": 0.30036364323520026,
     "recall": 0.03046026227479707,
     "training_duration_seconds": 151.78747079195455,
-    "notes": "Block 11 augmentation ablation: none. Reference point: all augmentation disabled.",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: none. Titik referensi dengan seluruh augmentasi dimatikan.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E10",
@@ -396,8 +396,8 @@
     "precision": 0.2853237299400282,
     "recall": 0.036141041187831416,
     "training_duration_seconds": 144.67039583297446,
-    "notes": "Block 11 augmentation ablation: horizontal_flip. PLAUSIBLE \u2014 a leaf/plant photographed from the mirrored lateral side is physically realistic; disease identity does not depend on left-right orientation.",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: horizontal_flip. MASUK AKAL, daun atau tanaman yang difoto dari sisi lateral yang dicerminkan tetap realistis secara fisik; identitas penyakit tidak bergantung pada orientasi kiri-kanan.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E11",
@@ -436,8 +436,8 @@
     "precision": 0.3860243597362077,
     "recall": 0.022072532216671784,
     "training_duration_seconds": 135.13337266584858,
-    "notes": "Block 11 augmentation ablation: vertical_flip. QUESTIONABLE \u2014 rice plants/leaves have a gravity-determined orientation (growth direction, how a camera/drone would ever realistically capture them). An upside-down plant is not a scenario the deployed system would see. Tested empirically anyway, but flagged for exclusion from the final config regardless of measured effect unless evidence strongly overrides this reasoning.",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: vertical_flip. DIRAGUKAN, tanaman dan daun padi memiliki orientasi yang ditentukan gravitasi, baik dari arah tumbuhnya maupun dari cara kamera atau drone realistis merekamnya. Tanaman terbalik bukan kondisi yang akan ditemui sistem saat dipakai. Tetap diuji secara empiris, tetapi sejak awal ditandai untuk dikeluarkan dari konfigurasi final berapa pun efek yang terukur, kecuali ada bukti yang sangat kuat membantah penalaran ini.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E12",
@@ -476,8 +476,8 @@
     "precision": 0.2892108027902681,
     "recall": 0.01827228082549691,
     "training_duration_seconds": 148.52877379208803,
-    "notes": "Block 11 augmentation ablation: rotation. PLAUSIBLE in moderation \u2014 simulates realistic camera tilt (handheld/drone not perfectly level). Kept well short of large-angle rotation, which would reintroduce the same gravity-orientation problem as vertical flip.",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: rotation. MASUK AKAL bila dibatasi, karena mensimulasikan kemiringan kamera yang realistis ketika perangkat genggam atau drone tidak benar-benar datar. Sudutnya dijaga jauh di bawah rotasi bersudut besar, yang akan memunculkan kembali masalah orientasi gravitasi seperti pada pembalikan vertikal.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E13",
@@ -516,8 +516,8 @@
     "precision": 0.1931960693655183,
     "recall": 0.04945585189549797,
     "training_duration_seconds": 129.42884162510745,
-    "notes": "Block 11 augmentation ablation: scaling. PLAUSIBLE \u2014 camera-to-subject distance varies naturally (drone altitude, handheld distance).",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: scaling. MASUK AKAL, jarak kamera terhadap objek memang bervariasi secara alami, baik karena ketinggian drone maupun jarak pengambilan dengan tangan.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E14",
@@ -556,8 +556,8 @@
     "precision": 0.29656750199736776,
     "recall": 0.021869644998946242,
     "training_duration_seconds": 135.60231400001794,
-    "notes": "Block 11 augmentation ablation: translation. PLAUSIBLE \u2014 subject framing/position within the shot varies naturally.",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: translation. MASUK AKAL, pembingkaian dan posisi objek di dalam bidang gambar bervariasi secara alami.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E15",
@@ -596,8 +596,8 @@
     "precision": 0.19287303123524052,
     "recall": 0.03849256134148535,
     "training_duration_seconds": 131.18362479214557,
-    "notes": "Block 11 augmentation ablation: brightness_contrast. PLAUSIBLE \u2014 outdoor field lighting varies hugely (sun/cloud/shade/time of day).",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: brightness_contrast. MASUK AKAL, pencahayaan di lahan terbuka sangat bervariasi mengikuti matahari, awan, naungan, dan waktu pengambilan.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E16",
@@ -636,8 +636,8 @@
     "precision": 0.19879930313612515,
     "recall": 0.025619237112827032,
     "training_duration_seconds": 132.2183094578795,
-    "notes": "Block 11 augmentation ablation: color_transform. PLAUSIBLE but bounded deliberately \u2014 hue shift is kept small (1.5%) because lesion color is a genuine diagnostic feature for several canonical classes (e.g. Brown spot vs. Blast); an aggressive hue shift risks producing images whose true label no longer visually matches, which would actively mislead the model, not just add noise.",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: color_transform. MASUK AKAL tetapi sengaja dibatasi. Pergeseran hue dijaga kecil (1,5 persen) karena warna lesi merupakan ciri diagnostik yang nyata bagi beberapa kelas canonical, misalnya Brown spot terhadap Blast. Pergeseran hue yang agresif berisiko menghasilkan citra yang label sebenarnya tidak lagi cocok secara visual, dan itu menyesatkan model, bukan sekadar menambah derau.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E17",
@@ -676,8 +676,8 @@
     "precision": 0.38670094731076254,
     "recall": 0.016718913270637407,
     "training_duration_seconds": 113.93102633301169,
-    "notes": "Block 11 augmentation ablation: mosaic (not in the master spec's candidate list, but active by default in Ultralytics \u2014 included for completeness since it silently affected every Block 10 run). QUESTIONABLE for this domain \u2014 mosaic composites 4 unrelated training images into one tile, which can distort the object-scale signal that Block 4/10 already showed is diagnostically meaningful per class (disease-lesion classes have characteristically small boxes; 'Healthy' has characteristically large ones). Tested empirically rather than assumed either way.",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: mosaic (tidak termasuk daftar kandidat awal, tetapi aktif secara bawaan pada Ultralytics; disertakan demi kelengkapan karena diam-diam memengaruhi seluruh percobaan matriks). DIRAGUKAN untuk domain ini, karena mosaic menggabungkan empat citra latih yang tidak berkaitan menjadi satu ubin. Penggabungan itu dapat merusak sinyal skala objek yang pada profiling dataset sudah terbukti bermakna diagnostik per kelas, yaitu kelas lesi penyakit yang khas berkotak kecil dan kelas Healthy yang khas berkotak besar. Tetap diuji secara empiris alih-alih diasumsikan ke salah satu arah.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E18",
@@ -716,7 +716,7 @@
     "precision": 0.11433599918605512,
     "recall": 0.055000796296357596,
     "training_duration_seconds": 135.15389191708528,
-    "notes": "Block 12 class-imbalance ablation: baseline, natural class distribution.",
+    "notes": "Ablasi ketidakseimbangan kelas: baseline dengan distribusi kelas alami.",
     "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Val/test data identical to Block 5's original, unmodified prepared directories."
   },
   {
@@ -756,7 +756,7 @@
     "precision": 0.18246333075410615,
     "recall": 0.011145942180424938,
     "training_duration_seconds": 119.70020454190671,
-    "notes": "Block 12 class-imbalance ablation: rare classes ['Bacterial leaf blight', 'Bacterial panicle blight', 'False smut', 'Leaf roller', 'Narrow brown'] oversampled 3x.",
+    "notes": "Ablasi ketidakseimbangan kelas: kelas minoritas ['Bacterial leaf blight', 'Bacterial panicle blight', 'False smut', 'Leaf roller', 'Narrow brown'] di-oversample 3 kali.",
     "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Val/test data identical to Block 5's original, unmodified prepared directories."
   },
   {
@@ -796,8 +796,8 @@
     "precision": 0.13440217953025804,
     "recall": 0.06222443481822743,
     "training_duration_seconds": 670.696525041014,
-    "notes": "Block 11 augmentation ablation: combined_default_aug. Block 14 confirmation: imgsz=640+epochs=12, DEFAULT augmentation (Ultralytics defaults).",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: combined_default_aug. Percobaan konfirmasi imgsz=640 dan epochs=12 dengan augmentasi BAWAAN Ultralytics.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   },
   {
     "experiment_id": "E21",
@@ -836,7 +836,7 @@
     "precision": 0.1403196067197282,
     "recall": 0.05520208452397238,
     "training_duration_seconds": 658.5250888750888,
-    "notes": "Block 11 augmentation ablation: combined_no_aug. Block 14 confirmation: imgsz=640+epochs=12, NO augmentation (tests whether Block 11 finding holds at larger scale).",
-    "compliance_notes": "No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only."
+    "notes": "Ablasi augmentasi: combined_no_aug. Percobaan konfirmasi imgsz=640 dan epochs=12 TANPA augmentasi, untuk menguji apakah temuan ablasi bertahan pada skala lebih besar.",
+    "compliance_notes": "Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih."
   }
 ]
