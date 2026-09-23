@@ -1,45 +1,45 @@
-# Block 12. Class Imbalance Mitigation Ablation
+# Ablasi Mitigasi Ketidakseimbangan Kelas
 
-Both runs use the identical training image COUNT (810, an absolute count via an integer `fraction`, verified via source not to be a percentage), the only difference is whether rare-class images are duplicated in the sampling pool. Same seed, same hyperparameters, same validation data (byte-identical files in both cases).
+Kedua eksekusi memakai JUMLAH citra latih yang identik (810), yaitu jumlah absolut melalui `fraction` bertipe bilangan bulat, yang sudah diverifikasi lewat kode sumber bahwa nilainya bukan persentase. Satu-satunya perbedaan adalah apakah citra kelas minoritas digandakan di dalam kumpulan penyampelan. Seed sama, hyperparameter sama, dan data validasi sama, dengan berkas yang identik byte per byte pada kedua kasus.
 
-Rare classes targeted for oversampling (< 20% of the most common class's instance count, per `artifacts/reports/class_imbalance_diagnostics.md`): ['Bacterial leaf blight', 'Bacterial panicle blight', 'False smut', 'Leaf roller', 'Narrow brown']
+Kelas minoritas yang menjadi sasaran oversampling, yaitu kelas dengan jumlah instance kurang dari 20 persen kelas terbanyak menurut `artifacts/reports/class_imbalance_diagnostics.md`: ['Bacterial leaf blight', 'Bacterial panicle blight', 'False smut', 'Leaf roller', 'Narrow brown']
 
-## Overall results
+## Hasil keseluruhan
 
-| Run | mAP@0.5 | Precision | Recall | Duration (s) |
+| Eksekusi | mAP@0.5 | Precision | Recall | Durasi (detik) |
 |---|---:|---:|---:|---:|
-| baseline (natural distribution) | 0.0071 | 0.1143 | 0.0550 | 135.2 |
-| oversampled (rare classes x3) | 0.0005 | 0.1825 | 0.0111 | 119.7 |
+| baseline, distribusi alami | 0.0071 | 0.1143 | 0.0550 | 135.2 |
+| oversampled, kelas minoritas 3 kali | 0.0005 | 0.1825 | 0.0111 | 119.7 |
 
-## Per-class AP@0.5, rare classes specifically (the actual point of this ablation)
+## AP@0.5 per kelas, khusus kelas minoritas, yang menjadi inti ablasi ini
 
-| Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |
+| Kelas | AP@0.5 baseline | AP@0.5 oversampled | Selisih |
 |---|---:|---:|---:|
 | Bacterial leaf blight | 0.0003 | 0.0003 | +0.0000 |
-| Bacterial panicle blight | 0.0080 | 0.0044 | -0.0037 |
+| Bacterial panicle blight | 0.0080 | 0.0044 | -0.0036 |
 | False smut | 0.0000 | 0.0000 | +0.0000 |
 | Leaf roller | 0.0677 | 0.0001 | -0.0676 |
 | Narrow brown | 0.0000 | 0.0000 | +0.0000 |
 
-## Per-class AP@0.5, all classes (checking oversampling didn't hurt common classes)
+## AP@0.5 per kelas, seluruh kelas, untuk memastikan oversampling tidak merugikan kelas mayoritas
 
-| Class | Baseline AP@0.5 | Oversampled AP@0.5 | Delta |
+| Kelas | AP@0.5 baseline | AP@0.5 oversampled | Selisih |
 |---|---:|---:|---:|
-| Bacterial leaf blight (rare, targeted) | 0.0003 | 0.0003 | +0.0000 |
-| Bacterial panicle blight (rare, targeted) | 0.0080 | 0.0044 | -0.0037 |
-| Blast | 0.0021 | 0.0007 | -0.0013 |
+| Bacterial leaf blight (minoritas, disasar) | 0.0003 | 0.0003 | +0.0000 |
+| Bacterial panicle blight (minoritas, disasar) | 0.0080 | 0.0044 | -0.0036 |
+| Blast | 0.0021 | 0.0007 | -0.0014 |
 | Brown spot | 0.0000 | 0.0000 | +0.0000 |
-| False smut (rare, targeted) | 0.0000 | 0.0000 | +0.0000 |
+| False smut (minoritas, disasar) | 0.0000 | 0.0000 | +0.0000 |
 | Healthy | 0.0000 | 0.0000 | +0.0000 |
-| Leaf roller (rare, targeted) | 0.0677 | 0.0001 | -0.0676 |
+| Leaf roller (minoritas, disasar) | 0.0677 | 0.0001 | -0.0676 |
 | Leaf scald | 0.0000 | 0.0000 | +0.0000 |
-| Narrow brown (rare, targeted) | 0.0000 | 0.0000 | +0.0000 |
+| Narrow brown (minoritas, disasar) | 0.0000 | 0.0000 | +0.0000 |
 | Sheath blight | 0.0000 | 0.0000 | +0.0000 |
 | Tungro | 0.0000 | 0.0000 | +0.0000 |
 
-## Verdict
+## Kesimpulan
 
-Average AP@0.5 delta on targeted rare classes: -0.0143
-Average AP@0.5 delta on non-targeted (common) classes: -0.0002
+Rata-rata selisih AP@0.5 pada kelas minoritas yang disasar: -0.0142
+Rata-rata selisih AP@0.5 pada kelas mayoritas yang tidak disasar: -0.0002
 
-Oversampling did NOT show a clear net benefit at this screening scale (either rare classes did not improve, or the improvement was outweighed by cost to common classes, or both). Per the master spec ('do not automatically oversample'), this strategy is NOT recommended for adoption based on this evidence. It may still be worth re-testing at full training scale in Block 14, since class-imbalance effects can behave differently with more data/epochs.
+Oversampling TIDAK menunjukkan manfaat bersih yang jelas pada skala penyaringan ini, entah karena kelas minoritas tidak membaik, karena perbaikannya kalah oleh kerugian pada kelas mayoritas, atau keduanya sekaligus. Berdasarkan bukti ini, strategi tersebut TIDAK direkomendasikan untuk diadopsi. Pengujian ulang pada skala pelatihan penuh masih layak dipertimbangkan, karena efek ketidakseimbangan kelas dapat berperilaku berbeda dengan data dan epoch yang lebih banyak.
