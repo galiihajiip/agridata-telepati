@@ -1,10 +1,11 @@
-"""Fast reproducibility unit tests (Block 8).
+"""Uji unit reproduktibilitas yang cepat.
 
-The slower checks that actually re-execute pipeline scripts (e.g. rerunning
-dataset preparation and diffing manifests) live in
-scripts/check_reproducibility.py, not here, this file only covers
-pure-function determinism that should run in milliseconds as part of the
-normal test suite.
+Pemeriksaan yang lebih lambat, yaitu yang benar-benar menjalankan ulang skrip
+pipeline seperti penyiapan dataset lalu membandingkan manifest-nya, berada di
+scripts/check_reproducibility.py, bukan di sini.
+
+Berkas ini hanya menguji determinisme fungsi murni yang mestinya selesai dalam
+hitungan milidetik sebagai bagian dari rangkaian uji biasa.
 """
 
 from __future__ import annotations

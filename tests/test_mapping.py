@@ -51,9 +51,10 @@ def test_mapping_is_deterministic() -> None:
 
 
 def test_build_mapping_report_against_actual_dataset_categories() -> None:
-    """Validates against the real category list discovered by the Block 2
-    forensic audit (artifacts/audit/dataset_audit_report.md), proving the
-    mapping covers the actual dataset with zero unmapped categories."""
+    """Menguji terhadap daftar kategori nyata yang ditemukan audit forensik dataset
+    (artifacts/audit/dataset_audit_report.md), untuk membuktikan bahwa pemetaan
+    mencakup dataset yang sebenarnya tanpa menyisakan kategori yang tidak
+    terpetakan."""
     actual_categories = [
         {"id": 0, "name": "Leaf-blight"},
         {"id": 1, "name": "Bacterial panicle Blight"},
