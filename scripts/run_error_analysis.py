@@ -154,7 +154,7 @@ def main() -> int:
         key=lambda x: -x[2],
     )
 
-    # --- per-class precision/recall from this same analysis ---
+    # --- precision dan recall per kelas dari analisis yang sama ---
     per_class_pr = result.per_class_precision_recall(list(CANONICAL_CLASSES))
 
     # --- low-confidence detection analysis: TP vs FP confidence distributions ---
@@ -176,7 +176,7 @@ def main() -> int:
         "false_negatives_are_smaller_than_average": fn_median_area < overall_median_area if (fn_areas and all_gt_areas) else None,
     }
 
-    # --- crowded scenes: correlate per-image GT instance count with FN rate ---
+    # --- adegan padat: mengaitkan jumlah instance ground truth per citra dengan rasio FN ---
     gt_count_per_image = Counter(gt.image_id for gt in ground_truths)
     fn_count_per_image = Counter(fn.image_id for fn in result.false_negatives)
     crowded_threshold = statistics.median(list(gt_count_per_image.values())) if gt_count_per_image else 0
@@ -185,7 +185,7 @@ def main() -> int:
     crowded_fn_rate = sum(fn_count_per_image.get(i, 0) for i in crowded_images) / max(1, sum(gt_count_per_image[i] for i in crowded_images))
     sparse_fn_rate = sum(fn_count_per_image.get(i, 0) for i in sparse_images) / max(1, sum(gt_count_per_image[i] for i in sparse_images))
 
-    # --- difficult backgrounds: images with the most background FPs ---
+    # --- latar belakang sulit: citra dengan false positive latar terbanyak ---
     bg_fp_count_per_image = Counter(bg.image_id for bg in result.background_false_positives)
     difficult_background_images = [images_by_id[iid]["file_name"] for iid, _ in bg_fp_count_per_image.most_common(5)]
 

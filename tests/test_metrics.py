@@ -58,7 +58,7 @@ def test_missed_detection_is_false_negative() -> None:
 
 
 def test_low_iou_detection_counts_as_false_positive_and_false_negative() -> None:
-    # Detection barely overlaps the GT (IoU well under 0.5) -> not a match.
+    # Deteksi nyaris tidak bertumpang tindih dengan ground truth, IoU jauh di bawah 0,5, sehingga bukan pasangan.
     gt = [GroundTruthBox(image_id=1, class_id=0, bbox_xywh=(0.0, 0.0, 10.0, 10.0))]
     det = [Detection(image_id=1, class_id=0, confidence=0.9, bbox_xywh=(9.0, 9.0, 10.0, 10.0))]
 
@@ -75,7 +75,7 @@ def test_confidence_threshold_filters_low_confidence_detections() -> None:
 
     result = match_detections_to_ground_truth(det, gt, confidence_threshold=0.5)
     overall = result["overall"]
-    # Below threshold -> detection is dropped entirely -> the GT box is unmatched (FN).
+    # Di bawah ambang, deteksi dibuang sepenuhnya, sehingga kotak ground truth tidak berpasangan dan terhitung FN.
     assert overall.true_positives == 0
     assert overall.false_negatives == 1
     assert overall.false_positives == 0
@@ -90,8 +90,9 @@ def test_greedy_matching_prefers_highest_confidence_prediction() -> None:
 
     result = match_detections_to_ground_truth(det, gt, confidence_threshold=0.3)
     overall = result["overall"]
-    # Only one GT to match: the higher-confidence det (0.9) takes it (TP),
-    # the other duplicate detection has nothing left to match (FP).
+    # Hanya ada satu ground truth: deteksi dengan confidence lebih tinggi (0,9)
+    # mengambilnya sebagai TP, sedangkan deteksi ganda lainnya tidak lagi punya
+    # pasangan sehingga terhitung FP.
     assert overall.true_positives == 1
     assert overall.false_positives == 1
     assert overall.false_negatives == 0
@@ -104,7 +105,7 @@ def test_per_class_breakdown_is_independent() -> None:
     ]
     det = [
         Detection(image_id=1, class_id=0, confidence=0.9, bbox_xywh=(0.0, 0.0, 10.0, 10.0)),
-        # class 1 has no matching detection -> FN for class 1 only
+        # kelas 1 tidak punya deteksi yang berpasangan, sehingga FN hanya untuk kelas 1
     ]
 
     result = match_detections_to_ground_truth(det, gt, confidence_threshold=0.5)

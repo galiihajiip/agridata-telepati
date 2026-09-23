@@ -44,9 +44,10 @@ logger = logging.getLogger("agridata.scripts.prepare_dataset")
 
 SPLITS = ("train", "valid", "test")
 DEFAULT_ANNOTATION_FILENAME = "_annotations.coco.json"
-# Matches the Block 2 forensic audit's evidence-based tolerance: every
-# observed "exceeds bounds" case in this dataset is <=0.5px (Roboflow float
-# export rounding). Anything beyond this is treated as a genuine error.
+# Mengikuti toleransi berbasis bukti dari audit forensik dataset: setiap kasus
+# "melampaui batas" yang teramati pada dataset ini besarnya paling banyak 0,5
+# piksel, akibat pembulatan bilangan pecahan pada ekspor Roboflow. Selisih di
+# luar batas itu diperlakukan sebagai kesalahan yang sesungguhnya.
 BBOX_BOUNDARY_TOLERANCE_PX = 1.0
 
 

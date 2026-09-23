@@ -45,9 +45,10 @@ from agridata.training.train import run_training  # noqa: E402
 
 logger = logging.getLogger("agridata.scripts.run_augmentation_ablation")
 
-# Visually verify bbox-vs-image consistency after augmentation for the two
-# transform types most likely to hide a coordinate bug: flip (trivial to get
-# wrong) and rotation (the most geometrically complex transform in the set).
+# Memverifikasi secara visual kesesuaian bbox terhadap citra setelah augmentasi,
+# khusus untuk dua jenis transformasi yang paling mungkin menyembunyikan
+# kesalahan koordinat: pembalikan, yang mudah keliru, dan rotasi, yang paling
+# rumit secara geometris di antara seluruh transformasi.
 VISUAL_VERIFICATION_VARIANTS = {"hflip_only", "rotation_only"}
 
 BLUR_NOISE_ANALYSIS = """
@@ -272,7 +273,7 @@ def main() -> int:
         exp_num += 1
 
     args.report_dir.mkdir(parents=True, exist_ok=True)
-    # Baseline reference from Block 10's tracked E02.
+    # Referensi baseline dari E02 yang tercatat pada matriks percobaan.
     all_records = load_experiments()
     e02 = next(r for r in all_records if r["experiment_id"] == "E02")
     report = build_report(results, e02["best_val_map50"])

@@ -100,7 +100,7 @@ def process_split(
     plot_bbox_size_distribution(bbox_dims, f"{split}: bbox width vs height", dist_dir / f"{split}_bbox_sizes.png")
     plot_image_dimension_distribution(img_dims, f"{split}: image width vs height", dist_dir / f"{split}_image_dims.png")
 
-    # --- random annotated samples (deterministic, only images with >=1 annotation) ---
+    # --- contoh beranotasi acak, deterministik, hanya citra dengan minimal satu anotasi ---
     sample_dir = output_dir / "samples" / split
     annotated_image_ids = sorted(per_image_ann_count.keys())
     chosen_ids = random.sample(annotated_image_ids, k=min(num_samples, len(annotated_image_ids)))
@@ -137,7 +137,7 @@ def process_split(
         )
         saved_samples.append(str(path))
 
-    # --- suspicious annotation example, pulled from the Block 2 audit findings ---
+    # --- contoh anotasi mencurigakan, diambil dari temuan audit forensik dataset ---
     suspicious = find_suspicious_example(audit_report_path, split)
     if suspicious is not None:
         image_id = suspicious["image_id"]

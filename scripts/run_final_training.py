@@ -191,8 +191,9 @@ def main() -> int:
     with summary_path.open("w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
-    # runs/ is gitignored, so the per-epoch history is copied into the tracked
-    # reports directory; without this a fresh clone cannot plot training curves.
+    # Direktori runs/ masuk gitignore, sehingga riwayat per epoch disalin ke
+    # direktori laporan yang terlacak. Tanpa langkah ini, hasil clone yang segar
+    # tidak dapat menggambar kurva pelatihan.
     history_src = Path(result["save_dir"]) / "results.csv"
     if history_src.exists():
         shutil.copyfile(history_src, args.report_dir / "final_training_history.csv")
