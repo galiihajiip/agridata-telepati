@@ -73,118 +73,71 @@ def build_compliance_checklist(experiments: list[dict]) -> list[dict]:
     best = max(experiments, key=lambda r: r["best_val_map50"])
     return [
         {
-            "item": "No external pretrained weights",
-            "status": "PASS",
-            "evidence": "Block 6: model always built from yolov8n.yaml (architecture only); "
-            "build_compliant_model() raises if pretrained=True or given a .pt/.pth/.ckpt file. "
-            "YOLO_OFFLINE enforced across all training/eval scripts. Empty pretrained-checkpoint-cache "
-            "verification performed in Block 6 (before/after directory diff, zero .pt files appeared "
-            "anywhere outside this project's own runs/ output).",
+            "item": "Tanpa external pretrained weights",
+            "status": "LULUS",
+            "evidence": "Model selalu dibangun dari yolov8n.yaml yang hanya memuat arsitektur. "
+            "build_compliant_model() melempar galat bila diberi pretrained=True atau berkas "
+            ".pt/.pth/.ckpt. YOLO_OFFLINE ditegakkan pada seluruh skrip pelatihan dan evaluasi. "
+            "Verifikasi cache checkpoint kosong dijalankan dengan membandingkan isi direktori "
+            "sebelum dan sesudah pelatihan; tidak ada berkas .pt yang muncul di luar keluaran "
+            "runs/ milik project ini sendiri.",
         },
         {
-            "item": "No data leakage",
-            "status": "PARTIAL, one confirmed case fixed, residual risk documented",
-            "evidence": "Block 2 forensic audit found exactly one exact-duplicate image (MD5-identical) "
-            "across train/test ('leaf_scald-230...'); Block 5 excludes it from the prepared train "
-            "manifest. Perceptual-hash overlap candidates (Block 2) are unconfirmed and were not "
-            "further investigated, flagged as a residual, documented risk, not silently ignored.",
+            "item": "Tanpa kebocoran data",
+            "status": "SEBAGIAN, satu kasus terkonfirmasi sudah ditangani, risiko sisa didokumentasikan",
+            "evidence": "Audit forensik menemukan tepat satu citra duplikat persis (identik menurut MD5) "
+            "antara split train dan test ('leaf_scald-230...'), dan entri tersebut dikeluarkan dari "
+            "manifest latih. Kandidat kemiripan berbasis perceptual hash belum dikonfirmasi satu per satu "
+            "dan tidak ditelusuri lebih jauh; hal ini dicatat sebagai risiko sisa yang terdokumentasi, "
+            "bukan diabaikan diam-diam.",
         },
         {
-            "item": "Official canonical 11 classes",
-            "status": "PASS",
-            "evidence": f"Block 3: canonical mapping validated against the actual dataset with zero "
-            f"unmapped raw categories (mapping version {MAPPING_VERSION}). Block 5's data.yaml always "
-            f"declares exactly {len(CANONICAL_CLASSES)} classes in canonical order: {list(CANONICAL_CLASSES)}.",
+            "item": "Memakai 11 kelas canonical resmi",
+            "status": "LULUS",
+            "evidence": f"Pemetaan canonical divalidasi terhadap dataset aktual tanpa menyisakan satu pun "
+            f"kategori mentah yang tidak terpetakan (versi pemetaan {MAPPING_VERSION}). Berkas data.yaml "
+            f"selalu mendeklarasikan tepat {len(CANONICAL_CLASSES)} kelas dalam urutan canonical: "
+            f"{list(CANONICAL_CLASSES)}.",
         },
         {
-            "item": "Reproducible preprocessing",
-            "status": "PASS",
-            "evidence": "Block 8: rerunning scripts/prepare_dataset.py with the same seed produced a "
-            "byte-for-byte identical 10,132-image manifest, verified via a live rerun-and-diff, not assumed.",
+            "item": "Prapemrosesan yang dapat direproduksi",
+            "status": "LULUS",
+            "evidence": "Menjalankan ulang scripts/prepare_dataset.py dengan seed yang sama menghasilkan "
+            "manifest 10.132 citra yang identik byte per byte. Hal ini diverifikasi melalui eksekusi ulang "
+            "dan pembandingan langsung, bukan diasumsikan.",
         },
         {
-            "item": "Reproducible configuration",
-            "status": "PASS",
-            "evidence": f"Block 9 tracker records seed/git-commit/hyperparameters for every one of the "
-            f"{len(experiments)} logged experiments. This report's frozen config "
-            f"({FINAL_CONFIG_PATH}) is itself version-controlled.",
+            "item": "Konfigurasi yang dapat direproduksi",
+            "status": "LULUS",
+            "evidence": f"Pelacak percobaan mencatat seed, commit Git, dan hyperparameter untuk seluruh "
+            f"{len(experiments)} percobaan yang tercatat. Konfigurasi beku pada laporan ini "
+            f"({FINAL_CONFIG_PATH}) sendiri berada di bawah kendali versi.",
         },
         {
-            "item": "Valid checkpoint",
-            "status": "PASS for screening checkpoints, PENDING for final weights",
-            "evidence": "All 21 screening experiments produced a loadable best.pt (verified by reloading "
-            "fresh in evaluate.py/error-analysis runs). The actual final-submission checkpoint does not "
-            "exist yet, it is produced by Block 15 and must be re-verified there.",
+            "item": "Checkpoint yang valid",
+            "status": "LULUS untuk checkpoint penyaringan, MENUNGGU untuk bobot final",
+            "evidence": "Seluruh 21 percobaan penyaringan menghasilkan best.pt yang dapat dimuat, "
+            "diverifikasi dengan memuat ulang secara segar pada proses evaluasi dan analisis kesalahan. "
+            "Checkpoint final untuk submission belum ada pada tahap ini dan harus diverifikasi ulang "
+            "setelah pelatihan skala penuh selesai.",
         },
         {
-            "item": "Successful inference",
-            "status": "PASS",
-            "evidence": "Block 6: standalone inference test on a freshly-loaded checkpoint in a clean "
-            "process. Blocks 7/13: evaluate.py and run_error_analysis.py both successfully ran inference "
-            "on screening checkpoints across the full valid split (2,106 images).",
+            "item": "Inferensi berhasil dijalankan",
+            "status": "LULUS",
+            "evidence": "Uji inferensi mandiri dijalankan pada checkpoint yang baru dimuat di dalam proses "
+            "bersih. Selain itu evaluate.py dan run_error_analysis.py keduanya berhasil menjalankan "
+            "inferensi pada checkpoint penyaringan di seluruh split validasi (2.106 citra).",
         },
         {
-            "item": "Acceptable validation performance",
-            "status": "PENDING, NOT YET MET, explicitly not claimed",
-            "evidence": f"Best screening result so far: {best['experiment_id']} at mAP@0.5="
-            f"{best['best_val_map50']:.4f}, trained on only ~10% of train data for {best['epochs']} epochs. "
-            "This is a screening-scale number, not a competitive result, and is not represented as one. "
-            "Full-scale training (Block 15: fraction=1.0, epochs=50, patience=15) is required before this "
-            "item can be assessed honestly.",
+            "item": "Performa validasi yang memadai",
+            "status": "MENUNGGU, BELUM TERPENUHI, dan sengaja tidak diklaim",
+            "evidence": f"Hasil penyaringan terbaik sejauh ini: {best['experiment_id']} dengan mAP@0.5="
+            f"{best['best_val_map50']:.4f}, dilatih hanya pada sekitar 10 persen data latih selama "
+            f"{best['epochs']} epoch. Angka ini berskala penyaringan, bukan hasil yang kompetitif, dan "
+            "tidak disajikan sebagai hasil kompetitif. Pelatihan skala penuh (fraction=1.0, epochs=50, "
+            "patience=15) diperlukan sebelum butir ini dapat dinilai secara jujur.",
         },
     ]
-
-
-def build_report(experiments: list[dict], checklist: list[dict], git_commit: str) -> str:
-    best = max(experiments, key=lambda r: r["best_val_map50"])
-    lines = [
-        "# Block 14. Final Model Configuration Selection",
-        "",
-        f"Reviewed all {len(experiments)} logged experiments (E01-E{len(experiments):02d}). This block "
-        "selects and freezes a CONFIGURATION for full-scale training (Block 15), it does not itself "
-        "produce the final submitted weights.",
-        "",
-        "## All candidate experiments (sorted by mAP@0.5)",
-        "",
-        build_candidate_table(experiments),
-        "",
-        f"## Selected configuration: see `{FINAL_CONFIG_PATH}`",
-        "",
-        f"Best individual screening result: **{best['experiment_id']}** (mAP@0.5={best['best_val_map50']:.4f}). "
-        "The frozen final config does not simply copy this one experiment's settings verbatim, it "
-        "synthesizes evidence across all 21 experiments (see the config file's inline rationale comments "
-        "for each hyperparameter) plus Block 11's semantic-plausibility reasoning and Block 13's "
-        "independent error-analysis evidence.",
-        "",
-        "## Compliance checklist (evidence-based, not asserted)",
-        "",
-        "| # | Item | Status | Evidence |",
-        "|---:|---|---|---|",
-    ]
-    for i, c in enumerate(checklist, start=1):
-        lines.append(f"| {i} | {c['item']} | {c['status']} | {c['evidence']} |")
-
-    lines += [
-        "",
-        "## Known risks",
-        "",
-        "- Residual, unconfirmed perceptual-hash overlap candidates from Block 2 (train-vs-valid: 426, "
-        "train-vs-test: 210, valid-vs-test: 84) were never individually visually confirmed as true "
-        "duplicates or false positives from the coarse 8x8 aHash. Only the one exact-MD5 duplicate was "
-        "acted on.",
-        "- All 21 screening experiments used a small fraction of train data (8-10%) and few epochs "
-        "(5-12); the frozen config's full-scale numbers (epochs=50, fraction=1.0) are extrapolated, "
-        "not directly measured. Block 15 is the first point at which the real full-scale behavior "
-        "is observed.",
-        "- MPS backend has confirmed non-deterministic kernels for `scatter_reduce_mps` and "
-        "`index_put_with_accumulate_mps` (Block 6/8 finding), exact bit-for-bit reproducibility of "
-        "training is not guaranteed, only reproducible configuration/preprocessing.",
-        "- Estimated full-scale training time (~8.2 hours on this project's hardware) is long; "
-        "`patience=15` may shorten it, but Block 15 must re-verify this estimate before committing.",
-        "",
-        f"Git commit at selection time: `{git_commit}`",
-    ]
-    return "\n".join(lines) + "\n"
 
 
 def build_model_metadata(git_commit: str) -> dict:
