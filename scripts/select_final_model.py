@@ -221,64 +221,67 @@ def build_model_metadata(git_commit: str) -> dict:
 
 
 def build_model_card_draft() -> str:
-    return f"""# Model Card (Draft). AgriData TELEPATI 8.0 Rice Disease Detector
+    return f"""# Model Card (Draf). Detektor Penyakit Padi AgriData TELEPATI 8.0
 
-**Status: DRAFT.** Training config is frozen (`{FINAL_CONFIG_PATH}`); weights, final metrics, and
-evaluation results will be filled in after Block 15 (final training run) and Block 16 (clean
-reproduction test). Do not treat any number in this draft as final.
+**Status: DRAF.** Konfigurasi pelatihan sudah dibekukan pada `{FINAL_CONFIG_PATH}`, sedangkan bobot,
+metrik final, dan hasil evaluasi baru diisi setelah pelatihan final dan uji reproduksi pada
+lingkungan bersih selesai. Jangan memperlakukan angka mana pun pada draf ini sebagai angka final.
 
-## Intended use
+## Tujuan penggunaan
 
-Object detection of rice plant disease/health conditions from field-captured imagery (drone or
-handheld camera), as a component of a Smart Agriculture monitoring system, per the TELEPATI 8.0
-AgriData Intelligence Race case study (assisting a farmer in monitoring large plots without
-exhaustive manual inspection).
+Deteksi objek untuk kondisi penyakit dan kesehatan tanaman padi dari citra lapangan, baik hasil
+tangkapan drone maupun kamera genggam, sebagai komponen sistem pemantauan Smart Agriculture sesuai
+studi kasus TELEPATI 8.0 AgriData Intelligence Race, yaitu membantu petani memantau lahan luas
+tanpa harus memeriksa seluruhnya secara manual.
 
-## Model architecture
+## Arsitektur model
 
-YOLOv8n (Ultralytics), initialized from an architecture-only definition (no external pretrained
-weights, `pretrained=False`, verified via source inspection and empty-checkpoint-cache checks in
-Block 6). ~3.0M parameters, 11-class detection head.
+YOLOv8n (Ultralytics), diinisialisasi dari definisi yang hanya memuat arsitektur. Tidak ada
+external pretrained weights, `pretrained=False`, dan hal ini diverifikasi melalui pemeriksaan kode
+sumber serta pemeriksaan cache checkpoint yang kosong. Sekitar 3,0 juta parameter dengan kepala
+deteksi 11 kelas.
 
-## Training data
+## Data pelatihan
 
-Official TELEPATI 8.0 AgriData dataset (COCO-format, Roboflow export). 11 canonical classes
-(see `src/agridata/dataset/mapping.py` for the verified raw-to-canonical mapping):
+Dataset resmi TELEPATI 8.0 AgriData dalam format COCO hasil ekspor Roboflow, dengan 11 kelas
+canonical. Pemetaan dari kategori mentah ke kelas canonical yang sudah diverifikasi dapat dilihat
+pada `src/agridata/dataset/mapping.py`. Kesebelas kelas tersebut adalah:
 {', '.join(CANONICAL_CLASSES)}.
 
-One confirmed exact-duplicate image across train/test was excluded from training (Block 2/5).
+Satu citra yang terbukti duplikat persis antara split train dan test dikeluarkan dari data latih.
 
-## Training procedure
+## Prosedur pelatihan
 
-See `{FINAL_CONFIG_PATH}` for the complete, version-controlled configuration. Selected from 21
-controlled screening experiments (Blocks 10-13), see
-`artifacts/reports/block14_final_model_selection.md` for full reasoning per hyperparameter.
+Konfigurasi lengkap yang berada di bawah kendali versi dapat dilihat pada `{FINAL_CONFIG_PATH}`.
+Konfigurasi tersebut dipilih dari 21 percobaan penyaringan terkontrol, dengan penalaran lengkap per
+hyperparameter pada `artifacts/reports/block14_final_model_selection.md`.
 
-## Evaluation
+## Evaluasi
 
-*Pending Block 15/16.* Metrics will be computed via `scripts/evaluate.py` (mAP@0.5. Ultralytics'
-native implementation; F1, a documented local implementation via greedy IoU≥0.5 matching at a
-configurable confidence threshold, since Ultralytics' own reported precision/recall uses an
-internally auto-selected threshold that is not configurable, see
-`src/agridata/metrics/detection.py`).
+*Menunggu pelatihan final dan uji reproduksi.* Metrik dihitung melalui `scripts/evaluate.py`, dengan
+mAP@0.5 memakai implementasi bawaan Ultralytics. Nilai F1 memakai implementasi lokal yang
+terdokumentasi melalui pencocokan greedy pada IoU minimal 0,5 dengan confidence threshold yang dapat
+dikonfigurasi, karena precision dan recall yang dilaporkan Ultralytics sendiri memakai threshold
+yang dipilih otomatis secara internal dan tidak dapat diatur. Rinciannya pada
+`src/agridata/metrics/detection.py`.
 
-## Known limitations (as of this draft)
+## Keterbatasan yang diketahui pada draf ini
 
-- All findings so far come from small-fraction, low-epoch screening experiments; full-scale
-  behavior may differ.
-- Residual, unconfirmed perceptual-hash near-duplicate candidates across splits (Block 2) were
-  not individually resolved.
-- No bit-for-bit training determinism guarantee on Apple Silicon / MPS (confirmed non-deterministic
-  kernels for two operations used in this pipeline).
-- Class imbalance is real (22.6x max/min instance ratio); a targeted-oversampling mitigation was
-  tested (Block 12) and did not show a clear benefit at screening scale, not adopted in the final
-  config as of this draft; may be revisited after Block 15's full-scale results.
+- Seluruh temuan sejauh ini berasal dari percobaan penyaringan dengan fraksi data kecil dan jumlah
+  epoch rendah, sehingga perilaku pada skala penuh dapat berbeda.
+- Kandidat near-duplicate lintas split berbasis perceptual hash belum diselesaikan satu per satu.
+- Tidak ada jaminan determinisme pelatihan bit per bit pada Apple Silicon dengan backend MPS,
+  karena dua operasi yang dipakai pipeline ini terbukti memiliki kernel yang tidak deterministik.
+- Ketidakseimbangan kelas nyata, dengan rasio instance terbanyak terhadap tersedikit sebesar 22,6
+  kali. Mitigasi berupa oversampling terarah sudah diuji dan tidak menunjukkan manfaat yang jelas
+  pada skala penyaringan, sehingga tidak diadopsi pada konfigurasi final per draf ini. Keputusan
+  tersebut dapat ditinjau ulang setelah hasil skala penuh tersedia.
 
-## Compliance statement
+## Pernyataan kepatuhan
 
-No external pretrained weights, no external dataset, no LLM/API dataset processing. See
-`artifacts/reports/block14_final_model_selection.md` for the full evidence-based compliance
-checklist.
+Tanpa external pretrained weights, tanpa dataset eksternal, dan tanpa pemrosesan dataset memakai
+LLM atau API. Daftar periksa kepatuhan lengkap yang berbasis bukti tersedia pada
+`artifacts/reports/block14_final_model_selection.md`.
 """
 
 
