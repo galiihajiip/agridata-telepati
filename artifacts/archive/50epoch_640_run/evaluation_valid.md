@@ -6,7 +6,7 @@
 > hanya label yang diterjemahkan. Angka yang berlaku untuk submission ada pada
 > `artifacts/reports/evaluation_valid.md`.
 
-Bobot: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Commit Git: `424747e1a390787b017f3528d602a4beaaf2584f`
+Bobot: `runs/detect/final/final_model/weights/best.pt`  |  Commit Git: `424747e1a390787b017f3528d602a4beaaf2584f`
 
 ## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
