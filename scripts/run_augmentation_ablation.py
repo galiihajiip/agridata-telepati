@@ -156,8 +156,8 @@ def run_one(experiment_id: str, axis: str, plausibility: str, extra_kwargs: dict
         precision=float(val_results.box.mp),
         recall=float(val_results.box.mr),
         training_duration_seconds=duration,
-        notes=f"Block 11 augmentation ablation: {axis}. {plausibility}",
-        compliance_notes="No external pretrained weights. YOLO_OFFLINE enforced. Augmentation applies to train split only.",
+        notes=f"Ablasi augmentasi: {axis}. {plausibility}",
+        compliance_notes="Tanpa external pretrained weights. YOLO_OFFLINE ditegakkan. Augmentasi hanya berlaku pada split latih.",
     )
 
     saved_batch_images = []

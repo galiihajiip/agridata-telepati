@@ -213,14 +213,14 @@ def main() -> int:
 
     baseline = run_one(
         f"E{args.start_experiment_num:02d}", "baseline (natural distribution)",
-        args.baseline_data_yaml, "Block 12 class-imbalance ablation: baseline, natural class distribution.",
+        args.baseline_data_yaml, "Ablasi ketidakseimbangan kelas: baseline dengan distribusi kelas alami.",
         args.project, git_commit, manifest_hash,
     )
     append_experiment(baseline["record"])
 
     oversampled = run_one(
         f"E{args.start_experiment_num + 1:02d}", "oversampled (rare classes x3)",
-        args.oversampled_data_yaml, f"Block 12 class-imbalance ablation: rare classes {args.rare_classes} oversampled 3x.",
+        args.oversampled_data_yaml, f"Ablasi ketidakseimbangan kelas: kelas minoritas {args.rare_classes} di-oversample 3 kali.",
         args.project, git_commit, manifest_hash,
     )
     append_experiment(oversampled["record"])

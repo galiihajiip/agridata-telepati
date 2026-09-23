@@ -73,12 +73,12 @@ def build_experiment_configs(matrix: dict) -> list[dict]:
     common = matrix["common"]
     baseline = matrix["baseline"]
 
-    configs = [{**common, **baseline, "experiment_id": "E02", "axis": "baseline", "notes": "Block 10 baseline (OFAT reference point)."}]
+    configs = [{**common, **baseline, "experiment_id": "E02", "axis": "baseline", "notes": "Baseline matriks percobaan, dipakai sebagai titik referensi pengujian satu faktor."}]
     for variant in matrix["variants"]:
         merged = {**common, **baseline, **variant["overrides"]}
         merged["experiment_id"] = f"E{len(configs) + 2:02d}"
         merged["axis"] = variant["axis"]
-        merged["notes"] = f"OFAT variant: {variant['axis']} changed from baseline; all else held fixed."
+        merged["notes"] = f"Varian satu faktor: {variant['axis']} diubah dari baseline, seluruh parameter lain ditahan tetap."
         configs.append(merged)
     return configs
 
