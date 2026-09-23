@@ -1,270 +1,209 @@
-# Audit Kesiapan Submission Final
+# Audit Kesiapan Submission
 
-Audit ini memeriksa seluruh paket submission setelah rangkaian pekerjaan
-BLOCK A sampai BLOCK H selesai. Seluruh angka pada dokumen ini berasal dari
-pemeriksaan yang dijalankan pada saat audit, bukan dari catatan sebelumnya.
+Audit menyeluruh terhadap paket submission. Seluruh angka pada dokumen ini
+berasal dari pemeriksaan yang dijalankan saat audit, bukan dari catatan
+sebelumnya.
 
-Tanggal audit: 22 September 2026
+Tanggal audit: 23 September 2026
 Tenggat submission: 26 September 2026
-*Commit* saat audit: `2e8521d51b16200c16e99e14524f6144797242c3`
 Repository: https://github.com/galiihajiip/agridata
 
 ## 1. Ringkasan Status
 
-| Kategori | Lulus | Terbuka | Di luar jangkauan otomatis |
+| Kategori | LULUS | TERBUKA | DI LUAR JANGKAUAN |
 |---|---:|---:|---:|
+| Model dan bobot | 5 | 0 | 0 |
+| Metrik dan konsistensi | 6 | 0 | 0 |
+| Dataset | 6 | 0 | 0 |
 | Notebook | 7 | 0 | 0 |
-| README dan dokumentasi | 6 | 0 | 0 |
-| Requirements dan lingkungan | 3 | 0 | 0 |
-| Kode sumber dan pengujian | 4 | 0 | 0 |
-| Bobot model | 5 | 0 | 0 |
-| Rilis | 0 | 2 | 0 |
-| Riwayat Git | 4 | 0 | 0 |
+| Dokumentasi | 6 | 0 | 0 |
+| Kode dan pengujian | 4 | 0 | 0 |
 | Kepatuhan regulasi | 8 | 0 | 0 |
-| Dokumen orisinalitas dan tim | 1 | 0 | 2 |
-| **Total** | **38** | **2** | **2** |
+| Repository dan Git | 4 | 0 | 0 |
+| Rilis | 0 | 2 | 0 |
+| Dokumen legal dan tim | 1 | 0 | 2 |
+| **Total** | **47** | **2** | **2** |
 
-**Kesimpulan: paket teknis siap. Dua item terbuka bersifat administratif dan
-berada pada kendali tim, bukan pada kode.**
+Paket teknis siap. Dua item terbuka bersifat mekanis dan dua item lain berada
+di luar kemampuan verifikasi otomatis.
 
-## 2. Notebook
-
-| Pemeriksaan | Hasil | Status |
-|---|---|---|
-| Jumlah sel | 117 sel, 45 di antaranya sel kode | LULUS |
-| Eksekusi penuh | 0 *error*, 0 sel belum dieksekusi | LULUS |
-| Figur tertanam | 15 figur | LULUS |
-| Struktur naratif | 22 bagian utama lengkap | LULUS |
-| Bahasa | Bahasa Indonesia penuh, istilah asing dimiringkan | LULUS |
-| *Em dash* | 0 | LULUS |
-| Ukuran berkas | 7,8 MB | LULUS |
-
-Catatan: figur sempat tidak tertanam sama sekali akibat `matplotlib.use("Agg")`
-pada modul visualisasi yang dipakai juga oleh skrip tanpa layar. Diperbaiki
-pada BLOCK H dengan mengembalikan *backend* inline di dalam notebook.
-
-## 3. README dan Dokumentasi
-
-| Berkas | Status |
-|---|---|
-| `README.md` | LULUS, berbahasa Indonesia, 19 bagian, angka sesuai artefak |
-| `docs/model_card_draft.md` | LULUS, status FINAL, memuat penggunaan yang tidak dianjurkan |
-| `weights/README.md` | LULUS, memuat *checksum* dan perintah rilis |
-| `references/README.md` | LULUS, audit sitasi per kalimat |
-| `docs/originality_statement_placeholder.md` | LULUS sebagai placeholder |
-| `SUBMISSION_CHECKLIST.md` | LULUS |
-
-Tautan internal pada seluruh berkas Markdown diperiksa: **0 tautan rusak**.
-
-## 4. Requirements dan Lingkungan
-
-| Pemeriksaan | Hasil | Status |
-|---|---|---|
-| Versi terkunci | 15 entri memakai `==` | LULUS |
-| Kesesuaian dengan *virtual environment* | seluruh paket inti cocok | LULUS |
-| Uji instalasi dari nol | dilakukan pada BLOCK 16, menemukan dan memperbaiki konflik `numpy` | LULUS |
-
-## 5. Kode Sumber dan Pengujian
-
-| Pemeriksaan | Hasil | Status |
-|---|---|---|
-| Uji unit | 69 lulus | LULUS |
-| *Path* absolut personal pada kode | tidak ditemukan | LULUS |
-| *Secret*, *API key*, *token* | tidak ditemukan | LULUS |
-| Penanda TODO atau FIXME | tidak ditemukan | LULUS |
-
-## 6. Bobot Model
+## 2. Model Final
 
 | Field | Nilai | Status |
 |---|---|---|
 | Berkas | `runs/detect/final/final_model/weights/best.pt` | LULUS |
+| Arsitektur | YOLOv8n dari `yolov8n.yaml`, `pretrained=False` | LULUS |
 | Ukuran | 6.253.994 byte | LULUS |
-| SHA-256 | `9d74fffdd977a7bb6749bc828fe908278c5d3eaa24c3cfdbbe5a560d41f5d308` | LULUS, diverifikasi ulang dengan `shasum -c` |
+| SHA-256 | `9d74fffdd977a7bb6749bc828fe908278c5d3eaa24c3cfdbbe5a560d41f5d308` | LULUS, diverifikasi dengan `shasum -c` |
 | Pemuatan proses bersih | berhasil, 11 kelas | LULUS |
-| Inferensi | berhasil menghasilkan deteksi | LULUS |
+| Inferensi | menghasilkan deteksi | LULUS |
 
-## 7. Konsistensi Metrik
+## 3. Metrik yang Dilaporkan
 
-Nilai mAP@0.5 diperiksa pada tiga artefak independen:
+Konfigurasi: resolusi inferensi 640, ambang NMS IoU 0,5, IoU pencocokan 0,5.
 
-| Sumber | mAP@0.5 |
-|---|---|
-| `final_model_metadata.json` | 0,6276771766514752 |
-| `evaluation_valid.json` | 0,6276771766514752 |
-| `block15_final_training_summary.json` | 0,6276771766514752 |
+| Metrik | *Split* valid | *Split* test |
+|---|---:|---:|
+| mAP@50 | **64,01%** | **62,46%** |
+| *F1-Score* macro | **63,83%** | **62,72%** |
+| mAP@0.5:0.95 | 0,3856 | 0,3998 |
 
-**Identik hingga digit terakhir.** Seluruh penyebutan nilai lama 0,5620 pada
-dokumentasi diperiksa satu per satu dan seluruhnya berada pada konteks
-historis yang menyebut model 20 *epoch* secara eksplisit.
+*Split* test tidak pernah dipakai untuk penyetelan apa pun. Selisih valid
+terhadap test sebesar 1,55 poin pada mAP dan 1,11 poin pada *F1* konsisten
+dengan generalisasi yang stabil pada kedua *split*. Satu evaluasi *held-out*
+tidak cukup untuk membuktikan ketiadaan *overfitting*.
 
-## 8. Riwayat Git
+| Pemeriksaan konsistensi | Hasil | Status |
+|---|---|---|
+| Artefak evaluasi, notebook, README, model card | angka identik | LULUS |
+| Sumber kebenaran tunggal | `evaluate.py` menghasilkan, `compute_official_metrics.py` hanya membaca | LULUS |
+| Nilai metrik historis | dibedakan pada `metrics_provenance.md` | LULUS |
+| Koreksi metodologi *F1* | didokumentasikan pada `metrics_methodology.md` | LULUS |
+| Ambang NMS | 0,5 seragam pada kode, artefak, dan dokumen | LULUS |
+| Definisi *F1* | dinyatakan sebagai implementasi lokal macro, bukan angka resmi panitia | LULUS |
+
+## 4. Dataset
 
 | Pemeriksaan | Hasil | Status |
 |---|---|---|
-| Jumlah *commit* | 224 | LULUS |
-| Sinkronisasi dengan remote | `main` sama dengan `origin/main` | LULUS |
-| Dataset mentah pada riwayat publik | **0 objek** dapat dijangkau dari `origin/main` | LULUS |
-| Ukuran berkas terlacak | 48 MB | LULUS |
+| Jumlah split | train 10.133, valid 2.106, test 1.059 citra | LULUS |
+| Anotasi canonical | 20.163, 4.888, 2.670 | LULUS |
+| Pemetaan 11 kelas | nol kategori tidak terpetakan pada ketiga split | LULUS |
+| Integritas referensi | nol berkas hilang, nol anotasi yatim, nol bbox tidak valid | LULUS |
+| Kebocoran antar split | satu duplikat persis ditemukan dan dikeluarkan dari manifest latih | LULUS |
+| Dataset mentah | tidak diubah, tidak ter-commit | LULUS |
 
-Komposisi awalan pesan *commit*: `feat` 73, `docs` 58, `refactor` 39,
-`chore` 36, `fix` 11, `test` 7.
+## 5. Notebook
 
-Catatan penting: paparan dataset mentah sebesar 590 MB yang sebelumnya ada
-pada riwayat publik **sudah teratasi**. Penulisan ulang riwayat dengan
-`git filter-repo` telah di-*force-push* oleh pemilik repository. Cabang lokal
-`backup-origin-main` masih menyimpan riwayat lama sebagai cadangan dan tidak
-pernah di-*push*, sehingga `.git` lokal berukuran 974 MB. Cabang tersebut
-aman dihapus bila sudah tidak diperlukan.
+| Pemeriksaan | Hasil | Status |
+|---|---|---|
+| Jumlah sel | 127 sel, 49 sel kode | LULUS |
+| Eksekusi | 0 *error*, 0 sel belum dieksekusi | LULUS |
+| Figur tertanam | 18 | LULUS |
+| Struktur | 22 bagian utama | LULUS |
+| Bahasa | Bahasa Indonesia, istilah asing dimiringkan | LULUS |
+| *Em dash* | 0 | LULUS |
+| Keluaran cocok dengan artefak | ya | LULUS |
 
-## 9. Kepatuhan Regulasi
+## 6. Dokumentasi
+
+| Berkas | Status |
+|---|---|
+| `README.md` | LULUS |
+| `docs/model_card_draft.md` | LULUS, memuat penggunaan yang tidak dianjurkan |
+| `weights/README.md` | LULUS |
+| `references/README.md` | LULUS, audit sitasi per kalimat |
+| `SUBMISSION_CHECKLIST.md` | LULUS |
+| `docs/originality_statement_placeholder.md` | LULUS sebagai penanda kewajiban |
+
+Tautan internal pada seluruh berkas Markdown: **0 rusak**.
+
+## 7. Kode dan Pengujian
+
+| Pemeriksaan | Hasil | Status |
+|---|---|---|
+| Uji unit | 69 lulus | LULUS |
+| *Path* absolut personal pada kode sumber | tidak ada | LULUS |
+| *Secret*, *API key*, *token* | tidak ada | LULUS |
+| Penanda TODO atau FIXME | tidak ada | LULUS |
+
+## 8. Kepatuhan Regulasi
 
 | Ketentuan | Status | Bukti |
 |---|---|---|
-| Tanpa *external pretrained weights* | LULUS | `build_compliant_model` menolak `pretrained=True` dan argumen menyerupai *checkpoint*; `YOLO_OFFLINE=1` aktif |
-| Hanya dataset resmi | LULUS | Tidak ada direktori atau rujukan dataset lain |
+| Tanpa *external pretrained weights* | LULUS | `build_compliant_model` menolak `pretrained=True` dan argumen menyerupai checkpoint, `YOLO_OFFLINE=1` aktif |
+| Hanya dataset resmi | LULUS | Tidak ada dataset lain pada repository maupun rujukan kode |
 | Tanpa pemrosesan LLM atau API | LULUS | Seluruh prapemrosesan berupa kode Python deterministik |
-| Pemetaan 11 kelas canonical | LULUS | Nol kategori tidak terpetakan pada ketiga *split* |
+| Pemetaan 11 kelas canonical | LULUS | `canonical_mapping_report.md` |
 | Split resmi dipertahankan | LULUS | Tidak ada penggabungan atau pengacakan ulang |
-| Tanpa kebocoran data | LULUS | Satu duplikat persis dikeluarkan dari *manifest* latih |
-| *Seeding* deterministik | LULUS | `seed=42` pada Python, NumPy, dan PyTorch |
+| Tanpa kebocoran data | LULUS | `dataset_audit_report.md` |
+| *Seeding* deterministik | LULUS | `seed=42` pada Python, NumPy, PyTorch |
 | Satu model final | LULUS | `final_model_metadata.json` |
 
-## 10. Item yang Masih Terbuka
+## 9. Repository dan Git
+
+| Pemeriksaan | Hasil | Status |
+|---|---|---|
+| Repository publik | ya | LULUS |
+| Riwayat commit bertahap | ya | LULUS |
+| Dataset mentah pada riwayat publik | 0 objek dapat dijangkau dari `origin/main` | LULUS |
+| Berkas prompt internal | sudah dikeluarkan, lihat `repository_cleanup.md` | LULUS |
+
+## 10. Item Terbuka
 
 ### 10.1 GitHub Release belum dipublikasikan
 
-Rilis sudah disiapkan lengkap: berkas *checksum* terkomit, metadata terisi,
-dan perintah `gh release create` beserta daftar aset tersedia pada
+Rilis sudah disiapkan lengkap. Berkas *checksum* dan metadata terkomit, dan
+perintah `gh release create` beserta daftar aset tersedia pada
 `weights/README.md`.
 
-Penghalang saat ini: `gh auth status` melaporkan token pada *keyring* tidak
-valid, sehingga publikasi tidak dapat dijalankan sebelum `gh auth login`
-diulang.
+Penghalang: `gh auth status` melaporkan token pada *keyring* tidak valid,
+sehingga publikasi tidak dapat dijalankan sebelum `gh auth login` diulang.
 
 Dampak bila tidak diselesaikan: regulasi mensyaratkan tautan unduhan langsung
-untuk bobot model. Tanpa rilis, juri tidak dapat mengunduh bobot, karena
-berkas tersebut memang sengaja tidak dikomit ke Git.
+untuk bobot model. Tanpa rilis, juri tidak dapat mengunduh bobot karena
+berkas tersebut sengaja tidak dikomit ke Git.
 
 ### 10.2 Metadata rilis belum diperbarui
 
-Setelah rilis terbit, `field` `release` pada
-`artifacts/reports/final_model_metadata.json` masih bernilai
-`published: false` dan perlu diperbarui bersama tautan aset pada
-`weights/README.md`.
+Field `release` pada `artifacts/reports/final_model_metadata.json` masih
+bernilai `published: false` dan perlu diperbarui bersama tautan aset pada
+`weights/README.md` setelah rilis terbit.
 
 ## 11. Item di Luar Jangkauan Verifikasi Otomatis
 
-### 11.1 Pernyataan orisinalitas bertanda tangan
+1. **Pernyataan orisinalitas bertanda tangan.** Artefak manusia di luar
+   repository. Daftar periksa tersedia pada
+   `docs/originality_statement_placeholder.md`.
+2. **Komposisi tim.** Ketentuan 2 sampai 3 mahasiswa aktif, satu universitas,
+   satu ketua tim, dan satu dosen pembimbing tidak dapat diperiksa dari
+   repository.
 
-Dokumen bertanda tangan basah merupakan artefak manusia di luar repository.
-Daftar periksa tersedia pada `docs/originality_statement_placeholder.md`.
-Aspek orisinalitas yang dapat diverifikasi secara teknis, yaitu tanpa dataset
-eksternal, tanpa bobot pra-latih eksternal, dan tanpa pemrosesan LLM, sudah
-terverifikasi pada bagian 9.
+## 12. Eksperimen yang Sedang Berjalan
 
-### 11.2 Komposisi tim
+Pelatihan dengan anggaran 100 *epoch* sedang dijalankan sebagai eksperimen
+terpisah. Dasarnya adalah kurva pelatihan model final yang menunjukkan model
+belum konvergen pada epoch 50: mAP@0.5 masih naik, *train loss* masih turun,
+dan *val loss* juga masih turun.
 
-Ketentuan 2 sampai 3 mahasiswa aktif, satu universitas, satu ketua tim, dan
-satu dosen pembimbing tidak dapat diperiksa dari repository. Perlu
-dikonfirmasi langsung terhadap data pendaftaran.
+Eksperimen resolusi 960 dihentikan pada epoch 7. Alasannya, bila model pada
+resolusi 640 saja belum konvergen dalam 50 *epoch*, model resolusi 960 yang
+konvergensinya teramati sekitar dua kali lebih lambat akan jauh lebih belum
+konvergen pada anggaran yang sama. Checkpoint beserta skrip pelanjutnya tetap
+disimpan, lihat `artifacts/reports/experiment_960_status.md`.
 
-## 12. Keterbatasan Audit Ini
+Model final yang dibekukan untuk submission tetap model 640 dengan 50
+*epoch*. Tidak ada eksperimen yang akan menggantikannya kecuali terbukti
+unggul pada prosedur evaluasi yang sama, pada *split* validasi, dan
+dikonfirmasi pada *split* test.
 
-Disampaikan terbuka agar tidak ada kesan cakupan audit lebih luas daripada
-yang sebenarnya:
+## 13. Keterbatasan Audit Ini
 
-1. **Laporan audit historis per block masih berbahasa Inggris**, yaitu
-   `final_submission_audit.md`, `block21_final_freeze.md`,
-   `block16_clean_reproduction_test.md`, `reproducibility_checklist.md`, serta
-   laporan block 10 sampai 14. Dokumen submission utama, yaitu notebook,
-   README, model card, referensi, dan informasi bobot, seluruhnya sudah
-   berbahasa Indonesia. Komentar dan *docstring* pada kode juga masih
-   berbahasa Inggris.
-2. **Dua berkas dikecualikan dari pembersihan *em dash*:** dokumen
-   spesifikasi milik pengguna dan satu berkas arsip historis. Mengubah
-   keduanya akan mengubah rekaman yang sengaja dibekukan.
-3. **Reproduksi pelatihan bit per bit tidak diverifikasi** dan memang tidak
-   diklaim, karena nondeterminisme *backend* MPS.
-4. **Nilai *F1* lokal tidak stabil** antar pengulangan pada rentang 0,22
-   sampai 0,42. Penyebab pastinya belum ditelusuri tuntas. Sapuan *threshold*
-   yang dihitung ulang dari prediksi tersimpan bersifat deterministik dan
-   dapat dipakai sebagai acuan yang lebih stabil.
-5. **Audit ini tidak menguji model pada data di luar dataset kompetisi**,
-   sehingga kemampuan generalisasi ke kondisi lapangan lain belum diketahui.
+Disampaikan terbuka agar cakupan audit tidak terbaca lebih luas daripada yang
+sebenarnya:
 
-## 13. Kesimpulan
+1. **Sebagian isi *docstring* pada skrip dan berkas uji masih berbahasa
+   Inggris.** Judul *docstring* seluruh skrip dan seluruh modul `src/` sudah
+   Bahasa Indonesia. Rincian pada `repository_cleanup.md`.
+2. **Sebagian laporan pada `artifacts/reports/` masih berbahasa Inggris.**
+   Isinya bukti eksperimen yang sah, hanya bahasanya yang belum disesuaikan.
+3. **Penamaan sebagian laporan masih memakai penomoran block internal**,
+   misalnya `block13_error_analysis.md`, yang tidak bermakna bagi juri.
+4. **Reproduksi pelatihan bit per bit tidak diverifikasi** dan tidak diklaim,
+   karena nondeterminisme *backend* MPS.
+5. **Metrik lokal diagnostik tidak stabil** antar pengulangan pada rentang
+   0,22 sampai 0,42. Metrik ini berstatus sekunder, bukan angka yang
+   dilaporkan.
+6. **Definisi *F1* panitia tidak diketahui.** Angka yang dilaporkan merupakan
+   *F1* macro hasil implementasi evaluasi lokal.
+7. **Belum ada validasi di luar dataset kompetisi.**
 
-Seluruh aspek teknis submission berada dalam kondisi siap dan dapat diaudit:
-notebook berjalan bersih dengan figur lengkap, metrik konsisten pada tiga
-artefak independen, bobot model terverifikasi *checksum*-nya, kepatuhan
-regulasi ditegakkan pada tingkat kode, dan riwayat Git publik sudah bersih
-dari dataset mentah.
+## 14. Kesimpulan
 
-Dua item terbuka, yaitu publikasi rilis dan pembaruan metadata rilis,
-bersifat mekanis dan dapat diselesaikan dalam hitungan menit setelah
-otentikasi GitHub CLI diperbarui.
+Seluruh aspek teknis berada dalam kondisi siap dan dapat diaudit. Angka yang
+dilaporkan konsisten pada seluruh artefak dan dokumen, berasal dari satu
+sumber kebenaran, dan dapat direproduksi dengan dua perintah.
 
-Dua item lain, yaitu pernyataan orisinalitas bertanda tangan dan konfirmasi
-komposisi tim, berada di luar kemampuan verifikasi otomatis dan merupakan
-tanggung jawab tim.
-
-Audit ini **tidak** menyatakan submission selesai. Audit ini menyatakan bahwa
-bagian yang berada dalam kendali repository sudah selesai dan terverifikasi,
-sedangkan empat item sisanya tercatat terbuka secara eksplisit.
-
-## 14. Pemaksimalan Lanjutan (22 September 2026)
-
-Setelah audit awal, beberapa celah terhadap tuntutan prompt ditutup.
-
-### 14.1 Evaluasi *split* test
-
-Sebelumnya *split* test memiliki *ground truth* (2.670 anotasi) tetapi belum
-pernah dievaluasi sama sekali. Evaluasi tunggal dijalankan setelah model
-dibekukan, tanpa dipakai untuk penyetelan apa pun.
-
-| Metrik | Valid | Test | Selisih |
-|---|---:|---:|---:|
-| mAP@0.5 | 0,6277 | 0,6145 | -0,0132 |
-| mAP@0.5:0.95 | 0,3905 | 0,3998 | +0,0093 |
-| *Precision* | 0,6406 | 0,6595 | +0,0189 |
-| *Recall* | 0,6237 | 0,6160 | -0,0077 |
-
-Selisih yang sangat kecil merupakan bukti bahwa performa tidak bergantung
-pada *split* validasi tertentu, sehingga tidak ada indikasi *overfitting*
-meskipun 21 percobaan dijalankan di atas *split* tersebut. Urutan kelas juga
-konsisten pada kedua *split*, dengan Narrow brown tertinggi dan Brown spot
-terendah.
-
-### 14.2 Analisis anotasi yang saling bertumpuk
-
-Pemeriksaan kualitas anotasi di dalam satu citra sebelumnya belum ada.
-Hasilnya: 85 pasang kelas sama pada *train*, 16 pada *valid*, 13 pada *test*,
-menyentuh kurang dari satu persen citra. Satu contoh mencapai IoU 0,9519 yang
-kemungkinan besar merupakan anotasi ganda. Tumpang tindih antar kelas hampir
-tidak ada, yaitu satu kejadian pada seluruh dataset.
-
-Tidak ada anotasi yang diubah berdasarkan temuan ini.
-
-### 14.3 Visualisasi kasus khas
-
-Tiga kelompok visual ditambahkan dengan aturan pemilihan eksplisit: adegan
-padat, objek kecil, dan kasus sulit. Temuan paling menonjol: ketiga citra
-terpadat seluruhnya kelas Brown spot, dengan 178, 126, dan 90 anotasi dalam
-satu gambar.
-
-Ini menghubungkan secara visual beberapa temuan yang sebelumnya terpisah,
-yaitu jumlah *instance* Brown spot tertinggi, dominasi objek kecil, rasio
-*false negative* adegan padat yang jauh lebih tinggi, dan AP@0.5 Brown spot
-yang terendah. Hubungan ini tetap bersifat observasional.
-
-### 14.4 Kondisi notebook setelah penambahan
-
-| Pemeriksaan | Hasil |
-|---|---|
-| Jumlah sel | 127 (49 sel kode) |
-| *Error* | 0 |
-| Sel belum dieksekusi | 0 |
-| Figur tertanam | 18 |
-| Bagian utama | 22 |
-| *Em dash* | 0 |
-| Uji unit | 69 lulus |
+Audit ini **tidak** menyatakan submission selesai. Dua item mekanis, yaitu
+publikasi rilis dan pembaruan metadata rilis, serta dua item administratif,
+yaitu pernyataan orisinalitas dan konfirmasi komposisi tim, masih terbuka.
