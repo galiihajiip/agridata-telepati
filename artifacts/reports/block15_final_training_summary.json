@@ -1,6 +1,6 @@
 {
   "block": 15,
-  "git_commit": "28668899fb000cee3a2a8386ac65ddeba2d04d02",
+  "git_commit": "38754ce334149e7eeb633edb8d9d81820bad3b13",
   "dataset_manifest_hash": "cf81abe0fbdae2740ad9eb27741f7fa0ef8cfcaabb18fd150ef16ba2ae55ab44",
   "config_used": {
     "seed": 42,
@@ -16,23 +16,23 @@
     "scheduler": "linear",
     "flipud": 0.0,
     "fraction": 1.0,
-    "epochs": 50,
-    "patience": 8,
+    "epochs": 100,
+    "patience": 20,
     "workers": 2,
     "device": "auto"
   },
   "device": "mps",
-  "started_at_utc": "2026-09-18T07:21:52.939164+00:00",
-  "finished_at_utc": "2026-09-18T14:42:38.936594+00:00",
-  "duration_seconds": 26445.99743,
-  "save_dir": "/Users/macbookpro/Projects/agridata/runs/detect/final/final_model",
-  "best_weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt",
-  "last_weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/last.pt",
+  "started_at_utc": "2026-09-23T02:54:27.068862+00:00",
+  "finished_at_utc": "2026-09-23T23:44:59.867763+00:00",
+  "duration_seconds": 75032.798901,
+  "save_dir": "/Users/macbookpro/Projects/agridata/runs/detect/final/model_100epoch",
+  "best_weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/model_100epoch/weights/best.pt",
+  "last_weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/model_100epoch/weights/last.pt",
   "final_metrics": {
-    "metrics/precision(B)": 0.6406313025367592,
-    "metrics/recall(B)": 0.6237468463233555,
-    "metrics/mAP50(B)": 0.6276771766514752,
-    "metrics/mAP50-95(B)": 0.39054142391436314
+    "metrics/precision(B)": 0.6919960007629866,
+    "metrics/recall(B)": 0.6661727734798185,
+    "metrics/mAP50(B)": 0.65672906570373,
+    "metrics/mAP50-95(B)": 0.4204549302354838
   },
   "resolved_hyperparameters": {
     "optimizer": "AdamW",
@@ -76,7 +76,7 @@
       "cuda_available": false,
       "mps_available": true
     },
-    "git_commit": "c9da362f5e6c3d67091eab2a22a277a27898e608",
+    "git_commit": "ac1dba57fb15a5e7ba781135721a2a1ac6f2592f",
     "git_status": {
       "clean": true,
       "changed_files": []
