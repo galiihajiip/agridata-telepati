@@ -1,36 +1,39 @@
 #!/usr/bin/env python3
 """Perangkat verifikasi reproduktibilitas.
 
-This script VERIFIES reproducibility claims by actually re-executing steps
-and diffing results, it does not just assert that things "should" be
-reproducible. Produces a PASS/WARN/FAIL/NOT VERIFIED checklist covering the
-ten items from the master spec's Block 8:
+Skrip ini MEMVERIFIKASI klaim reproduktibilitas dengan benar-benar menjalankan
+ulang langkahnya lalu membandingkan hasilnya, bukan sekadar menyatakan bahwa
+sesuatu seharusnya dapat direproduksi. Keluarannya berupa daftar periksa
+berstatus LULUS, PERINGATAN, GAGAL, atau TIDAK DIVERIFIKASI atas sepuluh butir
+berikut:
 
-  1. same seed -> same dataset manifest
-  2. same seed -> same canonical mapping
-  3. same config -> same generated metadata
-  4. training configuration is fully logged
-  5. random seeds are recorded
-  6. dependency versions are recordable
-  7. git commit hash is recorded where possible
-  8. model configuration is recorded
-  9. data path is configurable
-  10. generated artifacts are versioned through metadata, not giant commits
+  1. seed sama menghasilkan manifest dataset yang sama
+  2. seed sama menghasilkan pemetaan canonical yang sama
+  3. konfigurasi sama menghasilkan metadata yang sama
+  4. konfigurasi pelatihan tercatat lengkap
+  5. seed acak tercatat
+  6. versi dependensi dapat dicatat
+  7. hash commit git tercatat bila memungkinkan
+  8. konfigurasi model tercatat
+  9. path data dapat dikonfigurasi
+  10. artefak hasil generate diversikan melalui metadata, bukan commit raksasa
 
-It also explicitly distinguishes three different reproducibility claims
-rather than lumping them together:
-  - deterministic PREPROCESSING (dataset prep, canonical mapping): verified
-    bit-for-bit reproducible below.
-  - deterministic TRAINING: NOT claimed bit-for-bit on this project's Apple
-    Silicon / MPS backend. Block 6 logged genuine PyTorch warnings that
-    `scatter_reduce_mps` and `index_put_with_accumulate_mps` have no
-    deterministic implementation. This is real evidence, not a hedge.
-  - reproducible EXPERIMENT CONFIGURATION: the seed, hyperparameters, model
-    architecture, and code version needed to rerun any experiment are always
-    recorded, so the *setup* is always exactly reconstructable even where
-    bit-exact numerical output is not guaranteed.
+Skrip juga secara eksplisit membedakan tiga klaim reproduktibilitas yang berbeda,
+alih-alih menyatukannya begitu saja:
 
-Usage:
+  - PRAPEMROSESAN yang deterministik, mencakup penyiapan dataset dan pemetaan
+    canonical, terverifikasi dapat direproduksi byte per byte di bawah ini.
+  - PELATIHAN yang deterministik TIDAK diklaim bit per bit pada backend Apple
+    Silicon dengan MPS yang dipakai project ini. PyTorch mencatat peringatan
+    nyata bahwa `scatter_reduce_mps` dan `index_put_with_accumulate_mps` tidak
+    memiliki implementasi deterministik. Ini bukti sungguhan, bukan sikap
+    berhati-hati belaka.
+  - KONFIGURASI PERCOBAAN yang dapat direproduksi: seed, hyperparameter,
+    arsitektur model, dan versi kode yang dibutuhkan untuk menjalankan ulang
+    percobaan mana pun selalu tercatat. Dengan begitu penyiapannya selalu dapat
+    direkonstruksi persis, sekalipun keluaran numeriknya tidak dijamin identik.
+
+Pemakaian:
     python scripts/check_reproducibility.py --dataset-root "<PATH>"
 """
 
@@ -63,10 +66,12 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 def check_dataset_manifest_determinism(dataset_root: Path) -> dict:
-    """Rerun prepare_dataset.py into a fresh temp dir with the same seed/config
-    and diff the resulting train manifest against the checked-in one, byte
-    for byte (aside from the generation timestamp, which is expected to
-    differ and is not part of what "same seed -> same manifest" claims)."""
+    """Menjalankan ulang prepare_dataset.py ke direktori sementara yang baru dengan
+    seed dan konfigurasi yang sama, lalu membandingkan manifest latih hasilnya
+    terhadap manifest yang terkomit, byte per byte.
+
+    Timestamp pembuatan dikecualikan karena memang wajar berbeda dan bukan
+    bagian dari klaim bahwa seed yang sama menghasilkan manifest yang sama."""
     existing_manifest = PROJECT_ROOT / "data" / "prepared" / "manifest_train.json"
     if not existing_manifest.exists():
         return {"status": "TIDAK DIVERIFIKASI", "detail": "Tidak ada data/prepared/manifest_train.json sebagai pembanding. Jalankan penyiapan dataset terlebih dahulu."}
@@ -97,9 +102,10 @@ def check_dataset_manifest_determinism(dataset_root: Path) -> dict:
 
 
 def check_canonical_mapping_determinism() -> dict:
-    """Verify the mapping table itself is unchanged (via a stable hash tied to
-    MAPPING_VERSION) and that build_mapping_report is a pure, deterministic
-    function of its input (same categories in -> identical report out)."""
+    """Memastikan tabel pemetaannya sendiri tidak berubah, melalui hash stabil yang
+    terikat pada MAPPING_VERSION, sekaligus memastikan build_mapping_report
+    merupakan fungsi murni yang deterministik terhadap masukannya, yaitu
+    kategori yang sama selalu menghasilkan laporan yang identik."""
     import hashlib
 
     table_repr = json.dumps(
@@ -126,8 +132,9 @@ def check_canonical_mapping_determinism() -> dict:
 
 
 def check_generated_metadata_reproducible(dataset_manifest_check: dict) -> dict:
-    """Same config -> same generated metadata: reuses the rerun from the
-    manifest check above rather than re-executing prepare_dataset.py again."""
+    """Memastikan konfigurasi yang sama menghasilkan metadata yang sama, dengan
+    memakai ulang eksekusi dari pemeriksaan manifest di atas alih-alih
+    menjalankan prepare_dataset.py sekali lagi."""
     if dataset_manifest_check["status"] != "LULUS":
         return {"status": "TIDAK DIVERIFIKASI", "detail": "Bergantung pada pemeriksaan determinisme manifest dataset, yang tidak lulus."}
     return {
