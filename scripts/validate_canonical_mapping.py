@@ -44,21 +44,21 @@ def load_categories(json_path: Path) -> list[dict]:
 
 def build_markdown(per_split_reports: dict[str, dict]) -> str:
     lines = [
-        "# Canonical 11-Class Mapping Validation Report",
+        "# Laporan Validasi Pemetaan 11 Kelas Canonical",
         "",
-        f"Official canonical classes ({len(CANONICAL_CLASSES)}): {list(CANONICAL_CLASSES)}",
+        f"Kelas canonical resmi ({len(CANONICAL_CLASSES)}): {list(CANONICAL_CLASSES)}",
         "",
     ]
     for split, report in per_split_reports.items():
         lines.append(f"## Split: `{split}`")
         lines.append("")
         lines += [
-            f"- Total raw categories: {report['total_raw_categories']}",
-            f"- Mapped raw categories: {len(report['mapped'])}",
-            "- Supercategory placeholders (excluded, zero annotations expected): "
+            f"- Total kategori mentah: {report['total_raw_categories']}",
+            f"- Kategori mentah yang terpetakan: {len(report['mapped'])}",
+            "- Penanda supercategory yang dikecualikan, diharapkan tanpa anotasi: "
             f"{[p['raw_name'] for p in report['supercategory_placeholders']]}",
-            f"- Unmapped/unknown raw categories: {report['unmapped_raw_categories']}",
-            f"- Canonical classes with zero raw labels in this split: {report['canonical_classes_with_zero_raw_labels']}",
+            f"- Kategori mentah yang tidak terpetakan atau tidak dikenali: {report['unmapped_raw_categories']}",
+            f"- Kelas canonical tanpa label mentah pada split ini: {report['canonical_classes_with_zero_raw_labels']}",
             "",
             "| raw_id | raw_name | canonical_name | canonical_id |",
             "|---:|---|---|---:|",
@@ -66,8 +66,8 @@ def build_markdown(per_split_reports: dict[str, dict]) -> str:
         for m in report["mapped"]:
             lines.append(f"| {m['raw_id']} | {m['raw_name']} | {m['canonical_name']} | {m['canonical_id']} |")
         lines.append("")
-        status = "PASS" if not report["unmapped_raw_categories"] else "FAIL (unmapped categories present)"
-        lines.append(f"**Split mapping status: {status}**")
+        status = "LULUS" if not report["unmapped_raw_categories"] else "GAGAL, ada kategori yang tidak terpetakan"
+        lines.append(f"**Status pemetaan split: {status}**")
         lines.append("")
     return "\n".join(lines)
 
@@ -75,14 +75,14 @@ def build_markdown(per_split_reports: dict[str, dict]) -> str:
 def main() -> int:
     args = parse_args()
     if not args.dataset_root.exists():
-        print(f"FATAL: dataset root does not exist: {args.dataset_root}", file=sys.stderr)
+        print(f"FATAL: akar dataset tidak ditemukan: {args.dataset_root}", file=sys.stderr)
         return 2
 
     per_split_reports = {}
     for split in SPLITS:
         json_path = args.dataset_root / split / args.annotation_filename
         if not json_path.exists():
-            print(f"FATAL: annotation file missing for split '{split}': {json_path}", file=sys.stderr)
+            print(f"FATAL: berkas anotasi untuk split '{split}' tidak ditemukan: {json_path}", file=sys.stderr)
             return 2
         per_split_reports[split] = build_mapping_report(load_categories(json_path))
 

@@ -1,14 +1,14 @@
-# Canonical 11-Class Mapping Validation Report
+# Laporan Validasi Pemetaan 11 Kelas Canonical
 
-Official canonical classes (11): ['Bacterial leaf blight', 'Bacterial panicle blight', 'Blast', 'Brown spot', 'False smut', 'Healthy', 'Leaf roller', 'Leaf scald', 'Narrow brown', 'Sheath blight', 'Tungro']
+Kelas canonical resmi (11): ['Bacterial leaf blight', 'Bacterial panicle blight', 'Blast', 'Brown spot', 'False smut', 'Healthy', 'Leaf roller', 'Leaf scald', 'Narrow brown', 'Sheath blight', 'Tungro']
 
 ## Split: `train`
 
-- Total raw categories: 21
-- Mapped raw categories: 18
-- Supercategory placeholders (excluded, zero annotations expected): ['Leaf-blight', 'Rice-Leaf-Diseasee', 'paddy']
-- Unmapped/unknown raw categories: []
-- Canonical classes with zero raw labels in this split: []
+- Total kategori mentah: 21
+- Kategori mentah yang terpetakan: 18
+- Penanda supercategory yang dikecualikan, diharapkan tanpa anotasi: ['Leaf-blight', 'Rice-Leaf-Diseasee', 'paddy']
+- Kategori mentah yang tidak terpetakan atau tidak dikenali: []
+- Kelas canonical tanpa label mentah pada split ini: []
 
 | raw_id | raw_name | canonical_name | canonical_id |
 |---:|---|---|---:|
@@ -31,15 +31,15 @@ Official canonical classes (11): ['Bacterial leaf blight', 'Bacterial panicle bl
 | 19 | Narrow brown | Narrow brown | 9 |
 | 20 | healthy | Healthy | 6 |
 
-**Split mapping status: PASS**
+**Status pemetaan split: LULUS**
 
 ## Split: `valid`
 
-- Total raw categories: 21
-- Mapped raw categories: 18
-- Supercategory placeholders (excluded, zero annotations expected): ['Leaf-blight', 'Rice-Leaf-Diseasee', 'paddy']
-- Unmapped/unknown raw categories: []
-- Canonical classes with zero raw labels in this split: []
+- Total kategori mentah: 21
+- Kategori mentah yang terpetakan: 18
+- Penanda supercategory yang dikecualikan, diharapkan tanpa anotasi: ['Leaf-blight', 'Rice-Leaf-Diseasee', 'paddy']
+- Kategori mentah yang tidak terpetakan atau tidak dikenali: []
+- Kelas canonical tanpa label mentah pada split ini: []
 
 | raw_id | raw_name | canonical_name | canonical_id |
 |---:|---|---|---:|
@@ -62,15 +62,15 @@ Official canonical classes (11): ['Bacterial leaf blight', 'Bacterial panicle bl
 | 19 | Narrow brown | Narrow brown | 9 |
 | 20 | healthy | Healthy | 6 |
 
-**Split mapping status: PASS**
+**Status pemetaan split: LULUS**
 
 ## Split: `test`
 
-- Total raw categories: 21
-- Mapped raw categories: 18
-- Supercategory placeholders (excluded, zero annotations expected): ['Leaf-blight', 'Rice-Leaf-Diseasee', 'paddy']
-- Unmapped/unknown raw categories: []
-- Canonical classes with zero raw labels in this split: []
+- Total kategori mentah: 21
+- Kategori mentah yang terpetakan: 18
+- Penanda supercategory yang dikecualikan, diharapkan tanpa anotasi: ['Leaf-blight', 'Rice-Leaf-Diseasee', 'paddy']
+- Kategori mentah yang tidak terpetakan atau tidak dikenali: []
+- Kelas canonical tanpa label mentah pada split ini: []
 
 | raw_id | raw_name | canonical_name | canonical_id |
 |---:|---|---|---:|
@@ -93,4 +93,4 @@ Official canonical classes (11): ['Bacterial leaf blight', 'Bacterial panicle bl
 | 19 | Narrow brown | Narrow brown | 9 |
 | 20 | healthy | Healthy | 6 |
 
-**Split mapping status: PASS**
+**Status pemetaan split: LULUS**
