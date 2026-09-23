@@ -82,6 +82,7 @@ tidak cukup untuk membuktikan ketiadaan *overfitting*.
 | Figur tertanam | 18 | LULUS |
 | Struktur | 22 bagian utama | LULUS |
 | Bahasa | Bahasa Indonesia, istilah asing dimiringkan | LULUS |
+| Suara penulis | orang pertama jamak "kami" pada 70 dari 78 sel markdown | LULUS |
 | *Em dash* | 0 | LULUS |
 | Keluaran cocok dengan artefak | ya | LULUS |
 
@@ -182,21 +183,25 @@ dikonfirmasi pada *split* test.
 Disampaikan terbuka agar cakupan audit tidak terbaca lebih luas daripada yang
 sebenarnya:
 
-1. **Sebagian isi *docstring* pada skrip dan berkas uji masih berbahasa
-   Inggris.** Judul *docstring* seluruh skrip dan seluruh modul `src/` sudah
-   Bahasa Indonesia. Rincian pada `repository_cleanup.md`.
-2. **Sebagian laporan pada `artifacts/reports/` masih berbahasa Inggris.**
-   Isinya bukti eksperimen yang sah, hanya bahasanya yang belum disesuaikan.
-3. **Penamaan sebagian laporan masih memakai penomoran block internal**,
+1. **Penamaan sebagian laporan masih memakai penomoran block internal**,
    misalnya `block13_error_analysis.md`, yang tidak bermakna bagi juri.
-4. **Reproduksi pelatihan bit per bit tidak diverifikasi** dan tidak diklaim,
+   Penggantian nama ditunda agar tidak memicu tautan rusak menjelang tenggat.
+2. **Reproduksi pelatihan bit per bit tidak diverifikasi** dan tidak diklaim,
    karena nondeterminisme *backend* MPS.
-5. **Metrik lokal diagnostik tidak stabil** antar pengulangan pada rentang
+3. **Metrik lokal diagnostik tidak stabil** antar pengulangan pada rentang
    0,22 sampai 0,42. Metrik ini berstatus sekunder, bukan angka yang
    dilaporkan.
-6. **Definisi *F1* panitia tidak diketahui.** Angka yang dilaporkan merupakan
+4. **Definisi *F1* panitia tidak diketahui.** Angka yang dilaporkan merupakan
    *F1* macro hasil implementasi evaluasi lokal.
-7. **Belum ada validasi di luar dataset kompetisi.**
+5. **Belum ada validasi di luar dataset kompetisi.**
+6. **Satu regenerasi analisis kesalahan menghasilkan keluaran yang rusak dan
+   dibatalkan.** Eksekusi yang dijalankan bersamaan dengan pelatihan 100
+   *epoch* hanya menghasilkan sekitar sembilan prediksi untuk 2.106 citra,
+   padahal eksekusi yang sah menghasilkan 1.381 *true positive*. Artefak yang
+   sah dipulihkan dari riwayat Git dan dipakai kembali, sedangkan penyebab
+   kegagalannya belum ditelusuri karena kemungkinan besar berkaitan dengan
+   perebutan sumber daya MPS. Hal ini disampaikan terbuka agar tidak terbaca
+   seolah setiap eksekusi ulang pasti menghasilkan angka yang sama.
 
 ## 14. Kesimpulan
 
