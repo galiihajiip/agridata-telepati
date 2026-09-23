@@ -1,10 +1,10 @@
-# Block 10. Baseline Experiment Matrix: Results & Recommendation
+# Matriks Percobaan Baseline: Hasil dan Rekomendasi
 
-**Scale caveat**: this matrix uses a small fraction of train data and few epochs (a fast comparative screening pass), not the final training regime. Absolute mAP values are expected to be low here; only *relative* differences between variants and the baseline are meaningful at this stage.
+Perlu dicatat soal skalanya. Matriks ini memakai sebagian kecil data latih dengan sedikit *epoch* sebagai tahap penyaringan yang cepat, bukan rezim pelatihan final. Nilai mAP absolutnya memang rendah, dan pada tahap ini hanya perbedaan *relatif* antar varian terhadap baseline yang bermakna.
 
-## Results
+## Hasil
 
-| Experiment | Axis changed | mAP@0.5 | mAP@0.5:0.95 | Precision | Recall | Duration (s) |
+| Percobaan | Faktor yang diubah | mAP@0.5 | mAP@0.5:0.95 | Precision | Recall | Durasi (detik) |
 |---|---|---:|---:|---:|---:|---:|
 | E02 | baseline | 0.0018 | 0.0005 | 0.1840 | 0.0073 | 145.7 |
 | E03 | image_size | 0.0041 | 0.0017 | 0.3724 | 0.0052 | 302.2 |
@@ -14,17 +14,17 @@
 | E07 | augmentation_strength | 0.0007 | 0.0002 | 0.2759 | 0.0061 | 133.8 |
 | E08 | training_duration | 0.0134 | 0.0034 | 0.2921 | 0.0406 | 207.8 |
 
-## Per-axis effect (relative to baseline)
+## Efek tiap faktor, relatif terhadap baseline
 
-- **image_size**: mAP@0.5 improved by +0.0023 vs. baseline (302s vs baseline's 146s).
-- **batch_size**: mAP@0.5 worsened by -0.0013 vs. baseline (119s vs baseline's 146s).
-- **learning_rate**: mAP@0.5 worsened by -0.0016 vs. baseline (131s vs baseline's 146s).
-- **optimizer**: mAP@0.5 worsened by -0.0015 vs. baseline (128s vs baseline's 146s).
-- **augmentation_strength**: mAP@0.5 worsened by -0.0011 vs. baseline (134s vs baseline's 146s).
-- **training_duration**: mAP@0.5 improved by +0.0117 vs. baseline (208s vs baseline's 146s).
+- **image_size**: mAP@0.5 naik sebesar +0.0023 terhadap baseline (durasi 302 detik berbanding 146 detik pada baseline).
+- **batch_size**: mAP@0.5 turun sebesar -0.0013 terhadap baseline (durasi 119 detik berbanding 146 detik pada baseline).
+- **learning_rate**: mAP@0.5 turun sebesar -0.0016 terhadap baseline (durasi 131 detik berbanding 146 detik pada baseline).
+- **optimizer**: mAP@0.5 turun sebesar -0.0015 terhadap baseline (durasi 128 detik berbanding 146 detik pada baseline).
+- **augmentation_strength**: mAP@0.5 turun sebesar -0.0011 terhadap baseline (durasi 134 detik berbanding 146 detik pada baseline).
+- **training_duration**: mAP@0.5 naik sebesar +0.0117 terhadap baseline (durasi 208 detik berbanding 146 detik pada baseline).
 
-## Recommendation
+## Rekomendasi
 
-Highest mAP@0.5 in this screening pass: **E08** (training_duration, mAP@0.5=0.0134).
+mAP@0.5 tertinggi pada tahap penyaringan ini: **E08** (training_duration, mAP@0.5=0.0134).
 
-This is NOT declared the final configuration, per the master spec, no configuration is called "best" until measured at full scale. This result should inform, not replace, the ablations in Blocks 11-13 (augmentation, class imbalance, error analysis) before Block 14 freezes a final configuration.
+Hasil ini TIDAK dinyatakan sebagai konfigurasi final. Tidak ada konfigurasi yang disebut terbaik sebelum diukur pada skala penuh. Temuan di sini menjadi masukan, bukan pengganti, bagi ablasi augmentasi, ablasi ketidakseimbangan kelas, dan analisis kesalahan, sebelum konfigurasi final dibekukan.
