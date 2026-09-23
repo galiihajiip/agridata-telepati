@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 """Penyiapan dataset deterministik untuk pelatihan deteksi objek.
 
-Builds a training-ready representation from the RAW OFFICIAL DATASET without
-altering it:
+Skrip membangun representasi siap latih dari DATASET RESMI MENTAH tanpa
+mengubahnya sedikit pun:
 
-    raw dataset -> canonical class mapping -> YOLO-format labels + manifest
+    dataset mentah -> pemetaan kelas canonical -> label format YOLO + manifest
 
-Images are exposed via symlinks (never copied), so the prepared output does
-not duplicate the ~650MB of official dataset bytes and is safe to regenerate
-locally at any time. A full JSON manifest per split preserves traceability
-to original image IDs, raw category names, and canonical/model class IDs.
+Citra disajikan melalui symlink dan tidak pernah disalin, sehingga keluarannya
+tidak menggandakan sekitar 650MB byte dataset resmi dan aman dihasilkan ulang
+kapan saja secara lokal. Manifest JSON lengkap per split menjaga keterlacakan ke
+ID citra asli, nama kategori mentah, serta ID kelas canonical dan ID kelas model.
 
-One confirmed cross-split exact-duplicate image (Block 2 forensic audit,
-train vs test, identical MD5) is excluded from the TRAIN split here to
-prevent training on data that is byte-identical to a held-out test image.
+Satu citra yang terbukti duplikat persis lintas split, yaitu antara train dan
+test dengan MD5 identik menurut audit forensik dataset, dikeluarkan dari split
+TRAIN di sini. Tujuannya mencegah pelatihan di atas data yang identik byte per
+byte dengan citra uji yang seharusnya tersembunyi.
 
-Usage:
+Pemakaian:
     python scripts/prepare_dataset.py --dataset-root "<PATH>" --output-dir data/prepared
 """
 
@@ -115,12 +116,14 @@ def load_train_exclusions(audit_report_path: Path) -> set[str]:
 
 
 def clamp_bbox(bbox: list[float], img_w: int, img_h: int) -> list[float]:
-    """Clamp a COCO-style [x, y, w, h] box to the image bounds.
+    """Menjepit kotak bergaya COCO [x, y, w, h] agar berada di dalam batas citra.
 
-    Tolerates only sub-pixel overshoot (<= BBOX_BOUNDARY_TOLERANCE_PX), per
-    the Block 2 finding that every observed overshoot in this dataset is a
-    <=0.5px Roboflow export rounding artifact. Anything larger raises,
-    since that would indicate a genuinely invalid box slipping through.
+    Hanya kelebihan di bawah satu piksel yang ditoleransi, yaitu sampai
+    BBOX_BOUNDARY_TOLERANCE_PX. Batas ini mengikuti temuan audit bahwa setiap
+    kelebihan yang teramati pada dataset ini merupakan artefak pembulatan ekspor
+    Roboflow sebesar paling banyak 0,5 piksel. Kelebihan yang lebih besar akan
+    melempar galat, karena menandakan ada kotak yang benar-benar tidak valid
+    lolos ke tahap ini.
     """
     x, y, w, h = bbox
     overshoot = max(0.0, (x + w) - img_w, (y + h) - img_h)

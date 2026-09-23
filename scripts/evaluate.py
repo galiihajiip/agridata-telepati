@@ -1,34 +1,38 @@
 #!/usr/bin/env python3
 """Antarmuka baris perintah untuk evaluasi mAP@50 dan F1 yang dapat direproduksi.
 
-Usage:
+Pemakaian:
     python scripts/evaluate.py --weights <PATH> --split valid --config configs/base.yaml
 
-Two metric pathways (see src/agridata/metrics/detection.py for full
-documentation of why both exist and exactly how each is computed):
+Ada dua jalur metrik. Alasan keduanya ada dan cara masing-masing dihitung
+didokumentasikan lengkap pada src/agridata/metrics/detection.py.
 
-  1. NATIVE mAP@0.5 / mAP@0.5:0.95 via Ultralytics' `model.val()`. This is
-     the source of truth for mAP; this project does not reimplement AP
-     integration.
-  2. LOCAL precision/recall/F1 at `--conf-threshold`, via our own greedy
-     IoU>=0.5 matching, because Ultralytics' own reported precision/recall
-     uses an internally auto-selected confidence threshold that is not
-     configurable.
+  1. mAP@0.5 dan mAP@0.5:0.95 NATIVE melalui `model.val()` bawaan Ultralytics.
+     Inilah sumber kebenaran untuk mAP, dan project ini tidak
+     mengimplementasikan ulang integrasi AP.
+  2. Precision, recall, dan F1 LOKAL pada `--conf-threshold`, melalui
+     pencocokan greedy pada IoU >= 0,5 milik project ini sendiri. Jalur ini
+     diperlukan karena precision dan recall yang dilaporkan Ultralytics memakai
+     confidence threshold yang dipilih otomatis secara internal dan tidak dapat
+     diatur.
 
-These two stages run in SEPARATE PROCESSES, not sequentially in one. A
-Block 16 clean-environment reproduction test found that running
-`model.val()` followed by `model.predict(..., stream=True)` on the same (or
-even a freshly reloaded) model object in one process corrupts the MPS
-backend's internal state. It fails with either "MPSGraph does not support
-tensor dims larger than INT_MAX" or an explicit MPS out-of-memory error,
-regardless of `torch.mps.empty_cache()` + `gc.collect()` between the calls.
-Only full process-level isolation (a fresh Python interpreter and GPU
-context per stage) reliably avoids this. This script's default invocation
-transparently spawns itself twice (via `--stage`) to achieve that; the
-external CLI is unchanged.
+Kedua tahap itu berjalan pada PROSES TERPISAH, bukan berurutan dalam satu proses.
+Uji reproduksi pada lingkungan bersih menemukan bahwa menjalankan `model.val()`
+lalu `model.predict(..., stream=True)` pada objek model yang sama, bahkan pada
+objek yang baru dimuat ulang sekalipun, di dalam satu proses akan merusak kondisi
+internal backend MPS. Kegagalannya muncul sebagai "MPSGraph does not support
+tensor dims larger than INT_MAX" atau sebagai galat kehabisan memori MPS, dan
+tetap terjadi meski `torch.mps.empty_cache()` dan `gc.collect()` dipanggil di
+antara keduanya.
 
-Test-set evaluation is for final reporting only, never for iterative model
-tuning. A WARNING is logged whenever `--split test` is used.
+Hanya isolasi penuh pada tingkat proses, yaitu interpreter Python dan konteks GPU
+yang baru untuk setiap tahap, yang terbukti andal menghindarinya. Karena itu
+pemanggilan bawaan skrip ini menjalankan dirinya sendiri dua kali melalui
+`--stage`, sementara antarmuka CLI yang dipakai dari luar tidak berubah.
+
+Evaluasi pada split test hanya untuk pelaporan akhir, tidak pernah untuk
+penyetelan model secara berulang. PERINGATAN dicatat setiap kali `--split test`
+dipakai.
 """
 
 from __future__ import annotations
@@ -103,12 +107,12 @@ def parse_args() -> argparse.Namespace:
 
 
 def validate_class_mapping(model) -> None:
-    """Fail loudly if the model's class order doesn't match the canonical mapping.
+    """Gagal secara keras bila urutan kelas model tidak cocok dengan pemetaan canonical.
 
-    Ground truth (from the Block 5 manifest) uses model_class_id =
-    canonical_id - 1 in CANONICAL_CLASSES order. If the model's own class
-    order ever diverged from that (e.g. trained against a different
-    data.yaml), predictions and ground truth would silently misalign.
+    Ground truth yang berasal dari manifest memakai model_class_id =
+    canonical_id - 1 mengikuti urutan CANONICAL_CLASSES. Bila urutan kelas milik
+    model sampai menyimpang dari itu, misalnya karena dilatih terhadap data.yaml
+    yang berbeda, prediksi dan ground truth akan salah sejajar secara diam-diam.
     """
     model_names = [model.names[i] for i in range(len(model.names))]
     if model_names != list(CANONICAL_CLASSES):
@@ -136,25 +140,32 @@ def load_ground_truth(manifest_path: Path) -> tuple[list[GroundTruthBox], dict[i
 def collect_predictions(
     model, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str
 ) -> list[Detection]:
-    """Run inference at a low confidence threshold; filtering by a higher
-    threshold happens later in match_detections_to_ground_truth (pure function,
-    no re-inference needed per threshold).
+    """Menjalankan inferensi pada confidence threshold rendah.
 
-    Uses `stream=True` so Ultralytics yields one Result at a time instead of
-    accumulating all of them (each holding image tensors) in RAM, which is necessary
-    at full-dataset scale (Ultralytics itself warns against the non-streamed
-    form for exactly this reason).
+    Penyaringan dengan ambang yang lebih tinggi dilakukan belakangan di
+    match_detections_to_ground_truth, yang merupakan fungsi murni sehingga tidak
+    perlu inferensi ulang untuk setiap ambang.
 
-    Paths are submitted in chunks of `CHUNK_SIZE`, not as one 2000+ path
-    list. A Block 16 clean-environment reproduction test found that passing
-    the full valid-split path list (2106 images) to a single `predict(...,
-    stream=True)` call fails with "MPSGraph does not support tensor dims
-    larger than INT_MAX" on this project's numpy/torch/MPS combination,
-    reproduced with zero relation to any prior `val()` call, purely from
-    the size of the path list itself (confirmed working up to 1000 paths in
-    one call, confirmed failing at 2106). Root cause not fully isolated
-    (likely a numpy 2.4.x / torch MPS interaction specific to very large
-    explicit path lists); chunking is a verified, robust workaround.
+    Parameter `stream=True` dipakai supaya Ultralytics menghasilkan satu Result
+    pada satu waktu, alih-alih menumpuk seluruhnya di RAM dengan setiap Result
+    membawa tensor citra. Pada skala dataset penuh hal ini diperlukan, dan
+    Ultralytics sendiri memperingatkan agar tidak memakai bentuk non-stream
+    justru karena alasan tersebut.
+
+    Daftar path dikirim dalam potongan sebesar `CHUNK_SIZE`, bukan sebagai satu
+    daftar berisi lebih dari 2.000 path. Uji reproduksi pada lingkungan bersih
+    menemukan bahwa mengirim daftar path split valid secara utuh, yaitu 2.106
+    citra, ke satu pemanggilan `predict(..., stream=True)` akan gagal dengan
+    "MPSGraph does not support tensor dims larger than INT_MAX" pada kombinasi
+    numpy, torch, dan MPS yang dipakai project ini.
+
+    Kegagalan itu tereproduksi tanpa kaitan sama sekali dengan pemanggilan
+    `val()` sebelumnya, murni akibat ukuran daftar path-nya. Pengujian
+    mengonfirmasi bahwa sampai 1.000 path dalam satu pemanggilan masih berhasil,
+    sedangkan 2.106 path gagal. Akar masalahnya belum terisolasi sepenuhnya, dan
+    kemungkinan merupakan interaksi numpy 2.4.x dengan torch MPS khusus untuk
+    daftar path eksplisit yang sangat panjang. Pemecahan menjadi potongan
+    merupakan solusi sementara yang sudah terverifikasi dan kokoh.
     """
     CHUNK_SIZE = 500
     ordered_ids = list(images_by_id.keys())
@@ -308,9 +319,10 @@ def run_local_f1_stage(args: argparse.Namespace) -> None:
 
 
 def run_stage_in_subprocess(stage: str, args: argparse.Namespace) -> dict:
-    """Spawn a fresh `python scripts/evaluate.py --stage <stage> ...` process
-    and read back its JSON result. See module docstring for why this is a
-    separate process rather than a function call."""
+    """Menjalankan proses baru `python scripts/evaluate.py --stage <stage> ...` lalu
+    membaca kembali hasil JSON-nya. Alasan tahap ini dijalankan sebagai proses
+    terpisah, bukan sebagai pemanggilan fungsi, dijelaskan pada docstring
+    modul."""
     with tempfile.TemporaryDirectory() as tmpdir:
         stage_output = Path(tmpdir) / f"{stage}.json"
         cmd = [
