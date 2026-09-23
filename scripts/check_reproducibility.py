@@ -117,9 +117,9 @@ def check_canonical_mapping_determinism() -> dict:
 
     return {
         "status": "LULUS",
-        "detail": f"Mapping table hash for version {MAPPING_VERSION}: {table_hash}. "
-        "build_mapping_report is deterministic (identical input -> identical output). "
-        "If this hash ever changes unexpectedly on a rerun, MAPPING_VERSION must be bumped.",
+        "detail": f"Hash tabel pemetaan untuk versi {MAPPING_VERSION}: {table_hash}. "
+        "build_mapping_report bersifat deterministik, yaitu masukan identik menghasilkan keluaran identik. "
+        "Bila hash ini berubah tak terduga pada eksekusi ulang, MAPPING_VERSION wajib dinaikkan.",
         "mapping_version": MAPPING_VERSION,
         "mapping_table_hash": table_hash,
     }
@@ -149,7 +149,7 @@ def check_training_config_logged() -> dict:
     missing = required_keys - summary.keys()
     if missing:
         return {"status": "GAGAL", "detail": f"Ringkasan pelatihan kehilangan field wajib: {sorted(missing)}"}
-    return {"status": "LULUS", "detail": f"Seluruh field konfigurasi pelatihan yang wajib tersedia pada {summary_path}."}
+    return {"status": "LULUS", "detail": f"Seluruh field konfigurasi pelatihan yang wajib tersedia pada {_relatif(summary_path)}."}
 
 
 def check_seeds_recorded() -> dict:
@@ -176,11 +176,14 @@ def check_git_commit_recorded() -> dict:
     status = get_git_status()
     if commit is None:
         return {"status": "GAGAL", "detail": "Tidak berada di dalam repository git, atau git tidak tersedia, sehingga hash commit tidak dapat dicatat."}
-    detail = f"Current commit: {commit}."
+    detail = f"Commit saat ini: {commit}."
     result_status = "LULUS"
     if status.get("clean") is False:
-        result_status = "WARN"
-        detail += f" WARNING: working tree is dirty ({len(status['changed_files'])} changed files), any artifact generated right now would not be traceable to a clean commit."
+        result_status = "PERINGATAN"
+        detail += (
+            f" PERINGATAN: working tree tidak bersih ({len(status['changed_files'])} berkas berubah), "
+            "sehingga artefak yang dihasilkan sekarang tidak dapat ditelusuri ke commit yang bersih."
+        )
     return {"status": result_status, "detail": detail}
 
 
@@ -232,6 +235,15 @@ def check_artifacts_not_committed_as_giant_blobs() -> dict:
     if not_ignored:
         return {"status": "GAGAL", "detail": f"Direktori besar atau hasil generate berikut masih dilacak git: {not_ignored}"}
     return {"status": "LULUS", "detail": f"Direktori besar atau hasil generate sudah masuk gitignore: {large_dirs}"}
+
+
+def _relatif(path: Path) -> Path:
+    """Menyajikan path relatif terhadap akar repository agar laporan tidak memuat path absolut."""
+    root = Path(__file__).resolve().parent.parent
+    try:
+        return Path(path).resolve().relative_to(root)
+    except ValueError:
+        return Path(path)
 
 
 def build_report(results: dict[str, dict]) -> str:
