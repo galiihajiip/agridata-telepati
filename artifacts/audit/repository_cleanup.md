@@ -110,26 +110,43 @@ Fungsi `_caveat_text` pada `scripts/run_error_analysis.py` menghasilkan
 kalimat yang tercetak langsung ke `artifacts/reports/block13_error_analysis.md`,
 sehingga seluruh kalimat keluarannya diterjemahkan.
 
-## 6. Yang Belum Selesai
+## 6. Penyelesaian Pembersihan Bahasa
 
-Disampaikan terbuka agar tidak ada kesan pembersihan sudah tuntas:
+Seluruh butir yang sebelumnya terbuka pada dokumen ini sudah ditutup.
 
-1. **Isi *docstring* dan komentar pada sebagian skrip masih berbahasa
-   Inggris.** Judul sudah diterjemahkan, tetapi paragraf penjelas pada
-   beberapa skrip belum. Skrip yang terdampak antara lain `evaluate.py`,
-   `prepare_dataset.py`, `run_final_training.py`, dan
-   `check_reproducibility.py`.
-2. **Berkas uji pada `tests/` masih berbahasa Inggris.**
-3. **Sebagian laporan pada `artifacts/reports/` masih berbahasa Inggris**,
-   yaitu laporan ablasi dan pemilihan model. Isinya merupakan bukti
-   eksperimen yang sah, hanya bahasanya yang belum disesuaikan.
-4. **Penamaan berkas laporan masih memakai penomoran block internal**,
-   misalnya `block13_error_analysis.md`. Penomoran ini tidak bermakna bagi
-   juri. Mengganti nama memerlukan pembaruan rujukan pada notebook dan
-   README, sehingga ditunda agar tidak memicu tautan rusak menjelang
-   tenggat.
+*Docstring* modul dan fungsi pada `scripts/`, `src/`, dan `tests/` kini
+sepenuhnya Bahasa Indonesia, termasuk paragraf penjelas yang sebelumnya
+hanya judulnya saja yang diterjemahkan. Pemeriksaan otomatis atas seluruh
+*docstring* menggunakan `ast` tidak lagi menemukan sisa teks Inggris.
+Komentar sebaris juga sudah diterjemahkan.
 
-## 7. Keputusan yang Menunggu Pemilik Repository
+Seluruh laporan pada `artifacts/reports/` dan `artifacts/audit/` berbahasa
+Indonesia. Cara penerjemahannya dibedakan menurut sifat laporannya:
+
+| Laporan | Cara |
+|---|---|
+| `evaluation_valid.md`, `evaluation_test.md` | Dibentuk ulang dari JSON tersimpan melalui `evaluate.py --render-only`, tanpa inferensi ulang |
+| `block14_final_model_selection.md`, `experiment_log.md` | Diregenerasi dari log percobaan memakai templat yang sudah diterjemahkan |
+| `block10_matrix_recommendation.md`, `block11_augmentation_ablation.md` | Dibentuk ulang dari log percobaan; seluruh angka diverifikasi identik |
+| `block12_class_imbalance_ablation.md`, `block13_error_analysis.md` | Label diterjemahkan di tempat karena nilai AP per kelas berpresisi penuh tidak tersimpan; seluruh angka dipertahankan persis |
+| `dataset_audit_report.md`, `canonical_mapping_report.md`, `eda_summary.md`, `class_imbalance_diagnostics.md`, `reproducibility_checklist.md` | Dijalankan ulang terhadap dataset asli; angkanya diverifikasi identik |
+| `block16_clean_reproduction_test.md` | Ditulis ulang, karena merupakan dokumen yang disusun manual |
+
+Catatan pada `artifacts/experiments/experiment_log.json` ikut diterjemahkan.
+Hanya field `notes` dan `compliance_notes` yang berubah, sementara seluruh
+field metrik dan *hyperparameter* diverifikasi identik sebelum penulisan.
+
+Repository juga bebas dari karakter *em dash* dan dari *path* absolut
+personal pada artefak yang dibaca juri.
+
+## 7. Yang Belum Selesai
+
+**Penamaan berkas laporan masih memakai penomoran block internal**,
+misalnya `block13_error_analysis.md`. Penomoran ini tidak bermakna bagi
+juri. Mengganti nama memerlukan pembaruan rujukan pada notebook dan README,
+sehingga ditunda agar tidak memicu tautan rusak menjelang tenggat.
+
+## 8. Keputusan yang Menunggu Pemilik Repository
 
 `scripts/auto_commit_daemon.py` dan `scripts/auto_commit.sh` merupakan
 perkakas pengembangan milik pemilik repository. Keduanya tidak dibutuhkan
