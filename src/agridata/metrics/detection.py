@@ -1,31 +1,37 @@
 """Metrik evaluasi deteksi objek.
 
-Two complementary, clearly labeled metric pathways are used:
+Project ini memakai dua jalur metrik yang saling melengkapi dan diberi label
+secara jelas.
 
-1. NATIVE metrics (mAP@0.5, mAP@0.5:0.95), computed by calling Ultralytics'
-   `model.val()`, not reimplemented here. Verified by reading
-   `ultralytics/utils/metrics.py::ap_per_class` and
-   `ultralytics/models/yolo/detect/val.py`: AP is the standard 101-point
-   interpolated precision-recall-curve integration per class, evaluated at
-   `iouv = torch.linspace(0.5, 0.95, 10)`, index 0 is exactly IoU=0.50,
-   which is what "mAP@50" refers to in the competition regulation. This
-   project treats Ultralytics' implementation as the source of truth for
-   mAP rather than re-deriving AP integration from scratch.
+1. Metrik NATIVE, yaitu mAP@0.5 dan mAP@0.5:0.95, dihitung dengan memanggil
+   `model.val()` bawaan Ultralytics dan tidak diimplementasikan ulang di sini.
+   Hal ini diverifikasi dengan membaca `ultralytics/utils/metrics.py::ap_per_class`
+   dan `ultralytics/models/yolo/detect/val.py`. AP dihitung sebagai integrasi
+   kurva precision-recall terinterpolasi 101 titik per kelas, dievaluasi pada
+   `iouv = torch.linspace(0.5, 0.95, 10)`, dengan indeks 0 tepat berada pada
+   IoU=0,50, yaitu yang dimaksud regulasi kompetisi sebagai mAP@50. Implementasi
+   Ultralytics diperlakukan sebagai sumber kebenaran untuk mAP, alih-alih
+   menurunkan ulang integrasi AP dari nol.
 
-2. LOCAL precision/recall/F1 at a caller-specified confidence threshold,
-   implemented here via a standard greedy IoU>=0.5 matching algorithm
-   (predictions sorted by descending confidence; each is matched to the
-   highest-IoU unmatched ground-truth box of the same class in the same
-   image if IoU >= 0.5; unmatched predictions are false positives,
-   unmatched ground truths are false negatives). This exists because
-   Ultralytics' own reported precision/recall corresponds to an
-   INTERNALLY AUTO-SELECTED confidence threshold, the one maximizing mean
-   F1 across classes (`ap_per_class`: `i = smooth(f1_curve.mean(0),
-   0.1).argmax()`), which is not configurable by the caller. Per the
-   master spec, this local computation is explicitly labeled as an
-   implementation detail: the official competition scoring is the source
-   of truth, and this is a documented, reproducible approximation of the
-   F1 metric at a controllable operating point.
+2. Metrik LOKAL berupa precision, recall, dan F1 pada confidence threshold yang
+   ditentukan pemanggil, diimplementasikan di sini melalui algoritma pencocokan
+   greedy standar pada IoU >= 0,5. Prediksi diurutkan menurut confidence
+   menurun, lalu setiap prediksi dipasangkan dengan kotak ground truth berkelas
+   sama pada citra yang sama yang IoU-nya tertinggi dan belum berpasangan,
+   sepanjang IoU >= 0,5. Prediksi yang tidak berpasangan terhitung false
+   positive, sedangkan ground truth yang tidak berpasangan terhitung false
+   negative.
+
+   Jalur kedua ini diperlukan karena precision dan recall yang dilaporkan
+   Ultralytics sendiri mengacu pada confidence threshold yang DIPILIH OTOMATIS
+   SECARA INTERNAL, yaitu ambang yang memaksimalkan rata-rata F1 antar kelas
+   (`ap_per_class`: `i = smooth(f1_curve.mean(0), 0.1).argmax()`), dan ambang itu
+   tidak dapat diatur pemanggil.
+
+   Perhitungan lokal ini secara eksplisit dinyatakan sebagai detail
+   implementasi. Penilaian resmi kompetisi tetap menjadi sumber kebenaran, dan
+   perhitungan di sini merupakan pendekatan metrik F1 yang terdokumentasi dan
+   dapat direproduksi pada titik operasi yang dapat dikendalikan.
 """
 
 from __future__ import annotations
@@ -94,18 +100,19 @@ def match_detections_to_ground_truth(
     confidence_threshold: float,
     iou_threshold: float = IOU_MATCH_THRESHOLD,
 ) -> dict:
-    """Greedy IoU-based matching at a fixed confidence threshold.
+    """Pencocokan greedy berbasis IoU pada confidence threshold tetap.
 
     Prediksi di bawah `confidence_threshold` dibuang lebih dulu. Sisanya
-    predictions are grouped by (image_id, class_id) alongside ground truths
-    in the same group, then matched greedily in descending-confidence order:
-    each prediction takes the highest-IoU unmatched ground truth in its
-    group if that IoU >= `iou_threshold`, else it counts as a false
-    positive. Ground truths never matched count as false negatives.
+    dikelompokkan menurut pasangan (image_id, class_id) bersama ground truth
+    pada kelompok yang sama, lalu dicocokkan secara greedy menurut confidence
+    menurun. Setiap prediksi mengambil ground truth belum berpasangan dengan IoU
+    tertinggi di kelompoknya sepanjang IoU >= `iou_threshold`, dan bila tidak
+    ada, prediksi itu terhitung false positive. Ground truth yang tidak pernah
+    berpasangan terhitung false negative.
 
-    Mengembalikan dict berisi "overall" (rata-rata micro seluruh kelas) dan
-    "per_class" (keyed by class_id) `PRF1Result` values, plus the thresholds
-    used (for audit traceability).
+    Fungsi mengembalikan dict berisi "overall", yaitu rata-rata micro seluruh
+    kelas, dan "per_class" yang berkunci class_id, keduanya bertipe
+    `PRF1Result`, beserta ambang yang dipakai demi keterlacakan audit.
     """
     filtered = [d for d in detections if d.confidence >= confidence_threshold]
 
