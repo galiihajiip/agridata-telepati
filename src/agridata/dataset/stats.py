@@ -1,11 +1,13 @@
 """Statistik dataset setelah pemetaan canonical, untuk keperluan eksplorasi data.
 
-Loads the raw COCO annotations for a split, applies the Block 3 canonical
-mapping (fail-loudly on any unrecognized raw category, see
-`agridata.dataset.mapping`), and exposes simple in-memory records plus
-aggregate statistics (per-class instance/image counts, bbox and image
-dimension distributions). This module is read-only with respect to the raw
-dataset: it never writes back to the JSON or renames/moves any image.
+Modul ini memuat anotasi COCO mentah untuk satu split, menerapkan pemetaan
+canonical yang akan gagal secara keras bila menemui kategori mentah yang tidak
+dikenali (lihat `agridata.dataset.mapping`), lalu menyajikan rekaman sederhana
+di memori beserta statistik agregatnya, yaitu jumlah instance dan citra per
+kelas serta sebaran dimensi bbox dan citra.
+
+Terhadap dataset mentah, modul ini hanya membaca: tidak pernah menulis balik ke
+berkas JSON maupun mengganti nama atau memindahkan citra.
 """
 
 from __future__ import annotations
@@ -45,11 +47,11 @@ class SplitData:
 def load_canonical_split(dataset_root: Path, split: str, annotation_filename: str) -> SplitData:
     """Memuat JSON COCO satu split dan memetakan setiap anotasi ke kelas canonical.
 
-    Supercategory placeholder categories (Leaf-blight, Rice-Leaf-Diseasee,
-    paddy) are skipped, matching the Block 2/3 finding that they carry zero
-    annotations in the official dataset, if that ever changes, those
-    annotations are counted and reported via the returned skip count rather
-    than silently dropped without a trace.
+    Kategori penanda supercategory, yaitu Leaf-blight, Rice-Leaf-Diseasee, dan
+    paddy, dilewati. Hal ini sejalan dengan temuan audit bahwa ketiganya tidak
+    memuat satu pun anotasi pada dataset resmi. Bila suatu saat keadaan itu
+    berubah, anotasi tersebut tetap dihitung dan dilaporkan melalui jumlah
+    lewatan yang dikembalikan, bukan dibuang diam-diam tanpa jejak.
     """
     json_path = dataset_root / split / annotation_filename
     with json_path.open("r", encoding="utf-8") as f:
