@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Analisis kesalahan model deteksi objek.
 
-Usage:
+Pemakaian:
     python scripts/run_error_analysis.py --weights runs/detect/matrix/E08/weights/best.pt --split valid
 
 Bersifat baca saja terhadap model dan dataset. Skrip ini hanya menganalisis

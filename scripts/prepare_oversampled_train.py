@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Penyiapan varian data latih dengan oversampling kelas minoritas.
 
-Usage:
+Pemakaian:
     python scripts/prepare_oversampled_train.py \\
         --rare-classes "Bacterial leaf blight" "Bacterial panicle blight" "False smut" "Leaf roller" "Narrow brown" \\
         --multiplier 3
