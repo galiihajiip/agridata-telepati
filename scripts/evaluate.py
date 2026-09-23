@@ -403,30 +403,33 @@ def main() -> int:
     md_lines = [
         f"# Laporan Evaluasi, split: `{args.split}`",
         "",
-        f"Weights: `{args.weights}`  |  Git commit: `{summary['git_commit']}`",
+        f"Bobot: `{args.weights}`  |  Commit Git: `{summary['git_commit']}`",
         "",
-        "## Native metrics (Ultralytics, source of truth for mAP)",
+        "## Metrik native Ultralytics, sumber kebenaran untuk mAP",
         "",
         f"- mAP@0.5: {native_metrics['mAP50']:.4f}",
         f"- mAP@0.5:0.95: {native_metrics['mAP50_95']:.4f}",
-        f"- Precision/Recall at Ultralytics' internal best-F1 point: "
-        f"{native_metrics['precision_at_internal_best_f1_point']:.4f} / {native_metrics['recall_at_internal_best_f1_point']:.4f}",
+        f"- Ambang NMS IoU: {native_metrics['nms_iou']}",
+        f"- F1 macro pada titik operasi terbaik: {native_metrics['macro_f1']:.4f} "
+        f"(confidence {native_metrics['macro_f1_confidence']:.4f})",
+        f"- Precision dan recall pada titik operasi tersebut: "
+        f"{native_metrics.get('precision_at_macro_f1_point', 0):.4f} / {native_metrics.get('recall_at_macro_f1_point', 0):.4f}",
         "",
-        "| canonical class | AP@0.5 |",
+        "| Kelas canonical | AP@0.5 |",
         "|---|---:|",
     ]
     for cls, ap in per_class_map50.items():
         md_lines.append(f"| {cls} | {ap:.4f} |")
     md_lines += [
         "",
-        f"## Local F1 metrics (implementation detail, confidence threshold = {args.conf_threshold})",
+        f"## Metrik lokal diagnostik, rata-rata micro pada confidence {args.conf_threshold}",
         "",
-        f"- Overall precision: {local_overall['precision']:.4f}",
-        f"- Overall recall: {local_overall['recall']:.4f}",
-        f"- Overall F1: {local_overall['f1']:.4f}",
+        f"- Precision keseluruhan: {local_overall['precision']:.4f}",
+        f"- Recall keseluruhan: {local_overall['recall']:.4f}",
+        f"- F1 keseluruhan: {local_overall['f1']:.4f}",
         f"- TP={local_overall['true_positives']} FP={local_overall['false_positives']} FN={local_overall['false_negatives']}",
         "",
-        "| canonical class | precision | recall | F1 | TP | FP | FN |",
+        "| Kelas canonical | precision | recall | F1 | TP | FP | FN |",
         "|---|---:|---:|---:|---:|---:|---:|",
     ]
     for cls, prf1 in local_per_class.items():
@@ -435,7 +438,7 @@ def main() -> int:
             f"{prf1['true_positives']} | {prf1['false_positives']} | {prf1['false_negatives']} |"
         )
     if args.split == "test":
-        md_lines += ["", "**WARNING: this is a test-split evaluation. Test ground truth must never be used for iterative model tuning.**"]
+        md_lines += ["", "**PERINGATAN: ini evaluasi pada split test. Ground truth test tidak boleh dipakai untuk penyetelan model secara berulang.**"]
 
     md_path = args.report_dir / f"evaluation_{args.split}.md"
     md_path.write_text("\n".join(md_lines) + "\n", encoding="utf-8")
