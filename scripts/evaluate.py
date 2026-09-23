@@ -353,10 +353,19 @@ def build_markdown(summary: dict, conf_threshold: float) -> str:
     local_per_class = summary["local_f1_metrics"]["per_class"]
     split = summary["split"]
 
+    # Path bobot ditampilkan relatif terhadap akar repository agar laporan tidak
+    # memuat path absolut milik mesin tertentu.
+    weights = Path(summary["weights"])
+    root = Path(__file__).resolve().parent.parent
+    try:
+        weights = weights.resolve().relative_to(root)
+    except ValueError:
+        pass
+
     lines = [
         f"# Laporan Evaluasi, split: `{split}`",
         "",
-        f"Bobot: `{summary['weights']}`  |  Commit Git: `{summary['git_commit']}`",
+        f"Bobot: `{weights}`  |  Commit Git: `{summary['git_commit']}`",
         "",
         "## Metrik native Ultralytics, sumber kebenaran untuk mAP",
         "",

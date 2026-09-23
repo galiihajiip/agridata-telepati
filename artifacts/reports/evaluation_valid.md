@@ -1,6 +1,6 @@
 # Laporan Evaluasi, split: `valid`
 
-Bobot: `/Users/macbookpro/Projects/agridata/runs/detect/final/final_model/weights/best.pt`  |  Commit Git: `81dfbc040e725b1f321a4452db110fc4bb10d5f5`
+Bobot: `runs/detect/final/final_model/weights/best.pt`  |  Commit Git: `81dfbc040e725b1f321a4452db110fc4bb10d5f5`
 
 ## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
