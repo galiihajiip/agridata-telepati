@@ -160,16 +160,16 @@ def run_one_experiment(config: dict, project: Path, git_commit: str | None, mani
 def build_recommendation(results: list[dict]) -> str:
     baseline = next(r for r in results if r["config"]["axis"] == "baseline")
     lines = [
-        "# Block 10. Baseline Experiment Matrix: Results & Recommendation",
+        "# Matriks Percobaan Baseline: Hasil dan Rekomendasi",
         "",
-        "**Scale caveat**: this matrix uses a small fraction of train data and few epochs "
-        "(a fast comparative screening pass), not the final training regime. Absolute mAP "
-        "values are expected to be low here; only *relative* differences between variants "
-        "and the baseline are meaningful at this stage.",
+        "Perlu dicatat soal skalanya. Matriks ini memakai sebagian kecil data latih dengan "
+        "sedikit *epoch* sebagai tahap penyaringan yang cepat, bukan rezim pelatihan final. "
+        "Nilai mAP absolutnya memang rendah, dan pada tahap ini hanya perbedaan *relatif* "
+        "antar varian terhadap baseline yang bermakna.",
         "",
-        "## Results",
+        "## Hasil",
         "",
-        "| Experiment | Axis changed | mAP@0.5 | mAP@0.5:0.95 | Precision | Recall | Duration (s) |",
+        "| Percobaan | Faktor yang diubah | mAP@0.5 | mAP@0.5:0.95 | Precision | Recall | Durasi (detik) |",
         "|---|---|---:|---:|---:|---:|---:|",
     ]
     for r in results:
@@ -179,27 +179,28 @@ def build_recommendation(results: list[dict]) -> str:
             f"{rec.precision:.4f} | {rec.recall:.4f} | {rec.training_duration_seconds:.1f} |"
         )
 
-    lines += ["", "## Per-axis effect (relative to baseline)", ""]
+    lines += ["", "## Efek tiap faktor, relatif terhadap baseline", ""]
     baseline_map = baseline["record"].best_val_map50
     for r in results:
         if r["config"]["axis"] == "baseline":
             continue
         delta = r["record"].best_val_map50 - baseline_map
-        direction = "improved" if delta > 0 else ("worsened" if delta < 0 else "no change")
-        lines.append(f"- **{r['config']['axis']}**: mAP@0.5 {direction} by {delta:+.4f} vs. baseline ({r['record'].training_duration_seconds:.0f}s vs baseline's {baseline['record'].training_duration_seconds:.0f}s).")
+        direction = "naik" if delta > 0 else ("turun" if delta < 0 else "tidak berubah")
+        lines.append(f"- **{r['config']['axis']}**: mAP@0.5 {direction} sebesar {delta:+.4f} terhadap baseline "
+            f"(durasi {r['record'].training_duration_seconds:.0f} detik berbanding {baseline['record'].training_duration_seconds:.0f} detik pada baseline).")
 
     best = max(results, key=lambda r: r["record"].best_val_map50)
     lines += [
         "",
-        "## Recommendation",
+        "## Rekomendasi",
         "",
-        f"Highest mAP@0.5 in this screening pass: **{best['config']['experiment_id']}** ({best['config']['axis']}, "
-        f"mAP@0.5={best['record'].best_val_map50:.4f}).",
+        f"mAP@0.5 tertinggi pada tahap penyaringan ini: **{best['config']['experiment_id']}** "
+        f"({best['config']['axis']}, mAP@0.5={best['record'].best_val_map50:.4f}).",
         "",
-        "This is NOT declared the final configuration, per the master spec, no configuration is "
-        "called \"best\" until measured at full scale. This result should inform, not replace, the "
-        "ablations in Blocks 11-13 (augmentation, class imbalance, error analysis) before Block 14 "
-        "freezes a final configuration.",
+        "Hasil ini TIDAK dinyatakan sebagai konfigurasi final. Tidak ada konfigurasi yang disebut "
+        "terbaik sebelum diukur pada skala penuh. Temuan di sini menjadi masukan, bukan pengganti, "
+        "bagi ablasi augmentasi, ablasi ketidakseimbangan kelas, dan analisis kesalahan, sebelum "
+        "konfigurasi final dibekukan.",
     ]
     return "\n".join(lines) + "\n"
 
