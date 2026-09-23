@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Perekaman informasi lingkungan eksekusi untuk keperluan audit.
 
-Usage:
+Pemakaian:
     python scripts/report_environment.py
 
-Writes artifacts/reports/environment_snapshot.json. Python/platform info,
-resolved compute device, torch/CUDA/MPS availability, git commit + dirty
-status, and full `pip freeze` output. Any script in this project can call
-`agridata.reproducibility.environment.capture_environment_snapshot()`
-directly instead of re-deriving this information.
+Skrip menulis artifacts/reports/environment_snapshot.json, yang memuat informasi
+Python dan platform, perangkat komputasi yang dipakai, ketersediaan torch, CUDA,
+dan MPS, commit git beserta status kebersihan working tree, serta keluaran `pip
+freeze` selengkapnya.
+
+Skrip mana pun pada project ini dapat memanggil
+`agridata.reproducibility.environment.capture_environment_snapshot()` secara
+langsung, alih-alih menurunkan ulang informasi tersebut.
 """
 
 from __future__ import annotations

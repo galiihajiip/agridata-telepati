@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 """Diagnostik ketidakseimbangan kelas.
 
-Usage:
+Pemakaian:
     python scripts/analyze_class_imbalance.py --dataset-root "<PATH>"
 
-Reuses the Block 4 stats module (agridata.dataset.stats) for consistency
-rather than recomputing counts a different way. Read-only against the raw
-dataset. Reports instance/image counts, relative frequency, min/max
-imbalance ratio, rare classes, and "visually difficult" classes (via median
-bbox area, small objects are harder to localize, per the Block 4 finding
-that disease-lesion classes have systematically smaller boxes than
-whole-plant labels like Healthy).
+Skrip ini memakai ulang modul statistik `agridata.dataset.stats` demi
+konsistensi, alih-alih menghitung ulang dengan cara yang berbeda. Terhadap
+dataset mentah, skrip hanya membaca.
+
+Yang dilaporkan mencakup jumlah instance dan citra, frekuensi relatif, rasio
+ketidakseimbangan terbesar terhadap terkecil, kelas minoritas, serta kelas yang
+sulit secara visual. Kesulitan visual diperkirakan dari median luas bbox, karena
+objek kecil lebih sulit dilokalisasi, sejalan dengan temuan profiling bahwa
+kelas lesi penyakit secara sistematis berkotak lebih kecil daripada label
+sekujur tanaman seperti Healthy.
 """
 
 from __future__ import annotations

@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Audit forensik dataset mentah.
 
-Usage:
+Pemakaian:
     python scripts/audit_dataset.py --dataset-root "<PATH>" [--output-dir artifacts/audit]
 
-This script is READ-ONLY with respect to the dataset: it never modifies,
-renames, or deletes anything under --dataset-root. It fails loudly (nonzero
-exit code) when a JSON cannot be parsed, a required file is missing, or an
-annotation references an unknown image ID, while still writing a full report
-so the specific findings are visible rather than a bare crash.
+Terhadap dataset, skrip ini HANYA MEMBACA: tidak pernah mengubah, mengganti
+nama, maupun menghapus apa pun di bawah --dataset-root.
+
+Skrip gagal secara keras dengan kode keluar bukan nol bila ada JSON yang tidak
+dapat diurai, berkas wajib yang hilang, atau anotasi yang merujuk ID citra tak
+dikenal. Meski begitu laporan lengkapnya tetap ditulis, supaya temuan
+spesifiknya terlihat dan tidak berakhir sebagai crash tanpa keterangan.
 """
 
 from __future__ import annotations

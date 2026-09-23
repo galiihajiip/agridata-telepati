@@ -6,18 +6,18 @@ Usage:
         --rare-classes "Bacterial leaf blight" "Bacterial panicle blight" "False smut" "Leaf roller" "Narrow brown" \\
         --multiplier 3
 
-Builds an oversampled TRAIN-ONLY dataset variant from the existing Block 5
-prepared train manifest: any image containing at least one instance of a
-designated rare class is included `--multiplier` total times, via
-distinctly-named symlinks to the same underlying raw image (no byte
-duplication, no synthetic data, the same real image is just seen more
-often per epoch).
+Skrip membangun varian dataset dengan oversampling KHUSUS DATA LATIH, bertolak
+dari manifest latih yang sudah disiapkan sebelumnya. Setiap citra yang memuat
+minimal satu instance kelas minoritas yang ditunjuk akan disertakan sebanyak
+`--multiplier` kali, melalui symlink bernama berbeda yang menunjuk ke citra
+mentah yang sama. Tidak ada duplikasi byte dan tidak ada data sintetis; citra
+nyata yang sama hanya dilihat lebih sering per epoch.
 
-Validation and test data are NEVER touched: this script only ever writes
-under `<output-dir>/train/`, and the generated `data.yaml` points `val:`/
-`test:` at the ORIGINAL, unmodified `data/prepared/{valid,test}/images`
-directories, literally the same files, guaranteeing zero contamination by
-construction, not just by convention.
+Data validasi dan uji TIDAK PERNAH disentuh. Skrip ini hanya menulis di bawah
+`<output-dir>/train/`, sedangkan `data.yaml` yang dihasilkan mengarahkan `val:`
+dan `test:` ke direktori ASLI `data/prepared/{valid,test}/images` yang tidak
+diubah, yaitu berkas yang sama persis. Dengan begitu ketiadaan kontaminasi
+terjamin oleh rancangannya, bukan sekadar oleh kesepakatan.
 """
 
 from __future__ import annotations
