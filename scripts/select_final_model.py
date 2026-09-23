@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
 """Pemilihan konfigurasi model final berdasarkan bukti percobaan.
 
-Usage:
-    python scripts/select_final_model.py
+Pemakaian:
+    python scripts/select_final_model.py --only report
 
-Reviews all logged experiments (artifacts/experiments/experiment_log.json)
-and produces a factual selection report plus model metadata / model-card
-draft. This selects and freezes a CONFIGURATION, not a trained weights
-file, the actual final weights are produced by Block 15 using
-configs/final_model_config.yaml. Per the master spec, no configuration is
-declared "acceptable" on validation performance until the full-scale run
-completes; this report says so explicitly rather than overclaiming.
+Skrip membaca seluruh percobaan yang tercatat pada
+artifacts/experiments/experiment_log.json, lalu menyusun laporan pemilihan
+beserta metadata model dan draf model card. Yang dibekukan di sini adalah
+KONFIGURASI, bukan berkas bobot; bobot final dihasilkan oleh
+scripts/run_final_training.py memakai configs/final_model_config.yaml.
+
+Tidak ada konfigurasi yang dinyatakan memadai berdasarkan performa validasi
+sebelum pelatihan skala penuh selesai, dan laporan ini menyatakannya secara
+terbuka alih-alih mengklaim lebih dari yang terbukti.
+
+Argumen --only membatasi keluaran karena model card dan metadata model sudah
+difinalisasi setelah pelatihan selesai; menulis ulang keduanya dari templat
+draf akan mengembalikannya ke kondisi sebelum ada bobot.
 """
 
 from __future__ import annotations
@@ -43,7 +49,7 @@ def get_file_size_mb(path: Path) -> float | None:
 
 def build_candidate_table(experiments: list[dict]) -> str:
     lines = [
-        "| Experiment | imgsz | epochs | optimizer | mAP@0.5 | Precision | Recall | Duration (s) | Notes |",
+        "| Percobaan | imgsz | epoch | optimizer | mAP@0.5 | Precision | Recall | Durasi (detik) | Catatan |",
         "|---|---:|---:|---|---:|---:|---:|---:|---|",
     ]
     for r in sorted(experiments, key=lambda r: -r["best_val_map50"]):
