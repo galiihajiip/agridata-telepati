@@ -231,10 +231,10 @@ def run_native_val_stage(args: argparse.Namespace) -> None:
         plots=False, verbose=False, device=device,
     )
 
-    # Macro F1: per-class F1 curves averaged across classes, taken at the single
-    # confidence threshold that maximises that average. This is the reported
-    # F1-Score. The local micro-averaged F1 computed in the other stage is a
-    # secondary diagnostic, not the reported figure. See
+    # F1 macro: kurva F1 per kelas dirata-ratakan antar kelas, lalu diambil pada
+    # satu confidence threshold yang memaksimalkan rata-rata tersebut. Inilah
+    # F1-Score yang dilaporkan. F1 rata-rata micro yang dihitung pada tahap lain
+    # berstatus diagnostik sekunder, bukan angka yang dilaporkan. Lihat
     # artifacts/audit/metrics_methodology.md.
     import numpy as np
 
@@ -428,7 +428,7 @@ def main() -> int:
     if args.device == "auto":
         args.device = detect_device()
 
-    # Internal invocation: run exactly one stage and exit.
+    # Pemanggilan internal: jalankan tepat satu tahap lalu keluar.
     if args.stage == "native_val":
         run_native_val_stage(args)
         return 0

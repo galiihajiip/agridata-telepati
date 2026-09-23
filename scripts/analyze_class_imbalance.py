@@ -31,12 +31,13 @@ from agridata.dataset.stats import (  # noqa: E402
 )
 
 DEFAULT_ANNOTATION_FILENAME = "_annotations.coco.json"
-# A class is flagged "rare" if its instance count is below this fraction of
-# the most common class's count. 20% is a round, documented threshold, not
-# tuned to this dataset's specific numbers.
+# Suatu kelas ditandai sebagai minoritas bila jumlah instance-nya berada di
+# bawah fraksi ini terhadap kelas terbanyak. Nilai 20 persen dipilih sebagai
+# ambang bulat yang didokumentasikan, bukan hasil penyetelan terhadap angka
+# spesifik dataset ini.
 RARE_CLASS_THRESHOLD_FRACTION = 0.20
-# A class is flagged "small-object / visually difficult" if its median bbox
-# area is below this fraction of the largest class's median area.
+# Suatu kelas ditandai berobjek kecil atau sulit secara visual bila median luas
+# bbox-nya berada di bawah fraksi ini terhadap median luas kelas terbesar.
 SMALL_OBJECT_THRESHOLD_FRACTION = 0.10
 
 

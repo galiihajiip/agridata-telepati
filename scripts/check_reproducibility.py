@@ -225,7 +225,7 @@ def check_artifacts_not_committed_as_giant_blobs() -> dict:
     for d in large_dirs:
         result = subprocess.run(["git", "check-ignore", "-q", d], cwd=PROJECT_ROOT)
         if result.returncode != 0:
-            # returncode 1 = not ignored; check if it even exists as a concern
+            # returncode 1 berarti tidak di-ignore; periksa apakah memang perlu dipersoalkan
             check_tracked = subprocess.run(
                 ["git", "ls-files", "--error-unmatch", d], cwd=PROJECT_ROOT, capture_output=True
             )
