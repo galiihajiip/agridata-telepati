@@ -12,7 +12,7 @@
     },
     "konfigurasi sama menghasilkan metadata yang sama": {
       "status": "LULUS",
-      "detail": "Field deterministik (seed, mapping_version, jumlah citra dan anotasi per split) identical across reruns of the same config; only the recorded timestamp and git commit (if code changed between runs) are expected to vary, these are provenance fields, not outputs of the computation itself."
+      "detail": "Field deterministik (seed, mapping_version, jumlah citra dan anotasi per split) identik antar eksekusi ulang pada konfigurasi yang sama. Yang wajar berbeda hanya timestamp dan commit git, itu pun bila kode berubah di antara dua eksekusi. Keduanya merupakan field provenance, bukan keluaran dari komputasinya sendiri."
     },
     "konfigurasi pelatihan tercatat lengkap": {
       "status": "LULUS",
@@ -28,7 +28,7 @@
     },
     "hash commit git tercatat bila memungkinkan": {
       "status": "LULUS",
-      "detail": "Commit saat ini: 4bd79f4d69bceb9a608b2156c3efd9d998dc6c22."
+      "detail": "Commit saat ini: e77ea7a11898132e353ffda850a3532246d4fba9."
     },
     "konfigurasi model tercatat": {
       "status": "LULUS",
@@ -58,7 +58,7 @@
       "cuda_available": false,
       "mps_available": true
     },
-    "git_commit": "4bd79f4d69bceb9a608b2156c3efd9d998dc6c22",
+    "git_commit": "e77ea7a11898132e353ffda850a3532246d4fba9",
     "git_status": {
       "clean": false,
       "changed_files": [
