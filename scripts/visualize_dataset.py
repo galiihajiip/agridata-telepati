@@ -44,7 +44,7 @@ DEFAULT_ANNOTATION_FILENAME = "_annotations.coco.json"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Dataset EDA and annotation visualization (read-only).")
+    parser = argparse.ArgumentParser(description="Eksplorasi dataset dan visualisasi anotasi, hanya membaca tanpa mengubah.")
     parser.add_argument("--dataset-root", required=True, type=Path)
     parser.add_argument("--output-dir", default=Path("artifacts/figures"), type=Path)
     parser.add_argument("--report-dir", default=Path("artifacts/reports"), type=Path)

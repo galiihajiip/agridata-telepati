@@ -102,10 +102,10 @@ def main() -> int:
 
     any_unmapped = any(r["unmapped_raw_categories"] for r in per_split_reports.values())
     if any_unmapped:
-        print("\nVALIDATION RESULT: FAIL, unmapped raw categories found.", file=sys.stderr)
+        print("\nHASIL VALIDASI: GAGAL, ditemukan kategori mentah yang tidak terpetakan.", file=sys.stderr)
         return 1
 
-    print("\nVALIDATION RESULT: PASS, every raw category is covered by the canonical mapping or is a recognized supercategory placeholder.")
+    print("\nHASIL VALIDASI: LULUS, seluruh kategori mentah tercakup pemetaan canonical atau merupakan penanda supercategory yang dikenali.")
     return 0
 
 
