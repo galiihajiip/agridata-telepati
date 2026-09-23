@@ -21,6 +21,7 @@ draf akan mengembalikannya ke kondisi sebelum ada bobot.
 
 from __future__ import annotations
 
+import argparse
 import json
 import subprocess
 import sys
@@ -285,7 +286,23 @@ LLM atau API. Daftar periksa kepatuhan lengkap yang berbasis bukti tersedia pada
 """
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Menyusun laporan pemilihan konfigurasi model final dari log percobaan."
+    )
+    parser.add_argument(
+        "--only",
+        choices=["report", "metadata", "model-card", "all"],
+        default="report",
+        help="Keluaran yang ditulis ulang. Nilai bawaan 'report' karena metadata model dan model "
+        "card sudah difinalisasi setelah pelatihan selesai, sehingga menulis ulang keduanya dari "
+        "templat draf akan mengembalikannya ke kondisi sebelum ada bobot.",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
+    args = parse_args()
     experiments = load_experiments()
     git_commit = get_git_commit()
     checklist = build_compliance_checklist(experiments)
@@ -293,24 +310,31 @@ def main() -> int:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
 
-    report = build_report(experiments, checklist, git_commit)
-    (REPORT_DIR / "block14_final_model_selection.md").write_text(report, encoding="utf-8")
+    ditulis = []
 
-    metadata = build_model_metadata(git_commit)
-    with (REPORT_DIR / "final_model_metadata.json").open("w", encoding="utf-8") as f:
-        json.dump(metadata, f, indent=2)
+    if args.only in ("report", "all"):
+        report = build_report(experiments, checklist, git_commit)
+        (REPORT_DIR / "block14_final_model_selection.md").write_text(report, encoding="utf-8")
+        ditulis.append(REPORT_DIR / "block14_final_model_selection.md")
 
-    (DOCS_DIR / "model_card_draft.md").write_text(build_model_card_draft(), encoding="utf-8")
+        env_snapshot = capture_environment_snapshot()
+        with (REPORT_DIR / "block14_environment_snapshot.json").open("w", encoding="utf-8") as f:
+            json.dump(env_snapshot, f, indent=2)
+        ditulis.append(REPORT_DIR / "block14_environment_snapshot.json")
 
-    env_snapshot = capture_environment_snapshot()
-    with (REPORT_DIR / "block14_environment_snapshot.json").open("w", encoding="utf-8") as f:
-        json.dump(env_snapshot, f, indent=2)
+    if args.only in ("metadata", "all"):
+        metadata = build_model_metadata(git_commit)
+        with (REPORT_DIR / "final_model_metadata.json").open("w", encoding="utf-8") as f:
+            json.dump(metadata, f, indent=2)
+        ditulis.append(REPORT_DIR / "final_model_metadata.json")
 
-    print(report)
-    print("\nWritten:")
-    print(f"  {REPORT_DIR / 'block14_final_model_selection.md'}")
-    print(f"  {REPORT_DIR / 'final_model_metadata.json'}")
-    print(f"  {DOCS_DIR / 'model_card_draft.md'}")
+    if args.only in ("model-card", "all"):
+        (DOCS_DIR / "model_card_draft.md").write_text(build_model_card_draft(), encoding="utf-8")
+        ditulis.append(DOCS_DIR / "model_card_draft.md")
+
+    print("Berkas yang ditulis:")
+    for path in ditulis:
+        print(f"  {path}")
     return 0
 
 
