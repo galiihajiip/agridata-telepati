@@ -1,6 +1,6 @@
 # Laporan Evaluasi, split: `valid`
 
-Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `4fc68783d1bd66ce7861ca4a7be877ad76d2b9f2`
+Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `2ec51773abb3c832c73a0d57e9682494a38469e3`
 
 ## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
@@ -26,21 +26,21 @@ Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `4fc68
 
 ## Metrik lokal diagnostik, rata-rata micro pada confidence 0.25
 
-- Precision keseluruhan: 0.6580
-- Recall keseluruhan: 0.3400
-- F1 keseluruhan: 0.4483
-- TP=1662 FP=864 FN=3226
+- Precision keseluruhan: 0.6336
+- Recall keseluruhan: 0.2547
+- F1 keseluruhan: 0.3633
+- TP=1245 FP=720 FN=3643
 
 | Kelas canonical | precision | recall | F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|---:|
-| Leaf scald | 0.5325 | 0.3154 | 0.3961 | 123 | 108 | 267 |
-| Brown spot | 0.5625 | 0.1540 | 0.2418 | 225 | 175 | 1236 |
-| Healthy | 0.8475 | 0.7075 | 0.7712 | 300 | 54 | 124 |
-| Leaf roller | 0.7800 | 0.8966 | 0.8342 | 78 | 22 | 9 |
-| Tungro | 0.6474 | 0.3237 | 0.4316 | 246 | 134 | 514 |
-| Blast | 0.6337 | 0.2978 | 0.4052 | 282 | 163 | 665 |
+| Leaf scald | 0.5183 | 0.2897 | 0.3717 | 113 | 105 | 277 |
+| Brown spot | 0.6016 | 0.1540 | 0.2452 | 225 | 149 | 1236 |
+| Healthy | 0.8750 | 0.3962 | 0.5455 | 168 | 24 | 256 |
+| Leaf roller | 0.0000 | 0.0000 | 0.0000 | 0 | 1 | 87 |
+| Tungro | 0.6152 | 0.3092 | 0.4116 | 235 | 147 | 525 |
+| Blast | 0.6557 | 0.2534 | 0.3656 | 240 | 126 | 707 |
 | Narrow brown | 0.9091 | 0.9333 | 0.9211 | 70 | 7 | 5 |
-| Sheath blight | 0.6066 | 0.3381 | 0.4342 | 165 | 107 | 323 |
+| Sheath blight | 0.5533 | 0.2766 | 0.3689 | 135 | 109 | 353 |
 | Bacterial leaf blight | 0.5413 | 0.4720 | 0.5043 | 59 | 50 | 66 |
-| False smut | 0.7905 | 0.9651 | 0.8691 | 83 | 22 | 3 |
-| Bacterial panicle blight | 0.5849 | 0.6889 | 0.6327 | 31 | 22 | 14 |
+| False smut | 0.0000 | 0.0000 | 0.0000 | 0 | 2 | 86 |
+| Bacterial panicle blight | 0.0000 | 0.0000 | 0.0000 | 0 | 0 | 45 |
