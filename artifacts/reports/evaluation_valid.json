@@ -1,6 +1,6 @@
 {
   "block": 7,
-  "git_commit": "2ec51773abb3c832c73a0d57e9682494a38469e3",
+  "git_commit": "e27127fb482ebe6941d7ffe54f4a3bd2127bfa29",
   "weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/model_100epoch/weights/best.pt",
   "split": "valid",
   "data_yaml": "/Users/macbookpro/Projects/agridata/data/prepared/data.yaml",

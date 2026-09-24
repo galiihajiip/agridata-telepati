@@ -1,6 +1,6 @@
 # Laporan Evaluasi, split: `valid`
 
-Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `2ec51773abb3c832c73a0d57e9682494a38469e3`
+Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `e27127fb482ebe6941d7ffe54f4a3bd2127bfa29`
 
 ## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
