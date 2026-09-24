@@ -1,0 +1,147 @@
+{
+  "block": 7,
+  "git_commit": "4fc68783d1bd66ce7861ca4a7be877ad76d2b9f2",
+  "weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/model_100epoch/weights/best.pt",
+  "split": "valid",
+  "data_yaml": "/Users/macbookpro/Projects/agridata/data/prepared/data.yaml",
+  "iou_threshold": 0.5,
+  "native_metrics": {
+    "description": "Computed via ultralytics model.val(), source of truth for mAP. IoU thresholds: torch.linspace(0.5, 0.95, 10); mAP50 uses index 0 (IoU=0.50). Run in its own subprocess, see module docstring for why.",
+    "mAP50": 0.6677781108773165,
+    "mAP50_95": 0.41411444537573466,
+    "precision_at_internal_best_f1_point": 0.7010220847339276,
+    "recall_at_internal_best_f1_point": 0.6821962714566854,
+    "nms_iou": 0.5,
+    "macro_f1": 0.6826221301374376,
+    "macro_f1_confidence": 0.2502502502502503,
+    "precision_at_macro_f1_point": 0.7187723431034748,
+    "recall_at_macro_f1_point": 0.6722076010514297,
+    "per_class_AP50": {
+      "Bacterial leaf blight": 0.4679301305439004,
+      "Bacterial panicle blight": 0.6529634146276194,
+      "Blast": 0.5357756807971281,
+      "Brown spot": 0.33032127841993514,
+      "False smut": 0.9527905692823495,
+      "Healthy": 0.8717124155402841,
+      "Leaf roller": 0.9134020459651409,
+      "Leaf scald": 0.44896117786512113,
+      "Narrow brown": 0.9755463024650234,
+      "Sheath blight": 0.5501621882095341,
+      "Tungro": 0.645994015934445
+    }
+  },
+  "local_f1_metrics": {
+    "description": "LOCAL implementation detail (not the official scoring formula): greedy IoU>=0.5 matching at a caller-specified confidence threshold. See src/agridata/metrics/detection.py for full methodology. Run in its own subprocess.",
+    "confidence_threshold": 0.25,
+    "overall": {
+      "true_positives": 1662,
+      "false_positives": 864,
+      "false_negatives": 3226,
+      "precision": 0.6579572446555819,
+      "recall": 0.3400163666121113,
+      "f1": 0.44834097653088756
+    },
+    "per_class": {
+      "Leaf scald": {
+        "true_positives": 123,
+        "false_positives": 108,
+        "false_negatives": 267,
+        "precision": 0.5324675324675324,
+        "recall": 0.3153846153846154,
+        "f1": 0.3961352657004831
+      },
+      "Brown spot": {
+        "true_positives": 225,
+        "false_positives": 175,
+        "false_negatives": 1236,
+        "precision": 0.5625,
+        "recall": 0.1540041067761807,
+        "f1": 0.24180548092423432
+      },
+      "Healthy": {
+        "true_positives": 300,
+        "false_positives": 54,
+        "false_negatives": 124,
+        "precision": 0.847457627118644,
+        "recall": 0.7075471698113207,
+        "f1": 0.7712082262210797
+      },
+      "Leaf roller": {
+        "true_positives": 78,
+        "false_positives": 22,
+        "false_negatives": 9,
+        "precision": 0.78,
+        "recall": 0.896551724137931,
+        "f1": 0.8342245989304813
+      },
+      "Tungro": {
+        "true_positives": 246,
+        "false_positives": 134,
+        "false_negatives": 514,
+        "precision": 0.6473684210526316,
+        "recall": 0.3236842105263158,
+        "f1": 0.43157894736842106
+      },
+      "Blast": {
+        "true_positives": 282,
+        "false_positives": 163,
+        "false_negatives": 665,
+        "precision": 0.6337078651685393,
+        "recall": 0.29778247096092925,
+        "f1": 0.4051724137931034
+      },
+      "Narrow brown": {
+        "true_positives": 70,
+        "false_positives": 7,
+        "false_negatives": 5,
+        "precision": 0.9090909090909091,
+        "recall": 0.9333333333333333,
+        "f1": 0.9210526315789475
+      },
+      "Sheath blight": {
+        "true_positives": 165,
+        "false_positives": 107,
+        "false_negatives": 323,
+        "precision": 0.6066176470588235,
+        "recall": 0.33811475409836067,
+        "f1": 0.4342105263157895
+      },
+      "Bacterial leaf blight": {
+        "true_positives": 59,
+        "false_positives": 50,
+        "false_negatives": 66,
+        "precision": 0.5412844036697247,
+        "recall": 0.472,
+        "f1": 0.5042735042735041
+      },
+      "False smut": {
+        "true_positives": 83,
+        "false_positives": 22,
+        "false_negatives": 3,
+        "precision": 0.7904761904761904,
+        "recall": 0.9651162790697675,
+        "f1": 0.8691099476439791
+      },
+      "Bacterial panicle blight": {
+        "true_positives": 31,
+        "false_positives": 22,
+        "false_negatives": 14,
+        "precision": 0.5849056603773585,
+        "recall": 0.6888888888888889,
+        "f1": 0.6326530612244898
+      }
+    }
+  },
+  "num_detections_collected": 96546,
+  "num_ground_truth_boxes": 4888,
+  "predictions_artifact": "artifacts/predictions/predictions_valid.json",
+  "sample_prediction_figures": [
+    "artifacts/figures/predictions/pred_id0_IMG-20241014-WA0381_jpg.rf.02d81d946e4969027004eb331b2636b5.jpg",
+    "artifacts/figures/predictions/pred_id1_IMG-20241014-WA0258_jpg.rf.010c555e9aec70ddf42e72f285068311.jpg",
+    "artifacts/figures/predictions/pred_id2_IMG-20241012-WA0099_jpg.rf.052715be2fdca8f048e88ae49189c283.jpg",
+    "artifacts/figures/predictions/pred_id3_IMG-20240927-WA0215_jpg.rf.02427045292acba0cf19b92c6a42caf2.jpg",
+    "artifacts/figures/predictions/pred_id4_IMG-20240927-WA0204_jpg.rf.08d9cd91a261a0fac5a9eddf03f8313b.jpg",
+    "artifacts/figures/predictions/pred_id5_IMG-20240926-WA0174_jpg.rf.0877f8b16302ce982b768ca746a3185a.jpg"
+  ],
+  "test_set_tuning_warning_issued": false
+}
