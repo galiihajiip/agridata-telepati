@@ -397,6 +397,7 @@ def build_markdown(summary: dict, conf_threshold: float) -> str:
         f"- mAP@0.5: {native_metrics['mAP50']:.4f}",
         f"- mAP@0.5:0.95: {native_metrics['mAP50_95']:.4f}",
         f"- Ambang NMS IoU: {native_metrics['nms_iou']}",
+        f"- Test-Time Augmentation (TTA): {native_metrics.get('augment', False)}",
         f"- F1 macro pada titik operasi terbaik: {native_metrics['macro_f1']:.4f} "
         f"(confidence {native_metrics['macro_f1_confidence']:.4f})",
         f"- Precision dan recall pada titik operasi tersebut: "
