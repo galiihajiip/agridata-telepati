@@ -1,0 +1,95 @@
+{
+  "split_untuk_pencarian": "val",
+  "catatan": "Bobot model tidak diubah. Yang dicari hanya parameter inferensi. Split test tidak pernah dipakai untuk memilih parameter.",
+  "baseline": null,
+  "terbaik_map50": {
+    "imgsz": 640,
+    "nms_iou": 0.5,
+    "augment": true,
+    "map50": 0.6759011324175153,
+    "map50_95": 0.43044395130602975,
+    "mean_precision": 0.6990375208888888,
+    "mean_recall": 0.6759132068919547,
+    "best_f1": 0.6755108431179936,
+    "best_f1_conf": 0.31931931931931934
+  },
+  "terbaik_f1": {
+    "imgsz": 640,
+    "nms_iou": 0.45,
+    "augment": false,
+    "map50": 0.6687127819620858,
+    "map50_95": 0.4126178101603483,
+    "mean_precision": 0.7079491770727573,
+    "mean_recall": 0.6803333705358681,
+    "best_f1": 0.68480005723149,
+    "best_f1_conf": 0.2502502502502503
+  },
+  "semua_hasil": [
+    {
+      "imgsz": 640,
+      "nms_iou": 0.5,
+      "augment": true,
+      "map50": 0.6759011324175153,
+      "map50_95": 0.43044395130602975,
+      "mean_precision": 0.6990375208888888,
+      "mean_recall": 0.6759132068919547,
+      "best_f1": 0.6755108431179936,
+      "best_f1_conf": 0.31931931931931934
+    },
+    {
+      "imgsz": 640,
+      "nms_iou": 0.45,
+      "augment": true,
+      "map50": 0.6750936917557762,
+      "map50_95": 0.4275107344231405,
+      "mean_precision": 0.6994335750089218,
+      "mean_recall": 0.678289279495022,
+      "best_f1": 0.6765452884389064,
+      "best_f1_conf": 0.31931931931931934
+    },
+    {
+      "imgsz": 640,
+      "nms_iou": 0.55,
+      "augment": true,
+      "map50": 0.6736778211412809,
+      "map50_95": 0.43212297099398306,
+      "mean_precision": 0.6913520262883904,
+      "mean_recall": 0.6768435349298745,
+      "best_f1": 0.6721744933476997,
+      "best_f1_conf": 0.31931931931931934
+    },
+    {
+      "imgsz": 640,
+      "nms_iou": 0.45,
+      "augment": false,
+      "map50": 0.6687127819620858,
+      "map50_95": 0.4126178101603483,
+      "mean_precision": 0.7079491770727573,
+      "mean_recall": 0.6803333705358681,
+      "best_f1": 0.68480005723149,
+      "best_f1_conf": 0.2502502502502503
+    },
+    {
+      "imgsz": 640,
+      "nms_iou": 0.5,
+      "augment": false,
+      "map50": 0.6677782007856696,
+      "map50_95": 0.41411451117382597,
+      "mean_precision": 0.7010220133497806,
+      "mean_recall": 0.6821958577522534,
+      "best_f1": 0.6826222473518122,
+      "best_f1_conf": 0.2502502502502503
+    },
+    {
+      "imgsz": 640,
+      "nms_iou": 0.55,
+      "augment": false,
+      "map50": 0.6669870861720981,
+      "map50_95": 0.415611080942403,
+      "mean_precision": 0.7002034583483361,
+      "mean_recall": 0.6805287697287583,
+      "best_f1": 0.6800748544329109,
+      "best_f1_conf": 0.25125125125125125
+    }
+  ]
+}
