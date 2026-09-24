@@ -90,6 +90,11 @@ def parse_args() -> argparse.Namespace:
             "reported metric."
         ),
     )
+    parser.add_argument(
+        "--augment",
+        action="store_true",
+        help="Aktifkan Test-Time Augmentation (TTA) saat inferensi/evaluasi.",
+    )
     parser.add_argument("--conf-threshold", type=float, default=0.25, help="Confidence threshold for the LOCAL F1 computation (configurable).")
     parser.add_argument("--collection-conf", type=float, default=0.001, help="Low threshold used once to collect raw predictions; --conf-threshold filters afterward.")
     parser.add_argument("--num-vis-samples", type=int, default=6)
@@ -138,7 +143,7 @@ def load_ground_truth(manifest_path: Path) -> tuple[list[GroundTruthBox], dict[i
 
 
 def collect_predictions(
-    model, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str
+    model, images_dir: Path, images_by_id: dict[int, dict], collection_conf: float, device: str, augment: bool = False
 ) -> list[Detection]:
     """Menjalankan inferensi pada confidence threshold rendah.
 
@@ -175,7 +180,9 @@ def collect_predictions(
     for chunk_start in range(0, len(image_paths), CHUNK_SIZE):
         chunk_ids = ordered_ids[chunk_start : chunk_start + CHUNK_SIZE]
         chunk_paths = image_paths[chunk_start : chunk_start + CHUNK_SIZE]
-        results_stream = model.predict(chunk_paths, conf=collection_conf, verbose=False, stream=True, device=device)
+        results_stream = model.predict(
+            chunk_paths, conf=collection_conf, verbose=False, stream=True, device=device, augment=augment
+        )
         for image_id, result in zip(chunk_ids, results_stream, strict=True):
             for box in result.boxes:
                 x1, y1, x2, y2 = box.xyxy[0].tolist()
@@ -239,7 +246,7 @@ def run_native_val_stage(args: argparse.Namespace) -> None:
     ultralytics_split = {"train": "train", "valid": "val", "test": "test"}[args.split]
     val_results = model.val(
         data=str(data_yaml), split=ultralytics_split, iou=args.nms_iou,
-        plots=False, verbose=False, device=device,
+        augment=args.augment, plots=False, verbose=False, device=device,
     )
 
     # F1 macro: kurva F1 per kelas dirata-ratakan antar kelas, lalu diambil pada
@@ -260,6 +267,7 @@ def run_native_val_stage(args: argparse.Namespace) -> None:
         "precision_at_internal_best_f1_point": float(val_results.box.mp),
         "recall_at_internal_best_f1_point": float(val_results.box.mr),
         "nms_iou": float(args.nms_iou),
+        "augment": bool(args.augment),
         "macro_f1": float(macro_f1_curve[best]),
         "macro_f1_confidence": float(conf_grid[best]),
         "precision_at_macro_f1_point": float(np.array(val_results.box.p_curve).mean(axis=0)[best]),
@@ -287,7 +295,9 @@ def run_local_f1_stage(args: argparse.Namespace) -> None:
     validate_class_mapping(model)
 
     ground_truths, images_by_id = load_ground_truth(manifest_path)
-    detections = collect_predictions(model, images_dir, images_by_id, args.collection_conf, device)
+    detections = collect_predictions(
+        model, images_dir, images_by_id, args.collection_conf, device, augment=args.augment
+    )
 
     local_result = match_detections_to_ground_truth(detections, ground_truths, args.conf_threshold)
     local_overall = local_result["overall"]
@@ -331,6 +341,7 @@ def run_stage_in_subprocess(stage: str, args: argparse.Namespace) -> dict:
             "--split", args.split,
             "--prepared-dir", str(args.prepared_dir),
             "--device", args.device,
+            "--nms-iou", str(args.nms_iou),
             "--conf-threshold", str(args.conf_threshold),
             "--collection-conf", str(args.collection_conf),
             "--num-vis-samples", str(args.num_vis_samples),
@@ -339,6 +350,8 @@ def run_stage_in_subprocess(stage: str, args: argparse.Namespace) -> dict:
             "--stage", stage,
             "--stage-output", str(stage_output),
         ]
+        if getattr(args, "augment", False):
+            cmd.append("--augment")
         if args.data_yaml:
             cmd += ["--data-yaml", str(args.data_yaml)]
 
