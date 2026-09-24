@@ -1,0 +1,42 @@
+{
+  "split": "test",
+  "weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/model_100epoch/weights/best.pt",
+  "git_commit": "762b6e73bfce8bd4c0fba79253eaf76c6f2743f3",
+  "sumber_angka": "artifacts/reports/evaluation_test.json",
+  "dihitung_ulang": false,
+  "konfigurasi_inferensi": {
+    "nms_iou": 0.5,
+    "iou_pencocokan": 0.5
+  },
+  "metrik_dilaporkan": {
+    "mAP50_persen": 65.96,
+    "f1_persen": 66.41
+  },
+  "rincian": {
+    "mAP50": 0.6595577057162226,
+    "mAP50_95": 0.43303297774774835,
+    "f1_macro": 0.664149056978226,
+    "confidence_titik_operasi": 0.23823823823823823,
+    "precision_titik_operasi": 0.6983121121523648,
+    "recall_titik_operasi": 0.6633508171069296
+  },
+  "metrik_diagnostik_sekunder": {
+    "keterangan": "Implementasi lokal dengan rata-rata micro pada confidence threshold tetap. Bukan angka yang dilaporkan. Sistematis lebih rendah pada dataset timpang dan tidak sebanding langsung dengan F1 macro di atas.",
+    "f1_lokal_micro": 0.3380281690140845,
+    "confidence_threshold": 0.25
+  },
+  "caveat_definisi": "Regulasi tidak merinci metode averaging maupun threshold untuk F1. Angka F1 di sini merupakan hasil implementasi evaluasi lokal dengan rata-rata macro, bukan angka resmi panitia.",
+  "per_kelas_AP50": {
+    "Bacterial leaf blight": 0.3672637960367233,
+    "Bacterial panicle blight": 0.7671201513540857,
+    "Blast": 0.5066244853990223,
+    "Brown spot": 0.2811430000342533,
+    "False smut": 0.9470731418076435,
+    "Healthy": 0.9357341698085556,
+    "Leaf roller": 0.8965650698395007,
+    "Leaf scald": 0.4180237899997288,
+    "Narrow brown": 0.9729013282732448,
+    "Sheath blight": 0.5093633839757985,
+    "Tungro": 0.6533224463498926
+  }
+}
