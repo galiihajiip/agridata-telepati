@@ -1,46 +1,47 @@
 # Laporan Evaluasi, split: `valid`
 
-Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `e27127fb482ebe6941d7ffe54f4a3bd2127bfa29`
+Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `0d4cabd9f29e0d604c7a3d6107bc59e9b9718099`
 
 ## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
-- mAP@0.5: 0.6678
-- mAP@0.5:0.95: 0.4141
+- mAP@0.5: 0.6759
+- mAP@0.5:0.95: 0.4304
 - Ambang NMS IoU: 0.5
-- F1 macro pada titik operasi terbaik: 0.6826 (confidence 0.2503)
-- Precision dan recall pada titik operasi tersebut: 0.7188 / 0.6722
+- Test-Time Augmentation (TTA): True
+- F1 macro pada titik operasi terbaik: 0.6755 (confidence 0.3193)
+- Precision dan recall pada titik operasi tersebut: 0.7164 / 0.6688
 
 | Kelas canonical | AP@0.5 |
 |---|---:|
-| Bacterial leaf blight | 0.4679 |
-| Bacterial panicle blight | 0.6530 |
-| Blast | 0.5358 |
-| Brown spot | 0.3303 |
-| False smut | 0.9528 |
-| Healthy | 0.8717 |
-| Leaf roller | 0.9134 |
-| Leaf scald | 0.4490 |
-| Narrow brown | 0.9755 |
-| Sheath blight | 0.5502 |
-| Tungro | 0.6460 |
+| Bacterial leaf blight | 0.5072 |
+| Bacterial panicle blight | 0.6395 |
+| Blast | 0.5360 |
+| Brown spot | 0.3256 |
+| False smut | 0.9346 |
+| Healthy | 0.8923 |
+| Leaf roller | 0.9455 |
+| Leaf scald | 0.4746 |
+| Narrow brown | 0.9581 |
+| Sheath blight | 0.5682 |
+| Tungro | 0.6533 |
 
 ## Metrik lokal diagnostik, rata-rata micro pada confidence 0.25
 
-- Precision keseluruhan: 0.6336
-- Recall keseluruhan: 0.2547
-- F1 keseluruhan: 0.3633
-- TP=1245 FP=720 FN=3643
+- Precision keseluruhan: 0.6764
+- Recall keseluruhan: 0.2412
+- F1 keseluruhan: 0.3556
+- TP=1179 FP=564 FN=3709
 
 | Kelas canonical | precision | recall | F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|---:|
-| Leaf scald | 0.5183 | 0.2897 | 0.3717 | 113 | 105 | 277 |
-| Brown spot | 0.6016 | 0.1540 | 0.2452 | 225 | 149 | 1236 |
-| Healthy | 0.8750 | 0.3962 | 0.5455 | 168 | 24 | 256 |
-| Leaf roller | 0.0000 | 0.0000 | 0.0000 | 0 | 1 | 87 |
-| Tungro | 0.6152 | 0.3092 | 0.4116 | 235 | 147 | 525 |
-| Blast | 0.6557 | 0.2534 | 0.3656 | 240 | 126 | 707 |
-| Narrow brown | 0.9091 | 0.9333 | 0.9211 | 70 | 7 | 5 |
-| Sheath blight | 0.5533 | 0.2766 | 0.3689 | 135 | 109 | 353 |
-| Bacterial leaf blight | 0.5413 | 0.4720 | 0.5043 | 59 | 50 | 66 |
-| False smut | 0.0000 | 0.0000 | 0.0000 | 0 | 2 | 86 |
-| Bacterial panicle blight | 0.0000 | 0.0000 | 0.0000 | 0 | 0 | 45 |
+| Leaf scald | 0.5865 | 0.2000 | 0.2983 | 78 | 55 | 312 |
+| Brown spot | 0.5877 | 0.0917 | 0.1587 | 134 | 94 | 1327 |
+| Healthy | 0.8327 | 0.5165 | 0.6376 | 219 | 44 | 205 |
+| Leaf roller | 0.7879 | 0.8966 | 0.8387 | 78 | 21 | 9 |
+| Tungro | 0.6678 | 0.2592 | 0.3735 | 197 | 98 | 563 |
+| Blast | 0.6472 | 0.2112 | 0.3185 | 200 | 109 | 747 |
+| Narrow brown | 0.9375 | 0.2000 | 0.3297 | 15 | 1 | 60 |
+| Sheath blight | 0.6263 | 0.2541 | 0.3615 | 124 | 74 | 364 |
+| Bacterial leaf blight | 0.4545 | 0.1600 | 0.2367 | 20 | 24 | 105 |
+| False smut | 0.7905 | 0.9651 | 0.8691 | 83 | 22 | 3 |
+| Bacterial panicle blight | 0.5849 | 0.6889 | 0.6327 | 31 | 22 | 14 |
