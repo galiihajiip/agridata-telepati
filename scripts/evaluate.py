@@ -295,9 +295,7 @@ def run_local_f1_stage(args: argparse.Namespace) -> None:
     validate_class_mapping(model)
 
     ground_truths, images_by_id = load_ground_truth(manifest_path)
-    detections = collect_predictions(
-        model, images_dir, images_by_id, args.collection_conf, device, augment=args.augment
-    )
+    detections = collect_predictions(model, images_dir, images_by_id, args.collection_conf, device)
 
     local_result = match_detections_to_ground_truth(detections, ground_truths, args.conf_threshold)
     local_overall = local_result["overall"]
