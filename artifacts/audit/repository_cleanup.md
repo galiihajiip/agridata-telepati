@@ -146,13 +146,35 @@ misalnya `block13_error_analysis.md`. Penomoran ini tidak bermakna bagi
 juri. Mengganti nama memerlukan pembaruan rujukan pada notebook dan README,
 sehingga ditunda agar tidak memicu tautan rusak menjelang tenggat.
 
-## 8. Keputusan yang Menunggu Pemilik Repository
+## 8. Pembersihan Akhir Menjelang Submission
 
-`scripts/auto_commit_daemon.py` dan `scripts/auto_commit.sh` merupakan
-perkakas pengembangan milik pemilik repository. Keduanya tidak dibutuhkan
-juri maupun pipeline submission, sehingga memenuhi kriteria untuk
-dikeluarkan.
+Dijalankan pada 26 September 2026, bersamaan dengan penggantian model final ke
+model 100 *epoch*.
 
-Namun perkakas tersebut sedang aktif digunakan. Menghapusnya akan mengganggu
-alur kerja yang berjalan. Karena itu keputusan diserahkan kepada pemilik
-repository, dan berkas tetap dipertahankan sampai ada keputusan.
+| Berkas atau direktori | Tindakan | Alasan |
+|---|---|---|
+| `scripts/auto_commit_daemon.py`, `scripts/auto_commit.sh` | dihapus | Perkakas pengembangan milik pemilik repository. Tidak dibutuhkan juri maupun pipeline submission. |
+| `scripts/train_finetune_800.py`, `configs/experiment_800_finetune.yaml` | dihapus | Eksperimen *fine-tuning* resolusi 800 yang tidak pernah dijalankan dan tidak menghasilkan artefak apa pun. |
+| `configs/experiment_100epoch_config.yaml` | dihapus | Duplikat isi `configs/final_model_config.yaml`, yang sekarang menjadi konfigurasi kanonik model final. |
+| `artifacts/staging/`, `artifacts/experiments_100epoch/` | dihapus | Direktori kerja sementara saat evaluasi model baru. Hasilnya sudah dipindahkan ke `artifacts/reports/`. |
+| `scripts/__pycache__/` | dihapus | Artefak bytecode, bukan berkas sumber. |
+| `configs/final_model_config.yaml` | ditulis ulang | Kini berisi konfigurasi 100 *epoch* yang sesungguhnya menghasilkan bobot final, seluruhnya berbahasa Indonesia. Versi 50 *epoch* dipindahkan ke `configs/archive_50epoch_config.yaml`. |
+
+Artefak model 50 *epoch* yang digantikan kami arsipkan, tidak dihapus, pada
+`artifacts/archive/50epoch_640_run/` termasuk subdirektori `nms05/` yang memuat
+evaluasi final versi tersebut. Eksekusi ulang analisis kesalahan yang
+menghasilkan angka berbeda kami simpan pada
+`artifacts/archive/error_analysis_reruns/` agar selisihnya dapat diperiksa.
+
+Pemeriksaan penutup setelah pembersihan:
+
+| Pemeriksaan | Hasil |
+|---|---|
+| Tautan internal rusak pada seluruh berkas Markdown | 0 |
+| Karakter *em dash* pada berkas terlacak | 0 |
+| *Path* absolut personal pada kode sumber dan konfigurasi | tidak ada |
+| *Secret*, *API key*, atau *token* | tidak ada |
+| Penanda TODO atau FIXME | tidak ada |
+| Rujukan ke berkas yang sudah dihapus | tidak ada |
+| Uji unit | 69 lulus |
+| *Docstring* berbahasa Inggris | tidak ada |
