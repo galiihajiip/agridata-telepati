@@ -1,7 +1,7 @@
 {
   "split": "test",
-  "weights": "/Users/macbookpro/Projects/agridata/runs/detect/final/model_100epoch/weights/best.pt",
-  "git_commit": "762b6e73bfce8bd4c0fba79253eaf76c6f2743f3",
+  "weights": "runs/detect/final/model_100epoch/weights/best.pt",
+  "git_commit": "166f183db7ac53d07f74cdee2a82967a76793219",
   "sumber_angka": "artifacts/reports/evaluation_test.json",
   "dihitung_ulang": false,
   "konfigurasi_inferensi": {

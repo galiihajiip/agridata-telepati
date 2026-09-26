@@ -1,7 +1,7 @@
 {
   "split": "valid",
   "weights": "runs/detect/final/model_100epoch/weights/best.pt",
-  "git_commit": "0d4cabd9f29e0d604c7a3d6107bc59e9b9718099",
+  "git_commit": "9dbba82b01014b326c1f3467e9064587ac5beb60",
   "sumber_angka": "artifacts/reports/evaluation_valid.json",
   "dihitung_ulang": false,
   "konfigurasi_inferensi": {
@@ -9,34 +9,34 @@
     "iou_pencocokan": 0.5
   },
   "metrik_dilaporkan": {
-    "mAP50_persen": 67.59,
-    "f1_persen": 67.55
+    "mAP50_persen": 66.78,
+    "f1_persen": 68.26
   },
   "rincian": {
-    "mAP50": 0.6759011309647037,
-    "mAP50_95": 0.4304438669824292,
-    "f1_macro": 0.6755110715955195,
-    "confidence_titik_operasi": 0.31931931931931934,
-    "precision_titik_operasi": 0.7163690524578677,
-    "recall_titik_operasi": 0.6688310517831401
+    "mAP50": 0.6677781108773165,
+    "mAP50_95": 0.41411444537573466,
+    "f1_macro": 0.6826221301374376,
+    "confidence_titik_operasi": 0.2502502502502503,
+    "precision_titik_operasi": 0.7187723431034748,
+    "recall_titik_operasi": 0.6722076010514297
   },
   "metrik_diagnostik_sekunder": {
     "keterangan": "Implementasi lokal dengan rata-rata micro pada confidence threshold tetap. Bukan angka yang dilaporkan. Sistematis lebih rendah pada dataset timpang dan tidak sebanding langsung dengan F1 macro di atas.",
-    "f1_lokal_micro": 0.3556024732317901,
+    "f1_lokal_micro": 0.2407993338884263,
     "confidence_threshold": 0.25
   },
   "caveat_definisi": "Regulasi tidak merinci metode averaging maupun threshold untuk F1. Angka F1 di sini merupakan hasil implementasi evaluasi lokal dengan rata-rata macro, bukan angka resmi panitia.",
   "per_kelas_AP50": {
-    "Bacterial leaf blight": 0.5071901263803275,
-    "Bacterial panicle blight": 0.6395449386530655,
-    "Blast": 0.5359726162481593,
-    "Brown spot": 0.32564081800035005,
-    "False smut": 0.9345500943582926,
-    "Healthy": 0.8923493993561524,
-    "Leaf roller": 0.9454839993582902,
-    "Leaf scald": 0.4746170914735243,
-    "Narrow brown": 0.9581485761249808,
-    "Sheath blight": 0.5681579042864402,
-    "Tungro": 0.6532568763721587
+    "Bacterial leaf blight": 0.4679301305439004,
+    "Bacterial panicle blight": 0.6529634146276194,
+    "Blast": 0.5357756807971281,
+    "Brown spot": 0.33032127841993514,
+    "False smut": 0.9527905692823495,
+    "Healthy": 0.8717124155402841,
+    "Leaf roller": 0.9134020459651409,
+    "Leaf scald": 0.44896117786512113,
+    "Narrow brown": 0.9755463024650234,
+    "Sheath blight": 0.5501621882095341,
+    "Tungro": 0.645994015934445
   }
 }
