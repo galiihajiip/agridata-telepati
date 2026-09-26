@@ -1,10 +1,13 @@
-# Block 6, compliant baseline SMOKE TEST configuration.
+# Konfigurasi UJI ASAP baseline yang patuh batasan kompetisi.
 #
-# This is NOT the final model. Its only purpose is to prove the pipeline
-# works end-to-end (model loads, labels are valid, training starts,
-# validation runs, weights save, inference works) with no external
-# pretrained weights involved. Full hyperparameter experimentation happens
-# in later blocks (9-14); the final frozen config is decided in Block 14.
+# Ini BUKAN model final. Satu-satunya tujuannya membuktikan pipeline berjalan
+# dari ujung ke ujung, yaitu model dapat dimuat, label valid, pelatihan mulai,
+# validasi jalan, bobot tersimpan, dan inferensi bekerja, tanpa sama sekali
+# melibatkan external pretrained weights.
+#
+# Pencarian hyperparameter yang sesungguhnya dilakukan pada matriks percobaan
+# dan rangkaian ablasi, sedangkan konfigurasi final dibekukan pada
+# configs/final_model_config.yaml.
 
 seed: 42
 

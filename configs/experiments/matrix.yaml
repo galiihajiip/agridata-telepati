@@ -1,20 +1,19 @@
-# Block 10, controlled baseline hyperparameter experiment matrix.
+# Matriks percobaan hyperparameter baseline yang terkontrol.
 #
-# Methodology: one-factor-at-a-time (OFAT), not full factorial. Every
-# variant changes exactly ONE axis from `baseline`; everything else is
-# held fixed. This isolates each factor's effect instead of confounding
-# several changes at once (per master spec: "Jangan mengubah banyak
-# variabel simultan").
+# Metodologi: pengujian satu faktor pada satu waktu, bukan faktorial penuh.
+# Setiap varian mengubah tepat SATU faktor terhadap `baseline`, sementara
+# seluruh parameter lain ditahan tetap. Dengan begitu efek masing-masing faktor
+# dapat diisolasi alih-alih tercampur karena beberapa perubahan sekaligus.
 #
-# Scale note: this matrix intentionally uses a SMALL fraction of train data
-# and few epochs to keep total wall-clock time bounded for a comparative
-# screening pass, it is NOT the final training regime. The best-performing
-# configuration found here is a candidate for further investigation in
-# later blocks (11-14), not a final answer.
+# Catatan skala: matriks ini sengaja memakai fraksi KECIL data latih dengan
+# sedikit epoch, supaya total waktu untuk satu putaran penyaringan pembanding
+# tetap terkendali. Ini BUKAN rezim pelatihan final. Konfigurasi terbaik yang
+# ditemukan di sini merupakan kandidat untuk ditelusuri lebih lanjut, bukan
+# jawaban akhir.
 #
-# Every variant: same canonical dataset, same official train/valid split,
-# same evaluation method (model.val() -> mAP@0.5, per Block 7's established
-# native-metric methodology), same seed, no external pretrained weights.
+# Seluruh varian memakai dataset canonical yang sama, split train dan valid
+# resmi yang sama, metode evaluasi yang sama yaitu model.val() untuk mAP@0.5,
+# seed yang sama, dan tanpa external pretrained weights.
 
 common:
   seed: 42
@@ -23,7 +22,7 @@ common:
   data_yaml: "data/prepared/data.yaml"
   device: "auto"
   workers: 2
-  validate_during_training: false  # skip expensive per-epoch full validation; one val() pass after training instead
+  validate_during_training: false  # validasi penuh per epoch dilewati karena mahal; cukup satu val() setelah pelatihan
 
 baseline:
   image_size: 320

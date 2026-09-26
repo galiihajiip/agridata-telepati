@@ -1,6 +1,6 @@
-# Base configuration for the TELEPATI 8.0 AgriData pipeline.
-# Paths are relative to the project root so the pipeline is portable
-# across machines (no personal/absolute paths).
+# Konfigurasi dasar pipeline TELEPATI 8.0 AgriData.
+# Seluruh path bersifat relatif terhadap akar project agar pipeline portabel
+# antar mesin, tanpa path personal maupun path absolut.
 
 seed: 42
 
