@@ -131,3 +131,45 @@ notebook, README, dan model card
 tersebut hanya membaca artefak evaluasi dan menyusunnya ulang dalam format
 pelaporan. Dengan demikian tidak mungkin terjadi dua nilai berbeda untuk hal
 yang sama akibat dua jalur perhitungan yang terpisah.
+
+## 7. Kestabilan Pengukuran pada Perangkat Ini
+
+Satu hal kami temukan saat menyiapkan submission dan perlu kami sampaikan
+terbuka, karena menyangkut apa yang akan dialami juri ketika menjalankan ulang
+pipeline ini.
+
+Evaluasi terhadap *checkpoint* yang sama persis, dengan konfigurasi yang sama
+persis (resolusi 640, NMS IoU 0,5, IoU pencocokan 0,5), tidak selalu
+menghasilkan mAP@0.5 yang identik pada perangkat ini:
+
+| Waktu eksekusi | mAP@0.5 | mAP@0.5:0.95 | *F1* macro | Jumlah deteksi terkumpul |
+|---|---:|---:|---:|---:|
+| 24 Sep 07:39 | 0,6678 | 0,4141 | 0,6826 | 77.454 |
+| 24 Sep 10:38 | 0,6759 | 0,4304 | 0,6755 | 68.639 |
+| 24 Sep 23:54 | 0,6678 | 0,4141 | 0,6826 | 54.529 |
+
+Selisih terbesarnya 0,0081 pada mAP@0.5, atau sekitar 1,2 persen secara
+relatif. Nilai 0,6678 muncul pada dua eksekusi terpisah, sedangkan 0,6759
+muncul sekali. Karena itu **kami melaporkan 0,6678**, yaitu nilai yang
+tereproduksi berulang, bukan nilai tertinggi yang pernah kami lihat.
+
+Perlu dicatat pula bahwa jumlah deteksi yang terkumpul berbeda pada ketiga
+eksekusi meskipun metrik native-nya bisa identik. Hal ini konsisten dengan
+nondeterminisme *backend* MPS yang sudah kami dokumentasikan: tahap yang tidak
+deterministik adalah inferensinya, bukan pencocokannya.
+
+Implikasinya bagi audit juri, dan kami nyatakan ini sebagai pengakuan dan bukan
+pembelaan:
+
+1. Angka yang juri peroleh mungkin tidak identik dengan angka kami, dan selisih
+   pada orde 0,008 pada mAP@0.5 masih dalam rentang yang kami amati sendiri.
+2. Kami tidak mengklaim reproduksi bit per bit, dan hal ini sudah dinyatakan
+   sejak awal pada `reproducibility_checklist.md`.
+3. Dokumen audit kami sebelumnya menyatakan bahwa mAP@0.5 tercatat identik
+   pada beberapa kali pengulangan. Pernyataan itu benar untuk model 50 *epoch*
+   pada pengujian yang kami lakukan saat itu, tetapi tidak berlaku umum, dan
+   kami memperbaikinya di sini alih-alih membiarkannya berdiri.
+
+Analisis yang dihitung ulang dari prediksi tersimpan, misalnya sensitivitas
+*threshold*, tetap deterministik sepenuhnya, karena tidak menjalankan inferensi
+ulang.
