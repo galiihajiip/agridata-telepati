@@ -1,37 +1,47 @@
 # Bobot Model
 
-**Status: rilis disiapkan, menunggu konfirmasi publikasi.** Berkas *checksum*
+**Status: rilis sudah disiapkan, menunggu publikasi.** Berkas *checksum*
 (`best.pt.sha256`) dan metadata
-(`../artifacts/reports/final_model_metadata.json`) sudah final dan terkomit.
-Berkas bobot itu sendiri merupakan biner berukuran besar dan sengaja tidak
-dikomit ke Git (lihat `.gitignore`), melainkan didistribusikan sebagai
-lampiran GitHub Release. Lihat bagian "Rencana GitHub Release" di bawah untuk
-perintah dan daftar aset yang sudah disiapkan.
+(`../artifacts/reports/final_model_metadata.json`) sudah final. Berkas bobot
+itu sendiri merupakan biner dan sengaja tidak dikomit ke Git (lihat
+`.gitignore`), melainkan didistribusikan sebagai lampiran GitHub Release.
+Perintah dan daftar asetnya ada di bagian "Rencana GitHub Release" di bawah.
 
-## Model final saat ini
+## Model final
 
 | Field | Nilai |
 |---|---|
-| Berkas | `runs/detect/final/final_model/weights/best.pt` |
+| Berkas | `runs/detect/final/model_100epoch/weights/best.pt` |
 | Format | *Checkpoint* PyTorch (`.pt`) |
-| Ukuran | 6.253.994 byte (6,3 MB) |
-| SHA-256 | `9d74fffdd977a7bb6749bc828fe908278c5d3eaa24c3cfdbbe5a560d41f5d308` |
+| Ukuran | 6.260.394 byte (6,3 MB) |
+| SHA-256 | `c631a363ab580ca614c52b51eaaf798e31c44a3ba92f2aa05efcfe27f5a86965` |
 | Arsitektur | YOLOv8n (Ultralytics), dibangun dari `yolov8n.yaml`, `pretrained=False` |
-| Konfigurasi pelatihan | [`configs/final_model_config.yaml`](../configs/final_model_config.yaml), 50 *epoch* |
+| Konfigurasi pelatihan | [`configs/final_model_config.yaml`](../configs/final_model_config.yaml), 100 *epoch* |
 | Ringkasan pelatihan | [`artifacts/reports/block15_final_training_summary.json`](../artifacts/reports/block15_final_training_summary.json) |
-| *Commit* Git saat pelatihan | `28668899fb000cee3a2a8386ac65ddeba2d04d02` |
-| Hasil | mAP@0.5 = 0,6277 dan mAP@0.5:0.95 = 0,3905 |
+| *Commit* Git saat pelatihan | `38754ce334149e7eeb633edb8d9d81820bad3b13` |
+| *Hash* manifest dataset | `cf81abe0fbdae274...` |
+| mAP@0.5 | 0,6678 (valid) dan 0,6596 (test) |
+| *F1-Score* macro | 0,6826 (valid) dan 0,6641 (test) |
 
-Model 20 *epoch* sebelumnya (mAP@0.5 = 0,5620) digantikan atas permintaan
-pengguna untuk memperpanjang pelatihan. Seluruh hasilnya tetap diarsipkan
-pada [`artifacts/archive/20epoch_run/`](../artifacts/archive/20epoch_run/)
-dan tidak dihapus.
+Nama direktori `model_100epoch` kami pertahankan apa adanya karena mencerminkan
+anggaran *epoch* yang menghasilkannya, dan kami menilai itu lebih jujur
+daripada menamainya ulang menjadi sesuatu yang generik.
 
-Berkas ini tidak dikomit ke Git karena pola `*.pt` dan `runs/` dikecualikan
-pada `.gitignore`, konsisten dengan arahan untuk tidak menyimpan biner besar
-secara langsung di dalam repository. Saat ini berkas tersedia secara lokal
-pada *path* di atas, hasil menjalankan `scripts/run_final_training.py` dengan
-konfigurasi beku.
+## Model yang digantikan
+
+Dua model sebelumnya kami arsipkan utuh dan tidak kami hapus, supaya jejak
+keputusannya tetap dapat diperiksa:
+
+| Model | mAP@0.5 valid | *F1* macro valid | Arsip |
+|---|---:|---:|---|
+| 20 *epoch* | 0,5620 | tidak dihitung | [`artifacts/archive/20epoch_run/`](../artifacts/archive/20epoch_run/) |
+| 50 *epoch* | 0,6401 | 0,6383 | [`artifacts/archive/50epoch_640_run/`](../artifacts/archive/50epoch_640_run/) |
+
+Alasan penggantian terakhir kami catat pada
+[`artifacts/audit/metrics_provenance.md`](../artifacts/audit/metrics_provenance.md):
+kurva pelatihan model 50 *epoch* menunjukkan model belum konvergen, dan
+perpanjangan anggaran ke 100 *epoch* terbukti menaikkan mAP@0.5 sebesar 0,0277
+pada *split* valid sekaligus 0,0350 pada *split* test.
 
 ## Verifikasi
 
@@ -44,7 +54,9 @@ serta uji reproduksi lingkungan bersih pada
 Untuk memverifikasi *checksum* salinan Anda sendiri:
 
 ```bash
-shasum -a 256 runs/detect/final/final_model/weights/best.pt
+shasum -a 256 runs/detect/final/model_100epoch/weights/best.pt
+# atau, dari berkas checksum yang disertakan:
+shasum -a 256 -c weights/best.pt.sha256
 ```
 
 Hasilnya harus sama persis dengan nilai SHA-256 pada tabel di atas.
@@ -52,25 +64,24 @@ Hasilnya harus sama persis dengan nilai SHA-256 pada tabel di atas.
 ## Rencana GitHub Release
 
 Regulasi mensyaratkan bobot model dipublikasikan melalui GitHub Release atau
-Git LFS dengan tautan langsung, bukan tautan penyimpanan awan pribadi.
-Mengingat ukuran berkas hanya 6,3 MB, jauh di bawah batas per berkas GitHub,
-lampiran GitHub Release dipilih karena lebih sederhana dan sama patuhnya
+Git LFS dengan tautan unduhan langsung, bukan tautan penyimpanan awan pribadi.
+Karena ukuran berkasnya hanya 6,3 MB, jauh di bawah batas per berkas GitHub,
+kami memilih lampiran GitHub Release: lebih sederhana dan sama patuhnya
 dibanding Git LFS.
 
-Rilis sudah disiapkan tetapi **belum dipublikasikan**, karena publikasi
-merupakan tindakan publik yang sulit dibatalkan dan ditunda sampai ada
-konfirmasi eksplisit. Perintah yang sudah disiapkan:
+Rilisnya sudah siap tetapi **belum dipublikasikan**, karena publikasi
+merupakan tindakan publik yang sulit dibatalkan dan kami tunda sampai ada
+konfirmasi eksplisit dari pemilik repository. Perintahnya:
 
 ```bash
 gh release create v1.0.0-final-model \
-  runs/detect/final/final_model/weights/best.pt \
+  runs/detect/final/model_100epoch/weights/best.pt \
   weights/best.pt.sha256 \
   artifacts/reports/final_model_metadata.json \
-  --title "Final Model v1.0.0: YOLOv8n Rice Disease Detector" \
+  --title "Model Final v1.0.0: Detektor Penyakit Padi YOLOv8n" \
   --notes-file <berkas catatan rilis>
 ```
 
-Setelah dipublikasikan, bagian ini akan diperbarui dengan tautan aset
-langsung, dan *field* `release` pada
-`artifacts/reports/final_model_metadata.json` akan disetel menjadi
-`published: true` beserta metode dan URL-nya.
+Setelah rilis terbit, bagian ini perlu diperbarui dengan tautan aset langsung,
+dan *field* `release` pada `artifacts/reports/final_model_metadata.json`
+disetel menjadi `published: true` beserta metode dan URL-nya.
