@@ -291,22 +291,23 @@ threshold* 0,1, memakai pencocokan yang tidak memandang kelas supaya kasus
 
 | Jenis | Jumlah | Porsi dari seluruh kesalahan |
 |---|---:|---:|
-| *False negative*, objek terlewat | 3.919 | 71,4% |
-| *False positive* terhadap latar belakang | 1.542 | 28,1% |
-| Salah kelas | 24 | 0,4% |
+| *False negative*, objek terlewat | 3.276 | 55,6% |
+| *False positive* terhadap latar belakang | 2.547 | 43,2% |
+| Salah kelas | 67 | 1,1% |
 
 Masalah utama model kami jelas: **menemukan objeknya**, bukan membedakan
-penyakit. Salah kelas hanya 0,4 persen dari seluruh kesalahan, dan pasangan
-yang paling sering tertukar pun masuk akal secara domain, yaitu Brown spot
-dengan Blast (9 kejadian), keduanya menimbulkan lesi kecokelatan.
+penyakit. Salah kelas hanya 1,1 persen dari seluruh kesalahan, dan pasangan
+yang paling sering tertukar pun masuk akal secara domain, yaitu Blast dengan
+Brown spot (23 kejadian), keduanya menimbulkan lesi kecokelatan.
 
 Dua pola pendukung, keduanya dari kesalahan aktual dan bukan dugaan:
 
 - Objek yang terlewat cenderung lebih kecil daripada rata-rata. Median luas
-  *bounding box* yang gagal terdeteksi 5.328,1 px², di bawah median keseluruhan
-  7.051,6 px². Ini konsisten dengan dominasi objek kecil pada dataset.
+  *bounding box* yang gagal terdeteksi 3.343,2 px², yaitu 0,47 kali median
+  keseluruhan sebesar 7.051,6 px². Ini konsisten dengan dominasi objek kecil
+  pada dataset.
 - Adegan padat memiliki rasio *false negative* lebih tinggi daripada adegan
-  jarang, yaitu 0,810 berbanding 0,781.
+  jarang, yaitu 0,727 berbanding 0,527.
 
 Laporan lengkap pada
 [`artifacts/reports/block13_error_analysis.md`](artifacts/reports/block13_error_analysis.md).
@@ -324,13 +325,15 @@ rendah**:
 | *Precision* pada titik operasi | 0,6406 | **0,7188** | lebih baik |
 | *Recall* pada titik operasi | 0,6237 | **0,6722** | lebih baik |
 | *F1* lokal *micro* pada ambang tetap | **0,3479** | 0,2682 | lebih buruk |
-| *True positive* pada *confidence* 0,1 | **1.381** | 945 | lebih buruk |
+| *True positive* pada *confidence* 0,1 | 1.381 | **1.545** | lebih baik |
 
 Penjelasannya, kedua model memiliki kalibrasi keyakinan yang berbeda, sehingga
-membandingkannya pada satu ambang tetap yang sama menyesatkan. Model 100
-*epoch* lebih selektif dan menghasilkan lebih sedikit kotak berkeyakinan
-rendah. Ketika masing-masing diukur pada titik operasi optimalnya sendiri,
-model 100 *epoch* menang pada *precision* maupun *recall* sekaligus.
+membandingkan keduanya pada satu ambang tetap yang sama menyesatkan. Rata-rata
+*micro* pada ambang tetap didominasi kelas mayoritas Brown spot yang tetap
+lemah, sedangkan rata-rata *macro* pada titik operasi optimal mengangkat kelas
+minoritas yang justru sangat kuat. Ketika masing-masing model diukur pada titik
+operasi optimalnya sendiri, model 100 *epoch* menang pada *precision* maupun
+*recall* sekaligus.
 
 Kami memilih model 100 *epoch* karena dua metrik yang dinilai lomba, yaitu
 mAP@50 dan *F1-Score*, keduanya naik, dan kenaikannya terkonfirmasi pada
