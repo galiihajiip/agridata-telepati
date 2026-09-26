@@ -161,12 +161,26 @@ bernilai `published: false` dan perlu diperbarui bersama tautan aset pada
    satu ketua tim, dan satu dosen pembimbing tidak dapat diperiksa dari
    repository.
 
-## 12. Eksperimen yang Sedang Berjalan
+## 12. Riwayat Penggantian Model Final
 
-Pelatihan dengan anggaran 100 *epoch* sedang dijalankan sebagai eksperimen
-terpisah. Dasarnya adalah kurva pelatihan model final yang menunjukkan model
-belum konvergen pada epoch 50: mAP@0.5 masih naik, *train loss* masih turun,
-dan *val loss* juga masih turun.
+Model final yang disubmit merupakan hasil pelatihan 100 *epoch*, dan itu
+merupakan penggantian kedua. Kami mencatat urutannya terbuka:
+
+| Model | mAP@50 valid | *F1* macro valid | Status |
+|---|---:|---:|---|
+| 20 *epoch* | 56,20% | tidak dihitung | diarsipkan |
+| 50 *epoch* | 64,01% | 63,83% | diarsipkan |
+| **100 *epoch*** | **66,78%** | **68,26%** | **final** |
+
+Dasar penggantian terakhir adalah kurva pelatihan model 50 *epoch* yang
+menunjukkan model belum konvergen: mAP@0.5 masih naik, *train loss* masih
+turun, dan *val loss* juga masih turun pada epoch terakhir.
+
+Pemilihan model dilakukan **sepenuhnya di atas *split* valid**. Setelah model
+dikunci, *split* test dievaluasi satu kali, dan hasilnya mengonfirmasi kenaikan
+tersebut: mAP@50 naik 3,50 poin dan *F1* macro naik 3,69 poin dibanding model
+50 *epoch*. Karena kenaikannya muncul pada kedua *split*, kami tidak
+memperlakukannya sebagai kebetulan satu *split*.
 
 Eksperimen resolusi 960 dihentikan pada epoch 7. Alasannya, bila model pada
 resolusi 640 saja belum konvergen dalam 50 *epoch*, model resolusi 960 yang
@@ -174,10 +188,7 @@ konvergensinya teramati sekitar dua kali lebih lambat akan jauh lebih belum
 konvergen pada anggaran yang sama. Checkpoint beserta skrip pelanjutnya tetap
 disimpan, lihat `artifacts/reports/experiment_960_status.md`.
 
-Model final yang dibekukan untuk submission tetap model 640 dengan 50
-*epoch*. Tidak ada eksperimen yang akan menggantikannya kecuali terbukti
-unggul pada prosedur evaluasi yang sama, pada *split* validasi, dan
-dikonfirmasi pada *split* test.
+Tidak ada eksperimen lain yang sedang berjalan pada saat audit ini disusun.
 
 ## 13. Keterbatasan Audit Ini
 
@@ -189,20 +200,24 @@ sebenarnya:
    Penggantian nama ditunda agar tidak memicu tautan rusak menjelang tenggat.
 2. **Reproduksi pelatihan bit per bit tidak diverifikasi** dan tidak diklaim,
    karena nondeterminisme *backend* MPS.
-3. **Metrik lokal diagnostik tidak stabil** antar pengulangan pada rentang
-   0,22 sampai 0,42. Metrik ini berstatus sekunder, bukan angka yang
-   dilaporkan.
+3. **Pengukuran tidak sepenuhnya stabil antar pengulangan pada perangkat
+   ini.** Evaluasi terhadap *checkpoint* yang sama pernah menghasilkan mAP@0.5
+   sebesar 0,6678 dan 0,6759, yaitu selisih relatif sekitar 1,2 persen. Angka
+   yang kami laporkan adalah 0,6678, hasil yang muncul berulang. Pada analisis
+   kesalahan selisihnya jauh lebih besar, mencapai 39 persen pada jumlah *true
+   positive*, sehingga analisis kesalahan kami perlakukan sebagai bukti
+   kualitatif mengenai jenis kegagalan, bukan pengukuran presisi. Rincian dan
+   tabel pembandingnya pada `metrics_provenance.md` bagian 7.
 4. **Definisi *F1* panitia tidak diketahui.** Angka yang dilaporkan merupakan
    *F1* macro hasil implementasi evaluasi lokal.
 5. **Belum ada validasi di luar dataset kompetisi.**
-6. **Satu regenerasi analisis kesalahan menghasilkan keluaran yang rusak dan
-   dibatalkan.** Eksekusi yang dijalankan bersamaan dengan pelatihan 100
-   *epoch* hanya menghasilkan sekitar sembilan prediksi untuk 2.106 citra,
-   padahal eksekusi yang sah menghasilkan 1.381 *true positive*. Artefak yang
-   sah dipulihkan dari riwayat Git dan dipakai kembali, sedangkan penyebab
-   kegagalannya belum ditelusuri karena kemungkinan besar berkaitan dengan
-   perebutan sumber daya MPS. Hal ini disampaikan terbuka agar tidak terbaca
-   seolah setiap eksekusi ulang pasti menghasilkan angka yang sama.
+6. **Notebook memakai ulang artefak evaluasi yang sudah ada** alih-alih
+   menghitungnya kembali setiap kali dijalankan. Pilihan ini kami ambil supaya
+   notebook tidak bisa menyimpang dari README dan dokumen audit akibat
+   nondeterminisme MPS, sekaligus supaya notebook selesai dalam hitungan menit
+   bagi juri. Menghapus berkas artefaknya akan memaksa perhitungan ulang, dan
+   pesan yang dicetak sel tersebut menyatakan dengan jelas jalur mana yang
+   sedang dipakai.
 
 ## 14. Kesimpulan
 
