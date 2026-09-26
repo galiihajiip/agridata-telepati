@@ -4,7 +4,7 @@ Audit menyeluruh terhadap paket submission. Seluruh angka pada dokumen ini
 berasal dari pemeriksaan yang dijalankan saat audit, bukan dari catatan
 sebelumnya.
 
-Tanggal audit: 23 September 2026
+Tanggal audit: 26 September 2026
 Tenggat submission: 26 September 2026
 Repository: https://github.com/galiihajiip/agridata
 
@@ -31,10 +31,10 @@ di luar kemampuan verifikasi otomatis.
 
 | Field | Nilai | Status |
 |---|---|---|
-| Berkas | `runs/detect/final/final_model/weights/best.pt` | LULUS |
+| Berkas | `runs/detect/final/model_100epoch/weights/best.pt` | LULUS |
 | Arsitektur | YOLOv8n dari `yolov8n.yaml`, `pretrained=False` | LULUS |
-| Ukuran | 6.253.994 byte | LULUS |
-| SHA-256 | `9d74fffdd977a7bb6749bc828fe908278c5d3eaa24c3cfdbbe5a560d41f5d308` | LULUS, diverifikasi dengan `shasum -c` |
+| Ukuran | 6.260.394 byte | LULUS |
+| SHA-256 | `c631a363ab580ca614c52b51eaaf798e31c44a3ba92f2aa05efcfe27f5a86965` | LULUS, diverifikasi dengan `shasum -c` |
 | Pemuatan proses bersih | berhasil, 11 kelas | LULUS |
 | Inferensi | menghasilkan deteksi | LULUS |
 
@@ -44,13 +44,14 @@ Konfigurasi: resolusi inferensi 640, ambang NMS IoU 0,5, IoU pencocokan 0,5.
 
 | Metrik | *Split* valid | *Split* test |
 |---|---:|---:|
-| mAP@50 | **64,01%** | **62,46%** |
-| *F1-Score* macro | **63,83%** | **62,72%** |
-| mAP@0.5:0.95 | 0,3856 | 0,3998 |
+| mAP@50 | **66,78%** | **65,96%** |
+| *F1-Score* macro | **68,26%** | **66,41%** |
+| mAP@0.5:0.95 | 0,4141 | 0,4330 |
 
-*Split* test tidak pernah dipakai untuk penyetelan apa pun. Selisih valid
-terhadap test sebesar 1,55 poin pada mAP dan 1,11 poin pada *F1* konsisten
-dengan generalisasi yang stabil pada kedua *split*. Satu evaluasi *held-out*
+*Split* test tidak pernah dipakai untuk penyetelan apa pun, termasuk untuk
+memilih model final. Selisih valid terhadap test sebesar 0,82 poin pada mAP dan
+1,85 poin pada *F1* konsisten dengan generalisasi yang stabil pada kedua
+*split*. Satu evaluasi *held-out*
 tidak cukup untuk membuktikan ketiadaan *overfitting*.
 
 | Pemeriksaan konsistensi | Hasil | Status |
