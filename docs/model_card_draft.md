@@ -109,8 +109,8 @@ final. Selisih mAP@0.5 terhadap validasi hanya -0,0082, tanpa indikasi
    aturan kompetisi. Model tidak mewarisi representasi visual umum.
 2. ***Recall* merupakan pembatas utama.** Pada sapuan *confidence threshold*
    dengan metrik lokal *micro*, *recall* tertinggi hanya 0,2365. Komposisi
-   kesalahan didominasi *false negative* sebesar 71,4 persen, sedangkan salah
-   kelas hanya 0,4 persen.
+   kesalahan didominasi *false negative* sebesar 55,6 persen, sedangkan salah
+   kelas hanya 1,1 persen.
 3. **Objek kecil sulit dideteksi.** Median luas *bounding box* yang terlewat
    sekitar setengah dari median keseluruhan.
 4. **Performa antar kelas timpang**, dengan selisih AP@0.5 melebihi 0,64

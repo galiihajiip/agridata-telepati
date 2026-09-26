@@ -173,3 +173,33 @@ pembelaan:
 Analisis yang dihitung ulang dari prediksi tersimpan, misalnya sensitivitas
 *threshold*, tetap deterministik sepenuhnya, karena tidak menjalankan inferensi
 ulang.
+
+### 7.1 Instabilitas pada analisis kesalahan jauh lebih besar
+
+Ketidakstabilan yang sama, tetapi dengan amplitudo jauh lebih besar, kami amati
+pada analisis kesalahan. Dua eksekusi `scripts/run_error_analysis.py` terhadap
+*checkpoint* yang sama, split yang sama, dan *confidence threshold* yang sama
+(0,1) menghasilkan:
+
+| Eksekusi | *True positive* | Salah kelas | *FP* latar | *False negative* |
+|---|---:|---:|---:|---:|
+| 24 Sep 07:24 | 1.545 | 67 | 2.547 | 3.276 |
+| 26 Sep 12:05 | 945 | 24 | 1.542 | 3.919 |
+
+Selisihnya besar, yaitu 39 persen pada jumlah *true positive*. Penyebabnya
+adalah tahap pengumpulan prediksi yang memakai inferensi MPS, bukan tahap
+pencocokannya yang sepenuhnya deterministik.
+
+Angka yang kami pakai pada laporan, README, dan notebook adalah eksekusi 24 Sep
+07:24, karena itulah eksekusi yang keluarannya benar-benar tertanam di dalam
+notebook sebagai bukti. Eksekusi 26 Sep kami simpan pada
+`artifacts/archive/error_analysis_reruns/rerun_26sep.json` supaya selisihnya
+dapat diperiksa sendiri, bukan kami sembunyikan.
+
+Kesimpulan yang kami tarik dari analisis kesalahan tidak berubah di antara
+kedua eksekusi: *false negative* tetap mendominasi, salah kelas tetap porsi
+terkecil, objek yang terlewat tetap lebih kecil daripada rata-rata, dan adegan
+padat tetap memiliki rasio *false negative* lebih tinggi. Yang tidak stabil
+adalah angka absolutnya, bukan arah temuannya. Karena itu kami memperlakukan
+analisis kesalahan sebagai bukti kualitatif mengenai jenis kegagalan model,
+bukan sebagai pengukuran presisi.
