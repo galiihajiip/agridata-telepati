@@ -4,61 +4,61 @@ Bobot: `runs/detect/final/model_100epoch/weights/best.pt` | Split: `valid` | Amb
 
 ## Rincian jumlah
 
-- True positive: 1545
-- Salah kelas (lokasi benar, label salah): 67
-- False positive terhadap latar (mendeteksi objek yang tidak ada): 2547
-- False negative (objek terlewat sepenuhnya): 3276
+- True positive: 945
+- Salah kelas (lokasi benar, label salah): 24
+- False positive terhadap latar (mendeteksi objek yang tidak ada): 1542
+- False negative (objek terlewat sepenuhnya): 3919
 
 ## Pasangan kelas yang paling sering tertukar
 
 | Kelas sebenarnya | Diprediksi sebagai | Jumlah |
 |---|---|---:|
-| Blast | Brown spot | 23 |
-| Brown spot | Blast | 13 |
-| Leaf scald | Tungro | 6 |
-| Healthy | Brown spot | 4 |
-| Blast | Bacterial leaf blight | 3 |
-| Tungro | Leaf scald | 3 |
-| Bacterial leaf blight | Healthy | 2 |
-| Bacterial leaf blight | Tungro | 2 |
+| Brown spot | Blast | 9 |
+| Blast | Brown spot | 3 |
+| Leaf scald | Tungro | 3 |
 | Blast | Sheath blight | 2 |
-| Bacterial leaf blight | Blast | 1 |
+| Tungro | Leaf scald | 2 |
+| Bacterial leaf blight | Healthy | 1 |
+| Bacterial leaf blight | Tungro | 1 |
+| Brown spot | Leaf scald | 1 |
+| Healthy | Brown spot | 1 |
+| Sheath blight | Leaf roller | 1 |
 
 ## Precision dan recall per kelas menurut pencocokan analisis ini
 
 | Kelas | Precision | Recall | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|
-| Bacterial leaf blight | 0.3109 | 0.6640 | 83 | 184 | 42 |
+| Bacterial leaf blight | 0.2796 | 0.2080 | 26 | 67 | 99 |
 | Bacterial panicle blight | 0.0000 | 0.0000 | 0 | 1 | 45 |
-| Blast | 0.3854 | 0.3073 | 291 | 464 | 656 |
-| Brown spot | 0.3015 | 0.2416 | 353 | 818 | 1108 |
+| Blast | 0.3750 | 0.2091 | 198 | 330 | 749 |
+| Brown spot | 0.3328 | 0.1451 | 212 | 425 | 1249 |
 | False smut | 0.3333 | 0.0116 | 1 | 2 | 85 |
-| Healthy | 0.7703 | 0.4033 | 171 | 51 | 253 |
-| Leaf roller | 0.0000 | 0.0000 | 0 | 5 | 87 |
-| Leaf scald | 0.3455 | 0.3641 | 142 | 269 | 248 |
-| Narrow brown | 0.5208 | 1.0000 | 75 | 69 | 0 |
-| Sheath blight | 0.3174 | 0.3258 | 159 | 342 | 329 |
-| Tungro | 0.3976 | 0.3553 | 270 | 409 | 490 |
+| Healthy | 0.7317 | 0.2123 | 90 | 33 | 334 |
+| Leaf roller | 0.0000 | 0.0000 | 0 | 2 | 87 |
+| Leaf scald | 0.3529 | 0.2000 | 78 | 143 | 312 |
+| Narrow brown | 0.5161 | 0.2133 | 16 | 15 | 59 |
+| Sheath blight | 0.3127 | 0.2275 | 111 | 244 | 377 |
+| Tungro | 0.4120 | 0.2803 | 213 | 304 | 547 |
 
 ## Confidence: true positive dibanding false positive
 
-- Confidence true positive: {'mean': 0.5104493427141584, 'median': 0.5142697691917419}
-- Confidence false positive: {'mean': 0.2212644206857353, 'median': 0.1725218966603279}
+- Confidence true positive: {'mean': 0.5179209865826778, 'median': 0.5306923389434814}
+- Confidence false positive: {'mean': 0.21966816711871104, 'median': 0.1708322912454605}
 
 ## Analisis objek kecil yang terlewat
 
 - Median luas bbox ground truth keseluruhan: 7051.6 px²
-- Median luas bbox yang terlewat: 3343.2 px²
+- Median luas bbox yang terlewat: 5328.1 px²
 - Objek terlewat cenderung lebih kecil dari rata-rata: True
 
 ## Adegan padat dibanding adegan jarang
 
-- Rasio false negative pada adegan padat, lebih dari 1 instance per citra: 0.7269
-- Rasio false negative pada adegan jarang: 0.527
+- Rasio false negative pada adegan padat, lebih dari 1 instance per citra: 0.8101
+- Rasio false negative pada adegan jarang: 0.7808
 
 ## Kandidat latar belakang sulit, dengan false positive latar terbanyak
 
-['05-leaf-Blast_jpg.rf.194eb375c4dbe4607bc3a86bd3058862.jpg', 'brown_spot-22-_jpg.rf.bf0db732c7e78d74d928b106b56436bc.jpg', 'BROWNSPOT6_194_jpg.rf.b2ef46a9b340f833592d72bea1058e0f.jpg', 'rb_wb_17_jpg.rf.719eb72094811f2f84d8ea74a7343157.jpg', 'BROWNSPOT2_098_jpg.rf.ae6f388c9b5867ff0292af5e89d12935.jpg']
+['BROWNSPOT6_194_jpg.rf.b2ef46a9b340f833592d72bea1058e0f.jpg', 'rb_wb_17_jpg.rf.719eb72094811f2f84d8ea74a7343157.jpg', 'BROWNSPOT2_098_jpg.rf.ae6f388c9b5867ff0292af5e89d12935.jpg', 'BROWNSPOT6_011_jpg.rf.b29dd13fd4d5d61fd59a2a6da1ec5249.jpg', 'brownspot_orig_096_jpg.rf.bd95a8ea989b7cb812af80662cdaa796.jpg']
 
 ## Contoh visual
 
@@ -73,8 +73,8 @@ Checkpoint ini tidak memiliki true positive pada 2 dari 11 kelas (Bacterial pani
 
 Temuan berikut berasal dari kesalahan aktual checkpoint ini, bukan template umum:
 
-1. **Objek yang terlewat cenderung lebih kecil daripada sebaran luas ground truth secara keseluruhan**, yaitu median 3343.2 berbanding 7051.6 px persegi. Temuan ini konsisten dengan kesulitan deteksi objek kecil yang dikenal luas dalam literatur.
-2. **Adegan padat memiliki rasio false negative lebih tinggi**, yaitu 0.7269 berbanding 0.527 pada adegan jarang. Lesi kecil yang berdesakan tetap menjadi kasus tersulit.
+1. **Objek yang terlewat cenderung lebih kecil daripada sebaran luas ground truth secara keseluruhan**, yaitu median 5328.1 berbanding 7051.6 px persegi. Temuan ini konsisten dengan kesulitan deteksi objek kecil yang dikenal luas dalam literatur.
+2. **Adegan padat memiliki rasio false negative lebih tinggi**, yaitu 0.8101 berbanding 0.7808 pada adegan jarang. Lesi kecil yang berdesakan tetap menjadi kasus tersulit.
 3. Kedua temuan dicatat sebagai keterbatasan model, bukan usulan eksperimen lanjutan. Lihat bagian keterbatasan pada README untuk pengungkapan lengkapnya.
 
 ## PENTING: tidak ada perubahan yang diterapkan otomatis
