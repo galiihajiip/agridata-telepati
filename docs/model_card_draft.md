@@ -15,8 +15,8 @@ sementara.
 | Arsitektur | YOLOv8n (Ultralytics), sekitar 3,0 juta parameter |
 | Masukan | Citra RGB, ukuran 640 x 640 |
 | Keluaran | *Bounding box* format xyxy, kelas, dan *confidence score* |
-| Ukuran berkas | 6.253.994 byte |
-| SHA-256 | `9d74fffdd977a7bb6749bc828fe908278c5d3eaa24c3cfdbbe5a560d41f5d308` |
+| Ukuran berkas | 6.260.394 byte |
+| SHA-256 | `c631a363ab580ca614c52b51eaaf798e31c44a3ba92f2aa05efcfe27f5a86965` |
 | Versi pemetaan kelas | 1.0.0 |
 
 ## Penggunaan yang dituju
@@ -63,7 +63,7 @@ Satu pasangan citra identik lintas *split* latih dan uji dikeluarkan dari
 | Parameter | Nilai |
 |---|---|
 | *Pretrained* | `False`, dibangun dari definisi arsitektur saja |
-| *Epoch* | 50 |
+| *Epoch* | 100 |
 | Ukuran citra | 640 |
 | *Batch size* | 16 |
 | *Optimizer* | AdamW |
@@ -71,7 +71,7 @@ Satu pasangan citra identik lintas *split* latih dan uji dikeluarkan dari
 | *Weight decay* | 0,0005 |
 | *Seed* | 42 |
 | Perangkat | Apple Silicon MPS |
-| Durasi | 7,34 jam |
+| Durasi | 20,84 jam |
 
 Konfigurasi dipilih dari 21 percobaan terkontrol. Alasan setiap parameter
 tercatat pada `configs/final_model_config.yaml` dan
@@ -86,41 +86,34 @@ Konvensi: mAP@50 dari `model.val()`, *F1-Score* sebagai rata-rata antar
 kelas (*macro*) dari kurva *F1* pada titik operasi terbaik, ambang NMS IoU
 0,5.
 
-| Metrik | Nilai |
-|---|---:|
-| **mAP@50** | **64,01%** |
-| **F1-Score** | **63,83%** |
-| mAP@0.5:0.95 | 0,3856 |
-| *Precision* pada titik operasi | 0,6406 |
-| *Recall* pada titik operasi | 0,6237 |
+| Metrik | Valid | Test |
+|---|---:|---:|
+| **mAP@50** | **66,78%** | **65,96%** |
+| **F1-Score macro** | **68,26%** | **66,41%** |
+| mAP@0.5:0.95 | 0,4141 | 0,4330 |
+| *Precision* pada titik operasi | 0,7188 | 0,6983 |
+| *Recall* pada titik operasi | 0,6722 | 0,6634 |
 
-AP@0.5 per kelas berkisar dari 0,9631 (Narrow brown) sampai 0,2909
-(Brown spot). Rincian lengkap tersedia pada
+AP@0.5 per kelas berkisar dari 0,9755 (Narrow brown) sampai 0,3303
+(Brown spot) pada *split* valid. Rincian lengkap tersedia pada
 `artifacts/reports/evaluation_valid.md`.
 
-Evaluasi tunggal pada *split* test, yang tidak pernah dipakai untuk
-penyetelan, dilakukan setelah model dibekukan:
-
-| Metrik | Test |
-|---|---:|
-| mAP@0.5 | 0,6145 |
-| mAP@0.5:0.95 | 0,3998 |
-| *Precision* | 0,6595 |
-| *Recall* | 0,6160 |
-
-Selisih mAP@0.5 terhadap validasi hanya -0,0132, tanpa indikasi *overfitting*
-terhadap *split* validasi.
+Evaluasi pada *split* test dijalankan satu kali setelah model dibekukan, dan
+*split* itu tidak pernah dipakai untuk penyetelan maupun untuk memilih model
+final. Selisih mAP@0.5 terhadap validasi hanya -0,0082, tanpa indikasi
+*overfitting* terhadap *split* validasi.
 
 ## Keterbatasan
 
 1. **Model dilatih dari nol** tanpa *external pretrained weights*, sesuai
    aturan kompetisi. Model tidak mewarisi representasi visual umum.
-2. ***Recall* rendah merupakan pembatas utama.** Nilai *recall* tertinggi
-   pada seluruh rentang *confidence threshold* hanya 0,3331. Komposisi
-   kesalahan didominasi *false negative* sebesar 63,5 persen.
+2. ***Recall* merupakan pembatas utama.** Pada sapuan *confidence threshold*
+   dengan metrik lokal *micro*, *recall* tertinggi hanya 0,2365. Komposisi
+   kesalahan didominasi *false negative* sebesar 71,4 persen, sedangkan salah
+   kelas hanya 0,4 persen.
 3. **Objek kecil sulit dideteksi.** Median luas *bounding box* yang terlewat
    sekitar setengah dari median keseluruhan.
-4. **Performa antar kelas timpang**, dengan selisih AP@0.5 melebihi 0,67
+4. **Performa antar kelas timpang**, dengan selisih AP@0.5 melebihi 0,64
    antara kelas terbaik dan terburuk.
 5. **Ketidakseimbangan kelas nyata**, yaitu rasio 22,6 kali pada *split*
    latih. Mitigasi *oversampling* diuji dan tidak menunjukkan manfaat pada
