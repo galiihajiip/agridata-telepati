@@ -1,12 +1,13 @@
 # Laporan Evaluasi, split: `test`
 
-Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `762b6e73bfce8bd4c0fba79253eaf76c6f2743f3`
+Bobot: `runs/detect/final/model_100epoch/weights/best.pt`  |  Commit Git: `166f183db7ac53d07f74cdee2a82967a76793219`
 
 ## Metrik native Ultralytics, sumber kebenaran untuk mAP
 
 - mAP@0.5: 0.6596
 - mAP@0.5:0.95: 0.4330
 - Ambang NMS IoU: 0.5
+- Test-Time Augmentation (TTA): False
 - F1 macro pada titik operasi terbaik: 0.6641 (confidence 0.2382)
 - Precision dan recall pada titik operasi tersebut: 0.6983 / 0.6634
 
