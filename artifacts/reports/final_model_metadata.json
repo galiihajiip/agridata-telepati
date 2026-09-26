@@ -1,6 +1,6 @@
 {
   "model_name": "agridata-telepati8-yolov8n",
-  "architecture": "YOLOv8n (Ultralytics), built from architecture-only .yaml, pretrained=False",
+  "architecture": "YOLOv8n (Ultralytics), dibangun dari definisi arsitektur yolov8n.yaml, pretrained=False",
   "task": "object_detection",
   "num_classes": 11,
   "class_names": [
@@ -22,15 +22,17 @@
     "channels": 3,
     "format": "RGB"
   },
-  "output": "bounding boxes (xyxy) + class + confidence, per canonical class",
-  "training_config_path": "configs/experiment_100epoch_config.yaml",
+  "output": "bounding box (xyxy) + kelas + confidence, per kelas canonical",
+  "training_config_path": "configs/final_model_config.yaml",
   "compliance": {
     "external_pretrained_weights": false,
     "external_dataset_used": false,
     "llm_api_dataset_processing": false,
-    "yolo_offline_enforced": true
+    "yolo_offline_enforced": true,
+    "test_data_used_for_tuning": false,
+    "official_splits_preserved": true
   },
-  "status": "TRAINED — weights produced by 100-epoch run, verified via clean-environment load",
+  "status": "FINAL, bobot dihasilkan dan dievaluasi",
   "selected_at_utc": "2026-09-17T11:58:47.857491+00:00",
   "git_commit_at_selection": "9724a9b25a4c36e9ebf414fca841824afcedf74f",
   "trained_at_utc": "2026-09-23T02:54:27.068862+00:00",
@@ -54,5 +56,42 @@
     "method": null,
     "url": null,
     "note": "Prepared in Block 19; not yet published pending explicit confirmation."
-  }
+  },
+  "weights_size_bytes": 6260394,
+  "training": {
+    "epochs": 100,
+    "duration_hours": 20.84,
+    "device": "mps",
+    "seed": 42,
+    "dataset_manifest_hash": "cf81abe0fbdae2740ad9eb27741f7fa0ef8cfcaabb18fd150ef16ba2ae55ab44",
+    "git_commit_at_training": "38754ce334149e7eeb633edb8d9d81820bad3b13"
+  },
+  "reported_metrics": {
+    "inference_image_size": 640,
+    "nms_iou": 0.5,
+    "valid": {
+      "mAP50": 0.6677781108773165,
+      "macro_f1": 0.6826221301374376,
+      "mAP50_95": 0.41411444537573466,
+      "macro_f1_confidence": 0.2502502502502503
+    },
+    "test": {
+      "mAP50": 0.6595577057162226,
+      "macro_f1": 0.664149056978226,
+      "mAP50_95": 0.43303297774774835,
+      "macro_f1_confidence": 0.23823823823823823
+    }
+  },
+  "supersedes": [
+    {
+      "run": "20 epoch",
+      "valid_mAP50": 0.562,
+      "archive": "artifacts/archive/20epoch_run/"
+    },
+    {
+      "run": "50 epoch",
+      "valid_mAP50": 0.6401,
+      "archive": "artifacts/archive/50epoch_640_run/"
+    }
+  ]
 }
