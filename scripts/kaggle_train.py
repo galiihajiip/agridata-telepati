@@ -182,6 +182,9 @@ def run_parent(args: argparse.Namespace, run_dir: Path) -> int:
 
     cmd = [sys.executable, __file__, *sys.argv[1:], "--child"]
     env = os.environ.copy()
+    # Pada mode commit Kaggle stdout berupa pipe yang di-buffer per blok,
+    # sehingga log tampak berhenti berjam-jam. Paksa tanpa buffer.
+    env["PYTHONUNBUFFERED"] = "1"
     site_dir = str(Path(__file__).resolve().parent / "kaggle_site")
     env["PYTHONPATH"] = os.pathsep.join(p for p in (site_dir, env.get("PYTHONPATH")) if p)
     child = subprocess.Popen(cmd, start_new_session=True, env=env)
@@ -216,6 +219,7 @@ def run_parent(args: argparse.Namespace, run_dir: Path) -> int:
 
 def main() -> int:
     args = parse_args()
+    sys.stdout.reconfigure(line_buffering=True)
     # Menerima juga path berkas data.yaml, bukan hanya foldernya.
     if args.data_root.name == "data.yaml":
         args.data_root = args.data_root.parent
