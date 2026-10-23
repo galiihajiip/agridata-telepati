@@ -64,7 +64,11 @@ test dievaluasi satu kali setelah pilihan dibekukan.
 
 ## Kandidat
 
-| Config | Arsitektur | Tujuan |
-|---|---|---|
-| `configs/kaggle/yolov8s_640_300ep.yaml` | YOLOv8s | Kapasitas lebih besar dan jadwal pelatihan dari nol yang lazim |
-| `configs/kaggle/yolov8s_p2_640_300ep.yaml` | YOLOv8s + head P2 | Objek sangat kecil (Brown spot, Blast) |
+| Kandidat | Config | Arsitektur | Tujuan |
+|---|---|---|---|
+| A | `configs/kaggle/yolov8s_640_300ep.yaml` | YOLOv8s, 640 | Kapasitas lebih besar dan jadwal pelatihan dari nol yang lazim |
+| B | `configs/kaggle/yolov8s_p2_640_250ep.yaml` | YOLOv8s + head P2, 640 | Objek sangat kecil (Brown spot, Blast) |
+| C | `configs/kaggle/yolov8s_1024_150ep.yaml` | YOLOv8s, 1024 | Objek kecil lewat resolusi latih lebih tinggi |
+| D | `configs/kaggle/yolov8m_640_150ep.yaml` | YOLOv8m, 640 | Kapasitas model lebih besar lagi |
+
+Setiap config dipangkas agar muat dalam satu sesi Kaggle 11 jam.

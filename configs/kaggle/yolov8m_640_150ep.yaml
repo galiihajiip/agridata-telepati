@@ -1,0 +1,28 @@
+# KANDIDAT KAGGLE D: YOLOv8m dari nol, 640, 150 epoch.
+#
+# Dijalankan dengan:
+#     python scripts/kaggle_train.py --config configs/kaggle/yolov8m_640_150ep.yaml
+#
+# Identik dengan kandidat A kecuali arsitektur dan jumlah epoch. Varian m
+# memiliki kapasitas sekitar 2,3x varian s dan biaya per epoch sekitar 2,5x.
+# Epoch dipangkas menjadi 150 agar muat dalam satu sesi Kaggle 11 jam sebelum
+# tenggat submission.
+
+seed: 42
+
+model_arch: "yolov8m.yaml"   # HANYA definisi arsitektur
+pretrained: false
+
+image_size: 640
+batch_size: 32
+epochs: 150
+patience: 50
+optimizer: "SGD"
+learning_rate: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+cos_lr: false
+close_mosaic: 10
+workers: 4
+
+flipud: 0.0

@@ -1,7 +1,7 @@
-# KANDIDAT KAGGLE B: YOLOv8s dengan head P2 (stride 4), dari nol, 640, 300 epoch.
+# KANDIDAT KAGGLE B: YOLOv8s dengan head P2 (stride 4), dari nol, 640, 250 epoch.
 #
 # Dijalankan dengan:
-#     python scripts/kaggle_train.py --config configs/kaggle/yolov8s_p2_640_300ep.yaml
+#     python scripts/kaggle_train.py --config configs/kaggle/yolov8s_p2_640_250ep.yaml
 #
 # Identik dengan kandidat A kecuali arsitekturnya. Head P2 menambah peta fitur
 # beresolusi 160x160 untuk objek sangat kecil. Alasannya dari analisis
@@ -11,7 +11,8 @@
 # merusak (0,6277 menjadi 0,4200 pada 960), sehingga kapasitas objek kecil
 # ditambahkan pada arsitektur, bukan pada resolusi.
 #
-# Lebih mahal sekitar 1,5x per epoch dibanding kandidat A.
+# Lebih mahal sekitar 1,5x per epoch dibanding kandidat A, sehingga epoch
+# dipangkas menjadi 250 agar muat dalam satu sesi Kaggle 11 jam.
 
 seed: 42
 
@@ -20,7 +21,7 @@ pretrained: false
 
 image_size: 640
 batch_size: 32
-epochs: 300
+epochs: 250
 patience: 50
 optimizer: "SGD"
 learning_rate: 0.01
