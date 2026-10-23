@@ -47,6 +47,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", required=True, type=Path)
     parser.add_argument("--data-root", required=True, type=Path, help="Folder hasil scripts/export_kaggle_dataset.py.")
     parser.add_argument("--work-dir", default=Path("/kaggle/working"), type=Path)
+    parser.add_argument(
+        "--local-data-dir", default=Path("/tmp/agridata-yolo"), type=Path,
+        help="Salinan dataset di disk lokal; /kaggle/input terlalu lambat untuk dataloader.",
+    )
     parser.add_argument("--run-name", default=None, help="Bawaan: nama berkas config tanpa ekstensi.")
     parser.add_argument("--resume-from", default=None, type=Path, help="Folder run dari output sesi sebelumnya.")
     parser.add_argument("--device", default="0,1", help="'0,1' untuk T4 x2, '0' untuk P100.")
@@ -177,7 +181,10 @@ def run_parent(args: argparse.Namespace, run_dir: Path) -> int:
             shutil.copy2(backup, last)
 
     cmd = [sys.executable, __file__, *sys.argv[1:], "--child"]
-    child = subprocess.Popen(cmd, start_new_session=True)
+    env = os.environ.copy()
+    site_dir = str(Path(__file__).resolve().parent / "kaggle_site")
+    env["PYTHONPATH"] = os.pathsep.join(p for p in (site_dir, env.get("PYTHONPATH")) if p)
+    child = subprocess.Popen(cmd, start_new_session=True, env=env)
     deadline = time.time() + args.budget_hours * 3600
     print(f"Pelatihan berjalan (pid {child.pid}), anggaran {args.budget_hours} jam.")
 
@@ -221,7 +228,13 @@ def main() -> int:
     if args.child:
         return run_child(args, cfg, run_dir, args.work_dir / "data.yaml")
 
-    write_data_yaml(args.data_root, args.work_dir)
+    data_root = args.data_root
+    if args.local_data_dir:
+        if not (args.local_data_dir / "data.yaml").exists():
+            print(f"Menyalin dataset ke disk lokal {args.local_data_dir} ...")
+            shutil.copytree(args.data_root, args.local_data_dir, dirs_exist_ok=True)
+        data_root = args.local_data_dir
+    write_data_yaml(data_root, args.work_dir)
     return run_parent(args, run_dir)
 
 
