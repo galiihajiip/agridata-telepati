@@ -1,0 +1,33 @@
+# KANDIDAT KAGGLE B: YOLOv8s dengan head P2 (stride 4), dari nol, 640, 300 epoch.
+#
+# Dijalankan dengan:
+#     python scripts/kaggle_train.py --config configs/kaggle/yolov8s_p2_640_300ep.yaml
+#
+# Identik dengan kandidat A kecuali arsitekturnya. Head P2 menambah peta fitur
+# beresolusi 160x160 untuk objek sangat kecil. Alasannya dari analisis
+# kesalahan: median luas bbox Brown spot hanya sekitar 0,2 persen citra (kira-
+# kira 29x29 px pada 640), dan objek yang terlewat bermedian 3.343 px persegi,
+# separuh median keseluruhan. Menaikkan resolusi inferensi saja sudah terbukti
+# merusak (0,6277 menjadi 0,4200 pada 960), sehingga kapasitas objek kecil
+# ditambahkan pada arsitektur, bukan pada resolusi.
+#
+# Lebih mahal sekitar 1,5x per epoch dibanding kandidat A.
+
+seed: 42
+
+model_arch: "yolov8s-p2.yaml"   # HANYA definisi arsitektur
+pretrained: false
+
+image_size: 640
+batch_size: 32
+epochs: 300
+patience: 50
+optimizer: "SGD"
+learning_rate: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+cos_lr: false
+close_mosaic: 15
+workers: 4
+
+flipud: 0.0
