@@ -209,6 +209,9 @@ def run_parent(args: argparse.Namespace, run_dir: Path) -> int:
 
 def main() -> int:
     args = parse_args()
+    # Menerima juga path berkas data.yaml, bukan hanya foldernya.
+    if args.data_root.name == "data.yaml":
+        args.data_root = args.data_root.parent
     os.environ.setdefault("YOLO_OFFLINE", "1")
     cfg = load_config(args.config)
     run_name = args.run_name or args.config.stem
