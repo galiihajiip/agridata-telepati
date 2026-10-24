@@ -77,3 +77,7 @@ artifacts/archive/*.log
 # Block 12: oversampled train-only variant (symlinks + labels), regenerable
 # via scripts/prepare_oversampled_train.py, never committed.
 /data/prepared_oversampled/
+
+# Folder kerja hasil unduhan Kaggle/Colab (bobot, log, prediksi mentah).
+# Bukti yang dilaporkan disalin ke artifacts/candidates/ dan artifacts/reports/.
+/kaggle_results/

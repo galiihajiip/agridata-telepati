@@ -178,3 +178,26 @@ Pemeriksaan penutup setelah pembersihan:
 | Rujukan ke berkas yang sudah dihapus | tidak ada |
 | Uji unit | 69 lulus |
 | *Docstring* berbahasa Inggris | tidak ada |
+
+---
+
+## Pembersihan 24 Oktober 2026
+
+Dilakukan setelah model final diganti ke YOLOv8s-P2. Setiap berkas diperiksa
+apakah masih dirujuk README, notebook, kode, tes, atau dokumen audit sebelum
+dihapus.
+
+| Berkas | Tindakan | Alasan |
+|---|---|---|
+| `data_config.yaml` | Dihapus | Config awal berisi 9 kelas dengan nama mentah, bukan 11 kelas canonical. Tidak dirujuk apa pun dan menyesatkan pembaca |
+| `scripts/resume_training_960.py`, `configs/final_model_config_960.yaml`, `artifacts/reports/experiment_960_status.md`, `artifacts/archive/960_paused/` | Dihapus | Eksperimen YOLOv8n resolusi 960 yang dijeda pada *epoch* 7 dan tidak pernah dilanjutkan. Pertanyaan resolusi tinggi kemudian diuji ulang oleh kandidat C |
+| `artifacts/archive/*.log` | Dihapus | Log mentah pelatihan, tidak dirujuk, dan sudah digantikan ringkasan JSON |
+| `kaggle_results/` | Dipindah keluar repository | Folder kerja unduhan Kaggle dan Colab. Bukti yang dilaporkan disalin ke `artifacts/candidates/`, dan folder ini kini masuk `.gitignore` |
+| `artifacts/figures/error_analysis/`, `artifacts/figures/predictions/` | Dikosongkan lalu dibuat ulang | Berisi campuran contoh dari model lama dan model final karena nama berkas mengikuti ID citra. Dibuat ulang hanya dari model final; metrik hasil evaluasi ulang identik dengan sebelumnya |
+| `artifacts/reports/evaluation_*`, `official_metrics_*`, `final_model_metadata.json`, `block13_*`, `block15_*`, `threshold_sensitivity_valid.json` milik YOLOv8n | Dipindah ke `artifacts/archive/100epoch_v8n_run/` | Riwayat model final sebelumnya, tetap dirujuk README dan audit |
+| `configs/final_model_config.yaml` milik YOLOv8n | Disalin ke `configs/archive_100epoch_v8n_config.yaml` | Memuat penalaran pemilihan hyperparameter yang dikutip notebook Bagian 12 |
+
+Yang sengaja dipertahankan: skrip 21 percobaan penyaringan beserta
+`artifacts/experiments/`, karena menghasilkan bukti yang dikutip notebook
+Bagian 9 sampai 12; arsip 20, 50, dan 100 *epoch*, karena dirujuk tabel
+riwayat model.

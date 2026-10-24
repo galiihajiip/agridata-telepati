@@ -1,6 +1,6 @@
 {
-  "model_name": "agridata-telepati8-yolov8n",
-  "architecture": "YOLOv8n (Ultralytics), dibangun dari definisi arsitektur yolov8n.yaml, pretrained=False",
+  "model_name": "agridata-telepati8-yolov8s-p2",
+  "architecture": "yolov8s-p2 (Ultralytics), dibangun dari definisi arsitektur yolov8s-p2.yaml, pretrained=False",
   "task": "object_detection",
   "num_classes": 11,
   "class_names": [
@@ -23,75 +23,53 @@
     "format": "RGB"
   },
   "output": "bounding box (xyxy) + kelas + confidence, per kelas canonical",
-  "training_config_path": "configs/final_model_config.yaml",
+  "training_config_path": "configs/kaggle/yolov8s_p2_640_250ep.yaml",
   "compliance": {
     "external_pretrained_weights": false,
     "external_dataset_used": false,
     "llm_api_dataset_processing": false,
     "yolo_offline_enforced": true,
+    "amp_check_pretrained_download_blocked": true,
     "test_data_used_for_tuning": false,
     "official_splits_preserved": true
   },
   "status": "FINAL, bobot dihasilkan dan dievaluasi",
-  "selected_at_utc": "2026-09-17T11:58:47.857491+00:00",
-  "git_commit_at_selection": "9724a9b25a4c36e9ebf414fca841824afcedf74f",
-  "trained_at_utc": "2026-09-23T02:54:27.068862+00:00",
-  "git_commit_at_training": "38754ce334149e7eeb633edb8d9d81820bad3b13",
+  "registered_at_utc": "2026-10-24T10:00:41.032512+00:00",
+  "git_commit_at_registration": "b169142419518eee111afc865136c80988a3bd76",
   "dataset_manifest_hash": "cf81abe0fbdae2740ad9eb27741f7fa0ef8cfcaabb18fd150ef16ba2ae55ab44",
-  "weights_path": "runs/detect/final/model_100epoch/weights/best.pt",
-  "weights_checksum_sha256": "c631a363ab580ca614c52b51eaaf798e31c44a3ba92f2aa05efcfe27f5a86965",
-  "weights_file_size_bytes": 6260394,
-  "epochs_trained": 100,
-  "revision_note": "Extended from 50 to 100 epochs. mAP@0.5 improved from 0.6277 to 0.6567. This is a fresh 100-epoch run from scratch with patience=20.",
-  "results": {
-    "mAP50": 0.65672906570373,
-    "mAP50_95": 0.4204549302354838,
-    "precision": 0.6919960007629866,
-    "recall": 0.6661727734798185,
-    "note": "See artifacts/reports/evaluation_valid.md for per-class breakdown and the local F1 metric documented run-to-run variance."
-  },
+  "weights_path": "runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt",
+  "weights_checksum_sha256": "4dc86ac0e53d2849fb1b79f1a68dcb5284ae6f1e8fef27e4416fa54c6b772a9f",
+  "weights_size_bytes": 21754576,
   "clean_process_load_and_inference_validated": true,
-  "release": {
-    "published": false,
-    "method": null,
-    "url": null,
-    "note": "Prepared in Block 19; not yet published pending explicit confirmation."
-  },
-  "weights_size_bytes": 6260394,
   "training": {
-    "epochs": 100,
-    "duration_hours": 20.84,
-    "device": "mps",
-    "seed": 42,
-    "dataset_manifest_hash": "cf81abe0fbdae2740ad9eb27741f7fa0ef8cfcaabb18fd150ef16ba2ae55ab44",
-    "git_commit_at_training": "38754ce334149e7eeb633edb8d9d81820bad3b13"
+    "platform": "Kaggle Notebooks, 2x NVIDIA Tesla T4 (DDP), Ultralytics 8.4.154, torch 2.11.0+cu128",
+    "epochs_configured": 250,
+    "epochs_completed": 250,
+    "best_epoch": 238,
+    "duration_hours": 8.11,
+    "seed": 42
   },
   "reported_metrics": {
     "inference_image_size": 640,
     "nms_iou": 0.5,
     "valid": {
-      "mAP50": 0.6677781108773165,
-      "macro_f1": 0.6826221301374376,
-      "mAP50_95": 0.41411444537573466,
-      "macro_f1_confidence": 0.2502502502502503
+      "mAP50": 0.7070637800180504,
+      "macro_f1": 0.7232695953604829,
+      "mAP50_95": 0.46109939944862033,
+      "macro_f1_confidence": 0.21421421421421422,
+      "source": "artifacts/reports/evaluation_valid.json"
     },
     "test": {
-      "mAP50": 0.6595577057162226,
-      "macro_f1": 0.664149056978226,
-      "mAP50_95": 0.43303297774774835,
-      "macro_f1_confidence": 0.23823823823823823
+      "mAP50": 0.7064949660328684,
+      "macro_f1": 0.7144837071177097,
+      "mAP50_95": 0.4829752058172297,
+      "macro_f1_confidence": 0.26226226226226224,
+      "source": "artifacts/reports/evaluation_test.json"
     }
   },
-  "supersedes": [
-    {
-      "run": "20 epoch",
-      "valid_mAP50": 0.562,
-      "archive": "artifacts/archive/20epoch_run/"
-    },
-    {
-      "run": "50 epoch",
-      "valid_mAP50": 0.6401,
-      "archive": "artifacts/archive/50epoch_640_run/"
-    }
-  ]
+  "release": {
+    "published": false,
+    "method": null,
+    "url": null
+  }
 }

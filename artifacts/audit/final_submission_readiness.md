@@ -1,230 +1,149 @@
 # Audit Kesiapan Submission
 
-Audit menyeluruh terhadap paket submission. Seluruh angka pada dokumen ini
-berasal dari pemeriksaan yang dijalankan saat audit, bukan dari catatan
-sebelumnya.
-
-Tanggal audit: 26 September 2026
-Tenggat submission: 26 September 2026
-Repository: https://github.com/galiihajiip/agridata
+Audit menyeluruh terhadap paket submission, dijalankan ulang pada 24 Oktober
+2026 setelah model final diganti dari YOLOv8n ke YOLOv8s-P2. Setiap butir di
+bawah berasal dari pemeriksaan yang dijalankan saat audit, bukan dari catatan
+sebelumnya. Perintah pemeriksaannya disertakan agar dapat diulang.
 
 ## 1. Ringkasan Status
 
-| Kategori | LULUS | TERBUKA | DI LUAR JANGKAUAN |
-|---|---:|---:|---:|
-| Model dan bobot | 5 | 0 | 0 |
-| Metrik dan konsistensi | 6 | 0 | 0 |
-| Dataset | 6 | 0 | 0 |
-| Notebook | 7 | 0 | 0 |
-| Dokumentasi | 6 | 0 | 0 |
-| Kode dan pengujian | 4 | 0 | 0 |
-| Kepatuhan regulasi | 8 | 0 | 0 |
-| Repository dan Git | 4 | 0 | 0 |
-| Rilis | 0 | 2 | 0 |
-| Dokumen legal dan tim | 1 | 0 | 2 |
-| **Total** | **47** | **2** | **2** |
-
-Paket teknis siap. Dua item terbuka bersifat mekanis dan dua item lain berada
-di luar kemampuan verifikasi otomatis.
+| Area | Status |
+|---|---|
+| Model final dan bobot | Siap, *checksum* tercatat dan cocok |
+| Metrik yang dilaporkan | Siap, satu sumber kebenaran, identik di README, notebook, model card, dan audit |
+| Kepatuhan regulasi | Lulus seluruh butir yang dapat diverifikasi otomatis |
+| Notebook | Dieksekusi ulang penuh, 0 *error*, 0 sel belum dieksekusi |
+| Uji unit | 69 lulus |
+| Daftar periksa reproduktibilitas | 9 lulus, 1 peringatan (*working tree* belum dikomit saat audit) |
+| GitHub Release bobot | **Belum dipublikasikan**, lihat bagian 9 |
 
 ## 2. Model Final
 
-| Field | Nilai | Status |
-|---|---|---|
-| Berkas | `runs/detect/final/model_100epoch/weights/best.pt` | LULUS |
-| Arsitektur | YOLOv8n dari `yolov8n.yaml`, `pretrained=False` | LULUS |
-| Ukuran | 6.260.394 byte | LULUS |
-| SHA-256 | `c631a363ab580ca614c52b51eaaf798e31c44a3ba92f2aa05efcfe27f5a86965` | LULUS, diverifikasi dengan `shasum -c` |
-| Pemuatan proses bersih | berhasil, 11 kelas | LULUS |
-| Inferensi | menghasilkan deteksi | LULUS |
+| Field | Nilai |
+|---|---|
+| Arsitektur | YOLOv8s-P2, dari `yolov8s-p2.yaml`, `pretrained=False` |
+| Bobot | `runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt` |
+| SHA-256 | `4dc86ac0e53d2849fb1b79f1a68dcb5284ae6f1e8fef27e4416fa54c6b772a9f` |
+| Ukuran | 21.754.576 byte |
+| Config | `configs/kaggle/yolov8s_p2_640_250ep.yaml` (salinan beranotasi: `configs/final_model_config.yaml`) |
+| Pelatihan | Kaggle Notebooks, 2x NVIDIA Tesla T4, DDP dengan AMP, 250 *epoch*, 8,11 jam |
+| Pemilihan | Dari empat kandidat skala penuh, hanya berdasarkan *split* valid (`artifacts/candidates/README.md`) |
+
+Pemeriksaan checkpoint, dari proses Python yang bersih:
+
+```bash
+YOLO_OFFLINE=1 python -c "from ultralytics import YOLO; m=YOLO('runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt'); print(m.ckpt['train_args']['model'], m.ckpt['train_args']['pretrained'], list(m.names.values()))"
+# yolov8s-p2.yaml False ['Bacterial leaf blight', ..., 'Tungro']  (11 kelas, urutan canonical)
+```
 
 ## 3. Metrik yang Dilaporkan
 
-Konfigurasi: resolusi inferensi 640, ambang NMS IoU 0,5, IoU pencocokan 0,5.
-
 | Metrik | *Split* valid | *Split* test |
 |---|---:|---:|
-| mAP@50 | **66,78%** | **65,96%** |
-| *F1-Score* macro | **68,26%** | **66,41%** |
-| mAP@0.5:0.95 | 0,4141 | 0,4330 |
+| **mAP@50** | **70,71%** | 70,65% |
+| **F1-Score macro** | **72,33%** | 71,45% |
+| mAP@0.5:0.95 | 0,4611 | 0,4830 |
 
-*Split* test tidak pernah dipakai untuk penyetelan apa pun, termasuk untuk
-memilih model final. Selisih valid terhadap test sebesar 0,82 poin pada mAP dan
-1,85 poin pada *F1* konsisten dengan generalisasi yang stabil pada kedua
-*split*. Satu evaluasi *held-out*
-tidak cukup untuk membuktikan ketiadaan *overfitting*.
+Angka untuk form submission adalah angka *split* valid: mAP@50 **70,71** dan
+*F1-Score* **72,33**.
 
-| Pemeriksaan konsistensi | Hasil | Status |
+Jalur angka: `scripts/evaluate.py` menulis `artifacts/reports/evaluation_{split}.json`,
+lalu `scripts/compute_official_metrics.py` membacanya tanpa menghitung ulang dan
+menulis `official_metrics_{split}.json`. README, notebook, model card, dan
+`metrics_provenance.md` mengutip angka yang sama.
+
+Kestabilan: evaluasi *split* valid dijalankan tiga kali (satu di CPU, dua di
+MPS) dan menghasilkan mAP@50, *F1* macro, jumlah deteksi, dan hitungan analisis
+kesalahan yang identik sampai digit terakhir. Rincian pada
+`metrics_provenance.md` bagian 7.2.
+
+## 4. Kepatuhan Regulasi
+
+| Aturan | Status | Bukti |
 |---|---|---|
-| Artefak evaluasi, notebook, README, model card | angka identik | LULUS |
-| Sumber kebenaran tunggal | `evaluate.py` menghasilkan, `compute_official_metrics.py` hanya membaca | LULUS |
-| Nilai metrik historis | dibedakan pada `metrics_provenance.md` | LULUS |
-| Koreksi metodologi *F1* | didokumentasikan pada `metrics_methodology.md` | LULUS |
-| Ambang NMS | 0,5 seragam pada kode, artefak, dan dokumen | LULUS |
-| Definisi *F1* | dinyatakan sebagai implementasi lokal macro, bukan angka resmi panitia | LULUS |
+| Tanpa *external pretrained weights* | LULUS | Checkpoint final: `model=yolov8s-p2.yaml`, `pretrained=False`. `build_compliant_model` menolak berkas `.pt` sebagai arsitektur. Tidak ada `yolo*.pt` di repository maupun di cache Ultralytics |
+| Pengunduhan bobot pretrained oleh pustaka | LULUS, setelah perbaikan | Pengecekan AMP Ultralytics di GPU mengunduh `yolo26n.pt` walaupun `YOLO_OFFLINE` aktif. Ditemukan pada log percobaan pertama, percobaan itu dihentikan, lalu diblokir lewat `scripts/kaggle_site/sitecustomize.py` sebelum seluruh kandidat dilatih. Bobot itu tidak pernah masuk ke model mana pun |
+| Tanpa dataset eksternal | LULUS | Satu-satunya data adalah dataset resmi. `scripts/export_kaggle_dataset.py` hanya menyalin `data/prepared` |
+| Tanpa pemrosesan dataset dengan LLM/API | LULUS | Tidak ada panggilan API atau pustaka LLM pada `src/` maupun `scripts/` |
+| *Split* resmi dipertahankan | LULUS | valid 2.106 dan test 1.059 citra, sama dengan dataset mentah. Train 10.132 dari 10.133, satu citra dikeluarkan karena identik dengan citra test (MD5) |
+| *Split* test tidak dipakai untuk penyetelan | LULUS | Pemilihan kandidat dan ensemble hanya memakai *split* valid. Test dievaluasi untuk model terpilih saja, setelah pilihan dikunci |
+| 11 kelas canonical | LULUS | `names` pada checkpoint identik dengan `CANONICAL_CLASSES` versi pemetaan 1.0.0 |
+| `YOLO_OFFLINE` pada skrip yang memuat Ultralytics | LULUS | Seluruh 9 skrip yang mengimpor Ultralytics menyetel `YOLO_OFFLINE` atau memuatnya lewat `agridata.training` |
+| Bobot dipublikasikan lewat GitHub Release atau Git LFS | **BELUM** | Rilis disiapkan, perintah ada di `weights/README.md` |
 
-## 4. Dataset
+## 5. Dataset
 
-| Pemeriksaan | Hasil | Status |
-|---|---|---|
-| Jumlah split | train 10.133, valid 2.106, test 1.059 citra | LULUS |
-| Anotasi canonical | 20.163, 4.888, 2.670 | LULUS |
-| Pemetaan 11 kelas | nol kategori tidak terpetakan pada ketiga split | LULUS |
-| Integritas referensi | nol berkas hilang, nol anotasi yatim, nol bbox tidak valid | LULUS |
-| Kebocoran antar split | satu duplikat persis ditemukan dan dikeluarkan dari manifest latih | LULUS |
-| Dataset mentah | tidak diubah, tidak ter-commit | LULUS |
+| *Split* | Citra mentah | Citra siap latih | Anotasi canonical |
+|---|---:|---:|---:|
+| train | 10.133 | 10.132 | 20.163 |
+| valid | 2.106 | 2.106 | 4.888 |
+| test | 1.059 | 1.059 | 2.670 |
 
-## 5. Notebook
+Dataset mentah tidak pernah diubah. `data/prepared` dibangun ulang identik byte
+per byte oleh `scripts/prepare_dataset.py` dengan *seed* 42 (butir 1 daftar
+periksa reproduktibilitas).
 
-| Pemeriksaan | Hasil | Status |
-|---|---|---|
-| Jumlah sel | 127 sel, 49 sel kode | LULUS |
-| Eksekusi | 0 *error*, 0 sel belum dieksekusi | LULUS |
-| Figur tertanam | 18 | LULUS |
-| Struktur | 22 bagian utama | LULUS |
-| Bahasa | Bahasa Indonesia, istilah asing dimiringkan | LULUS |
-| Suara penulis | orang pertama jamak "kami" pada 70 dari 78 sel markdown | LULUS |
-| *Em dash* | 0 | LULUS |
-| Keluaran cocok dengan artefak | ya | LULUS |
+## 6. Notebook
 
-## 6. Dokumentasi
-
-| Berkas | Status |
-|---|---|
-| `README.md` | LULUS |
-| `docs/model_card_draft.md` | LULUS, memuat penggunaan yang tidak dianjurkan |
-| `weights/README.md` | LULUS |
-| `references/README.md` | LULUS, audit sitasi per kalimat |
-| `SUBMISSION_CHECKLIST.md` | LULUS |
-| `docs/originality_statement_placeholder.md` | LULUS sebagai penanda kewajiban |
-
-Tautan internal pada seluruh berkas Markdown: **0 rusak**.
+- Dieksekusi ulang penuh dengan `jupyter nbconvert --execute`: 129 sel,
+  0 *error*, 0 sel kode belum dieksekusi.
+- Seluruh tabel dan angka pada keluaran sel dibaca dari `artifacts/`, bukan
+  diketik ulang.
+- Narasi markdown diperiksa terhadap keluaran sel. Pemeriksaan otomatis atas
+  angka model lama (0,6401, 0,6383, 0,6246, 0,6272, 0,9717, 0,3153, 0,9809,
+  0,2582, `model_100epoch`, `yolov8n.yaml`) tidak menemukan sisa.
+- Bagian 13.1 baru memuat empat kandidat skala penuh, dibaca dari
+  `artifacts/candidates/`.
 
 ## 7. Kode dan Pengujian
 
-| Pemeriksaan | Hasil | Status |
-|---|---|---|
-| Uji unit | 69 lulus | LULUS |
-| *Path* absolut personal pada kode sumber | tidak ada | LULUS |
-| *Secret*, *API key*, *token* | tidak ada | LULUS |
-| Penanda TODO atau FIXME | tidak ada | LULUS |
+- `python -m pytest -q`: 69 lulus.
+- `scripts/evaluate.py` dan `scripts/run_error_analysis.py` kini memproses
+  prediksi dalam potongan 16 citra. Potongan 500 kehabisan memori MPS untuk
+  model yang lebih besar dari YOLOv8n, sehingga verifikasi juri di Mac akan
+  gagal tanpa perbaikan ini.
+- `scripts/register_final_model.py` menulis metadata, ringkasan pelatihan,
+  riwayat pelatihan, dan *checksum* dari satu folder run, dan hanya mengutip
+  laporan evaluasi yang dibuat untuk bobot yang sama.
 
-## 8. Kepatuhan Regulasi
+## 8. Repository
 
-| Ketentuan | Status | Bukti |
-|---|---|---|
-| Tanpa *external pretrained weights* | LULUS | `build_compliant_model` menolak `pretrained=True` dan argumen menyerupai checkpoint, `YOLO_OFFLINE=1` aktif |
-| Hanya dataset resmi | LULUS | Tidak ada dataset lain pada repository maupun rujukan kode |
-| Tanpa pemrosesan LLM atau API | LULUS | Seluruh prapemrosesan berupa kode Python deterministik |
-| Pemetaan 11 kelas canonical | LULUS | `canonical_mapping_report.md` |
-| Split resmi dipertahankan | LULUS | Tidak ada penggabungan atau pengacakan ulang |
-| Tanpa kebocoran data | LULUS | `dataset_audit_report.md` |
-| *Seeding* deterministik | LULUS | `seed=42` pada Python, NumPy, PyTorch |
-| Satu model final | LULUS | `final_model_metadata.json` |
+Pembersihan menjelang submission dicatat pada `repository_cleanup.md` bagian
+24 Oktober. Artefak model sebelumnya diarsipkan utuh pada
+`artifacts/archive/100epoch_v8n_run/`, bukan dihapus.
 
-## 9. Repository dan Git
+## 9. Item Terbuka
 
-| Pemeriksaan | Hasil | Status |
-|---|---|---|
-| Repository publik | ya | LULUS |
-| Riwayat commit bertahap | ya | LULUS |
-| Dataset mentah pada riwayat publik | 0 objek dapat dijangkau dari `origin/main` | LULUS |
-| Berkas prompt internal | sudah dikeluarkan, lihat `repository_cleanup.md` | LULUS |
+1. **Komit dan push** seluruh perubahan. Saat audit ini, *working tree* belum
+   dikomit, sehingga butir 7 daftar periksa reproduktibilitas berstatus
+   PERINGATAN dan repository publik masih menampilkan model lama.
+2. **Publikasikan GitHub Release** berisi bobot final, `weights/best.pt.sha256`,
+   dan `artifacts/reports/final_model_metadata.json`.
+3. **Perbarui** tautan rilis pada `weights/README.md` dan *field* `release` pada
+   `final_model_metadata.json`.
 
-## 10. Item Terbuka
+## 10. Di Luar Jangkauan Verifikasi Otomatis
 
-### 10.1 GitHub Release belum dipublikasikan
+- Pernyataan orisinalitas bertanda tangan basah (`docs/originality_statement_placeholder.md`).
+- Komposisi tim terhadap data pendaftaran.
+- Definisi resmi panitia untuk *F1-Score*. Regulasi tidak merinci metode
+  *averaging*; angka kami adalah *F1* macro pada titik operasi terbaik dan
+  dinyatakan demikian di seluruh dokumen.
 
-Rilis sudah disiapkan lengkap. Berkas *checksum* dan metadata terkomit, dan
-perintah `gh release create` beserta daftar aset tersedia pada
-`weights/README.md`.
+## 11. Riwayat Penggantian Model Final
 
-Penghalang: `gh auth status` melaporkan token pada *keyring* tidak valid,
-sehingga publikasi tidak dapat dijalankan sebelum `gh auth login` diulang.
-
-Dampak bila tidak diselesaikan: regulasi mensyaratkan tautan unduhan langsung
-untuk bobot model. Tanpa rilis, juri tidak dapat mengunduh bobot karena
-berkas tersebut sengaja tidak dikomit ke Git.
-
-### 10.2 Metadata rilis belum diperbarui
-
-Field `release` pada `artifacts/reports/final_model_metadata.json` masih
-bernilai `published: false` dan perlu diperbarui bersama tautan aset pada
-`weights/README.md` setelah rilis terbit.
-
-## 11. Item di Luar Jangkauan Verifikasi Otomatis
-
-1. **Pernyataan orisinalitas bertanda tangan.** Artefak manusia di luar
-   repository. Daftar periksa tersedia pada
-   `docs/originality_statement_placeholder.md`.
-2. **Komposisi tim.** Ketentuan 2 sampai 3 mahasiswa aktif, satu universitas,
-   satu ketua tim, dan satu dosen pembimbing tidak dapat diperiksa dari
-   repository.
-
-## 12. Riwayat Penggantian Model Final
-
-Model final yang disubmit merupakan hasil pelatihan 100 *epoch*, dan itu
-merupakan penggantian kedua. Kami mencatat urutannya terbuka:
-
-| Model | mAP@50 valid | *F1* macro valid | Status |
+| Model | mAP@50 valid | *F1* macro valid | Arsip |
 |---|---:|---:|---|
-| 20 *epoch* | 56,20% | tidak dihitung | diarsipkan |
-| 50 *epoch* | 64,01% | 63,83% | diarsipkan |
-| **100 *epoch*** | **66,78%** | **68,26%** | **final** |
+| YOLOv8n, 20 *epoch* | 56,20% | tidak dihitung | `artifacts/archive/20epoch_run/` |
+| YOLOv8n, 50 *epoch* | 64,01% | 63,83% | `artifacts/archive/50epoch_640_run/` |
+| YOLOv8n, 100 *epoch* | 66,78% | 68,26% | `artifacts/archive/100epoch_v8n_run/` |
+| **YOLOv8s-P2, 250 *epoch*** | **70,71%** | **72,33%** | model final |
 
-Dasar penggantian terakhir adalah kurva pelatihan model 50 *epoch* yang
-menunjukkan model belum konvergen: mAP@0.5 masih naik, *train loss* masih
-turun, dan *val loss* juga masih turun pada epoch terakhir.
+Setiap penggantian diputuskan di atas *split* valid, dan *split* test model
+final baru dievaluasi setelah pilihan dikunci.
 
-Pemilihan model dilakukan **sepenuhnya di atas *split* valid**. Setelah model
-dikunci, *split* test dievaluasi satu kali, dan hasilnya mengonfirmasi kenaikan
-tersebut: mAP@50 naik 3,50 poin dan *F1* macro naik 3,69 poin dibanding model
-50 *epoch*. Karena kenaikannya muncul pada kedua *split*, kami tidak
-memperlakukannya sebagai kebetulan satu *split*.
+## 12. Kesimpulan
 
-Eksperimen resolusi 960 dihentikan pada epoch 7. Alasannya, bila model pada
-resolusi 640 saja belum konvergen dalam 50 *epoch*, model resolusi 960 yang
-konvergensinya teramati sekitar dua kali lebih lambat akan jauh lebih belum
-konvergen pada anggaran yang sama. Checkpoint beserta skrip pelanjutnya tetap
-disimpan, lihat `artifacts/reports/experiment_960_status.md`.
-
-Tidak ada eksperimen lain yang sedang berjalan pada saat audit ini disusun.
-
-## 13. Keterbatasan Audit Ini
-
-Disampaikan terbuka agar cakupan audit tidak terbaca lebih luas daripada yang
-sebenarnya:
-
-1. **Penamaan sebagian laporan masih memakai penomoran block internal**,
-   misalnya `block13_error_analysis.md`, yang tidak bermakna bagi juri.
-   Penggantian nama ditunda agar tidak memicu tautan rusak menjelang tenggat.
-2. **Reproduksi pelatihan bit per bit tidak diverifikasi** dan tidak diklaim,
-   karena nondeterminisme *backend* MPS.
-3. **Pengukuran tidak sepenuhnya stabil antar pengulangan pada perangkat
-   ini.** Evaluasi terhadap *checkpoint* yang sama pernah menghasilkan mAP@0.5
-   sebesar 0,6678 dan 0,6759, yaitu selisih relatif sekitar 1,2 persen. Angka
-   yang kami laporkan adalah 0,6678, hasil yang muncul berulang. Pada analisis
-   kesalahan selisihnya jauh lebih besar, mencapai 39 persen pada jumlah *true
-   positive*, sehingga analisis kesalahan kami perlakukan sebagai bukti
-   kualitatif mengenai jenis kegagalan, bukan pengukuran presisi. Rincian dan
-   tabel pembandingnya pada `metrics_provenance.md` bagian 7.
-4. **Definisi *F1* panitia tidak diketahui.** Angka yang dilaporkan merupakan
-   *F1* macro hasil implementasi evaluasi lokal.
-5. **Belum ada validasi di luar dataset kompetisi.**
-6. **Notebook memakai ulang artefak evaluasi yang sudah ada** alih-alih
-   menghitungnya kembali setiap kali dijalankan. Pilihan ini kami ambil supaya
-   notebook tidak bisa menyimpang dari README dan dokumen audit akibat
-   nondeterminisme MPS, sekaligus supaya notebook selesai dalam hitungan menit
-   bagi juri. Menghapus berkas artefaknya akan memaksa perhitungan ulang, dan
-   pesan yang dicetak sel tersebut menyatakan dengan jelas jalur mana yang
-   sedang dipakai.
-
-## 14. Kesimpulan
-
-Seluruh aspek teknis berada dalam kondisi siap dan dapat diaudit. Angka yang
-dilaporkan konsisten pada seluruh artefak dan dokumen, berasal dari satu
-sumber kebenaran, dan dapat direproduksi dengan dua perintah.
-
-Audit ini **tidak** menyatakan submission selesai. Dua item mekanis, yaitu
-publikasi rilis dan pembaruan metadata rilis, serta dua item administratif,
-yaitu pernyataan orisinalitas dan konfirmasi komposisi tim, masih terbuka.
+Paket submission siap secara teknis. Yang tersisa adalah tindakan pemilik
+repository: komit dan push, publikasi GitHub Release, dan dokumen
+administratif.

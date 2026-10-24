@@ -23,11 +23,11 @@ alih-alih menyatukannya begitu saja:
 
   - PRAPEMROSESAN yang deterministik, mencakup penyiapan dataset dan pemetaan
     canonical, terverifikasi dapat direproduksi byte per byte di bawah ini.
-  - PELATIHAN yang deterministik TIDAK diklaim bit per bit pada backend Apple
-    Silicon dengan MPS yang dipakai project ini. PyTorch mencatat peringatan
-    nyata bahwa `scatter_reduce_mps` dan `index_put_with_accumulate_mps` tidak
-    memiliki implementasi deterministik. Ini bukti sungguhan, bukan sikap
-    berhati-hati belaka.
+  - PELATIHAN yang deterministik TIDAK diklaim bit per bit. Model final dilatih
+    dengan DDP pada dua GPU CUDA dengan AMP, dan percobaan penyaringan berjalan
+    pada Apple Silicon dengan MPS. PyTorch mencatat peringatan nyata bahwa
+    `scatter_reduce_mps` dan `index_put_with_accumulate_mps` tidak memiliki
+    implementasi deterministik, dan sebagian operasi CUDA pun demikian.
   - KONFIGURASI PERCOBAAN yang dapat direproduksi: seed, hyperparameter,
     arsitektur model, dan versi kode yang dibutuhkan untuk menjalankan ulang
     percobaan mana pun selalu tercatat. Dengan begitu penyiapannya selalu dapat
@@ -146,29 +146,37 @@ def check_generated_metadata_reproducible(dataset_manifest_check: dict) -> dict:
     }
 
 
+FINAL_SUMMARY_PATH = PROJECT_ROOT / "artifacts" / "reports" / "block15_final_training_summary.json"
+
+
+def _load_final_config() -> dict | None:
+    """Konfigurasi yang benar-benar menghasilkan bobot final, sebagaimana dicatat
+    scripts/register_final_model.py, bukan konfigurasi uji asap."""
+    if not FINAL_SUMMARY_PATH.exists():
+        return None
+    with FINAL_SUMMARY_PATH.open() as f:
+        return json.load(f)
+
+
 def check_training_config_logged() -> dict:
-    summary_path = PROJECT_ROOT / "artifacts" / "reports" / "block6_baseline_smoke_summary.json"
-    if not summary_path.exists():
-        return {"status": "TIDAK DIVERIFIKASI", "detail": "Ringkasan pelatihan tidak ditemukan. Jalankan pelatihan terlebih dahulu."}
-    with summary_path.open() as f:
-        summary = json.load(f)
-    required_keys = {"seed", "device", "model_arch", "pretrained", "image_size", "batch_size", "epochs", "data_yaml"}
-    missing = required_keys - summary.keys()
+    summary = _load_final_config()
+    if summary is None:
+        return {"status": "TIDAK DIVERIFIKASI", "detail": "Ringkasan pelatihan final tidak ditemukan. Jalankan scripts/register_final_model.py."}
+    required_keys = {"seed", "model_arch", "pretrained", "image_size", "batch_size", "epochs", "optimizer", "learning_rate"}
+    missing = required_keys - summary.get("config_used", {}).keys()
     if missing:
-        return {"status": "GAGAL", "detail": f"Ringkasan pelatihan kehilangan field wajib: {sorted(missing)}"}
-    return {"status": "LULUS", "detail": f"Seluruh field konfigurasi pelatihan yang wajib tersedia pada {_relatif(summary_path)}."}
+        return {"status": "GAGAL", "detail": f"Konfigurasi pelatihan final kehilangan field wajib: {sorted(missing)}"}
+    return {"status": "LULUS", "detail": f"Seluruh field konfigurasi pelatihan final tersedia pada {_relatif(FINAL_SUMMARY_PATH)} ({summary.get('config_path')})."}
 
 
 def check_seeds_recorded() -> dict:
-    summary_path = PROJECT_ROOT / "artifacts" / "reports" / "block6_baseline_smoke_summary.json"
-    config_path = PROJECT_ROOT / "configs" / "experiments" / "baseline_smoke.yaml"
-    if not summary_path.exists() or not config_path.exists():
-        return {"status": "TIDAK DIVERIFIKASI", "detail": "Ringkasan pelatihan atau konfigurasi percobaan tidak ditemukan."}
-    with summary_path.open() as f:
-        summary = json.load(f)
-    if "seed" not in summary or not isinstance(summary["seed"], int):
-        return {"status": "GAGAL", "detail": "Seed tidak ada atau bukan bilangan bulat pada ringkasan pelatihan."}
-    return {"status": "LULUS", "detail": f"Seed={summary['seed']} tercatat pada konfigurasi percobaan sekaligus ringkasan eksekusi."}
+    summary = _load_final_config()
+    if summary is None:
+        return {"status": "TIDAK DIVERIFIKASI", "detail": "Ringkasan pelatihan final tidak ditemukan."}
+    seed = summary.get("config_used", {}).get("seed")
+    if not isinstance(seed, int) or summary.get("resolved_hyperparameters", {}).get("seed") != seed:
+        return {"status": "GAGAL", "detail": "Seed tidak tercatat, atau seed pada config berbeda dari seed yang tersimpan di checkpoint."}
+    return {"status": "LULUS", "detail": f"Seed={seed} tercatat pada config final dan cocok dengan seed di dalam checkpoint."}
 
 
 def check_dependency_versions_recordable() -> dict:
@@ -195,14 +203,16 @@ def check_git_commit_recorded() -> dict:
 
 
 def check_model_config_recorded() -> dict:
-    summary_path = PROJECT_ROOT / "artifacts" / "reports" / "block6_baseline_smoke_summary.json"
-    if not summary_path.exists():
-        return {"status": "TIDAK DIVERIFIKASI", "detail": "Ringkasan pelatihan tidak ditemukan. Jalankan pelatihan terlebih dahulu."}
-    with summary_path.open() as f:
-        summary = json.load(f)
-    if not summary.get("model_arch") or "pretrained" not in summary:
-        return {"status": "GAGAL", "detail": "Arsitektur model atau flag pretrained tidak tercatat."}
-    return {"status": "LULUS", "detail": f"Tercatat model_arch={summary['model_arch']} dan pretrained={summary['pretrained']}."}
+    summary = _load_final_config()
+    if summary is None:
+        return {"status": "TIDAK DIVERIFIKASI", "detail": "Ringkasan pelatihan final tidak ditemukan."}
+    cfg = summary.get("config_used", {})
+    ckpt = summary.get("resolved_hyperparameters", {})
+    if not cfg.get("model_arch") or cfg.get("pretrained") is not False:
+        return {"status": "GAGAL", "detail": "Arsitektur model tidak tercatat atau pretrained tidak bernilai False."}
+    if ckpt.get("model") != cfg["model_arch"]:
+        return {"status": "GAGAL", "detail": f"Arsitektur pada checkpoint ({ckpt.get('model')}) berbeda dari config ({cfg['model_arch']})."}
+    return {"status": "LULUS", "detail": f"Tercatat model_arch={cfg['model_arch']} dan pretrained=False, cocok dengan checkpoint bobot final."}
 
 
 def check_data_path_configurable() -> dict:
@@ -262,9 +272,11 @@ def build_report(results: dict[str, dict]) -> str:
         "Prapemrosesan bersifat deterministik dan terverifikasi byte per byte, mencakup penyiapan "
         "dataset dan pemetaan canonical.",
         "",
-        "Pelatihan TIDAK diklaim deterministik bit per bit. PyTorch mencatat peringatan nyata bahwa "
-        "`scatter_reduce_mps` dan `index_put_with_accumulate_mps` tidak memiliki implementasi "
-        "deterministik pada backend Apple Silicon dengan MPS yang dipakai project ini. Pelatihan "
+        "Pelatihan TIDAK diklaim deterministik bit per bit. Model final dilatih dengan DDP pada dua "
+        "GPU CUDA dengan AMP, dan percobaan penyaringan berjalan pada Apple Silicon dengan MPS. "
+        "PyTorch mencatat peringatan nyata bahwa `scatter_reduce_mps` dan "
+        "`index_put_with_accumulate_mps` tidak memiliki implementasi deterministik, dan sebagian "
+        "operasi CUDA pun demikian. Pelatihan "
         "dapat direproduksi pada tingkat *konfigurasi*, yaitu seed, hyperparameter, dan versi kode "
         "yang sama, tetapi keluaran numeriknya tidak dijamin identik.",
         "",

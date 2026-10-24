@@ -1,6 +1,6 @@
 # Daftar Periksa Submission
 
-Status per 26 September 2026, yaitu hari tenggat submission.
+Status per 24 Oktober 2026. Tenggat submission 25 Oktober 2026 pukul 23.59.
 
 Legenda: `[x]` terverifikasi otomatis, `[ ]` masih terbuka, `[!]` di luar
 kemampuan verifikasi otomatis dan harus dikonfirmasi tim.
@@ -16,9 +16,11 @@ kemampuan verifikasi otomatis dan harus dikonfirmasi tim.
 
 ## Model
 
-- [x] Satu model final, hasil pelatihan 100 *epoch*
-- [x] mAP@50 66,78% dan *F1-Score* macro 68,26% pada *split* valid
-- [x] Dikonfirmasi pada *split* test: 65,96% dan 66,41%
+- [x] Satu model final: YOLOv8s-P2, 250 *epoch*, dilatih di Kaggle 2x T4
+- [x] mAP@50 70,71% dan *F1-Score* macro 72,33% pada *split* valid
+- [x] Dikonfirmasi pada *split* test: 70,65% dan 71,45%
+- [x] Dipilih dari empat kandidat skala penuh, hanya berdasarkan *split* valid
+- [x] Pengunduhan `yolo26n.pt` oleh pengecekan AMP diblokir pada seluruh kandidat
 - [x] Pemilihan model dilakukan hanya di atas *split* valid, test dievaluasi sekali
 - [x] *Checksum* SHA-256 bobot final tercatat dan diverifikasi
 - [x] Tanpa *external pretrained weights*, ditegakkan pada tingkat kode
@@ -72,24 +74,29 @@ kemampuan verifikasi otomatis dan harus dikonfirmasi tim.
 - [!] Komposisi tim: 2 sampai 3 mahasiswa aktif, satu universitas, satu ketua,
       satu dosen pembimbing
 
+## Angka untuk form submission
+
+| Isian form | Nilai | Sumber |
+|---|---|---|
+| mAP@50 (%) | **70,71** | `artifacts/reports/official_metrics_valid.json` |
+| F1-Score (%) | **72,33** | `artifacts/reports/official_metrics_valid.json` |
+
+Kedua angka berasal dari *split* valid, konvensi yang sama dengan seluruh
+laporan sebelumnya. Angka *split* test (70,65 dan 71,45) dicantumkan di README
+sebagai konfirmasi.
+
 ## Tindakan yang masih perlu dilakukan
 
-1. **Perbarui otentikasi GitHub CLI.** `gh auth status` melaporkan token pada
-   *keyring* tidak valid, sehingga publikasi rilis belum dapat dijalankan.
-   Jalankan `gh auth login`.
-2. **Publikasikan GitHub Release** berisi `best.pt`, berkas *checksum*, dan
-   metadata. Perintah siap pakai tersedia pada `weights/README.md`.
+1. **Pastikan seluruh perubahan sudah ter-*push*** oleh daemon auto-commit
+   sebelum mengisi form, karena juri membaca repository publik.
+2. **Publikasikan GitHub Release** berisi `best.pt` model YOLOv8s-P2, berkas
+   *checksum*, dan metadata. Perintah siap pakai tersedia pada
+   `weights/README.md`. Bila `gh auth status` gagal, jalankan `gh auth login`.
 3. **Perbarui `weights/README.md` dan field `release`** pada
    `artifacts/reports/final_model_metadata.json` dengan tautan aset setelah
    rilis terbit.
 4. **Selesaikan pernyataan orisinalitas bertanda tangan** sesuai daftar periksa
    pada `docs/originality_statement_placeholder.md`.
 5. **Konfirmasi komposisi tim** terhadap data pendaftaran kompetisi.
-6. **Commit dan push seluruh perubahan.** Pekerjaan hari ini belum dikomit,
-   sesuai permintaan pemilik repository untuk melakukannya sendiri. Perubahan
-   mencakup penggantian model final ke 100 *epoch*, pembaruan seluruh artefak
-   evaluasi, README, model card, dokumen audit, dan notebook yang sudah
-   dieksekusi ulang.
-7. **Opsional:** hapus cabang lokal `backup-origin-main` bila sudah yakin
-   dengan hasil pembersihan riwayat, lalu jalankan `git gc --prune=now` untuk
-   mengecilkan `.git` lokal dari 974 MB. Cabang ini tidak pernah di-*push*.
+6. **Isi form submission:** surat orisinalitas (PDF maks. 2 MB), tautan GitHub
+   Release bobot, tautan notebook, tautan repository, serta dua angka di atas.

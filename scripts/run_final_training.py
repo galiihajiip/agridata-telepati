@@ -136,6 +136,7 @@ def main() -> int:
         "momentum": cfg["momentum"], "weight_decay": cfg["weight_decay"],
         "patience": cfg["patience"],
     }
+    extra_kwargs.update({k: cfg[k] for k in ("cos_lr", "close_mosaic") if k in cfg})
     extra_kwargs.update({k: cfg[k] for k in AUGMENTATION_OVERRIDE_KEYS if k in cfg})
 
     started_at = datetime.now(timezone.utc)

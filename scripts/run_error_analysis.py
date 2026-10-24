@@ -91,8 +91,12 @@ def collect_predictions(model: YOLO, images_dir: Path, images_by_id: dict[int, d
     """Dipecah menjadi potongan untuk menghindari kegagalan yang sudah terkonfirmasi:
     meneruskan daftar path yang sangat panjang ke satu panggilan
     `predict(..., stream=True)` gagal dengan galat MPSGraph pada kombinasi
-    numpy, torch, dan MPS di project ini."""
-    CHUNK_SIZE = 500
+    numpy, torch, dan MPS di project ini.
+
+    Ukuran potongan 16, bukan 500: Ultralytics memproses satu daftar path
+    sebagai satu batch, dan untuk YOLOv8s-P2 potongan 500 citra sudah melampaui
+    memori MPS. Penjelasan lengkap ada pada collect_predictions di evaluate.py."""
+    CHUNK_SIZE = 16
     ordered_ids = list(images_by_id.keys())
     image_paths = [str(images_dir / images_by_id[iid]["file_name"]) for iid in ordered_ids]
     detections = []

@@ -1,5 +1,7 @@
 # TELEPATI 8.0 AgriData Intelligence Race
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/galiihajiip/agridata-telepati/blob/main/notebooks/final_agriData_telepati8.ipynb)
+
 Deteksi penyakit tanaman padi berbasis *object detection* untuk 11 kelas
 canonical, dibangun dari dataset resmi TELEPATI 8.0. Model dilatih sepenuhnya
 dari nol tanpa *external pretrained weights*, sesuai ketentuan lomba.
@@ -10,21 +12,26 @@ Notebook itu memuat alur lengkap dari audit dataset sampai analisis kesalahan,
 dan kami tulis sebagai laporan penelitian, bukan sekadar kumpulan sel kode.
 README ini merupakan peta jalan menuju bukti-bukti di dalamnya.
 
+Tombol *Open in Colab* di atas membuka notebook beserta seluruh keluaran,
+tabel, dan figurnya yang sudah tertanam, sehingga dapat dibaca tanpa instalasi.
+Untuk menjalankan ulang sel-selnya diperlukan dataset resmi dan bobot dari
+GitHub Release; langkahnya ada pada bagian [Cara Menjalankan](#cara-menjalankan).
+
 ## Ringkasan
 
 | Item | Nilai |
 |---|---|
 | Tugas | *Object detection*, 11 kelas canonical |
-| Arsitektur | YOLOv8n, dilatih dari nol, `pretrained=False` |
-| **mAP@50 (valid)** | **66,78%** |
-| **F1-Score macro (valid)** | **68,26%** |
-| mAP@50 (test) | 65,96% |
-| F1-Score macro (test) | 66,41% |
+| Arsitektur | YOLOv8s-P2, dilatih dari nol, `pretrained=False` |
+| **mAP@50 (valid)** | **70,71%** |
+| **F1-Score macro (valid)** | **72,33%** |
+| mAP@50 (test) | 70,65% |
+| F1-Score macro (test) | 71,45% |
 | Resolusi inferensi | 640 |
 | Ambang NMS IoU | 0,5 (bukan bawaan 0,7) |
-| Ukuran model | 6,3 MB (6.260.394 byte) |
-| Waktu pelatihan | 20,84 jam, 100 *epoch*, Apple Silicon MPS |
-| Jumlah percobaan tercatat | 21 percobaan terkontrol |
+| Ukuran model | 21,8 MB (21.754.576 byte) |
+| Waktu pelatihan | 8,11 jam, 250 *epoch*, Kaggle 2x NVIDIA Tesla T4 |
+| Jumlah percobaan tercatat | 21 percobaan penyaringan dan 4 kandidat skala penuh |
 | Uji unit | 69, seluruhnya lulus |
 
 ## Bagi juri yang ingin memverifikasi dengan cepat
@@ -33,11 +40,12 @@ Kalau Anda hanya perlu memastikan angka yang kami laporkan benar, dua perintah
 berikut cukup dan tidak memerlukan pelatihan ulang:
 
 ```bash
-python scripts/evaluate.py --weights runs/detect/final/model_100epoch/weights/best.pt --split valid --nms-iou 0.5
+python scripts/evaluate.py --weights runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt --split valid --nms-iou 0.5
 python scripts/compute_official_metrics.py --split valid
 ```
 
-Perintah pertama memakan sekitar 8 sampai 10 menit pada Apple Silicon dan
+Bobotnya diunduh dari GitHub Release, lihat [`weights/README.md`](weights/README.md).
+Perintah pertama memakan sekitar 4 menit pada Apple Silicon dan
 menghasilkan `artifacts/reports/evaluation_valid.json`. Perintah kedua hanya
 membaca berkas itu dan mencetak dua angka leaderboard, tanpa menghitung ulang
 apa pun. Pemisahan ini sengaja kami buat agar hanya ada satu sumber kebenaran
@@ -111,7 +119,7 @@ periksa hubungan itu secara khusus pada Bagian 17 notebook.
 
 ## Metodologi
 
-Urutan kerja kami:
+Urutan kerja kami dari awal sampai angka akhir:
 
 ```
 Dataset resmi (tidak diubah)
@@ -119,10 +127,11 @@ Dataset resmi (tidak diubah)
   -> Pemetaan 21 kategori menjadi 11 kelas canonical
   -> Profiling dan eksplorasi
   -> Penyiapan data format YOLO (symlink, manifest)
-  -> 21 percobaan terkontrol satu faktor pada satu waktu
-  -> Pembekuan konfigurasi final
-  -> Pelatihan skala penuh
-  -> Evaluasi, analisis kesalahan, audit
+  -> 21 percobaan penyaringan, satu faktor pada satu waktu (laptop, MPS)
+  -> Model YOLOv8n 20, 50, lalu 100 epoch (laptop, MPS)
+  -> Empat kandidat skala penuh dari nol (Kaggle 2x T4 dan Colab A100)
+  -> Pemilihan model final di atas split valid
+  -> Evaluasi split test satu kali, analisis kesalahan, audit
 ```
 
 Kami tidak menetapkan *hyperparameter* berdasarkan nilai bawaan maupun
@@ -130,6 +139,31 @@ intuisi. Setiap keputusan konfigurasi bersandar pada percobaan yang tercatat
 lengkap dengan *seed*, *hyperparameter*, arsitektur, *hash* manifest dataset,
 dan *commit* Git saat percobaan dijalankan. Seluruhnya ada pada
 [`artifacts/experiments/experiment_log.md`](artifacts/experiments/experiment_log.md).
+
+### Perjalanan menuju model final
+
+Kami mencatat urutan ini lengkap, termasuk langkah yang tidak berhasil, karena
+setiap angka di repository ini berasal dari salah satu tahapnya.
+
+| Tahap | Yang dilakukan | Hasil (mAP@50 / *F1* macro, *split* valid) | Bukti |
+|---|---|---|---|
+| 1. Penyaringan | 21 percobaan YOLOv8n pada 5 sampai 10 persen data dan 2 sampai 12 *epoch*, untuk memilih ukuran citra, *optimizer*, augmentasi, dan penanganan ketimpangan kelas | angka sangat kecil, hanya untuk membandingkan faktor | `artifacts/experiments/` |
+| 2. YOLOv8n 20 *epoch* | Pelatihan penuh pertama di Apple Silicon | 56,20% / tidak dihitung | `artifacts/archive/20epoch_run/` |
+| 3. YOLOv8n 50 *epoch* | Kurva 20 *epoch* belum konvergen. Di tahap ini pula konvensi *F1* dikoreksi dari *micro* ke *macro* dan ambang NMS diturunkan ke 0,5 | 64,01% / 63,83% | `artifacts/archive/50epoch_640_run/` |
+| 4. YOLOv8n 100 *epoch* | Kurva 50 *epoch* masih naik. Pelatihan memakan 20,84 jam dan kurvanya tetap belum konvergen | 66,78% / 68,26% | `artifacts/archive/100epoch_v8n_run/` |
+| 5. Kandidat skala penuh | Pelatihan dipindah ke GPU. Empat kandidat dilatih dari nol: A (YOLOv8s 640), B (YOLOv8s-P2 640), C (YOLOv8s 1024), D (YOLOv8m 640) | A 70,57% / 71,37%; B 70,71% / 72,33%; C terputus di *epoch* 49; D 71,39% / 71,38% | `artifacts/candidates/` |
+| 6. Ensemble | A+B dan B+D diuji dengan aturan keputusan yang ditetapkan sebelum melihat hasil: dipakai hanya bila jumlah kedua metrik naik minimal 2 poin | A+B 71,15% / 71,64%; B+D 71,77% / 71,55%; tidak dipakai | `artifacts/candidates/ensembles.json` |
+| 7. Pemilihan | B dipilih: jumlah kedua metrik lomba tertinggi, bobot 2,4 kali lebih kecil dari D | **70,71% / 72,33%** | `artifacts/reports/evaluation_valid.json` |
+| 8. *Split* test | Dievaluasi satu kali untuk B setelah pilihan dikunci | 70,65% / 71,45% | `artifacts/reports/evaluation_test.json` |
+
+Dua kejadian di tahap 5 perlu kami sebut karena menyangkut kepatuhan dan
+kejujuran angka. Pertama, percobaan pertama di Kaggle memperlihatkan bahwa
+Ultralytics mengunduh bobot pretrained `yolo26n.pt` untuk pengecekan AMP;
+percobaan itu kami hentikan dan seluruh kandidat dilatih setelah celah itu
+ditutup (bagian [Model](#model)). Kedua, sebelum memakai angka ensemble kami
+memvalidasi metode pengukurannya dengan menjalankan A sendirian; hasilnya
+harus sama persis dengan `evaluate.py` (0,7057), dan baru setelah cocok angka
+ensemble kami pakai.
 
 ## Profiling Dataset
 
@@ -157,20 +191,37 @@ Laporan lengkap:
 
 | Aspek | Nilai |
 |---|---|
-| Arsitektur | YOLOv8n (Ultralytics), dari definisi `yolov8n.yaml` |
+| Arsitektur | YOLOv8s-P2 (Ultralytics), dari definisi `yolov8s-p2.yaml` |
 | Inisialisasi | acak, `pretrained=False` |
-| Parameter | sekitar 3,0 juta |
-| Kepala deteksi | 11 kelas |
+| Parameter | sekitar 10,6 juta |
+| Kepala deteksi | 11 kelas, empat skala keluaran (stride 4, 8, 16, 32) |
 | Resolusi masukan | 640 x 640 |
-| Ukuran *checkpoint* | 6,3 MB |
+| Ukuran *checkpoint* | 21,8 MB |
+
+Varian P2 menambahkan kepala deteksi beresolusi 160 x 160 (stride 4) di atas
+tiga kepala bawaan YOLOv8. Kami memilihnya karena median *bounding box* Brown
+spot hanya sekitar 0,2 persen luas citra. Pada split valid keunggulannya atas
+YOLOv8s biasa ternyata tipis, dan kami menjelaskannya pada bagian
+[Hasil](#hasil).
 
 Larangan *external pretrained weights* tidak hanya kami nyatakan di dokumen,
 tetapi kami tegakkan di dalam kode. Fungsi `build_compliant_model` menolak
 berjalan bila diberi `pretrained=True` atau bila argumen arsitekturnya
 menyerupai berkas *checkpoint*, dan `YOLO_OFFLINE=1` dipaksa aktif sebelum
-Ultralytics diimpor sehingga setiap upaya pengunduhan bobot gagal secara
-keras. Dengan begitu pelanggaran aturan akan berhenti sebagai galat, bukan
-lolos diam-diam.
+Ultralytics diimpor. Dengan begitu pelanggaran aturan akan berhenti sebagai
+galat, bukan lolos diam-diam.
+
+Pelatihan di GPU membuka satu celah yang tidak muncul di Apple Silicon:
+pengecekan AMP bawaan Ultralytics mengunduh bobot pretrained `yolo26n.pt` untuk
+membandingkan keluaran FP32 dan FP16, dan `YOLO_OFFLINE` tidak mencegahnya.
+Bobot itu tidak pernah masuk ke model kami, tetapi tetap merupakan berkas
+pretrained eksternal. Kami menemukannya pada log percobaan pertama di Kaggle,
+menghentikan percobaan itu, dan menutup celahnya lewat
+[`scripts/kaggle_site/sitecustomize.py`](scripts/kaggle_site/sitecustomize.py),
+yang mengganti pengecekan tersebut pada setiap proses pelatihan termasuk proses
+DDP. Seluruh kandidat yang kami laporkan dilatih setelah perbaikan ini, dan
+log masing-masing memuat baris `AMP check dilewati tanpa mengunduh bobot
+pretrained`.
 
 ## Eksperimen
 
@@ -197,12 +248,19 @@ pendek. Alasannya kami nyatakan terbuka sebagai penilaian, yaitu bahwa
 selisihnya menyempit seiring bertambahnya anggaran dan bahwa model ini
 ditujukan untuk kondisi lapangan yang bervariasi. Penalaran lengkapnya ada
 pada komentar di dalam
-[`configs/final_model_config.yaml`](configs/final_model_config.yaml) dan pada
-Bagian 12 notebook.
+[`configs/archive_100epoch_v8n_config.yaml`](configs/archive_100epoch_v8n_config.yaml)
+dan pada Bagian 12 notebook. Keputusan itu kami bawa ke empat kandidat skala
+penuh, yang memakai augmentasi bawaan Ultralytics dengan `flipud=0`.
+
+Percobaan penyaringan juga memenangkan AdamW atas SGD, tetapi hanya pada 5
+*epoch* dengan sekitar 10 persen data. Untuk kandidat skala penuh kami memakai
+SGD dengan *learning rate* 0,01, resep bawaan Ultralytics untuk pelatihan dari
+nol dengan jadwal panjang, dan kami mencatat ini sebagai keputusan yang tidak
+diuji ulang pada skala penuh.
 
 ## Hasil
 
-Bobot yang dievaluasi: `runs/detect/final/model_100epoch/weights/best.pt`.
+Bobot yang dievaluasi: `runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt`.
 
 **Konvensi pengukuran**, kami nyatakan eksplisit agar juri dapat mereproduksi
 angka yang sama persis:
@@ -218,24 +276,44 @@ angka yang sama persis:
 
 | Metrik | Valid | Test | Selisih |
 |---|---:|---:|---:|
-| **mAP@50** | **66,78%** | **65,96%** | -0,82 poin |
-| **F1-Score macro** | **68,26%** | **66,41%** | -1,85 poin |
-| mAP@0.5:0.95 | 0,4141 | 0,4330 | +0,0189 |
-| *Precision* pada titik operasi | 0,7188 | 0,6983 | -0,0205 |
-| *Recall* pada titik operasi | 0,6722 | 0,6634 | -0,0089 |
-| *Confidence* titik operasi | 0,2503 | 0,2382 | |
+| **mAP@50** | **70,71%** | **70,65%** | -0,06 poin |
+| **F1-Score macro** | **72,33%** | **71,45%** | -0,88 poin |
+| mAP@0.5:0.95 | 0,4611 | 0,4830 | +0,0219 |
+| *Precision* pada titik operasi | 0,7353 | 0,7626 | +0,0273 |
+| *Recall* pada titik operasi | 0,7206 | 0,6904 | -0,0302 |
+| *Confidence* titik operasi | 0,2142 | 0,2623 | |
 
 *Split* test tidak pernah kami pakai untuk penyetelan apa pun, termasuk untuk
 memilih model final. Pemilihan model kami lakukan sepenuhnya di atas *split*
 valid, lalu *split* test kami evaluasi sekali setelah model dikunci. Selisih
-valid terhadap test yang hanya 0,82 poin pada mAP menunjukkan performa model
-tidak bergantung pada satu *split* tertentu.
+mAP@50 valid terhadap test hanya 0,06 poin, sehingga performa model tidak
+bergantung pada satu *split* tertentu.
 
-Urutan kelas juga konsisten pada kedua *split*: Narrow brown tertinggi dan
-Brown spot terendah. Konsistensi peringkat itu menguatkan bahwa perbedaan
-performa antar kelas merupakan sifat yang stabil, bukan kebetulan satu *split*.
+Evaluasi *split* valid yang sama di CPU dan di Apple Silicon MPS menghasilkan
+mAP@50 0,7071 dan *F1* macro 0,7233 yang identik pada kedua perangkat.
 
 Reproduksi: `python scripts/compute_official_metrics.py --split valid`
+
+### AP@50 per kelas
+
+| Kelas | Valid | Test |
+|---|---:|---:|
+| Narrow brown | 0,9864 | 0,9950 |
+| False smut | 0,9623 | 0,9612 |
+| Leaf roller | 0,9226 | 0,9312 |
+| Healthy | 0,8722 | 0,9595 |
+| Bacterial panicle blight | 0,7723 | 0,8790 |
+| Tungro | 0,6690 | 0,6996 |
+| Sheath blight | 0,6650 | 0,6282 |
+| Blast | 0,5709 | 0,5427 |
+| Leaf scald | 0,5028 | 0,4898 |
+| Bacterial leaf blight | 0,4787 | 0,3666 |
+| Brown spot | 0,3755 | 0,3188 |
+
+Urutan kelas konsisten pada kedua *split*: Narrow brown tertinggi dan Brown spot
+terendah. Brown spot tetap menjadi penghambat terbesar walaupun kapasitas model
+dan kepala deteksi objek kecil sudah ditambah, dan kami membahas dugaan
+penyebabnya pada [Keterbatasan](#keterbatasan).
 
 ### Riwayat perubahan model final
 
@@ -243,15 +321,28 @@ Kami mencatatnya terbuka karena memengaruhi cara membaca dokumen lama:
 
 | Model | mAP@50 valid | *F1* macro valid | Status |
 |---|---:|---:|---|
-| 20 *epoch* | 56,20% | tidak dihitung | diarsipkan |
-| 50 *epoch* | 64,01% | 63,83% | diarsipkan |
-| **100 *epoch*** | **66,78%** | **68,26%** | **final** |
+| YOLOv8n, 20 *epoch* | 56,20% | tidak dihitung | diarsipkan |
+| YOLOv8n, 50 *epoch* | 64,01% | 63,83% | diarsipkan |
+| YOLOv8n, 100 *epoch* | 66,78% | 68,26% | diarsipkan |
+| **YOLOv8s-P2, 250 *epoch*** | **70,71%** | **72,33%** | **final** |
 
-Perpanjangan terakhir kami dasarkan pada kurva pelatihan model 50 *epoch* yang
-menunjukkan model belum konvergen: mAP masih naik, *train loss* masih turun,
-dan *val loss* juga masih turun. Model 100 *epoch* kemudian menang di kedua
-*split* sekaligus, naik 2,77 poin pada valid dan 3,50 poin pada test, sehingga
-kami tidak menganggapnya kebetulan satu *split*.
+Model YOLOv8n 100 *epoch* belum konvergen, dan satu kali pelatihannya saja
+memakan 20,84 jam di Apple Silicon. Kami lalu melatih empat kandidat
+berkapasitas lebih besar dari nol di GPU Kaggle dan Colab:
+
+| Kandidat | Arsitektur | mAP@50 valid | *F1* macro valid | mAP@50-95 valid |
+|---|---|---:|---:|---:|
+| A | YOLOv8s, 640 | 70,57% | 71,37% | 46,40% |
+| **B** | **YOLOv8s-P2, 640** | **70,71%** | **72,33%** | **46,11%** |
+| C | YOLOv8s, 1024 | terputus di *epoch* 49, tidak dievaluasi | | |
+| D | YOLOv8m, 640 | 71,39% | 71,38% | 48,32% |
+
+B dan D masing-masing unggul pada satu metrik lomba dengan selisih di bawah
+satu poin. Kami memilih B karena jumlah kedua metrik lombanya paling tinggi
+dan bobotnya 2,4 kali lebih kecil. Ensemble B dengan D menaikkan mAP@50 menjadi
+71,77% tetapi menurunkan *F1*, sehingga tidak kami pakai. Rinciannya, termasuk
+aturan keputusan yang kami tetapkan sebelum melihat hasil, ada pada
+[`artifacts/candidates/README.md`](artifacts/candidates/README.md).
 
 Seluruh nilai metrik historis dibedakan pada
 [`artifacts/audit/metrics_provenance.md`](artifacts/audit/metrics_provenance.md).
@@ -265,23 +356,17 @@ prediksi yang sudah tersimpan, tanpa inferensi ulang, sehingga deterministik.
 
 | Threshold | Precision | Recall | F1 lokal |
 |---:|---:|---:|---:|
-| 0,05 | 0,2273 | 0,2365 | 0,2318 |
-| 0,10 | 0,3828 | 0,2064 | **0,2682** |
-| 0,25 | 0,6473 | 0,1479 | 0,2408 |
-| 0,50 | 0,8571 | 0,0945 | 0,1703 |
-| 0,90 | 1,0000 | 0,0076 | 0,0150 |
+| 0,05 | 0,3217 | 0,6749 | 0,4357 |
+| 0,10 | 0,4532 | 0,6205 | 0,5238 |
+| 0,25 | 0,6735 | 0,5237 | **0,5893** |
+| 0,50 | 0,8303 | 0,3893 | 0,5301 |
+| 0,90 | 0,9676 | 0,0428 | 0,0819 |
 
-Faktor pembatasnya adalah *recall*, bukan *precision*. Nilai *recall*
-tertinggi pada seluruh rentang hanya 0,2365, yang berarti sebagian besar objek
-*ground truth* tidak terpasangkan bahkan ketika ambangnya diturunkan.
-
-Perlu kami jelaskan satu hal yang tampak berlawanan. Dibanding model 50
-*epoch*, *F1* macro kami naik (63,83% menjadi 68,26%) sementara *F1* lokal
-*micro* justru turun (0,3479 menjadi 0,2682). Keduanya tidak bertentangan,
-karena rata-rata *micro* pada ambang tetap didominasi kelas mayoritas Brown
-spot yang tetap lemah, sedangkan rata-rata *macro* pada titik operasi optimal
-mengangkat kelas minoritas yang justru sangat kuat. Kami melaporkan keduanya
-apa adanya alih-alih menampilkan hanya yang menguntungkan.
+Dibanding model YOLOv8n, *recall* maksimum naik dari 0,2365 menjadi 0,6749 dan
+*F1* lokal tertinggi naik dari 0,2682 menjadi 0,5893. *F1* lokal *micro* tetap
+lebih rendah daripada *F1* macro, karena rata-rata *micro* didominasi kelas
+mayoritas Brown spot yang paling lemah, sedangkan rata-rata *macro* memberi
+bobot sama pada kelas minoritas yang justru kuat.
 
 ### Analisis kesalahan
 
@@ -289,57 +374,31 @@ Kami mengelompokkan setiap kesalahan menjadi empat kategori pada *confidence
 threshold* 0,1, memakai pencocokan yang tidak memandang kelas supaya kasus
 "model salah tempat" dapat dipisahkan dari kasus "model salah nama":
 
-| Jenis | Jumlah | Porsi dari seluruh kesalahan |
+| Jenis | YOLOv8n 100 *epoch* | Model final |
 |---|---:|---:|
-| *False negative*, objek terlewat | 3.276 | 55,6% |
-| *False positive* terhadap latar belakang | 2.547 | 43,2% |
-| Salah kelas | 67 | 1,1% |
+| *True positive* | 1.545 | **3.026** |
+| *False negative*, objek terlewat | 3.276 | **1.755** |
+| *False positive* terhadap latar belakang | 2.547 | 3.560 |
+| Salah kelas | 67 | 107 |
 
-Masalah utama model kami jelas: **menemukan objeknya**, bukan membedakan
-penyakit. Salah kelas hanya 1,1 persen dari seluruh kesalahan, dan pasangan
-yang paling sering tertukar pun masuk akal secara domain, yaitu Blast dengan
-Brown spot (23 kejadian), keduanya menimbulkan lesi kecokelatan.
+Model final menemukan hampir dua kali lebih banyak objek dan melewatkan 46
+persen lebih sedikit. Salah kelas tetap sekitar 2 persen dari seluruh
+kesalahan, dan pasangan yang paling sering tertukar tetap masuk akal secara
+domain, yaitu Brown spot dengan Blast (22 dan 14 kejadian), keduanya
+menimbulkan lesi kecokelatan. Pada ambang serendah 0,1, *false positive*
+terhadap latar kini menjadi jenis kesalahan terbanyak, yang wajar karena ambang
+itu jauh di bawah titik operasi 0,21.
 
 Dua pola pendukung, keduanya dari kesalahan aktual dan bukan dugaan:
 
-- Objek yang terlewat cenderung lebih kecil daripada rata-rata. Median luas
-  *bounding box* yang gagal terdeteksi 3.343,2 px², yaitu 0,47 kali median
-  keseluruhan sebesar 7.051,6 px². Ini konsisten dengan dominasi objek kecil
-  pada dataset.
-- Adegan padat memiliki rasio *false negative* lebih tinggi daripada adegan
-  jarang, yaitu 0,727 berbanding 0,527.
+- Objek yang masih terlewat sangat kecil. Median luas *bounding box* yang gagal
+  terdeteksi 719,2 px², kira-kira 27 x 27 piksel, yaitu 0,10 kali median
+  keseluruhan sebesar 7.051,6 px². Pada model YOLOv8n medianya 3.343,2 px².
+- Adegan padat tetap tersulit: rasio *false negative* 0,486 berbanding 0,039
+  pada adegan jarang.
 
 Laporan lengkap pada
 [`artifacts/reports/block13_error_analysis.md`](artifacts/reports/block13_error_analysis.md).
-
-### Satu temuan yang perlu kami sampaikan terbuka
-
-Dibanding model 50 *epoch*, model final kami lebih baik pada kedua metrik
-leaderboard, tetapi **lebih buruk bila diukur pada ambang keyakinan tetap yang
-rendah**:
-
-| Pengukuran | 50 *epoch* | 100 *epoch* | Arah |
-|---|---:|---:|---|
-| mAP@0.5 valid | 0,6401 | **0,6678** | lebih baik |
-| *F1* macro pada titik operasi optimal | 0,6383 | **0,6826** | lebih baik |
-| *Precision* pada titik operasi | 0,6406 | **0,7188** | lebih baik |
-| *Recall* pada titik operasi | 0,6237 | **0,6722** | lebih baik |
-| *F1* lokal *micro* pada ambang tetap | **0,3479** | 0,2682 | lebih buruk |
-| *True positive* pada *confidence* 0,1 | 1.381 | **1.545** | lebih baik |
-
-Penjelasannya, kedua model memiliki kalibrasi keyakinan yang berbeda, sehingga
-membandingkan keduanya pada satu ambang tetap yang sama menyesatkan. Rata-rata
-*micro* pada ambang tetap didominasi kelas mayoritas Brown spot yang tetap
-lemah, sedangkan rata-rata *macro* pada titik operasi optimal mengangkat kelas
-minoritas yang justru sangat kuat. Ketika masing-masing model diukur pada titik
-operasi optimalnya sendiri, model 100 *epoch* menang pada *precision* maupun
-*recall* sekaligus.
-
-Kami memilih model 100 *epoch* karena dua metrik yang dinilai lomba, yaitu
-mAP@50 dan *F1-Score*, keduanya naik, dan kenaikannya terkonfirmasi pada
-*split* test yang tidak pernah kami pakai menyetel apa pun. Tetapi kami
-mencatat sisi yang merugikan ini apa adanya, karena menyembunyikannya akan
-membuat angka kami tampak lebih baik daripada yang sebenarnya.
 
 ## Analisis Kelebihan dan Keterbatasan
 
@@ -364,24 +423,31 @@ membuat angka kami tampak lebih baik daripada yang sebenarnya.
 
 1. **Model dilatih dari nol**, sehingga tidak mewarisi representasi visual
    umum. Ini konsekuensi aturan lomba, bukan pilihan desain.
-2. **Reproduksi pelatihan bit per bit tidak kami klaim.** Operasi
-   `scatter_reduce_mps` dan `index_put_with_accumulate_mps` tidak memiliki
-   implementasi deterministik pada *backend* MPS.
-3. **Evaluasi dapat bergeser antar pengulangan.** Pada perangkat ini kami
+2. **Reproduksi pelatihan bit per bit tidak kami klaim.** Model final dilatih
+   dengan DDP di dua GPU dengan AMP, dan sebagian operasi CUDA maupun MPS tidak
+   memiliki implementasi deterministik.
+3. **Evaluasi dapat bergeser antar pengulangan.** Pada model sebelumnya kami
    pernah mengamati mAP@0.5 yang sama-sama sah bernilai 0,6678 dan 0,6759
-   untuk *checkpoint* yang sama, yaitu selisih relatif sekitar 1,2 persen.
-   Angka yang kami laporkan adalah 0,6678, hasil yang muncul berulang pada
-   eksekusi bersih.
+   untuk *checkpoint* yang sama di MPS. Untuk model final, evaluasi di CPU dan
+   di MPS menghasilkan mAP@0.5 yang sama persis, 0,7071, tetapi kami tetap
+   mencatat risiko ini.
 4. **Performa antar kelas tidak merata.** Selisih AP@0.5 antara Narrow brown
-   dan Brown spot melebihi 0,64.
+   dan Brown spot masih melebihi 0,6. Brown spot hampir tidak membaik walaupun
+   kapasitas model dinaikkan dan kepala P2 ditambahkan.
+   Dugaan kami, yang belum kami buktikan, adalah konsistensi anotasinya:
+   pada *split* valid median kotaknya hanya sekitar 0,2 persen luas citra,
+   satu citra dapat memuat sampai 104 kotak, dan kelas ini berasal dari dua
+   label mentah (`Brown spot` dan `BrownSpot`) yang tampaknya bersumber dari
+   himpunan data berbeda.
 5. **Ekstrapolasi dari skala penyaringan.** Pemilihan *hyperparameter*
    divalidasi pada sebagian data dan sedikit *epoch*.
 6. **Kandidat duplikat berbasis *perceptual hash* belum diverifikasi visual**
    satu per satu.
 7. **Belum ada validasi di luar dataset kompetisi**, sehingga kemampuan
    generalisasi ke kondisi lapangan lain belum diketahui.
-8. **Anggaran komputasi terbatas satu laptop**, yang membatasi ukuran model
-   dan jumlah percobaan.
+8. **Anggaran komputasi terbatas.** Percobaan penyaringan berjalan di satu
+   laptop, dan empat kandidat skala penuh memakai kuota GPU gratis Kaggle dan
+   Colab, sehingga tiap kandidat hanya dilatih sekali dengan satu *seed*.
 
 ## Reproducibility
 
@@ -391,7 +457,7 @@ Kami membedakan tiga tingkat agar klaim kami tidak melampaui bukti:
 |---|---|
 | Prapemrosesan | Terverifikasi identik byte per byte |
 | Konfigurasi | Terverifikasi, seluruh parameter tercatat |
-| Pelatihan bit per bit | **Tidak diklaim**, karena nondeterminisme MPS |
+| Pelatihan bit per bit | **Tidak diklaim**, karena nondeterminisme GPU (CUDA dan MPS) |
 
 Risiko pada tingkat ketiga kami kurangi lewat *seed* tetap, konfigurasi beku,
 manifest tetap, validasi pemuatan pada proses bersih, *checksum* model, dan
@@ -423,8 +489,8 @@ selalu berfungsi, hanya lebih lambat.
 ## Instalasi
 
 ```bash
-git clone https://github.com/galiihajiip/agridata.git
-cd agridata
+git clone https://github.com/galiihajiip/agridata-telepati.git
+cd agridata-telepati
 python3.11 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install --upgrade pip
@@ -474,9 +540,9 @@ byte per byte setiap kali dijalankan dengan *seed* yang sama. Sekitar 1 menit.
 ### Verifikasi angka yang kami laporkan
 
 ```bash
-# Evaluasi pada split valid, sekitar 8-10 menit
+# Evaluasi pada split valid, sekitar 4 menit di Apple Silicon
 python scripts/evaluate.py \
-  --weights runs/detect/final/model_100epoch/weights/best.pt \
+  --weights runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt \
   --split valid --nms-iou 0.5
 
 # Cetak dua angka leaderboard, hanya membaca hasil di atas
@@ -505,7 +571,7 @@ python scripts/check_reproducibility.py --dataset-root "Telepati 8.0 Datasets"
 
 # Analisis kesalahan, sekitar 10 menit
 python scripts/run_error_analysis.py \
-  --weights runs/detect/final/model_100epoch/weights/best.pt --split valid
+  --weights runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt --split valid
 
 # Sensitivitas threshold, dari prediksi tersimpan, beberapa detik
 python scripts/threshold_sensitivity.py --split valid
@@ -513,18 +579,37 @@ python scripts/threshold_sensitivity.py --split valid
 
 ### Melatih ulang dari nol
 
+Model final kami latih di Kaggle Notebooks (2x NVIDIA Tesla T4), karena
+pelatihan model yang lebih besar dari YOLOv8n tidak realistis di laptop.
+Langkah lengkapnya, termasuk cara menyalin dataset ke Kaggle sebagai dataset
+privat, ada pada [`docs/kaggle_training.md`](docs/kaggle_training.md). Intinya:
+
+```bash
+# Di Mac: salin data siap latih (tanpa symlink) untuk diunggah ke Kaggle
+python scripts/export_kaggle_dataset.py --out ~/agridata_kaggle_dataset
+
+# Di notebook Kaggle, GPU T4 x2: sekitar 8,1 jam
+python scripts/kaggle_train.py --config configs/kaggle/yolov8s_p2_640_250ep.yaml \
+  --data-root /kaggle/input/<dataset-anda>
+```
+
+`kaggle_train.py` menghentikan pelatihan sendiri sebelum batas sesi 12 jam
+Kaggle dan menyimpan `last.pt` yang dapat dilanjutkan dengan `--resume-from`.
+
+Pelatihan ulang lokal tetap tersedia:
+
 ```bash
 python scripts/run_final_training.py --config configs/final_model_config.yaml
 ```
 
-Memakan sekitar **20,84 jam** pada Apple Silicon dengan MPS untuk 100 *epoch*.
-Sebelum mulai, skrip mencetak seluruh pengungkapan yang diwajibkan, yaitu
+Pada Apple Silicon, jalur ini jauh lebih lambat; YOLOv8n saja memakan 20,84 jam
+untuk 100 *epoch*. Sebelum mulai, skrip mencetak seluruh pengungkapan yang diwajibkan, yaitu
 *commit* Git, versi pustaka, *seed*, *hash* manifest dataset, pemetaan kelas,
 arsitektur, status `pretrained`, seluruh *hyperparameter*, dan perangkat.
 Setelah selesai, bobotnya diverifikasi dapat dimuat dan menjalankan inferensi
 dari proses Python yang benar-benar bersih.
 
-Karena *backend* MPS tidak deterministik, angka hasil pelatihan ulang tidak
+Karena pelatihan di GPU tidak deterministik, angka hasil pelatihan ulang tidak
 akan identik bit per bit dengan milik kami. Yang kami jamin identik adalah
 konfigurasi dan prapemrosesannya.
 
@@ -547,7 +632,7 @@ import os
 os.environ["YOLO_OFFLINE"] = "1"
 from ultralytics import YOLO
 
-model = YOLO("runs/detect/final/model_100epoch/weights/best.pt")
+model = YOLO("runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt")
 results = model.predict("path/ke/citra.jpg", conf=0.25, iou=0.5, imgsz=640)
 
 for box in results[0].boxes:
@@ -562,10 +647,10 @@ disertakan agar hasilnya sama dengan angka yang kami laporkan.
 
 | Field | Nilai |
 |---|---|
-| Berkas | `runs/detect/final/model_100epoch/weights/best.pt` |
-| Ukuran | 6.260.394 byte |
-| SHA-256 | `c631a363ab580ca614c52b51eaaf798e31c44a3ba92f2aa05efcfe27f5a86965` |
-| *Commit* saat pelatihan | `38754ce334149e7eeb633edb8d9d81820bad3b13` |
+| Berkas | `runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt` |
+| Ukuran | 21.754.576 byte |
+| SHA-256 | `4dc86ac0e53d2849fb1b79f1a68dcb5284ae6f1e8fef27e4416fa54c6b772a9f` |
+| Perangkat pelatihan | Kaggle, 2x NVIDIA Tesla T4, 250 *epoch*, 8,11 jam |
 
 Berkas bobot tidak kami komit ke Git karena merupakan biner. Lihat
 [`weights/README.md`](weights/README.md) untuk informasi rilis dan cara
@@ -575,7 +660,7 @@ memverifikasi *checksum*.
 
 ```
 agridata/
-  configs/          konfigurasi percobaan dan konfigurasi final beku
+  configs/          konfigurasi percobaan, konfigurasi final beku, dan configs/kaggle/ untuk kandidat
   src/agridata/     paket inti: dataset, training, metrics, analysis, visualization
   scripts/          titik masuk CLI untuk setiap tahap pipeline
   notebooks/        notebook submission
@@ -585,24 +670,26 @@ agridata/
     figures/        figur untuk notebook dan dokumentasi
     experiments/    log 21 percobaan terkontrol
     predictions/    prediksi tersimpan, dipakai analisis deterministik
-    archive/        hasil model 20 dan 50 epoch yang digantikan
+    candidates/     empat kandidat skala penuh, ensemble, dan alasan pemilihan
+    archive/        hasil model YOLOv8n 20, 50, dan 100 epoch yang digantikan
   references/       audit sitasi dan daftar pustaka
   tests/            69 uji unit
   weights/          informasi rilis model dan checksum
-  docs/             model card dan penanda pernyataan orisinalitas
+  docs/             model card, panduan pelatihan Kaggle/Colab, penanda pernyataan orisinalitas
 ```
 
 ## Kepatuhan terhadap Regulasi
 
 | Ketentuan | Status | Bukti |
 |---|---|---|
-| Tanpa *external pretrained weights* | Patuh | `build_compliant_model` menolak `pretrained=True` dan argumen menyerupai *checkpoint*, `YOLO_OFFLINE=1` aktif |
+| Tanpa *external pretrained weights* | Patuh | `build_compliant_model` menolak `pretrained=True` dan argumen menyerupai *checkpoint*, `YOLO_OFFLINE=1` aktif, checkpoint final tercatat `model=yolov8s-p2.yaml` dan `pretrained=False` |
+| Tanpa unduhan bobot pretrained oleh pustaka | Patuh | Unduhan `yolo26n.pt` oleh pengecekan AMP Ultralytics diblokir lewat `scripts/kaggle_site/sitecustomize.py` pada seluruh kandidat |
 | Hanya dataset resmi | Patuh | Tidak ada dataset lain pada repository maupun rujukan kode |
 | Tanpa pemrosesan LLM atau API | Patuh | Seluruh prapemrosesan berupa kode Python deterministik |
 | Pemetaan 11 kelas canonical | Patuh | [`canonical_mapping_report.md`](artifacts/audit/canonical_mapping_report.md), nol kategori tak terpetakan |
 | *Split* resmi dipertahankan | Patuh | Tidak ada penggabungan atau pengacakan ulang |
 | Tanpa kebocoran data | Patuh | Satu duplikat persis ditemukan dan dikeluarkan dari manifest latih |
-| Data uji tidak dipakai menyetel | Patuh | Pemilihan model dilakukan di atas *split* valid, test dievaluasi sekali |
+| Data uji tidak dipakai menyetel | Patuh | Pemilihan kandidat dan ensemble di atas *split* valid, test dievaluasi sekali untuk model terpilih |
 | *Seeding* deterministik | Patuh | `seed=42` pada Python, NumPy, dan PyTorch |
 | Satu model final | Patuh | [`final_model_metadata.json`](artifacts/reports/final_model_metadata.json) |
 

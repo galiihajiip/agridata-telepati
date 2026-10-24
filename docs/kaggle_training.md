@@ -72,3 +72,39 @@ test dievaluasi satu kali setelah pilihan dibekukan.
 | D | `configs/kaggle/yolov8m_640_150ep.yaml` | YOLOv8m, 640 | Kapasitas model lebih besar lagi |
 
 Setiap config dipangkas agar muat dalam satu sesi Kaggle 11 jam.
+
+Hasil, alasan memilih B sebagai model final, dan catatan per kandidat ada di
+[`artifacts/candidates/README.md`](../artifacts/candidates/README.md).
+
+## Google Colab
+
+Kandidat C kami jalankan di Google Colab (A100) dengan skrip yang sama. Dataset
+diunggah sebagai zip ke Google Drive lalu diekstrak ke disk lokal runtime:
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+!mkdir -p /content/agridata-yolo && unzip -q -o /content/drive/MyDrive/agridata-yolo.zip -d /content/agridata-yolo
+```
+
+```bash
+python scripts/kaggle_train.py --config configs/kaggle/yolov8s_1024_150ep.yaml \
+    --data-root /content/agridata-yolo --local-data-dir "" \
+    --work-dir /content/drive/MyDrive/agridata_runs --device 0
+```
+
+Sesi Colab dapat terputus kapan saja, dan runtime yang di-reset menghapus isi
+`/content`. Run C terputus di *epoch* 49 dan tidak kami lanjutkan.
+
+## Catatan kepatuhan pada GPU
+
+Pengecekan AMP bawaan Ultralytics mengunduh bobot pretrained `yolo26n.pt`
+setiap kali pelatihan dimulai di GPU CUDA, dan `YOLO_OFFLINE` tidak
+mencegahnya. `kaggle_train.py` menambahkan `scripts/kaggle_site/` ke
+`PYTHONPATH` setiap proses pelatihan, termasuk proses DDP, sehingga
+`sitecustomize.py` di sana mengganti pengecekan tersebut sebelum Ultralytics
+memakainya. Log setiap run memuat baris `AMP check dilewati tanpa mengunduh
+bobot pretrained; AMP diaktifkan.` sebagai bukti.
+
+Pada mode commit Kaggle, menyalin dataset dari `/kaggle/input` ke disk lokal
+memakan 20 sampai 60 menit, dan log tampak diam selama itu.

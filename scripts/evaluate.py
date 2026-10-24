@@ -171,8 +171,15 @@ def collect_predictions(
     kemungkinan merupakan interaksi numpy 2.4.x dengan torch MPS khusus untuk
     daftar path eksplisit yang sangat panjang. Pemecahan menjadi potongan
     merupakan solusi sementara yang sudah terverifikasi dan kokoh.
+
+    Akar masalahnya kemudian teridentifikasi: Ultralytics versi ini memproses
+    seluruh daftar path dalam satu pemanggilan sebagai satu batch, terlepas dari
+    argumen `batch`. Potongan 500 citra masih muat untuk YOLOv8n, tetapi untuk
+    YOLOv8s-P2 forward pass pertama saja sudah meminta lebih dari 19 GB memori
+    MPS. Potongan 16 citra menjaga memori di bawah 1 GB untuk arsitektur yang
+    lebih besar, tanpa mengubah hasil karena seluruh citra berukuran 640x640.
     """
-    CHUNK_SIZE = 500
+    CHUNK_SIZE = 16
     ordered_ids = list(images_by_id.keys())
     image_paths = [str(images_dir / images_by_id[iid]["file_name"]) for iid in ordered_ids]
 

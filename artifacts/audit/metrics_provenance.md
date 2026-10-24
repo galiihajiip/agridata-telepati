@@ -17,9 +17,15 @@ diagnostik, dan tidak boleh disejajarkan dengan angka final.
 | 0,6401 | Historis, pernah final | 50 *epoch*, resolusi 640 | NMS 0,5 | `artifacts/archive/50epoch_640_run/nms05/evaluation_valid.json` |
 | 0,6145 | Historis | 50 *epoch*, resolusi 640 | NMS 0,7, *split* test | `artifacts/archive/50epoch_640_run/evaluation_test.json` |
 | 0,6246 | Historis, pernah final | 50 *epoch*, resolusi 640 | NMS 0,5, *split* test | `artifacts/archive/50epoch_640_run/nms05/evaluation_test.json` |
-| 0,6567 | Historis | 100 *epoch*, resolusi 640 | NMS 0,7, saat pelatihan | `runs/detect/final/model_100epoch/results.csv` |
-| **0,6678** | **FINAL, *split* valid** | **100 *epoch*, resolusi 640** | **NMS 0,5** | `artifacts/reports/evaluation_valid.json` |
-| **0,6596** | **FINAL, *split* test** | **100 *epoch*, resolusi 640** | **NMS 0,5** | `artifacts/reports/evaluation_test.json` |
+| 0,6567 | Historis | 100 *epoch*, resolusi 640 | NMS 0,7, saat pelatihan | `artifacts/archive/100epoch_v8n_run/final_training_history.csv` |
+| 0,6678 | Historis, pernah final | YOLOv8n 100 *epoch*, resolusi 640 | NMS 0,5 | `artifacts/archive/100epoch_v8n_run/evaluation_valid.json` |
+| 0,6596 | Historis, pernah final | YOLOv8n 100 *epoch*, resolusi 640 | NMS 0,5, *split* test | `artifacts/archive/100epoch_v8n_run/evaluation_test.json` |
+| 0,7057 | Kandidat A | YOLOv8s 640, 300 *epoch* | NMS 0,5 | `artifacts/candidates/A/evaluation_valid.json` |
+| 0,7139 | Kandidat D | YOLOv8m 640, 150 *epoch* | NMS 0,5 | `artifacts/candidates/D/evaluation_valid.json` |
+| 0,7115 / 0,7177 | Tidak dipakai | Ensemble A+B / B+D | NMS 0,5 | `artifacts/candidates/ensembles.json` |
+| 0,6997 | Historis | YOLOv8s-P2, saat pelatihan | NMS 0,7 | `artifacts/reports/final_training_history.csv` |
+| **0,7071** | **FINAL, *split* valid** | **YOLOv8s-P2 640, 250 *epoch*** | **NMS 0,5** | `artifacts/reports/evaluation_valid.json` |
+| **0,7065** | **FINAL, *split* test** | **YOLOv8s-P2 640, 250 *epoch*** | **NMS 0,5** | `artifacts/reports/evaluation_test.json` |
 | 0,6759 | Tidak dipakai | 100 *epoch*, resolusi 640 | NMS 0,5, pengulangan lain | Lihat bagian 7 mengenai kestabilan pengukuran |
 | 0,4200 | Eksperimen | 50 *epoch*, latih 640 | inferensi pada 960 | `artifacts/reports/inference_tuning_imgsz.json` |
 | 0,1164 | Eksperimen | 50 *epoch*, latih 640 | inferensi pada 1280 | `artifacts/reports/inference_tuning_imgsz.json` |
@@ -34,13 +40,16 @@ diagnostik, dan tidak boleh disejajarkan dengan angka final.
 | 0,6383 | Historis, pernah final | *macro*, titik operasi terbaik | NMS 0,5, 50 *epoch* | `artifacts/archive/50epoch_640_run/nms05/evaluation_valid.json` |
 | 0,6272 | Historis, pernah final | *macro*, titik operasi terbaik | NMS 0,5, 50 *epoch*, *split* test | `artifacts/archive/50epoch_640_run/nms05/evaluation_test.json` |
 | 0,2682 | Diagnostik | *micro*, *threshold* 0,10 | NMS 0,5, 100 *epoch* | Puncak sapuan *threshold* pada model final |
-| **0,6826** | **FINAL, *split* valid** | ***macro*, titik operasi terbaik** | **NMS 0,5, 100 *epoch*** | `artifacts/reports/evaluation_valid.json` |
-| **0,6641** | **FINAL, *split* test** | ***macro*, titik operasi terbaik** | **NMS 0,5, 100 *epoch*** | `artifacts/reports/evaluation_test.json` |
+| 0,6826 | Historis, pernah final | *macro*, titik operasi terbaik | NMS 0,5, YOLOv8n 100 *epoch* | `artifacts/archive/100epoch_v8n_run/evaluation_valid.json` |
+| 0,6641 | Historis, pernah final | *macro*, titik operasi terbaik | NMS 0,5, YOLOv8n 100 *epoch*, *split* test | `artifacts/archive/100epoch_v8n_run/evaluation_test.json` |
+| 0,5893 | Diagnostik | *micro*, *threshold* 0,25 | NMS 0,5, YOLOv8s-P2 | Puncak sapuan *threshold* pada model final |
+| **0,7233** | **FINAL, *split* valid** | ***macro*, titik operasi terbaik** | **NMS 0,5, YOLOv8s-P2** | `artifacts/reports/evaluation_valid.json` |
+| **0,7145** | **FINAL, *split* test** | ***macro*, titik operasi terbaik** | **NMS 0,5, YOLOv8s-P2** | `artifacts/reports/evaluation_test.json` |
 | 0,6321 | Tidak dipakai | *harmonic mean* dari *mean P* dan *mean R* | NMS 0,7 | Menggabungkan titik operasi berbeda antar kelas, lebih sulit direproduksi |
 
 ## 3. Mengapa Terdapat Banyak Nilai
 
-Empat perubahan besar terjadi selama project berjalan, dan masing-masing
+Lima perubahan besar terjadi selama project berjalan, dan masing-masing
 menghasilkan satu generasi angka:
 
 1. **Perpanjangan pelatihan** dari 20 *epoch* menjadi 50 *epoch*.
@@ -55,7 +64,13 @@ menghasilkan satu generasi angka:
    Menaikkan mAP@0.5 dari 0,6401 menjadi 0,6678 dan F1 macro dari 0,6383
    menjadi 0,6826 pada *split* valid.
 
-Perubahan pertama dan keempat mengubah model. Perubahan kedua mengubah cara
+5. **Penggantian arsitektur** dari YOLOv8n ke YOLOv8s-P2, dilatih 250
+   *epoch* di Kaggle. Menaikkan mAP@0.5 dari 0,6678 menjadi 0,7071 dan F1
+   macro dari 0,6826 menjadi 0,7233 pada *split* valid. Model ini dipilih
+   dari empat kandidat hanya berdasarkan *split* valid, lihat
+   `artifacts/candidates/README.md`.
+
+Perubahan pertama, keempat, dan kelima mengubah model. Perubahan kedua mengubah cara
 mengukur. Perubahan ketiga mengubah konfigurasi inferensi. Seluruhnya
 terdokumentasi, dan tidak satu pun dilakukan setelah melihat hasil pada
 *split* test.
@@ -70,18 +85,18 @@ dievaluasi sekali setelah model dikunci.
 
 | Metrik | *Split* valid | *Split* test | Sumber |
 |---|---:|---:|---|
-| mAP@50 | **66,78%** | **65,96%** | `official_metrics_{split}.json` |
-| F1-Score macro | **68,26%** | **66,41%** | `official_metrics_{split}.json` |
+| mAP@50 | **70,71%** | **70,65%** | `official_metrics_{split}.json` |
+| F1-Score macro | **72,33%** | **71,45%** | `official_metrics_{split}.json` |
 
-Selisih valid terhadap test sebesar 0,82 poin pada mAP dan 1,85 poin pada F1.
-*Split* test tidak pernah dipakai untuk penyetelan apa pun, sehingga selisih
-sekecil itu konsisten dengan generalisasi yang stabil pada kedua *split*.
-Namun satu evaluasi *held-out* tidak cukup untuk membuktikan ketiadaan
+Selisih valid terhadap test sebesar 0,06 poin pada mAP dan 0,88 poin pada F1.
+*Split* test tidak pernah dipakai untuk penyetelan apa pun, termasuk memilih
+di antara kandidat, dan baru dievaluasi sekali setelah model dikunci. Namun
+satu evaluasi *held-out* tidak cukup untuk membuktikan ketiadaan
 *overfitting*.
 
 Konfigurasi yang menghasilkan angka tersebut:
 
-- bobot `runs/detect/final/model_100epoch/weights/best.pt`;
+- bobot `runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt`;
 - resolusi inferensi 640, sama dengan resolusi pelatihan;
 - ambang NMS IoU 0,5;
 - IoU pencocokan 0,5;
@@ -91,7 +106,7 @@ Konfigurasi yang menghasilkan angka tersebut:
 Reproduksi:
 
 ```bash
-python scripts/evaluate.py --weights runs/detect/final/model_100epoch/weights/best.pt --split valid --nms-iou 0.5
+python scripts/evaluate.py --weights runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt --split valid --nms-iou 0.5
 python scripts/compute_official_metrics.py --split valid
 ```
 
@@ -203,3 +218,20 @@ padat tetap memiliki rasio *false negative* lebih tinggi. Yang tidak stabil
 adalah angka absolutnya, bukan arah temuannya. Karena itu kami memperlakukan
 analisis kesalahan sebagai bukti kualitatif mengenai jenis kegagalan model,
 bukan sebagai pengukuran presisi.
+
+### 7.2 Model final: tidak ada pergeseran yang teramati
+
+Untuk model final YOLOv8s-P2 kami mengulang pengukuran yang sama dengan sengaja,
+justru karena riwayat di atas. Hasilnya identik sampai digit terakhir:
+
+| Eksekusi | Perangkat | mAP@0.5 | *F1* macro | Deteksi terkumpul | *TP* analisis kesalahan |
+|---|---|---:|---:|---:|---:|
+| 24 Okt 09:22 | CPU | 0,7071 | 0,7233 | tidak dicatat | tidak dijalankan |
+| 24 Okt 10:47 | MPS | 0,7071 | 0,7233 | 89.827 | 3.026 |
+| 24 Okt 17:10 | MPS | 0,7071 | 0,7233 | 89.827 | 3.026 |
+
+Di antara kedua periode, pengumpulan prediksi pada `evaluate.py` dan
+`run_error_analysis.py` kami ubah dari potongan 500 citra menjadi potongan 16
+citra, karena potongan 500 kehabisan memori MPS untuk model yang lebih besar.
+Kami belum memastikan apakah perubahan itu juga yang menghilangkan
+ketidakstabilan pada model lama, sehingga tidak kami klaim sebagai penyebabnya.

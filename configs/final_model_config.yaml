@@ -1,103 +1,54 @@
 # KONFIGURASI MODEL FINAL, dibekukan dan dipakai menghasilkan bobot yang disubmit.
 #
-# Konfigurasi ini dipilih dari 21 percobaan penyaringan yang tercatat
-# (E01 sampai E21). Penalaran lengkapnya ada pada
-# artifacts/experiments/experiment_log.json dan
-# artifacts/reports/block14_final_model_selection.md.
+# Isinya identik dengan kandidat B, configs/kaggle/yolov8s_p2_640_250ep.yaml,
+# ditambah empat kunci (data_yaml, fraction, device, scheduler) yang dibutuhkan
+# scripts/run_final_training.py dan notebook untuk pelatihan ulang lokal.
 #
-# Berkas ini bukan model terlatih, melainkan resep yang persis dan dapat
-# direproduksi untuk menghasilkan bobot final:
+# Bobot final dilatih di Kaggle Notebooks (2x NVIDIA Tesla T4, DDP) dengan:
+#
+#     python scripts/kaggle_train.py --config configs/kaggle/yolov8s_p2_640_250ep.yaml \
+#         --data-root <folder hasil scripts/export_kaggle_dataset.py>
+#
+# Pelatihan ulang lokal tetap dapat dijalankan dengan:
 #
 #     python scripts/run_final_training.py --config configs/final_model_config.yaml
 #
-# RIWAYAT ANGGARAN EPOCH, dicatat terbuka karena memengaruhi cara membaca
-# hasilnya:
+# RIWAYAT MODEL FINAL, dicatat terbuka:
 #
-#   1. Awalnya kami menetapkan 50 epoch, lalu menurunkannya menjadi 20 epoch
-#      demi menyisakan waktu bagi tahap-tahap berikutnya. Keputusan itu
-#      diambil sebelum satu pun hasil skala penuh terlihat.
-#   2. Setelah eksekusi 20 epoch selesai (mAP@0.5 = 0,5620), kami
-#      memperpanjang menjadi 50 epoch dan memperoleh 0,6277.
-#   3. Kurva pelatihan 50 epoch menunjukkan model belum konvergen: mAP masih
-#      naik, train loss masih turun, dan val loss juga masih turun. Atas dasar
-#      bukti itu kami memperpanjang anggaran menjadi 100 epoch, yang
-#      menghasilkan model final saat ini dengan mAP@0.5 = 0,6678 pada split
-#      valid.
-#
-# Setiap perpanjangan merupakan pelatihan baru dari nol, bukan kelanjutan
-# checkpoint, karena Ultralytics melucuti keadaan optimizer begitu pelatihan
-# selesai normal sehingga pelanjutan sejati tidak mungkin dilakukan. Seluruh
-# hasil versi sebelumnya tetap diarsipkan di artifacts/archive/ dan tidak
-# dihapus. Konfigurasi versi 50 epoch tersimpan pada
-# configs/archive_50epoch_config.yaml.
+#   1. YOLOv8n 640, AdamW, 20 lalu 50 lalu 100 epoch di Apple Silicon MPS.
+#      Model 100 epoch mencapai mAP@0.5 0,6678 pada split valid. Konfigurasinya
+#      diarsipkan pada configs/archive_100epoch_v8n_config.yaml.
+#   2. Analisis kesalahan model itu menunjukkan kapasitas dan jadwal pelatihan
+#      sebagai pembatas: kurva 100 epoch belum konvergen, dan pelatihan 100
+#      epoch saja memakan 20,84 jam di MPS. Empat kandidat lalu dilatih di GPU
+#      Kaggle dan Colab, masing-masing dari nol (docs/kaggle_training.md):
+#        A. YOLOv8s 640, 300 epoch
+#        B. YOLOv8s-P2 640, 250 epoch   <- terpilih
+#        C. YOLOv8s 1024, 150 epoch
+#        D. YOLOv8m 640, 150 epoch
+#   3. Pemilihan hanya berdasarkan split valid. Split test dievaluasi sekali
+#      setelah pilihan dibekukan.
 
 seed: 42
 
-model_arch: "yolov8n.yaml"   # HANYA definisi arsitektur, tidak pernah berkas checkpoint .pt
+model_arch: "yolov8s-p2.yaml"   # HANYA definisi arsitektur, tidak pernah berkas checkpoint .pt
 pretrained: false
 
 data_yaml: "data/prepared/data.yaml"
 
-# --- Dipilih berdasarkan bukti percobaan penyaringan ---
 image_size: 640
-# Alasan: E03 dengan imgsz=640 mengungguli baseline 320 sebesar +0,0023 pada 5
-# epoch, dan hal itu dikuatkan secara terpisah oleh analisis kesalahan, yang
-# menunjukkan objek terlewat cenderung lebih kecil daripada sebaran luas ground
-# truth secara keseluruhan sehingga resolusi lebih tinggi semestinya menolong.
-# E20 dan E21 dengan imgsz=640 dan 12 epoch menempati dua hasil mAP@0.5
-# tertinggi dari seluruh 21 percobaan.
-
-batch_size: 16
-# Alasan: E04 dengan batch=32 berada di bawah baseline batch=16 sebesar 0,0013
-# mAP@0.5, konsisten dengan berkurangnya jumlah pembaruan gradien per epoch pada
-# jumlah epoch yang sama.
-
-optimizer: "AdamW"
-learning_rate: 0.001
-momentum: 0.9
+batch_size: 32
+epochs: 250
+patience: 50
+optimizer: "SGD"
+learning_rate: 0.01
+momentum: 0.937
 weight_decay: 0.0005
-# Alasan: E06 dengan SGD berada di bawah AdamW sebesar 0,0015 mAP@0.5, dan E05
-# dengan learning rate 0,0001 juga di bawah baseline 0,001 sebesar 0,0016.
-
-scheduler: "linear"   # bawaan Ultralytics ketika cos_lr=False; tidak diablasi terpisah
-
-# --- Augmentasi: bawaan Ultralytics, dengan satu pengecualian yang disengaja ---
-# Alasannya tidak murni dari angka penyaringan. Pada 5 epoch, setiap varian
-# augmentasi berada di bawah referensi tanpa augmentasi, yang merupakan artefak
-# lazim pada anggaran epoch dan data yang kecil. Pada 12 epoch, selisih antara
-# E20 dengan augmentasi bawaan dan E21 tanpa augmentasi menyempit menjadi hanya
-# 0,0013 atau sekitar 5 persen, jauh lebih tipis. Arah tren itu konsisten dengan
-# manfaat augmentasi yang baru muncul pada anggaran pelatihan lebih besar.
-#
-# Digabung dengan penalaran domain, yaitu bahwa sistem kamera atau drone yang
-# dipakai di lapangan akan menghadapi variasi pencahayaan, sudut, dan jarak yang
-# tidak seluruhnya tercakup data latih ini, augmentasi kami PERTAHANKAN untuk
-# pelatihan skala penuh, dengan satu penimpaan yang disengaja:
-flipud: 0.0   # pembalikan vertikal dinonaktifkan secara eksplisit, karena tidak
-              # masuk akal secara fisik untuk tanaman yang orientasinya
-              # ditentukan gravitasi. Nilai ini memang sama dengan bawaan
-              # Ultralytics, tetapi kami tulis eksplisit agar tidak pernah
-              # diaktifkan kembali diam-diam oleh perubahan konfigurasi.
-# Seluruh parameter augmentasi lain (hsv_h, hsv_s, hsv_v, degrees, translate,
-# scale, shear, perspective, fliplr, mosaic, mixup, copy_paste) dibiarkan pada
-# nilai bawaan Ultralytics. Masing-masing sudah dinilai satu per satu sebagai
-# masuk akal secara fisik untuk citra padi hasil tangkapan lapangan.
-
-# --- Parameter pelatihan skala penuh ---
-fraction: 1.0        # seluruh data latih; semua penyaringan memakai fraksi kecil
-epochs: 100          # lihat riwayat anggaran epoch di kepala berkas ini
-patience: 20         # early stopping: berhenti bila fitness validasi tidak
-                     # membaik selama 20 epoch berturut-turut
-workers: 2
+scheduler: "linear"   # bawaan Ultralytics ketika cos_lr=False
+cos_lr: false
+close_mosaic: 15
+fraction: 1.0
+workers: 4
 device: "auto"
 
-# --- Waktu pelatihan yang teramati, dicatat apa adanya ---
-# Eksekusi 100 epoch yang menghasilkan model final memakan 20,84 jam pada Apple
-# Silicon dengan backend MPS, atau sekitar 9 menit per epoch pada 10.132 citra
-# latih. Nilai `patience: 20` tidak pernah memicu penghentian dini, karena
-# fitness validasi masih membaik sampai epoch 100.
-#
-# Sebagai pembanding, eksekusi 50 epoch sebelumnya memakan 7,34 jam dan eksekusi
-# 20 epoch memakan 5,23 jam. Perkiraan awal kami sekitar 590 detik per epoch
-# ternyata terlalu optimistis pada anggaran pendek, karena biaya tetap per epoch
-# berupa validasi dan penulisan checkpoint belum teramortisasi.
+flipud: 0.0   # pembalikan vertikal tidak masuk akal secara fisik untuk tanaman

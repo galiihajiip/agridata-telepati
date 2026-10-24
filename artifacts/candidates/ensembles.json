@@ -1,0 +1,25 @@
+{
+  "description": "Ensemble NMS (prediksi digabung lalu NMS IoU 0,5) dievaluasi dengan DetectionValidator bawaan Ultralytics, rect=True, split valid. Kontrol: A sendiri menghasilkan mAP@50 0,70572, identik dengan evaluate.py. F1 dari jalur ini sekitar 0,0007 lebih rendah daripada evaluate.py.",
+  "decision_rule": "Ensemble hanya dipakai bila jumlah mAP@50 dan F1 naik minimal 2 poin dibanding model tunggal terbaik, karena menambah kerumitan reproduksi.",
+  "results": [
+    {
+      "members": [
+        "A",
+        "B"
+      ],
+      "mAP50": 0.7115,
+      "mAP50_95": 0.4662,
+      "macro_f1": 0.7164
+    },
+    {
+      "members": [
+        "B",
+        "D"
+      ],
+      "mAP50": 0.7177,
+      "mAP50_95": 0.4828,
+      "macro_f1": 0.7155
+    }
+  ],
+  "outcome": "Tidak dipakai. Kenaikan terbesar kurang dari 1 poin pada jumlah kedua metrik."
+}
