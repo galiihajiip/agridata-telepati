@@ -14,8 +14,8 @@ sebelumnya. Perintah pemeriksaannya disertakan agar dapat diulang.
 | Kepatuhan regulasi | Lulus seluruh butir yang dapat diverifikasi otomatis |
 | Notebook | Dieksekusi ulang penuh, 0 *error*, 0 sel belum dieksekusi |
 | Uji unit | 69 lulus |
-| Daftar periksa reproduktibilitas | 9 lulus, 1 peringatan (*working tree* belum dikomit saat audit) |
-| GitHub Release bobot | **Belum dipublikasikan**, lihat bagian 9 |
+| Daftar periksa reproduktibilitas | 10 lulus pada commit bersih |
+| GitHub Release bobot | Dipublikasikan, [`v1.0.0-final-model`](https://github.com/galiihajiip/agridata-telepati/releases/tag/v1.0.0-final-model), diunduh ulang dan SHA-256 cocok |
 
 ## 2. Model Final
 
@@ -69,7 +69,7 @@ kesalahan yang identik sampai digit terakhir. Rincian pada
 | *Split* test tidak dipakai untuk penyetelan | LULUS | Pemilihan kandidat dan ensemble hanya memakai *split* valid. Test dievaluasi untuk model terpilih saja, setelah pilihan dikunci |
 | 11 kelas canonical | LULUS | `names` pada checkpoint identik dengan `CANONICAL_CLASSES` versi pemetaan 1.0.0 |
 | `YOLO_OFFLINE` pada skrip yang memuat Ultralytics | LULUS | Seluruh 9 skrip yang mengimpor Ultralytics menyetel `YOLO_OFFLINE` atau memuatnya lewat `agridata.training` |
-| Bobot dipublikasikan lewat GitHub Release atau Git LFS | **BELUM** | Rilis disiapkan, perintah ada di `weights/README.md` |
+| Bobot dipublikasikan lewat GitHub Release atau Git LFS | LULUS | [`v1.0.0-final-model`](https://github.com/galiihajiip/agridata-telepati/releases/tag/v1.0.0-final-model); unduhan ulang identik byte per byte |
 
 ## 5. Dataset
 
@@ -114,13 +114,9 @@ Pembersihan menjelang submission dicatat pada `repository_cleanup.md` bagian
 
 ## 9. Item Terbuka
 
-1. **Komit dan push** seluruh perubahan. Saat audit ini, *working tree* belum
-   dikomit, sehingga butir 7 daftar periksa reproduktibilitas berstatus
-   PERINGATAN dan repository publik masih menampilkan model lama.
-2. **Publikasikan GitHub Release** berisi bobot final, `weights/best.pt.sha256`,
-   dan `artifacts/reports/final_model_metadata.json`.
-3. **Perbarui** tautan rilis pada `weights/README.md` dan *field* `release` pada
-   `final_model_metadata.json`.
+Tidak ada item teknis yang terbuka. Perubahan sudah dikomit dan di-*push*
+(daftar periksa reproduktibilitas 10/10 lulus pada commit bersih), dan GitHub
+Release bobot sudah terbit serta terverifikasi dengan unduhan ulang.
 
 ## 10. Di Luar Jangkauan Verifikasi Otomatis
 
@@ -144,6 +140,6 @@ final baru dievaluasi setelah pilihan dikunci.
 
 ## 12. Kesimpulan
 
-Paket submission siap secara teknis. Yang tersisa adalah tindakan pemilik
-repository: komit dan push, publikasi GitHub Release, dan dokumen
-administratif.
+Paket submission siap secara teknis. Yang tersisa hanya dokumen
+administratif di luar repository: pernyataan orisinalitas bertanda tangan dan
+pengisian form submission.

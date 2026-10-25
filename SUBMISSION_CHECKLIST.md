@@ -49,7 +49,7 @@ kemampuan verifikasi otomatis dan harus dikonfirmasi tim.
 - [x] README lengkap berbahasa Indonesia
 - [x] `requirements.txt` terkunci pada versi eksak
 - [x] Dataset mentah tidak ada pada riwayat Git publik
-- [ ] Rilis bobot model dipublikasikan dengan tautan langsung
+- [x] Rilis bobot model dipublikasikan dengan tautan langsung: https://github.com/galiihajiip/agridata-telepati/releases/tag/v1.0.0-final-model (diunduh ulang, SHA-256 cocok)
 
 ## Audit
 

@@ -1,13 +1,22 @@
 # Bobot Model
 
-**Status: rilis sudah disiapkan, menunggu publikasi.** Berkas *checksum*
-(`best.pt.sha256`) dan metadata
+**Status: dipublikasikan** pada GitHub Release
+[`v1.0.0-final-model`](https://github.com/galiihajiip/agridata-telepati/releases/tag/v1.0.0-final-model).
+
+Unduhan langsung: <https://github.com/galiihajiip/agridata-telepati/releases/download/v1.0.0-final-model/best.pt>
+
+```bash
+mkdir -p runs/detect/final/yolov8s_p2_640_250ep/weights
+curl -L -o runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt \
+  https://github.com/galiihajiip/agridata-telepati/releases/download/v1.0.0-final-model/best.pt
+shasum -a 256 -c weights/best.pt.sha256
+```
+
+Berkas bobot merupakan biner dan sengaja tidak dikomit ke Git (lihat
+`.gitignore`). *Checksum* (`best.pt.sha256`) dan metadata
 (`../artifacts/reports/final_model_metadata.json`) ditulis oleh
-`scripts/register_final_model.py` langsung dari bobot dan laporan evaluasinya.
-Berkas bobot itu sendiri merupakan biner dan sengaja tidak dikomit ke Git
-(lihat `.gitignore`), melainkan didistribusikan sebagai lampiran GitHub
-Release. Perintah dan daftar asetnya ada di bagian "Rencana GitHub Release" di
-bawah.
+`scripts/register_final_model.py` langsung dari bobot dan laporan evaluasinya,
+dan salinan identiknya ikut dilampirkan pada Release.
 
 ## Model final
 
@@ -65,27 +74,23 @@ shasum -a 256 -c weights/best.pt.sha256
 
 Hasilnya harus sama persis dengan nilai SHA-256 pada tabel di atas.
 
-## Rencana GitHub Release
+## GitHub Release
 
 Regulasi mensyaratkan bobot model dipublikasikan melalui GitHub Release atau
-Git LFS dengan tautan unduhan langsung, bukan tautan penyimpanan awan pribadi.
-Ukuran berkasnya 21,8 MB, jauh di bawah batas per berkas GitHub, sehingga kami
-memilih lampiran GitHub Release: lebih sederhana dan sama patuhnya dibanding
-Git LFS.
+Git LFS dengan tautan unduhan langsung. Ukuran berkasnya 21,8 MB, jauh di bawah
+batas per berkas GitHub, sehingga kami memilih lampiran GitHub Release.
 
-Rilisnya sudah siap tetapi **belum dipublikasikan**, karena publikasi
-merupakan tindakan publik yang sulit dibatalkan dan kami tunda sampai ada
-konfirmasi eksplisit dari pemilik repository. Perintahnya:
+| Aset pada Release | Isi |
+|---|---|
+| `best.pt` | Bobot final, 21.754.576 byte |
+| `best.pt.sha256` | *Checksum* SHA-256 |
+| `final_model_metadata.json` | Metadata model, identik dengan berkas di repository |
 
-```bash
-gh release create v2.0.0-final-model \
-  runs/detect/final/yolov8s_p2_640_250ep/weights/best.pt \
-  weights/best.pt.sha256 \
-  artifacts/reports/final_model_metadata.json \
-  --title "Model Final v2.0.0: Detektor Penyakit Padi YOLOv8s-P2" \
-  --notes-file <berkas catatan rilis>
-```
+Setelah publikasi, `best.pt` kami unduh ulang dari Release dan kami bandingkan
+dengan bobot yang kami evaluasi: identik byte per byte, dengan SHA-256
+`4dc86ac0e53d2849fb1b79f1a68dcb5284ae6f1e8fef27e4416fa54c6b772a9f`.
 
-Setelah rilis terbit, bagian ini perlu diperbarui dengan tautan aset langsung,
-dan *field* `release` pada `artifacts/reports/final_model_metadata.json`
-disetel menjadi `published: true` beserta metode dan URL-nya.
+*Field* `release` pada `final_model_metadata.json` sengaja tidak kami ubah
+setelah publikasi, agar salinan di repository tetap identik dengan salinan yang
+dilampirkan pada Release. Tautan resmi Release adalah yang tercantum pada
+dokumen ini.

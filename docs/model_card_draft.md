@@ -5,6 +5,17 @@
 berasal dari hasil evaluasi aktual terhadap bobot final, bukan angka
 sementara.
 
+## Tim
+
+| | |
+|---|---|
+| Nama tim | Di Bandung Di Ganesha |
+| Perguruan tinggi | Universitas Pembangunan Nasional "Veteran" Jawa Timur |
+| Ketua | Galih Aji Pangestu |
+| Anggota | Stevyka Frista Aninda, Putri Ayu Ajeng Nina Zuraida |
+| Dosen pembimbing | Andreas Nugroho Sihananto, S.Kom., M.Kom. |
+| Cabang lomba | AgriData Intelligence Race, TELEPATI 8.0 |
+
 ## Identitas model
 
 | Field | Nilai |

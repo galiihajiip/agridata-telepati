@@ -2,6 +2,15 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/galiihajiip/agridata-telepati/blob/main/notebooks/final_agriData_telepati8.ipynb)
 
+| | |
+|---|---|
+| Nama tim | Di Bandung Di Ganesha |
+| Perguruan tinggi | Universitas Pembangunan Nasional "Veteran" Jawa Timur |
+| Ketua | Galih Aji Pangestu |
+| Anggota | Stevyka Frista Aninda, Putri Ayu Ajeng Nina Zuraida |
+| Dosen pembimbing | Andreas Nugroho Sihananto, S.Kom., M.Kom. |
+| Cabang lomba | AgriData Intelligence Race, TELEPATI 8.0 |
+
 Deteksi penyakit tanaman padi berbasis *object detection* untuk 11 kelas
 canonical, dibangun dari dataset resmi TELEPATI 8.0. Model dilatih sepenuhnya
 dari nol tanpa *external pretrained weights*, sesuai ketentuan lomba.
@@ -36,7 +45,18 @@ GitHub Release; langkahnya ada pada bagian [Cara Menjalankan](#cara-menjalankan)
 
 ## Bagi juri yang ingin memverifikasi dengan cepat
 
-Kalau Anda hanya perlu memastikan angka yang kami laporkan benar, dua perintah
+**Cara tercepat, di Google Colab:**
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/galiihajiip/agridata-telepati/blob/main/notebooks/verify_colab.ipynb)
+
+Buka [`notebooks/verify_colab.ipynb`](notebooks/verify_colab.ipynb), isi `DATASET_ZIP`
+dengan zip dataset resmi, lalu Runtime > Run all. Notebook itu meng-*clone*
+repository ini, mengunduh bobot dari GitHub Release dan memverifikasi
+SHA-256-nya, menyiapkan dataset dengan `scripts/prepare_dataset.py`,
+menjalankan dua perintah di bawah, lalu membandingkan hasilnya dengan angka
+kami pada toleransi 2 persen relatif. Uji kami dari dataset mentah memberi
+mAP@50 70,71% dan *F1-Score* 72,33%, selisih 0,00%, dalam sekitar 4 menit.
+
+**Atau secara lokal**, dua perintah
 berikut cukup dan tidak memerlukan pelatihan ulang:
 
 ```bash
@@ -44,7 +64,9 @@ python scripts/evaluate.py --weights runs/detect/final/yolov8s_p2_640_250ep/weig
 python scripts/compute_official_metrics.py --split valid
 ```
 
-Bobotnya diunduh dari GitHub Release, lihat [`weights/README.md`](weights/README.md).
+Bobotnya diunduh dari GitHub Release
+[`v1.0.0-final-model`](https://github.com/galiihajiip/agridata-telepati/releases/tag/v1.0.0-final-model) dan diletakkan pada path di atas; perintah
+unduhan dan verifikasi *checksum* ada pada [`weights/README.md`](weights/README.md).
 Perintah pertama memakan sekitar 4 menit pada Apple Silicon dan
 menghasilkan `artifacts/reports/evaluation_valid.json`. Perintah kedua hanya
 membaca berkas itu dan mencetak dua angka leaderboard, tanpa menghitung ulang
@@ -707,4 +729,10 @@ repository ini.
 
 ## Kontributor
 
-- **Galih Aji Pangestu** ([@galiihajiip](https://github.com/galiihajiip))
+Tim **Di Bandung Di Ganesha**, Universitas Pembangunan Nasional "Veteran" Jawa Timur.
+
+- **Galih Aji Pangestu** (ketua, [@galiihajiip](https://github.com/galiihajiip))
+- **Stevyka Frista Aninda**
+- **Putri Ayu Ajeng Nina Zuraida**
+
+Dosen pembimbing: **Andreas Nugroho Sihananto, S.Kom., M.Kom.**
