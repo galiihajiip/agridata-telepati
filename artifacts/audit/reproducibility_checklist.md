@@ -18,7 +18,7 @@ Konfigurasi percobaan dapat direproduksi dan hal ini sudah terverifikasi. Seed, 
 | 4 | konfigurasi pelatihan tercatat lengkap | LULUS | Seluruh field konfigurasi pelatihan final tersedia pada artifacts/reports/block15_final_training_summary.json (configs/kaggle/yolov8s_p2_640_250ep.yaml). |
 | 5 | seed acak tercatat | LULUS | Seed=42 tercatat pada config final dan cocok dengan seed di dalam checkpoint. |
 | 6 | versi dependensi dapat dicatat | LULUS | `pip freeze` menghasilkan 125 paket dengan versi terkunci. |
-| 7 | hash commit git tercatat bila memungkinkan | PERINGATAN | Commit saat ini: b169142419518eee111afc865136c80988a3bd76. PERINGATAN: working tree tidak bersih (109 berkas berubah), sehingga artefak yang dihasilkan sekarang tidak dapat ditelusuri ke commit yang bersih. |
+| 7 | hash commit git tercatat bila memungkinkan | LULUS | Commit saat ini: 66acbf0ed1554faf7860547e0a9ca78d034065d7. |
 | 8 | konfigurasi model tercatat | LULUS | Tercatat model_arch=yolov8s-p2.yaml dan pretrained=False, cocok dengan checkpoint bobot final. |
 | 9 | path data dapat dikonfigurasi | LULUS | Tidak ditemukan path personal yang dipatok keras pada configs/. Skrip yang menyentuh dataset menerima --dataset-root atau --prepared-dir. |
 | 10 | artefak hasil generate diversikan melalui metadata, bukan commit berukuran raksasa | LULUS | Direktori besar atau hasil generate sudah masuk gitignore: ['data/prepared', 'runs', '.venv'] |
