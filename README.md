@@ -1,6 +1,13 @@
 # TELEPATI 8.0 AgriData Intelligence Race
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/galiihajiip/agridata-telepati/blob/main/notebooks/final_agriData_telepati8.ipynb)
+| Notebook | Isi | Buka |
+|---|---|---|
+| **Laporan utama** `notebooks/final_agriData_telepati8.ipynb` | Seluruh alur dari audit dataset, eksperimen, empat kandidat, evaluasi, sampai analisis kesalahan | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/galiihajiip/agridata-telepati/blob/main/notebooks/final_agriData_telepati8.ipynb) |
+| **Reproduksi skor cepat** `notebooks/verify_colab.ipynb` | Unduh bobot dari Release, cek SHA-256, evaluasi, bandingkan dengan angka kami (sekitar 4 menit) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/galiihajiip/agridata-telepati/blob/main/notebooks/verify_colab.ipynb) |
+
+Di Colab, kedua notebook cukup diberi zip dataset resmi (nama berkas bebas, lewat panel Files atau
+Google Drive), lalu Runtime > Run all. Repository, dependensi, dan bobot disiapkan otomatis. Tanpa
+dataset, laporan utama tetap dapat dibaca karena seluruh keluarannya sudah tertanam.
 
 | | |
 |---|---|
@@ -48,8 +55,8 @@ GitHub Release; langkahnya ada pada bagian [Cara Menjalankan](#cara-menjalankan)
 **Cara tercepat, di Google Colab:**
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/galiihajiip/agridata-telepati/blob/main/notebooks/verify_colab.ipynb)
 
-Buka [`notebooks/verify_colab.ipynb`](notebooks/verify_colab.ipynb), isi `DATASET_ZIP`
-dengan zip dataset resmi, lalu Runtime > Run all. Notebook itu meng-*clone*
+Buka [`notebooks/verify_colab.ipynb`](notebooks/verify_colab.ipynb), unggah zip dataset
+resmi (nama berkas bebas) lewat panel Files, lalu Runtime > Run all. Notebook itu meng-*clone*
 repository ini, mengunduh bobot dari GitHub Release dan memverifikasi
 SHA-256-nya, menyiapkan dataset dengan `scripts/prepare_dataset.py`,
 menjalankan dua perintah di bawah, lalu membandingkan hasilnya dengan angka
